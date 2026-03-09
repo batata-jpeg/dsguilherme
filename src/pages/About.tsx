@@ -25,6 +25,7 @@ const tools = [
 
 export default function About() {
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   const skills = [
     { key: "skill.brand", level: 98 },
