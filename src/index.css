@@ -104,7 +104,7 @@
     --gradient-card: linear-gradient(145deg, rgba(112, 251, 249, 0.06) 0%, rgba(231, 57, 245, 0.03) 100%);
 
     /* Typography */
-    --font-display: 'Syne', sans-serif;
+    --font-display: 'Gellix', 'Syne', sans-serif;
     --font-body: 'Inter', sans-serif;
 
     /* Sidebar (unchanged for system components) */
