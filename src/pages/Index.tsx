@@ -324,26 +324,25 @@ export default function Index() {
 
           <FadeInSection delay={0.2}>
             <h2
-              className="font-display font-extrabold uppercase leading-[0.85] tracking-tight"
+              className="font-display font-extrabold leading-[0.85] tracking-tight"
               style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)" }}
             >
-              DESIGN IS NOT
+              "A CRIATIVIDADE,
               <br />
-              JUST WHAT IT{" "}
-              <span className="gradient-text">LOOKS LIKE.</span>
+              É A INTELIGÊNCIA{" "}
+              <span className="gradient-text">SE DIVERTINDO</span>
             </h2>
           </FadeInSection>
 
           <FadeInSection delay={0.4}>
             <h2
-              className="font-display font-extrabold uppercase leading-[0.85] tracking-tight mt-4"
+              className="font-display font-extrabold leading-[0.85] tracking-tight mt-4"
               style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)", color: "rgba(228,228,230,0.6)" }}
             >
-              IT IS WHAT IT
+              -ALBERT EINSTEIN
               <br />
-              MAKES YOU{" "}
+              {" "}
               <span className="relative">
-                FEEL.
                 <span
                   className="absolute -inset-2 rounded-lg pointer-events-none"
                   style={{
