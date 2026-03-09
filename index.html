@@ -19,44 +19,7 @@
   </head>
 
   <body>
-    <div id="custom-cursor"></div>
-    <div id="cursor-follower"></div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script>
-      const cursor = document.getElementById('custom-cursor');
-      const follower = document.getElementById('cursor-follower');
-      let followerX = 0, followerY = 0;
-      let cursorX = 0, cursorY = 0;
-
-      document.addEventListener('mousemove', (e) => {
-        cursorX = e.clientX;
-        cursorY = e.clientY;
-        cursor.style.left = cursorX + 'px';
-        cursor.style.top = cursorY + 'px';
-      });
-
-      function animateFollower() {
-        followerX += (cursorX - followerX) * 0.12;
-        followerY += (cursorY - followerY) * 0.12;
-        follower.style.left = followerX + 'px';
-        follower.style.top = followerY + 'px';
-        requestAnimationFrame(animateFollower);
-      }
-      animateFollower();
-
-      document.addEventListener('mouseover', (e) => {
-        if (e.target.closest('a, button, [data-hover]')) {
-          cursor.classList.add('hover');
-          follower.classList.add('hover');
-        }
-      });
-      document.addEventListener('mouseout', (e) => {
-        if (e.target.closest('a, button, [data-hover]')) {
-          cursor.classList.remove('hover');
-          follower.classList.remove('hover');
-        }
-      });
-    </script>
   </body>
 </html>
