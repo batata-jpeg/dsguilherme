@@ -114,6 +114,7 @@ export default function About() {
             <ProfileCard
               avatarUrl={aboutPortrait}
               miniAvatarUrl={aboutPortrait}
+              grainUrl={grainTexture}
               name={t("about.card.name")}
               title={t("about.card.title")}
               handle={t("about.card.handle")}
