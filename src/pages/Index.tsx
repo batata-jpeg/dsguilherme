@@ -14,7 +14,7 @@ const floatingBadges = [
   { label: "Branding", icon: "◆", delay: 1, x: "85%", y: "60%" },
   { label: "3D Design", icon: "◎", delay: 1.5, x: "-5%", y: "65%" },
   { label: "Blender", icon: "⬡", delay: 2, x: "40%", y: "-8%" },
-  { label: "Adobe Suite", icon: "◇", delay: 0.8, x: "75%", y: "35%" },
+  { label: "Edição de Imagens", icon: "◇", delay: 0.8, x: "75%", y: "35%" },
 ];
 
 const stats = [
