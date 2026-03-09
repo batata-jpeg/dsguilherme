@@ -203,49 +203,7 @@
 }
 
 /* ─── Custom Cursor ──────────────────────────────────────────────────────── */
-* {
-  cursor: none !important;
-}
-
-#custom-cursor {
-  position: fixed;
-  width: 12px;
-  height: 12px;
-  background: hsl(var(--primary));
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, opacity 0.2s;
-  box-shadow: var(--glow-cyan);
-  mix-blend-mode: screen;
-}
-
-#cursor-follower {
-  position: fixed;
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(112, 251, 249, 0.4);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
-  backdrop-filter: blur(2px);
-}
-
-#custom-cursor.hover {
-  width: 20px;
-  height: 20px;
-  background: hsl(var(--secondary));
-  box-shadow: var(--glow-magenta);
-}
-
-#cursor-follower.hover {
-  width: 56px;
-  height: 56px;
-  border-color: rgba(231, 57, 245, 0.6);
-}
+/* Using default system cursor */
 
 /* ─── Dot Matrix Background ──────────────────────────────────────────────── */
 .dot-grid {
