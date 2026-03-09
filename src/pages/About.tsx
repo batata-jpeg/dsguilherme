@@ -109,13 +109,20 @@ export default function About() {
       {/* Portrait + Bio */}
       <div className="max-w-7xl mx-auto px-6 py-20">
         <div className="glass-panel p-8 md:p-14 grid grid-cols-1 lg:grid-cols-5 gap-12 items-start" style={{ boxShadow: "var(--glow-combined)" }}>
-          <FadeInSection className="lg:col-span-2">
-            <div className="relative">
-              <div className="absolute -inset-4 rounded-2xl pointer-events-none"
-                style={{ background: "radial-gradient(circle, rgba(112,251,249,0.1) 0%, rgba(231,57,245,0.06) 60%, transparent 80%)", filter: "blur(24px)" }} />
-              <img src={aboutPortrait} alt="Designer Portrait" className="relative w-full rounded-2xl object-cover"
-                style={{ height: "500px", objectPosition: "center top", border: "1px solid rgba(112,251,249,0.2)", boxShadow: "var(--glow-cyan-sm)" }} />
-            </div>
+          <FadeInSection className="lg:col-span-2 flex justify-center">
+            <ProfileCard
+              avatarUrl={aboutPortrait}
+              miniAvatarUrl={aboutPortrait}
+              name={t("about.card.name")}
+              title={t("about.card.title")}
+              handle={t("about.card.handle")}
+              status={t("about.card.status")}
+              contactText={t("about.cta.work")}
+              behindGlowColor="rgba(112,251,249,0.5)"
+              behindGlowSize="60%"
+              onContactClick={() => navigate("/contact")}
+              className="w-full max-w-xs"
+            />
           </FadeInSection>
 
           <FadeInSection delay={0.2} className="lg:col-span-3 space-y-10">
