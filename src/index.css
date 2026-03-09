@@ -1,4 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+/* ─── Gellix Font (commercial) ────────────────────────────────────────────── */
+/* Para usar Gellix, adicione os arquivos da fonte em public/fonts/           */
+/* e descomente os @font-face abaixo (obtenha a licença em schicktoikka.com)  */
+/*
+@font-face {
+  font-family: 'Gellix';
+  src: url('/fonts/Gellix-Regular.woff2') format('woff2'),
+       url('/fonts/Gellix-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Gellix';
+  src: url('/fonts/Gellix-SemiBold.woff2') format('woff2'),
+       url('/fonts/Gellix-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Gellix';
+  src: url('/fonts/Gellix-Bold.woff2') format('woff2'),
+       url('/fonts/Gellix-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Gellix';
+  src: url('/fonts/Gellix-ExtraBold.woff2') format('woff2'),
+       url('/fonts/Gellix-ExtraBold.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+*/
 
 @tailwind base;
 @tailwind components;
