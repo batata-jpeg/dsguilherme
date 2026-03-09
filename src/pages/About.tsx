@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Award, Briefcase, Clock, Download } from "lucide-react";
 import aboutPortrait from "@/assets/about-portrait.jpg";
+import grainTexture from "@/assets/grain.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import ProfileCard from "@/components/ProfileCard";
 
@@ -113,6 +114,7 @@ export default function About() {
             <ProfileCard
               avatarUrl={aboutPortrait}
               miniAvatarUrl={aboutPortrait}
+              grainUrl={grainTexture}
               name={t("about.card.name")}
               title={t("about.card.title")}
               handle={t("about.card.handle")}
