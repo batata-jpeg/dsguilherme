@@ -117,6 +117,62 @@
     --sidebar-border: 232 50% 20%;
     --sidebar-ring: 179 93% 72%;
   }
+
+  /* ─── Light mode overrides ──────────────────────────────────────────────── */
+  :root.light {
+    --background: 210 40% 96%;
+    --background-deep: 210 30% 90%;
+    --foreground: 232 40% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 232 40% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 232 40% 12%;
+
+    --primary: 179 80% 38%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 179 90% 45%;
+
+    --secondary: 293 70% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 30% 88%;
+    --muted-foreground: 232 20% 45%;
+    --accent: 179 80% 38%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 30% 78%;
+    --input: 210 30% 85%;
+    --ring: 179 80% 38%;
+
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-bg-hover: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(0, 160, 158, 0.25);
+    --glass-border-hover: rgba(0, 160, 158, 0.5);
+
+    --glow-cyan: 0 0 40px rgba(0, 160, 158, 0.2);
+    --glow-cyan-sm: 0 0 20px rgba(0, 160, 158, 0.15);
+    --glow-magenta: 0 0 40px rgba(160, 30, 170, 0.15);
+    --glow-magenta-sm: 0 0 20px rgba(160, 30, 170, 0.1);
+    --glow-combined: 0 0 60px rgba(0, 160, 158, 0.12), 0 0 120px rgba(160, 30, 170, 0.08);
+
+    --gradient-bg: linear-gradient(180deg, hsl(210, 40%, 96%) 0%, hsl(210, 30%, 90%) 100%);
+    --gradient-hero: radial-gradient(ellipse at 60% 50%, rgba(0,160,158,0.07) 0%, rgba(160,30,170,0.04) 40%, transparent 70%);
+    --gradient-text: linear-gradient(135deg, #00a09e 0%, #a01eaa 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%);
+    --gradient-card: linear-gradient(145deg, rgba(0,160,158,0.06) 0%, rgba(160,30,170,0.03) 100%);
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 232 40% 12%;
+    --sidebar-primary: 179 80% 38%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 30% 88%;
+    --sidebar-accent-foreground: 232 40% 12%;
+    --sidebar-border: 210 30% 78%;
+    --sidebar-ring: 179 80% 38%;
+  }
 }
 
 @layer base {
@@ -140,7 +196,7 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 700;
-    color: hsl(0 0% 100%);
+    color: hsl(var(--foreground));
     text-transform: uppercase;
     letter-spacing: -0.02em;
   }
