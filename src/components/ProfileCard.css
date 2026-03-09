@@ -178,7 +178,7 @@
 
 .pc-card:hover .pc-shine,
 .pc-card.active .pc-shine {
-  filter: brightness(0.85) contrast(1.5) saturate(0.5);
+  filter: brightness(0.66) contrast(1.33) saturate(0.33) opacity(0.6);
   animation-play-state: paused;
 }
 
@@ -243,7 +243,7 @@
 }
 
 .pc-avatar-content {
-  mix-blend-mode: luminosity;
+  mix-blend-mode: normal;
   overflow: visible;
   transform: translateZ(2);
   backface-visibility: hidden;
@@ -362,7 +362,7 @@
     0.1px
   );
   z-index: 5;
-  mix-blend-mode: luminosity;
+  mix-blend-mode: normal;
 }
 
 .pc-details {
