@@ -3,24 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- TODO: Set the document title to the name of your application -->
-    <title>Lovable App</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
+    <title>Refraction Point — Graphic Designer Portfolio</title>
+    <meta name="description" content="Premium graphic designer portfolio specializing in branding, 3D, motion design, and immersive visual experiences." />
+    <meta name="author" content="Refraction Point" />
 
-    <!-- TODO: Update og:title to match your application name -->
-    <meta property="og:title" content="Lovable App" />
-    <meta property="og:description" content="Lovable Generated Project" />
+    <meta property="og:title" content="Refraction Point — Graphic Designer Portfolio" />
+    <meta property="og:description" content="Premium graphic designer portfolio specializing in branding, 3D, motion design, and immersive visual experiences." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@Lovable" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   </head>
 
   <body>
+    <div id="custom-cursor"></div>
+    <div id="cursor-follower"></div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      const cursor = document.getElementById('custom-cursor');
+      const follower = document.getElementById('cursor-follower');
+      let followerX = 0, followerY = 0;
+      let cursorX = 0, cursorY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        cursorX = e.clientX;
+        cursorY = e.clientY;
+        cursor.style.left = cursorX + 'px';
+        cursor.style.top = cursorY + 'px';
+      });
+
+      function animateFollower() {
+        followerX += (cursorX - followerX) * 0.12;
+        followerY += (cursorY - followerY) * 0.12;
+        follower.style.left = followerX + 'px';
+        follower.style.top = followerY + 'px';
+        requestAnimationFrame(animateFollower);
+      }
+      animateFollower();
+
+      document.addEventListener('mouseover', (e) => {
+        if (e.target.closest('a, button, [data-hover]')) {
+          cursor.classList.add('hover');
+          follower.classList.add('hover');
+        }
+      });
+      document.addEventListener('mouseout', (e) => {
+        if (e.target.closest('a, button, [data-hover]')) {
+          cursor.classList.remove('hover');
+          follower.classList.remove('hover');
+        }
+      });
+    </script>
   </body>
 </html>
