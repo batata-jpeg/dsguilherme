@@ -6,7 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ClickSpark from "@/components/ClickSpark";
-import ColorBends from "@/components/ColorBends";
+import LiquidEther from "@/components/LiquidEther";
 
 import Index from "./pages/Index.tsx";
 import Projects from "./pages/Projects.tsx";
@@ -27,20 +27,16 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            {/* Fixed shader background */}
+            {/* Fixed fluid background */}
             <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
-              <ColorBends
-                colors={['#a8d8ff', '#c4b5fd', '#bfdbfe', '#e0f2fe', '#ddd6fe', '#f0f9ff', '#ffffff', '#93c5fd']}
-                speed={0.15}
-                rotation={30}
-                autoRotate={1.5}
-                scale={0.9}
-                frequency={0.8}
-                warpStrength={0.7}
-                mouseInfluence={0.4}
-                parallax={0.3}
-                noise={0.03}
-                transparent={false}
+              <LiquidEther
+                colors={['#5227FF', '#FF9FFC', '#B19EEF']}
+                mouseForce={20}
+                cursorSize={100}
+                resolution={0.5}
+                autoDemo={true}
+                autoSpeed={0.5}
+                autoIntensity={2.2}
               />
             </div>
             <ClickSpark sparkColor="#ffffff" sparkRadius={30} sparkCount={10} extraScale={1.3}>
