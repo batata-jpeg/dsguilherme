@@ -6,8 +6,12 @@
   border: 1px solid var(--gh-border);
   overflow: hidden;
   position: relative;
-  display: grid;
-  place-items: center;
+}
+
+.glare-hover.aspect-\[4\/5\] {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  height: auto;
 }
 
 .glare-hover::before {
