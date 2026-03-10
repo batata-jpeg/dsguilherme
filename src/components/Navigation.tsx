@@ -102,7 +102,7 @@ export default function Navigation() {
       baseColor={baseColor}
       pillColor={pillColor}
       hoveredPillTextColor={hoveredPillTextColor}
-      pillTextColor="#ffffff"
+      pillTextColor={isDark ? "hsl(220, 20%, 92%)" : "hsl(220, 25%, 18%)"}
       extraControls={extraControls}
       mobileExtraControls={mobileExtraControls}
       initialLoadAnimation={true}
