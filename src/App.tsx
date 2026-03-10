@@ -47,7 +47,7 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             {/* Fixed fluid background */}
-            <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+            <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
               <LiquidEther
                 colors={['#5227FF', '#FF9FFC', '#B19EEF']}
                 mouseForce={20}
