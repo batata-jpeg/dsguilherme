@@ -167,18 +167,13 @@ export default function Index() {
               <div className="relative z-10"
                 style={{ filter: "drop-shadow(0 24px 60px rgba(59,153,252,0.25)) drop-shadow(0 0 100px rgba(147,84,245,0.15))" }}
               >
-                <AnimatePresence mode="sync">
-                  <motion.img
-                    key={theme}
-                    src={heroVisual}
-                    alt="Designer 3D Character"
-                    className="w-80 h-auto md:w-[440px] object-contain"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1, y: [0, -12, 0] }}
-                    exit={{ opacity: 0, position: "absolute" } as any}
-                    transition={{ opacity: { duration: 0.35, ease: "easeInOut" }, y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
-                  />
-                </AnimatePresence>
+                <motion.img
+                  src={displayedVisual}
+                  alt="Designer 3D Character"
+                  className="w-80 h-auto md:w-[440px] object-contain"
+                  animate={charControls}
+                  transition={{ y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
+                />
               </div>
             </div>
           </div>
