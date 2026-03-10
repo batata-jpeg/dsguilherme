@@ -155,7 +155,7 @@
 
   body {
     font-family: var(--font-body);
-    background: var(--gradient-bg);
+    background: transparent;
     color: hsl(var(--foreground));
     min-height: 100vh;
     overflow-x: hidden;
@@ -282,9 +282,8 @@
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(59, 153, 252, 0.14) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(59, 153, 252, 0.08) 0%, transparent 70%);
   pointer-events: none;
-  filter: blur(50px);
 }
 
 .radial-glow-violet {
@@ -292,9 +291,8 @@
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(147, 84, 245, 0.11) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(147, 84, 245, 0.06) 0%, transparent 70%);
   pointer-events: none;
-  filter: blur(50px);
 }
 
 /* Legacy compat — map old names to new */
@@ -307,7 +305,6 @@
   background: var(--gradient-prism);
   border-radius: 2px;
   opacity: 0.6;
-  filter: blur(0.5px);
 }
 
 /* ─── Scrollbar ──────────────────────────────────────────────────────────── */

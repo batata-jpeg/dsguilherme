@@ -79,10 +79,6 @@ export default function Index() {
     <div className="min-h-screen overflow-x-hidden dot-grid" style={{ background: "var(--gradient-bg)" }}>
       {/* ── HERO */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
-        <div className="absolute top-32 right-24 w-48 h-48 rounded-full pointer-events-none opacity-20"
-        style={{ background: "hsl(var(--primary))", filter: "blur(60px)" }} />
-        <div className="absolute bottom-40 left-12 w-32 h-32 rounded-full pointer-events-none opacity-15"
-        style={{ background: "hsl(var(--secondary))", filter: "blur(50px)" }} />
 
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative z-10 w-full">
           <div className="max-w-7xl mx-auto px-6 pt-28 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -235,7 +231,7 @@ export default function Index() {
                   <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${featuredProjects[0].image})` }} />
                   <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,20,50,0.85) 30%, rgba(10,20,50,0.15) 70%)" }} />
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: "rgba(59,153,252,0.04)", backdropFilter: "blur(2px)" }} />
+                  style={{ background: "rgba(59,153,252,0.08)" }} />
                   <div className="absolute bottom-0 left-0 right-0 p-8 space-y-2">
                     <span className="section-label" style={{ color: "rgba(255,255,255,0.7)" }}>{featuredProjects[0].category}</span>
                     <h3 className="font-display font-bold text-2xl uppercase text-white">{featuredProjects[0].title}</h3>
