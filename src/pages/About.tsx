@@ -69,8 +69,8 @@ export default function About() {
     <div className="min-h-screen dot-grid" style={{ background: "var(--gradient-bg)" }}>
       {/* Hero */}
       <div className="relative pt-36 pb-20 overflow-hidden">
-        <div className="absolute top-0 right-0 radial-glow-magenta opacity-30 pointer-events-none" />
-        <div className="absolute bottom-0 left-1/3 radial-glow-cyan opacity-20 pointer-events-none" />
+        <div className="absolute top-0 right-0 radial-glow-violet opacity-25 pointer-events-none" />
+        <div className="absolute bottom-0 left-1/3 radial-glow-blue opacity-20 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <span className="section-label block mb-6">{t("about.label")}</span>
@@ -109,7 +109,7 @@ export default function About() {
 
       {/* Portrait + Bio */}
       <div className="max-w-7xl mx-auto px-6 py-20">
-        <div className="glass-panel p-8 md:p-14 grid grid-cols-1 lg:grid-cols-5 gap-12 items-start" style={{ boxShadow: "var(--glow-combined)" }}>
+        <div className="glass-panel p-8 md:p-14 grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
           <FadeInSection className="lg:col-span-2 flex justify-center">
             <ProfileCard
               avatarUrl={aboutPortrait}
@@ -120,8 +120,9 @@ export default function About() {
               handle={t("about.card.handle")}
               status={t("about.card.status")}
               contactText={t("about.cta.work")}
-              behindGlowColor="rgba(112,251,249,0.5)"
+              behindGlowColor="rgba(59,153,252,0.45)"
               behindGlowSize="60%"
+              innerGradient="linear-gradient(145deg, rgba(10,132,255,0.25) 0%, rgba(191,90,242,0.20) 100%)"
               onContactClick={() => navigate("/contact")}
               className="w-full max-w-xs"
             />
@@ -152,8 +153,8 @@ export default function About() {
               <span className="section-label block mb-4">{t("about.tools.label")}</span>
               <div className="flex flex-wrap gap-2">
                 {tools.map((tool) => (
-                  <span key={tool} className="font-display text-xs tracking-[0.08em] uppercase px-3 py-2 rounded-xl transition-all duration-200 hover:scale-105"
-                    style={{ background: "rgba(112,251,249,0.06)", color: "hsl(var(--foreground))", border: "1px solid rgba(112,251,249,0.12)" }}>
+                  <span key={tool} className="font-display text-xs tracking-[0.08em] uppercase px-3 py-2 rounded-xl transition-all duration-200 hover:scale-105 glass-panel-sm"
+                    style={{ color: "hsl(var(--foreground))" }}>
                     {tool}
                   </span>
                 ))}
@@ -176,10 +177,10 @@ export default function About() {
                   <span className="font-display font-600 text-sm tracking-[0.1em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{t(skill.key)}</span>
                   <span className="font-display text-sm gradient-text font-bold">{skill.level}%</span>
                 </div>
-                <div className="h-1 rounded-full overflow-hidden" style={{ background: "rgba(112,251,249,0.1)" }}>
+                <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(10,132,255,0.08)" }}>
                   <motion.div initial={{ width: 0 }} whileInView={{ width: `${skill.level}%` }} viewport={{ once: true }}
                     transition={{ duration: 1.2, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                    className="h-full rounded-full" style={{ background: "var(--gradient-text)", boxShadow: "var(--glow-cyan-sm)" }} />
+                    className="h-full rounded-full" style={{ background: "var(--gradient-text)", boxShadow: "var(--glow-blue-sm)" }} />
                 </div>
               </div>
             </FadeInSection>
@@ -195,7 +196,7 @@ export default function About() {
         <div className="space-y-4">
           {experience.map((exp, i) => (
             <FadeInSection key={exp.company} delay={i * 0.1}>
-              <div className="glass-panel p-6 md:p-8 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 items-start group hover:border-primary/30 transition-colors duration-300">
+              <div className="glass-panel p-6 md:p-8 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 items-start">
                 <div>
                   <div className="font-display font-bold uppercase text-base" style={{ color: "hsl(var(--foreground))" }}>{exp.role}</div>
                   <div className="font-display text-sm mt-1 gradient-text font-600">{exp.company}</div>
@@ -222,7 +223,7 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {awards.map((award, i) => (
             <FadeInSection key={award.title} delay={i * 0.1}>
-              <div className="glass-panel p-6 flex items-center justify-between group hover:border-primary/30 transition-all duration-300" style={{ cursor: "none" }}>
+              <div className="glass-panel p-6 flex items-center justify-between group">
                 <div className="flex items-center gap-4">
                   <Award className="w-5 h-5 flex-shrink-0" style={{ color: "hsl(var(--primary))", opacity: 0.7 }} />
                   <span className="font-display font-600 text-sm tracking-[0.08em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{award.title}</span>

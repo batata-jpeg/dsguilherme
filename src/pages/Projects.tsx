@@ -103,8 +103,8 @@ export default function Projects() {
     <div className="min-h-screen dot-grid" style={{ background: "var(--gradient-bg)" }}>
       {/* Header */}
       <div className="relative pt-36 pb-20 overflow-hidden">
-        <div className="absolute top-0 right-1/4 radial-glow-cyan opacity-30 pointer-events-none" />
-        <div className="absolute bottom-0 left-1/4 radial-glow-magenta opacity-20 pointer-events-none" />
+        <div className="absolute top-0 right-1/4 radial-glow-blue opacity-25 pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 radial-glow-violet opacity-18 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <span className="section-label block mb-6">{t("projects.label")}</span>
@@ -129,9 +129,9 @@ export default function Projects() {
               className="glass-panel-sm px-4 py-2 font-display text-xs tracking-[0.15em] uppercase transition-all duration-300"
               style={{
                 color: activeCategory === cat.key ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))",
-                borderColor: activeCategory === cat.key ? "rgba(112,251,249,0.5)" : "rgba(112,251,249,0.15)",
-                boxShadow: activeCategory === cat.key ? "var(--glow-cyan-sm)" : "none",
-                background: activeCategory === cat.key ? "rgba(112,251,249,0.08)" : "var(--glass-bg)",
+                borderColor: activeCategory === cat.key ? "rgba(10,132,255,0.5)" : undefined,
+                boxShadow: activeCategory === cat.key ? "var(--glow-blue-sm)" : undefined,
+                background: activeCategory === cat.key ? "rgba(10,132,255,0.10)" : undefined,
               }}>
               {cat.label}
             </button>
@@ -145,12 +145,12 @@ export default function Projects() {
           {filtered.map((proj, i) => (
             <FadeInSection key={proj.id} delay={i * 0.08}>
               <Link to={`/projects/${proj.id}`}>
-                <div className="glass-panel group overflow-hidden" style={{ cursor: "none" }}>
+                <div className="glass-panel group overflow-hidden">
                   <div className="relative h-56 overflow-hidden">
                     <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url(${proj.image})` }} />
-                    <div className="absolute inset-0 transition-opacity duration-300" style={{ background: "linear-gradient(to bottom, transparent 50%, rgba(3,6,21,0.9) 100%)" }} />
+                    <div className="absolute inset-0 transition-opacity duration-300" style={{ background: "linear-gradient(to bottom, transparent 50%, rgba(10,20,50,0.85) 100%)" }} />
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                      style={{ background: "rgba(112,251,249,0.04)", backdropFilter: "blur(2px)" }}>
+                      style={{ background: "rgba(59,153,252,0.06)", backdropFilter: "blur(2px)" }}>
                       <div className="glass-panel-sm px-5 py-2 flex items-center gap-2">
                         <span className="font-display text-xs tracking-widest uppercase" style={{ color: "hsl(var(--primary))" }}>{t("projects.view")}</span>
                         <ArrowRight className="w-3 h-3" style={{ color: "hsl(var(--primary))" }} />
@@ -166,8 +166,8 @@ export default function Projects() {
                     <p className="font-body text-sm leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>{proj.description}</p>
                     <div className="flex flex-wrap gap-2 pt-2">
                       {proj.tags.map((tag) => (
-                        <span key={tag} className="font-display text-xs tracking-[0.1em] uppercase px-2 py-1 rounded-lg"
-                          style={{ background: "rgba(112,251,249,0.06)", color: "rgba(112,251,249,0.6)", border: "1px solid rgba(112,251,249,0.12)" }}>
+                        <span key={tag} className="font-display text-xs tracking-[0.1em] uppercase px-2 py-1 rounded-lg glass-panel-sm"
+                          style={{ color: "hsl(var(--primary))", opacity: 0.8 }}>
                           {tag}
                         </span>
                       ))}
