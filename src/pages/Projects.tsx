@@ -139,36 +139,26 @@ export default function Projects() {
 
       {/* Grid */}
       <div className="max-w-7xl mx-auto px-6 pb-32">
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
           {filtered.map((proj, i) => (
             <FadeInSection key={proj.id} delay={i * 0.08}>
               <Link to={`/projects/${proj.id}`}>
                 <div className="glass-panel group overflow-hidden">
-                  <div className="relative h-56 overflow-hidden">
+                  <div className="relative aspect-[4/5] overflow-hidden">
                     <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url(${proj.image})` }} />
-                    <div className="absolute inset-0 transition-opacity duration-300" style={{ background: "linear-gradient(to bottom, transparent 50%, rgba(10,20,50,0.85) 100%)" }} />
+                    <div className="absolute inset-0 transition-opacity duration-300" style={{ background: "linear-gradient(to bottom, transparent 40%, rgba(10,20,50,0.75) 100%)" }} />
+                    {/* Hover overlay */}
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
                       style={{ background: "rgba(59,153,252,0.10)" }}>
-                      <div className="glass-panel-sm px-5 py-2 flex items-center gap-2">
+                      <div className="glass-panel-sm px-4 py-2 flex items-center gap-2">
                         <span className="font-display text-xs tracking-widest uppercase" style={{ color: "hsl(var(--primary))" }}>{t("projects.view")}</span>
                         <ArrowRight className="w-3 h-3" style={{ color: "hsl(var(--primary))" }} />
                       </div>
                     </div>
-                    <div className="absolute top-4 right-4 glass-panel-sm px-2 py-1">
-                      <span className="font-display text-xs tracking-widest" style={{ color: "hsl(var(--muted-foreground))" }}>{proj.year}</span>
-                    </div>
-                  </div>
-                  <div className="p-6 space-y-3">
-                    <span className="section-label">{proj.category}</span>
-                    <h3 className="font-display font-bold text-lg uppercase">{proj.title}</h3>
-                    <p className="font-body text-sm leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>{proj.description}</p>
-                    <div className="flex flex-wrap gap-2 pt-2">
-                      {proj.tags.map((tag) => (
-                        <span key={tag} className="font-display text-xs tracking-[0.1em] uppercase px-2 py-1 rounded-lg glass-panel-sm"
-                          style={{ color: "hsl(var(--primary))", opacity: 0.8 }}>
-                          {tag}
-                        </span>
-                      ))}
+                    {/* Bottom title overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <span className="block font-display text-[10px] tracking-widest uppercase mb-1" style={{ color: "rgba(255,255,255,0.6)" }}>{proj.category}</span>
+                      <h3 className="font-display font-bold text-sm uppercase leading-tight text-white">{proj.title}</h3>
                     </div>
                   </div>
                 </div>
