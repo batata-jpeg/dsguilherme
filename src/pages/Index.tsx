@@ -137,13 +137,11 @@ export default function Index() {
               )}
               <motion.div initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }} className="relative z-10"
-              style={{ filter: "drop-shadow(0 12px 40px rgba(59,153,252,0.22)) drop-shadow(0 0 80px rgba(147,84,245,0.12))" }}>
-                <motion.img src={heroVisual} alt="Liquid Glass Crystal"
-                className="w-72 h-72 md:w-96 md:h-96 object-contain"
-                animate={{ rotate: [0, 3, -2, 0], y: [0, -10, 5, 0] }}
-                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                style={{ transform: `perspective(1000px)` }} />
-
+              style={{ filter: "drop-shadow(0 24px 60px rgba(59,153,252,0.25)) drop-shadow(0 0 100px rgba(147,84,245,0.15))" }}>
+                <motion.img src={heroVisual} alt="Designer 3D Character"
+                className="w-80 h-auto md:w-[440px] object-contain"
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
               </motion.div>
             </div>
           </div>
