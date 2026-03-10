@@ -27,6 +27,23 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+          <BrowserRouter>
+            {/* Fixed shader background */}
+            <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+              <ColorBends
+                colors={['#a8d8ff', '#c4b5fd', '#bfdbfe', '#e0f2fe', '#ddd6fe', '#f0f9ff', '#ffffff', '#93c5fd']}
+                speed={0.15}
+                rotation={30}
+                autoRotate={1.5}
+                scale={0.9}
+                frequency={0.8}
+                warpStrength={0.7}
+                mouseInfluence={0.4}
+                parallax={0.3}
+                noise={0.03}
+                transparent={false}
+              />
+            </div>
             <ClickSpark sparkColor="#ffffff" sparkRadius={30} sparkCount={10} extraScale={1.3}>
               <Navigation />
               <Routes>
