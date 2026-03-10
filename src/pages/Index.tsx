@@ -10,6 +10,7 @@ import project3 from "@/assets/project-3.jpg";
 import aboutPortrait from "@/assets/about-portrait.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const floatingBadges = [
   { label: "Motion Design", icon: "◈", delay: 0,   x: "-10%", y: "10%",  mx: "2%",  my: "6%",  xKeys: [0, 28, -22,  12, -26,  0], yKeys: [0, -20, 14, -28, 10,  0], rKeys: [0,  4, -3,  5, -2,  0], dur: 8   },
