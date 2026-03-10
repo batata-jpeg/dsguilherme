@@ -101,7 +101,7 @@ export default function ProjectDetail() {
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${project.image})` }}
         />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(3,6,21,0.4) 0%, rgba(3,6,21,0.8) 60%, rgba(3,6,21,1) 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(10,20,50,0.35) 0%, rgba(10,20,50,0.75) 60%, rgba(10,20,50,0.98) 100%)" }} />
 
         {/* Back button */}
         <div className="absolute top-28 left-6 z-20">
@@ -120,8 +120,8 @@ export default function ProjectDetail() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="space-y-4"
           >
-            <span className="section-label">{project.category}</span>
-            <h1 className="font-display font-extrabold uppercase leading-tight" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}>
+            <span className="section-label" style={{ color: "rgba(255,255,255,0.65)" }}>{project.category}</span>
+            <h1 className="font-display font-extrabold uppercase leading-tight text-white" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}>
               {project.title}
             </h1>
             <div className="flex flex-wrap gap-2">
@@ -129,7 +129,7 @@ export default function ProjectDetail() {
                 <span
                   key={tag}
                   className="font-display text-xs tracking-[0.1em] uppercase px-3 py-1 rounded-xl"
-                  style={{ background: "rgba(112,251,249,0.08)", color: "rgba(112,251,249,0.8)", border: "1px solid rgba(112,251,249,0.2)" }}
+                  style={{ background: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.85)", border: "1px solid rgba(255,255,255,0.25)", backdropFilter: "blur(12px)" }}
                 >
                   {tag}
                 </span>
@@ -159,7 +159,7 @@ export default function ProjectDetail() {
               <span className="section-label block mb-2">Year</span>
               <p className="font-display font-bold text-xl gradient-text">{project.year}</p>
             </div>
-            <div style={{ borderTop: "1px solid rgba(112,251,249,0.1)", paddingTop: "1rem" }}>
+            <div style={{ borderTop: "1px solid rgba(10,132,255,0.1)", paddingTop: "1rem" }}>
               <span className="section-label block mb-3">Tools Used</span>
               <div className="space-y-2">
                 {project.tools.map((tool) => (
@@ -217,7 +217,7 @@ export default function ProjectDetail() {
         </div>
 
         {/* Navigation */}
-        <div className="flex justify-between items-center pt-8" style={{ borderTop: "1px solid rgba(112,251,249,0.1)" }}>
+        <div className="flex justify-between items-center pt-8" style={{ borderTop: "1px solid rgba(10,132,255,0.1)" }}>
           <Link to="/projects">
             <button className="btn-glass-primary">
               <ArrowLeft className="w-4 h-4" /> All Projects

@@ -84,25 +84,29 @@ export default function Index() {
     },
   ];
 
-  const glowX = mousePos.x * 100;
-  const glowY = mousePos.y * 100;
-
   return (
     <div className="min-h-screen overflow-x-hidden dot-grid" style={{ background: "var(--gradient-bg)" }}>
       {/* ── HERO */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Ambient prismatic glow that follows mouse */}
         <div
-          className="absolute pointer-events-none transition-all duration-300"
+          className="absolute pointer-events-none transition-all duration-500"
           style={{
-            left: `${glowX}%`, top: `${glowY}%`,
-            width: "800px", height: "800px",
+            left: `${mousePos.x * 100}%`, top: `${mousePos.y * 100}%`,
+            width: "900px", height: "900px",
             transform: "translate(-50%, -50%)",
-            background: `radial-gradient(circle, rgba(112,251,249,0.06) 0%, rgba(231,57,245,0.04) 40%, transparent 70%)`,
-            filter: "blur(40px)",
+            background: `radial-gradient(circle, rgba(59,153,252,0.08) 0%, rgba(147,84,245,0.05) 40%, transparent 70%)`,
+            filter: "blur(60px)",
           }}
         />
-        <div className="absolute top-1/4 left-1/4 radial-glow-magenta opacity-60 pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/3 radial-glow-cyan opacity-40 pointer-events-none" />
+        <div className="absolute top-1/4 left-1/4 radial-glow-violet opacity-50 pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/3 radial-glow-blue opacity-40 pointer-events-none" />
+
+        {/* Decorative floating glass orbs */}
+        <div className="absolute top-32 right-24 w-48 h-48 rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle at 35% 35%, rgba(255,255,255,0.6) 0%, rgba(59,153,252,0.08) 60%, transparent 100%)", border: "1px solid rgba(255,255,255,0.7)", boxShadow: "0 8px 40px rgba(59,153,252,0.10), inset 0 1px 0 rgba(255,255,255,0.9)", backdropFilter: "blur(20px)" }} />
+        <div className="absolute bottom-40 left-12 w-32 h-32 rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle at 35% 35%, rgba(255,255,255,0.5) 0%, rgba(191,90,242,0.06) 60%, transparent 100%)", border: "1px solid rgba(255,255,255,0.6)", boxShadow: "0 8px 32px rgba(191,90,242,0.10), inset 0 1px 0 rgba(255,255,255,0.8)", backdropFilter: "blur(16px)" }} />
 
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative z-10 w-full">
           <div className="max-w-7xl mx-auto px-6 pt-28 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -112,7 +116,7 @@ export default function Index() {
               </motion.div>
 
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }} className="space-y-2">
-                <h1 className="font-display font-extrabold leading-[0.9] tracking-tight" style={{ fontSize: "clamp(3.5rem, 7vw, 6.5rem)" }}>
+                <h1 className="font-display font-extrabold leading-[0.9] tracking-tight uppercase" style={{ fontSize: "clamp(3.5rem, 7vw, 6.5rem)" }}>
                   {t("index.hero.h1a")}
                   <br />
                   <span className="gradient-text">{t("index.hero.h1b")}</span>
@@ -153,8 +157,7 @@ export default function Index() {
                   transition={{ duration: 0.5, delay: 1 + badge.delay }}
                   style={{ position: "absolute", left: badge.x, top: badge.y }} className="z-20">
                   <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 4 + i * 0.5, repeat: Infinity, ease: "easeInOut" }}
-                    className="glass-panel-sm px-3 py-2 flex items-center gap-2 whitespace-nowrap hover:scale-105 transition-transform duration-300"
-                    style={{ boxShadow: "var(--glow-cyan-sm)" }}>
+                    className="glass-panel-sm px-3 py-2 flex items-center gap-2 whitespace-nowrap hover:scale-105 transition-transform duration-300">
                     <span className="text-sm" style={{ color: "hsl(var(--primary))" }}>{badge.icon}</span>
                     <span className="font-display text-xs tracking-[0.1em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{badge.label}</span>
                   </motion.div>
@@ -162,14 +165,15 @@ export default function Index() {
               ))}
               <motion.div initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }} className="relative z-10"
-                style={{ filter: "drop-shadow(0 0 60px rgba(112,251,249,0.25)) drop-shadow(0 0 120px rgba(231,57,245,0.15))" }}>
+                style={{ filter: "drop-shadow(0 12px 40px rgba(59,153,252,0.22)) drop-shadow(0 0 80px rgba(147,84,245,0.12))" }}>
                 <motion.img src={heroVisual} alt="Liquid Glass Crystal"
                   className="w-72 h-72 md:w-96 md:h-96 object-contain"
                   animate={{ rotate: [0, 3, -2, 0], y: [0, -10, 5, 0] }}
                   transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                   style={{ transform: `perspective(1000px) rotateX(${(mousePos.y - 0.5) * 8}deg) rotateY(${(mousePos.x - 0.5) * 8}deg)` }} />
-                <div className="absolute inset-0 pointer-events-none"
-                  style={{ background: `radial-gradient(circle at ${mousePos.x * 100}% ${mousePos.y * 100}%, rgba(112,251,249,0.12) 0%, transparent 60%)`, filter: "blur(20px)", transition: "all 0.3s ease" }} />
+                {/* Glass orb behind image */}
+                <div className="absolute inset-0 pointer-events-none rounded-full"
+                  style={{ background: `radial-gradient(circle at ${mousePos.x * 100}% ${mousePos.y * 100}%, rgba(59,153,252,0.09) 0%, transparent 60%)`, filter: "blur(20px)" }} />
               </motion.div>
             </div>
           </div>
@@ -188,13 +192,13 @@ export default function Index() {
       <FadeInSection>
         <section className="relative py-12">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="glass-panel p-1 rounded-2xl" style={{ boxShadow: "var(--glow-combined)" }}>
+            <div className="glass-panel p-1 rounded-2xl">
               <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0"
-                style={{ "--tw-divide-opacity": 1, borderColor: "rgba(112,251,249,0.1)" } as React.CSSProperties}>
+                style={{ borderColor: "rgba(10,132,255,0.08)" } as React.CSSProperties}>
                 {stats.map(({ value, label, icon: Icon }, i) => (
                   <motion.div key={label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                    className="p-8 flex flex-col items-center text-center gap-3 group">
+                    className="p-8 flex flex-col items-center text-center gap-3">
                     <Icon className="w-5 h-5 mb-1" style={{ color: "hsl(var(--primary))", opacity: 0.7 }} />
                     <span className="font-display font-extrabold gradient-text" style={{ fontSize: "2.8rem", lineHeight: 1 }}>{value}</span>
                     <span className="font-display text-xs tracking-[0.15em] uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>{label}</span>
@@ -208,15 +212,16 @@ export default function Index() {
 
       {/* ── PHILOSOPHY */}
       <section className="relative py-32 overflow-hidden">
-        <div className="absolute left-0 right-0" style={{ top: "50%", height: "120px", background: "rgba(112,251,249,0.025)", backdropFilter: "blur(8px)", borderTop: "1px solid rgba(112,251,249,0.08)", borderBottom: "1px solid rgba(112,251,249,0.08)", transform: "translateY(-20px) skewY(-1deg)" }} />
-        <div className="absolute top-0 right-0 radial-glow-magenta opacity-30 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 radial-glow-cyan opacity-20 pointer-events-none" />
+        {/* Prismatic band */}
+        <div className="absolute left-0 right-0 h-px pointer-events-none" style={{ top: "50%", background: "var(--gradient-prism)", opacity: 0.25 }} />
+        <div className="absolute top-0 right-0 radial-glow-violet opacity-25 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 radial-glow-blue opacity-20 pointer-events-none" />
         <div className="relative max-w-7xl mx-auto px-6">
           <FadeInSection>
             <span className="section-label mb-8 block">{t("index.philosophy.label")}</span>
           </FadeInSection>
           <FadeInSection delay={0.2}>
-            <h2 className="font-display font-extrabold leading-[0.85] tracking-tight" style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)" }}>
+            <h2 className="font-display font-extrabold leading-[0.85] tracking-tight uppercase" style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)" }}>
               {t("index.philosophy.line1")}
               <br />
               {t("index.philosophy.line2")}{" "}
@@ -224,13 +229,9 @@ export default function Index() {
             </h2>
           </FadeInSection>
           <FadeInSection delay={0.4}>
-            <h2 className="font-display font-extrabold leading-[0.85] tracking-tight mt-4"
-              style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)", color: "rgba(228,228,230,0.6)" }}>
+            <h2 className="font-display font-extrabold leading-[0.85] tracking-tight mt-4 uppercase"
+              style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)", color: "hsl(var(--muted-foreground))", opacity: 0.5 }}>
               {t("index.philosophy.author")}
-              <span className="relative">
-                <span className="absolute -inset-2 rounded-lg pointer-events-none"
-                  style={{ background: "rgba(112,251,249,0.05)", backdropFilter: "blur(4px)", border: "1px solid rgba(112,251,249,0.1)" }} />
-              </span>
             </h2>
           </FadeInSection>
           <FadeInSection delay={0.6} className="mt-10 max-w-lg">
@@ -259,17 +260,18 @@ export default function Index() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <FadeInSection delay={0.1} className="md:col-span-2">
               <Link to={`/projects/${featuredProjects[0].id}`}>
-                <div className="glass-panel group overflow-hidden h-[420px] relative" style={{ cursor: "none" }}>
+                <div className="glass-panel group overflow-hidden h-[420px] relative">
                   <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${featuredProjects[0].image})` }} />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(3,6,21,0.95) 30%, rgba(3,6,21,0.3) 70%)" }} />
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: "rgba(112,251,249,0.03)", backdropFilter: "blur(2px)" }} />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,20,50,0.85) 30%, rgba(10,20,50,0.15) 70%)" }} />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{ background: "rgba(59,153,252,0.04)", backdropFilter: "blur(2px)" }} />
                   <div className="absolute bottom-0 left-0 right-0 p-8 space-y-2">
-                    <span className="section-label">{featuredProjects[0].category}</span>
-                    <h3 className="font-display font-bold text-2xl uppercase">{featuredProjects[0].title}</h3>
-                    <p className="font-body text-sm leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>{featuredProjects[0].description}</p>
+                    <span className="section-label" style={{ color: "rgba(255,255,255,0.7)" }}>{featuredProjects[0].category}</span>
+                    <h3 className="font-display font-bold text-2xl uppercase text-white">{featuredProjects[0].title}</h3>
+                    <p className="font-body text-sm leading-relaxed text-white/60">{featuredProjects[0].description}</p>
                     <div className="flex items-center gap-2 pt-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                      <span className="font-display text-xs tracking-widest uppercase" style={{ color: "hsl(var(--primary))" }}>{t("index.featured.view")}</span>
-                      <ExternalLink className="w-3 h-3" style={{ color: "hsl(var(--primary))" }} />
+                      <span className="font-display text-xs tracking-widest uppercase text-white/80">{t("index.featured.view")}</span>
+                      <ExternalLink className="w-3 h-3 text-white/80" />
                     </div>
                   </div>
                 </div>
@@ -280,16 +282,15 @@ export default function Index() {
               {featuredProjects.slice(1).map((proj, i) => (
                 <FadeInSection key={proj.id} delay={0.2 + i * 0.15}>
                   <Link to={`/projects/${proj.id}`}>
-                    <div className="glass-panel group overflow-hidden h-[196px] relative" style={{ cursor: "none" }}>
+                    <div className="glass-panel group overflow-hidden h-[196px] relative">
                       <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${proj.image})` }} />
-                      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(3,6,21,0.9) 40%, rgba(3,6,21,0.2) 100%)" }} />
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: "rgba(112,251,249,0.03)" }} />
+                      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,20,50,0.85) 40%, rgba(10,20,50,0.1) 100%)" }} />
                       <div className="absolute bottom-0 left-0 right-0 p-5 space-y-1">
-                        <span className="section-label text-xs">{proj.category}</span>
-                        <h3 className="font-display font-bold text-base uppercase">{proj.title}</h3>
+                        <span className="font-display text-xs tracking-[0.12em] uppercase text-white/60">{proj.category}</span>
+                        <h3 className="font-display font-bold text-base uppercase text-white">{proj.title}</h3>
                         <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <span className="font-display text-xs tracking-widest uppercase" style={{ color: "hsl(var(--primary))" }}>{t("index.featured.view.short")}</span>
-                          <ArrowRight className="w-3 h-3" style={{ color: "hsl(var(--primary))" }} />
+                          <span className="font-display text-xs tracking-widest uppercase text-white/80">{t("index.featured.view.short")}</span>
+                          <ArrowRight className="w-3 h-3 text-white/80" />
                         </div>
                       </div>
                     </div>
@@ -310,12 +311,13 @@ export default function Index() {
       {/* ── ABOUT PREVIEW */}
       <section className="relative py-24">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="glass-panel p-12 md:p-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-center" style={{ boxShadow: "var(--glow-combined)" }}>
+          <div className="glass-panel p-12 md:p-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <FadeInSection>
               <div className="relative">
-                <div className="absolute inset-0 rounded-2xl" style={{ background: "radial-gradient(circle at 40% 40%, rgba(112,251,249,0.15) 0%, rgba(231,57,245,0.1) 60%, transparent 80%)", filter: "blur(24px)" }} />
+                <div className="absolute inset-0 rounded-2xl pointer-events-none"
+                  style={{ background: "radial-gradient(circle at 40% 40%, rgba(59,153,252,0.15) 0%, rgba(147,84,245,0.08) 60%, transparent 80%)", filter: "blur(24px)" }} />
                 <img src={aboutPortrait} alt="Designer Portrait" className="relative rounded-2xl w-full object-cover"
-                  style={{ height: "400px", objectPosition: "center top", border: "1px solid rgba(112,251,249,0.2)", boxShadow: "var(--glow-cyan-sm)" }} />
+                  style={{ height: "400px", objectPosition: "center top", border: "1px solid rgba(255,255,255,0.8)", boxShadow: "var(--glass-shadow)" }} />
               </div>
             </FadeInSection>
             <FadeInSection delay={0.2} className="space-y-6">
@@ -344,9 +346,12 @@ export default function Index() {
       {/* ── CONTACT CTA */}
       <section className="relative py-32 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="radial-glow-cyan absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60" style={{ width: "800px", height: "800px" }} />
-          <div className="radial-glow-magenta absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-40" />
+          <div className="radial-glow-blue absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-50" style={{ width: "800px", height: "800px" }} />
+          <div className="radial-glow-violet absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-35" />
         </div>
+        {/* Large decorative glass orb */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle at 35% 30%, rgba(255,255,255,0.5) 0%, rgba(59,153,252,0.06) 50%, transparent 100%)", border: "1px solid rgba(255,255,255,0.5)", backdropFilter: "blur(8px)", opacity: 0.5 }} />
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <FadeInSection>
             <span className="section-label justify-center mb-6 flex">{t("index.cta.label")}</span>
@@ -361,7 +366,7 @@ export default function Index() {
               {t("index.cta.body")}
             </p>
             <Link to="/contact">
-              <button className="btn-glass-primary px-10 py-4 text-base" style={{ boxShadow: "var(--glow-cyan)" }}>
+              <button className="btn-glass-primary px-10 py-4 text-base">
                 {t("index.cta.btn")} <ArrowRight className="w-5 h-5" />
               </button>
             </Link>
