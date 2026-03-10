@@ -147,28 +147,15 @@ export default function Index() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="relative z-10"
+                style={{ filter: "drop-shadow(0 24px 60px rgba(59,153,252,0.25)) drop-shadow(0 0 100px rgba(147,84,245,0.15))" }}
               >
-                <GlareHover
-                  width="440px"
-                  height="480px"
-                  background="transparent"
-                  borderRadius="0px"
-                  borderColor="transparent"
-                  glareColor="#ffffff"
-                  glareOpacity={0.18}
-                  glareAngle={-40}
-                  glareSize={220}
-                  transitionDuration={700}
-                >
-                  <motion.img
-                    src={heroVisual}
-                    alt="Designer 3D Character"
-                    className="w-80 h-auto md:w-[440px] object-contain"
-                    style={{ filter: "drop-shadow(0 24px 60px rgba(59,153,252,0.25)) drop-shadow(0 0 100px rgba(147,84,245,0.15))" }}
-                    animate={{ y: [0, -12, 0] }}
-                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                </GlareHover>
+                <motion.img
+                  src={heroVisual}
+                  alt="Designer 3D Character"
+                  className="w-80 h-auto md:w-[440px] object-contain"
+                  animate={{ y: [0, -12, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                />
               </motion.div>
             </div>
           </div>
