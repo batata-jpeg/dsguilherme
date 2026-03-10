@@ -2,13 +2,14 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { ArrowRight, ChevronDown, ExternalLink, Zap, Award, Users, Layers } from "lucide-react";
-import heroVisual from "@/assets/hero-character.png";
+import heroVisualDark from "@/assets/hero-character.png";
+import heroVisualLight from "@/assets/hero-character-light.png";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 import aboutPortrait from "@/assets/about-portrait.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
-import GlareHover from "@/components/GlareHover";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const floatingBadges = [
   { label: "Motion Design", icon: "◈", delay: 0,   x: "-10%", y: "10%",  xKeys: [0, 28, -22,  12, -26,  0], yKeys: [0, -20, 14, -28, 10,  0], rKeys: [0,  4, -3,  5, -2,  0], dur: 8   },
