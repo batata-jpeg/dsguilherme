@@ -116,7 +116,7 @@ export default function Index() {
             <div className="space-y-8">
 
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }} className="space-y-2">
-                <h1 className="font-display font-extrabold leading-[0.9] tracking-tight uppercase" style={{ fontSize: "clamp(3.5rem, 7vw, 6.5rem)" }}>
+                <h1 className="font-display font-extrabold leading-[0.9] tracking-tight uppercase text-7xl" style={{ fontSize: "clamp(3.5rem, 7vw, 6.5rem)" }}>
                   {t("index.hero.h1a")}
                   <br />
                   <span className="gradient-text">{t("index.hero.h1b")}</span>
@@ -230,11 +230,11 @@ export default function Index() {
         {/* Prismatic band */}
         <div className="relative max-w-7xl mx-auto px-6">
           <FadeInSection delay={0.2}>
-            <h2 className="font-display font-extrabold leading-[0.85] tracking-tight uppercase text-left text-foreground" style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)" }}>
+            <h2 className="font-display font-extrabold leading-[0.85] tracking-tight uppercase text-white text-7xl text-left" style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)", color: "hsl(var(--background))" }}>
               {t("index.philosophy.line1")}
               <br />
               {t("index.philosophy.line2")}{" "}
-              <span className="gradient-text">{t("index.philosophy.accent")}</span>
+              <span className="gradient-text text-white">{t("index.philosophy.accent")}</span>
             </h2>
           </FadeInSection>
           <FadeInSection delay={0.4}>
