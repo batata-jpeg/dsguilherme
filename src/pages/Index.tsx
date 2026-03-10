@@ -349,9 +349,6 @@ export default function Index() {
           <div className="radial-glow-blue absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-50" style={{ width: "800px", height: "800px" }} />
           <div className="radial-glow-violet absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-35" />
         </div>
-        {/* Large decorative glass orb */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle at 35% 30%, rgba(255,255,255,0.5) 0%, rgba(59,153,252,0.06) 50%, transparent 100%)", border: "1px solid rgba(255,255,255,0.5)", backdropFilter: "blur(8px)", opacity: 0.5 }} />
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <FadeInSection>
             <span className="section-label justify-center mb-6 flex">{t("index.cta.label")}</span>
