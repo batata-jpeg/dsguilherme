@@ -22,7 +22,7 @@ const translations: Record<Language, Record<string, string>> = {
     "index.hero.h1a": "DESIGN",
     "index.hero.h1b": "BEYOND",
     "index.hero.h1c": "THE SURFACE",
-    "index.hero.description": "Creating immersive visual experiences at the intersection of design, art, branding, and digital interaction. Where concept becomes sensation.",
+    "index.hero.description": "",
     "index.hero.cta.projects": "View Projects",
     "index.hero.cta.about": "About Me",
     "index.hero.available": "Available for New Projects",
