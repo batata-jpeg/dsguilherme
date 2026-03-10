@@ -8,6 +8,7 @@ import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 import aboutPortrait from "@/assets/about-portrait.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
+import GlareHover from "@/components/GlareHover";
 
 const floatingBadges = [
 { label: "Motion Design", icon: "◈", delay: 0, x: "-10%", y: "10%" },
