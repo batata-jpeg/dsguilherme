@@ -9,6 +9,7 @@ export default function LampCord() {
   const isDark = theme === 'dark';
 
   const [pullY, setPullY] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
   const dragging = useRef(false);
   const startY = useRef(0);
   const pullRef = useRef(0);
@@ -23,7 +24,6 @@ export default function LampCord() {
 
     const tick = (now: number) => {
       const t = Math.min((now - startTime) / duration, 1);
-      // damped spring: decays exponentially with oscillation
       const val = from * Math.exp(-7 * t) * (Math.cos(14 * t) + 0.4 * Math.sin(14 * t));
       setPullY(Math.max(0, val));
       if (t < 1) {
@@ -36,39 +36,71 @@ export default function LampCord() {
     rafRef.current = requestAnimationFrame(tick);
   }, []);
 
-  useEffect(() => {
-    const onMove = (e: PointerEvent) => {
-      if (!dragging.current) return;
-      const delta = Math.max(0, Math.min(MAX_PULL, e.clientY - startY.current));
-      pullRef.current = delta;
-      setPullY(delta);
-    };
+  const startDrag = useCallback((clientY: number) => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    dragging.current = true;
+    startY.current = clientY;
+    pullRef.current = 0;
+    setIsDragging(true);
+  }, []);
 
-    const onUp = () => {
-      if (!dragging.current) return;
-      dragging.current = false;
-      const pulled = pullRef.current;
-      if (pulled >= THRESHOLD) {
-        toggleRef.current();
-      }
-      springBack(pulled);
-    };
+  const moveDrag = useCallback((clientY: number) => {
+    if (!dragging.current) return;
+    const delta = Math.max(0, Math.min(MAX_PULL, clientY - startY.current));
+    pullRef.current = delta;
+    setPullY(delta);
+  }, []);
 
-    window.addEventListener('pointermove', onMove);
-    window.addEventListener('pointerup', onUp);
-    return () => {
-      window.removeEventListener('pointermove', onMove);
-      window.removeEventListener('pointerup', onUp);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
+  const endDrag = useCallback(() => {
+    if (!dragging.current) return;
+    dragging.current = false;
+    setIsDragging(false);
+    const pulled = pullRef.current;
+    if (pulled >= THRESHOLD) {
+      toggleRef.current();
+    }
+    springBack(pulled);
   }, [springBack]);
 
+  useEffect(() => {
+    // Pointer events (covers mouse + touch on modern browsers)
+    const onPointerMove = (e: PointerEvent) => moveDrag(e.clientY);
+    const onPointerUp = () => endDrag();
+
+    // Touch events as explicit fallback for older mobile browsers
+    const onTouchMove = (e: TouchEvent) => {
+      if (!dragging.current) return;
+      e.preventDefault(); // prevent page scroll during cord drag
+      moveDrag(e.touches[0].clientY);
+    };
+    const onTouchEnd = () => endDrag();
+
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', onPointerUp);
+    window.addEventListener('pointercancel', onPointerUp);
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
+    window.addEventListener('touchend', onTouchEnd);
+    window.addEventListener('touchcancel', onTouchEnd);
+
+    return () => {
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerup', onPointerUp);
+      window.removeEventListener('pointercancel', onPointerUp);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onTouchEnd);
+      window.removeEventListener('touchcancel', onTouchEnd);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [moveDrag, endDrag]);
+
   const onPointerDown = (e: React.PointerEvent) => {
-    if (rafRef.current) cancelAnimationFrame(rafRef.current);
     e.currentTarget.setPointerCapture(e.pointerId);
-    dragging.current = true;
-    startY.current = e.clientY;
-    pullRef.current = 0;
+    startDrag(e.clientY);
+  };
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    e.preventDefault();
+    startDrag(e.touches[0].clientY);
   };
 
   const progress = Math.min(pullY / THRESHOLD, 1);
@@ -98,6 +130,7 @@ export default function LampCord() {
         alignItems: 'center',
         pointerEvents: 'none',
         userSelect: 'none',
+        touchAction: 'none',
       }}
     >
       {/* static attachment from top to nav */}
@@ -110,16 +143,19 @@ export default function LampCord() {
         }}
       />
 
-      {/* draggable cord + bead */}
+      {/* draggable cord + bead — expanded touch target via padding */}
       <div
         onPointerDown={onPointerDown}
+        onTouchStart={onTouchStart}
         style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           pointerEvents: 'auto',
-          cursor: dragging.current ? 'grabbing' : 'grab',
+          cursor: isDragging ? 'grabbing' : 'grab',
           touchAction: 'none',
+          // wider hit area on mobile without visual change
+          padding: '0 16px',
         }}
         title={isDark ? 'Arraste para ligar a luz' : 'Arraste para apagar a luz'}
       >
@@ -144,18 +180,20 @@ export default function LampCord() {
           }}
         />
 
-        {/* bead */}
+        {/* bead — larger on mobile for easier grab */}
         <div
           style={{
             width: beadSize,
             height: beadSize,
+            minWidth: 28,
+            minHeight: 28,
             borderRadius: '50%',
             background: beadBg,
             boxShadow: `0 ${2 + progress * 6}px ${10 + progress * 14}px rgba(0,0,0,${0.2 + progress * 0.2}), inset 0 1px 0 rgba(255,255,255,0.3)`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: 8 + progress * 2,
+            fontSize: 9 + progress * 2,
             lineHeight: 1,
             transition: 'box-shadow 0.05s',
           }}
