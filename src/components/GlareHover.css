@@ -14,10 +14,12 @@
   height: auto;
 }
 
-.glare-hover::before {
+.glare-hover::after {
   content: '';
   position: absolute;
   inset: 0;
+  z-index: 10;
+  pointer-events: none;
   background: linear-gradient(
     var(--gh-angle),
     hsla(0, 0%, 0%, 0) 60%,
@@ -39,17 +41,17 @@
   cursor: pointer;
 }
 
-.glare-hover:hover::before {
+.glare-hover:hover::after {
   background-position:
     100% 100%,
     0 0;
 }
 
-.glare-hover--play-once::before {
+.glare-hover--play-once::after {
   transition: none;
 }
 
-.glare-hover--play-once:hover::before {
+.glare-hover--play-once:hover::after {
   transition: var(--gh-duration) ease;
   background-position:
     100% 100%,
