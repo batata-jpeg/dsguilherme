@@ -10,14 +10,15 @@ import project3 from "@/assets/project-3.jpg";
 import aboutPortrait from "@/assets/about-portrait.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const floatingBadges = [
-  { label: "Motion Design", icon: "◈", delay: 0,   x: "-10%", y: "10%",  xKeys: [0, 28, -22,  12, -26,  0], yKeys: [0, -20, 14, -28, 10,  0], rKeys: [0,  4, -3,  5, -2,  0], dur: 8   },
-  { label: "UI/UX",         icon: "◉", delay: 0.5, x: "80%",  y: "5%",   xKeys: [0, -24, 30, -14, 22,  0], yKeys: [0,  26, -18, 28, -12, 0], rKeys: [0, -3,  5, -4,  3,  0], dur: 9   },
-  { label: "Branding",      icon: "◆", delay: 1,   x: "85%",  y: "60%",  xKeys: [0,  20, -28, 10, -24, 0], yKeys: [0, -18, 26,  -8, 22,  0], rKeys: [0,  5, -4,  3, -5,  0], dur: 7.5 },
-  { label: "3D Design",     icon: "◎", delay: 1.5, x: "-5%",  y: "65%",  xKeys: [0, -30, 14, 24, -18,  0], yKeys: [0,  14, -28, 18, -8,  0], rKeys: [0, -4,  3, -5,  2,  0], dur: 10  },
-  { label: "Blender",       icon: "⬡", delay: 2,   x: "40%",  y: "-8%",  xKeys: [0,  16, -20, 28, -14, 0], yKeys: [0, -26, 18, -14, 28,  0], rKeys: [0,  3, -5,  4, -3,  0], dur: 8.5 },
-  { label: "Imagens",       icon: "◇", delay: 0.8, x: "75%",  y: "35%",  xKeys: [0, -18, 26, -24, 14,  0], yKeys: [0,  22, -12, 28, -18, 0], rKeys: [0, -5,  4, -3,  5,  0], dur: 9.5 },
+  { label: "Motion Design", icon: "◈", delay: 0,   x: "-10%", y: "10%",  mx: "2%",  my: "6%",  xKeys: [0, 28, -22,  12, -26,  0], yKeys: [0, -20, 14, -28, 10,  0], rKeys: [0,  4, -3,  5, -2,  0], dur: 8   },
+  { label: "UI/UX",         icon: "◉", delay: 0.5, x: "80%",  y: "5%",   mx: "62%", my: "4%",  xKeys: [0, -24, 30, -14, 22,  0], yKeys: [0,  26, -18, 28, -12, 0], rKeys: [0, -3,  5, -4,  3,  0], dur: 9   },
+  { label: "Branding",      icon: "◆", delay: 1,   x: "85%",  y: "60%",  mx: "60%", my: "56%", xKeys: [0,  20, -28, 10, -24, 0], yKeys: [0, -18, 26,  -8, 22,  0], rKeys: [0,  5, -4,  3, -5,  0], dur: 7.5 },
+  { label: "3D Design",     icon: "◎", delay: 1.5, x: "-5%",  y: "65%",  mx: "2%",  my: "64%", xKeys: [0, -30, 14, 24, -18,  0], yKeys: [0,  14, -28, 18, -8,  0], rKeys: [0, -4,  3, -5,  2,  0], dur: 10  },
+  { label: "Blender",       icon: "⬡", delay: 2,   x: "40%",  y: "-8%",  mx: "28%", my: "0%",  xKeys: [0,  16, -20, 28, -14, 0], yKeys: [0, -26, 18, -14, 28,  0], rKeys: [0,  3, -5,  4, -3,  0], dur: 8.5 },
+  { label: "Imagens",       icon: "◇", delay: 0.8, x: "75%",  y: "35%",  mx: "58%", my: "30%", xKeys: [0, -18, 26, -24, 14,  0], yKeys: [0,  22, -12, 28, -18, 0], rKeys: [0, -5,  4, -3,  5,  0], dur: 9.5 },
 ];
 
 
@@ -40,6 +41,7 @@ function FadeInSection({ children, delay = 0, className = "" }: {children: React
 export default function Index() {
   const { t } = useLanguage();
   const { theme } = useTheme();
+  const isMobile = useIsMobile();
   const isDark = theme === "dark";
   const heroVisual = isDark ? heroVisualDark : heroVisualLight;
   const heroRef = useRef<HTMLDivElement>(null);
@@ -145,30 +147,31 @@ export default function Index() {
             </div>
 
             {/* Right – visual centerpiece */}
-            <div className="relative flex items-center justify-center min-h-[400px] lg:min-h-[500px]">
+            <div className="relative flex items-center justify-center min-h-[480px] lg:min-h-[500px]">
 
-              {/* Floating badges — desktop only */}
-              <div className="hidden lg:block">
-                {floatingBadges.map((badge, i) =>
+              {/* Floating badges — all screens with responsive positions */}
+              {floatingBadges.map((badge, i) =>
+              <motion.div
+                key={badge.label}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 1 + badge.delay }}
+                className="z-20 absolute"
+                style={{
+                  left: isMobile ? badge.mx : badge.x,
+                  top: isMobile ? badge.my : badge.y,
+                }}
+              >
                 <motion.div
-                  key={badge.label}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 1 + badge.delay }}
-                  style={{ position: "absolute", left: badge.x, top: badge.y }}
-                  className="z-20"
+                  animate={{ x: badge.xKeys, y: badge.yKeys, rotate: badge.rKeys }}
+                  transition={{ duration: badge.dur, repeat: Infinity, ease: "easeInOut", repeatType: "loop" }}
+                  className="glass-panel-sm px-2 py-1.5 lg:px-3 lg:py-2 flex items-center gap-1.5 lg:gap-2 whitespace-nowrap hover:scale-105 transition-transform duration-300"
                 >
-                  <motion.div
-                    animate={{ x: badge.xKeys, y: badge.yKeys, rotate: badge.rKeys }}
-                    transition={{ duration: badge.dur, repeat: Infinity, ease: "easeInOut", repeatType: "loop" }}
-                    className="glass-panel-sm px-3 py-2 flex items-center gap-2 whitespace-nowrap hover:scale-105 transition-transform duration-300"
-                  >
-                    <span className="text-sm" style={{ color: "hsl(var(--primary))" }}>{badge.icon}</span>
-                    <span className="font-display text-xs tracking-[0.1em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{badge.label}</span>
-                  </motion.div>
+                  <span className="text-xs lg:text-sm" style={{ color: "hsl(var(--primary))" }}>{badge.icon}</span>
+                  <span className="font-display text-[9px] lg:text-xs tracking-[0.1em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{badge.label}</span>
                 </motion.div>
-                )}
-              </div>
+              </motion.div>
+              )}
 
               {/* Character */}
               <div className="flex flex-col items-center gap-4 z-10">
@@ -176,29 +179,11 @@ export default function Index() {
                   <motion.img
                     src={displayedVisual}
                     alt="Designer 3D Character"
-                    className="w-64 h-auto sm:w-80 md:w-96 lg:w-80 xl:w-[440px] object-contain"
+                    className="w-56 h-auto sm:w-72 md:w-80 lg:w-80 xl:w-[440px] object-contain"
                     animate={charControls}
                     transition={{ y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
                   />
                 </div>
-
-                {/* Badge strip — mobile & tablet only */}
-                <motion.div
-                  className="flex lg:hidden flex-wrap justify-center gap-2 px-4"
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 1.2 }}
-                >
-                  {floatingBadges.map((badge) => (
-                    <div
-                      key={badge.label}
-                      className="glass-panel-sm px-3 py-1.5 flex items-center gap-1.5 whitespace-nowrap"
-                    >
-                      <span className="text-xs" style={{ color: "hsl(var(--primary))" }}>{badge.icon}</span>
-                      <span className="font-display text-[10px] tracking-[0.1em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{badge.label}</span>
-                    </div>
-                  ))}
-                </motion.div>
               </div>
             </div>
           </div>
