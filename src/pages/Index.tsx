@@ -133,7 +133,7 @@ export default function Index() {
                 className="z-20"
               >
                 <motion.div
-                  animate={{ x: badge.xKeys, y: badge.yKeys }}
+                  animate={{ x: badge.xKeys, y: badge.yKeys, rotate: badge.rKeys }}
                   transition={{ duration: badge.dur, repeat: Infinity, ease: "easeInOut", repeatType: "loop" }}
                   className="glass-panel-sm px-3 py-2 flex items-center gap-2 whitespace-nowrap hover:scale-105 transition-transform duration-300"
                 >
