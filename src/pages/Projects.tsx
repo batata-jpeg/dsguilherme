@@ -148,7 +148,7 @@ export default function Projects() {
                     <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url(${proj.image})` }} />
                     <div className="absolute inset-0 transition-opacity duration-300" style={{ background: "linear-gradient(to bottom, transparent 50%, rgba(10,20,50,0.85) 100%)" }} />
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                      style={{ background: "rgba(59,153,252,0.06)", backdropFilter: "blur(2px)" }}>
+                      style={{ background: "rgba(59,153,252,0.10)" }}>
                       <div className="glass-panel-sm px-5 py-2 flex items-center gap-2">
                         <span className="font-display text-xs tracking-widest uppercase" style={{ color: "hsl(var(--primary))" }}>{t("projects.view")}</span>
                         <ArrowRight className="w-3 h-3" style={{ color: "hsl(var(--primary))" }} />
