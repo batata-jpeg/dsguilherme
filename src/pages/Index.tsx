@@ -16,14 +16,14 @@ import { useIsMobile } from "@/hooks/use-mobile";
 // Desktop (x/y): ellipse rx≈40%, ry≈43% — slight negatives OK (overflow visible)
 // Mobile  (mx/my): tighter ellipse fully inside the container
 const floatingBadges = [
-  { label: "Motion Design",  icon: "◈", delay: 0,   x: "36%",  y: "0%",   mx: "28%", my: "0%",  xKeys: [0,  22, -16,  8, -20,  0], yKeys: [0, -18, 12, -22,  8,  0], rKeys: [0,  4, -3,  5, -2,  0], dur: 8   },
-  { label: "Edição de Vídeo",icon: "▶", delay: 0.3, x: "72%",  y: "10%",  mx: "58%", my: "8%",  xKeys: [0, -18, 24, -10, 18,  0], yKeys: [0,  20, -14, 22, -10, 0], rKeys: [0, -3,  4, -5,  3,  0], dur: 8.8 },
-  { label: "UI/UX",          icon: "◉", delay: 0.6, x: "84%",  y: "44%",  mx: "66%", my: "38%", xKeys: [0, -20, 28, -12, 20,  0], yKeys: [0,  24, -16, 26, -10, 0], rKeys: [0, -3,  5, -4,  3,  0], dur: 9   },
-  { label: "Branding",       icon: "◆", delay: 1,   x: "68%",  y: "80%",  mx: "55%", my: "74%", xKeys: [0,  18, -24,  8, -20, 0], yKeys: [0, -16, 22,  -6, 18,  0], rKeys: [0,  5, -4,  3, -5,  0], dur: 7.5 },
-  { label: "3D Design",      icon: "◎", delay: 1.3, x: "26%",  y: "86%",  mx: "20%", my: "78%", xKeys: [0, -26, 12, 20, -16,  0], yKeys: [0,  12, -24, 16, -6,  0], rKeys: [0, -4,  3, -5,  2,  0], dur: 10  },
-  { label: "Blender",        icon: "⬡", delay: 1.7, x: "-6%",  y: "44%",  mx: "2%",  my: "40%", xKeys: [0,  14, -18, 24, -12, 0], yKeys: [0, -22, 14, -12, 24,  0], rKeys: [0,  3, -5,  4, -3,  0], dur: 8.5 },
-  { label: "Imagens",        icon: "◇", delay: 0.8, x: "-4%",  y: "12%",  mx: "2%",  my: "10%", xKeys: [0, -16, 22, -20, 12,  0], yKeys: [0,  18, -10, 24, -16, 0], rKeys: [0, -5,  4, -3,  5,  0], dur: 9.5 },
-];
+{ label: "Motion Design", icon: "◈", delay: 0, x: "36%", y: "0%", mx: "28%", my: "0%", xKeys: [0, 22, -16, 8, -20, 0], yKeys: [0, -18, 12, -22, 8, 0], rKeys: [0, 4, -3, 5, -2, 0], dur: 8 },
+{ label: "Edição de Vídeo", icon: "▶", delay: 0.3, x: "72%", y: "10%", mx: "58%", my: "8%", xKeys: [0, -18, 24, -10, 18, 0], yKeys: [0, 20, -14, 22, -10, 0], rKeys: [0, -3, 4, -5, 3, 0], dur: 8.8 },
+{ label: "UI/UX", icon: "◉", delay: 0.6, x: "84%", y: "44%", mx: "66%", my: "38%", xKeys: [0, -20, 28, -12, 20, 0], yKeys: [0, 24, -16, 26, -10, 0], rKeys: [0, -3, 5, -4, 3, 0], dur: 9 },
+{ label: "Branding", icon: "◆", delay: 1, x: "68%", y: "80%", mx: "55%", my: "74%", xKeys: [0, 18, -24, 8, -20, 0], yKeys: [0, -16, 22, -6, 18, 0], rKeys: [0, 5, -4, 3, -5, 0], dur: 7.5 },
+{ label: "3D Design", icon: "◎", delay: 1.3, x: "26%", y: "86%", mx: "20%", my: "78%", xKeys: [0, -26, 12, 20, -16, 0], yKeys: [0, 12, -24, 16, -6, 0], rKeys: [0, -4, 3, -5, 2, 0], dur: 10 },
+{ label: "Blender", icon: "⬡", delay: 1.7, x: "-6%", y: "44%", mx: "2%", my: "40%", xKeys: [0, 14, -18, 24, -12, 0], yKeys: [0, -22, 14, -12, 24, 0], rKeys: [0, 3, -5, 4, -3, 0], dur: 8.5 },
+{ label: "Imagens", icon: "◇", delay: 0.8, x: "-4%", y: "12%", mx: "2%", my: "10%", xKeys: [0, -16, 22, -20, 12, 0], yKeys: [0, 18, -10, 24, -16, 0], rKeys: [0, -5, 4, -3, 5, 0], dur: 9.5 }];
+
 
 
 function FadeInSection({ children, delay = 0, className = "" }: {children: React.ReactNode;delay?: number;className?: string;}) {
@@ -56,7 +56,7 @@ export default function Index() {
   const isFirstRender = useRef(true);
 
   useEffect(() => {
-    if (isFirstRender.current) { isFirstRender.current = false; return; }
+    if (isFirstRender.current) {isFirstRender.current = false;return;}
     const run = async () => {
       setDisplayedVisual(heroVisual); // swap immediately
       // Quick jump up with horizontal pre-wiggle
@@ -164,14 +164,14 @@ export default function Index() {
                 style={{
                   left: isMobile ? badge.mx : badge.x,
                   top: isMobile ? badge.my : badge.y,
-                  transform: "translate(-50%, -50%)",
-                }}
-              >
+                  transform: "translate(-50%, -50%)"
+                }}>
+                
                 <motion.div
                   animate={{ x: badge.xKeys, y: badge.yKeys, rotate: badge.rKeys }}
                   transition={{ duration: badge.dur, repeat: Infinity, ease: "easeInOut", repeatType: "loop" }}
-                  className="glass-panel-sm px-2 py-1.5 lg:px-3 lg:py-2 flex items-center gap-1.5 lg:gap-2 whitespace-nowrap hover:scale-105 transition-transform duration-300"
-                >
+                  className="glass-panel-sm px-2 py-1.5 lg:px-3 lg:py-2 flex items-center gap-1.5 lg:gap-2 whitespace-nowrap hover:scale-105 transition-transform duration-300">
+                  
                   <span className="text-xs lg:text-sm" style={{ color: "hsl(var(--primary))" }}>{badge.icon}</span>
                   <span className="font-display text-[9px] lg:text-xs tracking-[0.1em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{badge.label}</span>
                 </motion.div>
@@ -186,8 +186,8 @@ export default function Index() {
                     alt="Designer 3D Character"
                     className="w-56 h-auto sm:w-72 md:w-80 lg:w-80 xl:w-[440px] object-contain"
                     animate={charControls}
-                    transition={{ y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
-                  />
+                    transition={{ y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }} />
+                  
                 </div>
               </div>
             </div>
@@ -230,11 +230,11 @@ export default function Index() {
         {/* Prismatic band */}
         <div className="relative max-w-7xl mx-auto px-6">
           <FadeInSection delay={0.2}>
-            <h2 className="font-display font-extrabold leading-[0.85] tracking-tight uppercase" style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)", color: "hsl(var(--background))" }}>
+            <h2 className="font-display font-extrabold leading-[0.85] tracking-tight uppercase text-slate-50" style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)", color: "hsl(var(--background))" }}>
               {t("index.philosophy.line1")}
               <br />
               {t("index.philosophy.line2")}{" "}
-              <span className="gradient-text">{t("index.philosophy.accent")}</span>
+              <span className="gradient-text text-white">{t("index.philosophy.accent")}</span>
             </h2>
           </FadeInSection>
           <FadeInSection delay={0.4}>
