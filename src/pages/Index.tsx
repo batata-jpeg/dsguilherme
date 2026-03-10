@@ -88,21 +88,6 @@ export default function Index() {
     <div className="min-h-screen overflow-x-hidden dot-grid" style={{ background: "var(--gradient-bg)" }}>
       {/* ── HERO */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Ambient prismatic glow that follows mouse */}
-        <div
-          className="absolute pointer-events-none transition-all duration-500"
-          style={{
-            left: `${mousePos.x * 100}%`, top: `${mousePos.y * 100}%`,
-            width: "900px", height: "900px",
-            transform: "translate(-50%, -50%)",
-            background: `radial-gradient(circle, rgba(59,153,252,0.08) 0%, rgba(147,84,245,0.05) 40%, transparent 70%)`,
-            filter: "blur(60px)",
-          }}
-        />
-        <div className="absolute top-1/4 left-1/4 radial-glow-violet opacity-50 pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/3 radial-glow-blue opacity-40 pointer-events-none" />
-
-        {/* Decorative floating glass orbs */}
         <div className="absolute top-32 right-24 w-48 h-48 rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle at 35% 35%, rgba(255,255,255,0.6) 0%, rgba(59,153,252,0.08) 60%, transparent 100%)", border: "1px solid rgba(255,255,255,0.7)", boxShadow: "0 8px 40px rgba(59,153,252,0.10), inset 0 1px 0 rgba(255,255,255,0.9)", backdropFilter: "blur(20px)" }} />
         <div className="absolute bottom-40 left-12 w-32 h-32 rounded-full pointer-events-none"
