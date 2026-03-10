@@ -151,10 +151,10 @@ export default function Index() {
             </div>
 
             {/* Right – visual centerpiece */}
-            <div className="relative flex items-center justify-center min-h-[480px] lg:min-h-[500px]">
+            <div className="relative flex items-center justify-center min-h-[520px] lg:min-h-[560px]" style={{ overflow: "visible" }}>
 
-              {/* Floating badges — all screens with responsive positions */}
-              {floatingBadges.map((badge, i) =>
+              {/* Floating badges — circular pattern around character */}
+              {floatingBadges.map((badge) =>
               <motion.div
                 key={badge.label}
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -164,6 +164,7 @@ export default function Index() {
                 style={{
                   left: isMobile ? badge.mx : badge.x,
                   top: isMobile ? badge.my : badge.y,
+                  transform: "translate(-50%, -50%)",
                 }}
               >
                 <motion.div
