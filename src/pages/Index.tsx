@@ -73,8 +73,8 @@ export default function Index() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const stats = [
-  { value: "7+", label: t("index.stats.years"), icon: Zap },
-  { value: "120+", label: t("index.stats.projects"), icon: Award },
+  { value: "5+", label: t("index.stats.years"), icon: Zap },
+  { value: "78+", label: t("index.stats.projects"), icon: Award },
   { value: "40+", label: t("index.stats.clients"), icon: Users },
   { value: "6", label: t("index.stats.fields"), icon: Layers }];
 
