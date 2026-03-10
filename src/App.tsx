@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import LiquidGlassCursor from "@/components/LiquidGlassCursor";
 import Index from "./pages/Index.tsx";
 import Projects from "./pages/Projects.tsx";
 import ProjectDetail from "./pages/ProjectDetail.tsx";
@@ -23,6 +24,8 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
+          {/* Liquid Glass custom cursor — renders above everything */}
+          <LiquidGlassCursor />
           <BrowserRouter>
             <Navigation />
             <Routes>
