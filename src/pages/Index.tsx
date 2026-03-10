@@ -158,8 +158,8 @@ export default function Index() {
                 transition={{ duration: 0.5, delay: 1 + badge.delay }}
                 className="z-20 absolute"
                 style={{
-                  left: `clamp(2%, ${badge.mx}, calc(100% - 110px))`,
-                  top: badge.my,
+                  left: isMobile ? badge.mx : badge.x,
+                  top: isMobile ? badge.my : badge.y,
                 }}
               >
                 <motion.div
