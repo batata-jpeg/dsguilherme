@@ -24,8 +24,6 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          {/* Liquid Glass custom cursor — renders above everything */}
-          <LiquidGlassCursor />
           <BrowserRouter>
             <Navigation />
             <Routes>
