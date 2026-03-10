@@ -26,7 +26,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <ClickSpark sparkColor="hsl(211, 100%, 50%)" sparkRadius={30} sparkCount={10} extraScale={1.3}>
+            <ClickSpark sparkColor="#ffffff" sparkRadius={30} sparkCount={10} extraScale={1.3}>
               <Navigation />
               <Routes>
                 <Route path="/" element={<Index />} />
