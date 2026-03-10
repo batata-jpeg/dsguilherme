@@ -276,7 +276,7 @@ export default function ColorBends({
   }, [rotation, autoRotate, speed, scale, frequency, warpStrength, mouseInfluence, parallax, noise, colors, transparent]);
 
   useEffect(() => {
-    const container = containerRef.current;
+    const container = containerRef.current as HTMLDivElement | null;
     if (!container) return;
 
     const handlePointerMove = (e: PointerEvent) => {
