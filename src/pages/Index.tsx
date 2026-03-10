@@ -145,30 +145,31 @@ export default function Index() {
             </div>
 
             {/* Right – visual centerpiece */}
-            <div className="relative flex items-center justify-center min-h-[400px] lg:min-h-[500px]">
+            <div className="relative flex items-center justify-center min-h-[480px] lg:min-h-[500px]">
 
-              {/* Floating badges — desktop only */}
-              <div className="hidden lg:block">
-                {floatingBadges.map((badge, i) =>
+              {/* Floating badges — all screens with responsive positions */}
+              {floatingBadges.map((badge, i) =>
+              <motion.div
+                key={badge.label}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 1 + badge.delay }}
+                className="z-20 absolute"
+                style={{
+                  left: `clamp(2%, ${badge.mx}, calc(100% - 110px))`,
+                  top: badge.my,
+                }}
+              >
                 <motion.div
-                  key={badge.label}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 1 + badge.delay }}
-                  style={{ position: "absolute", left: badge.x, top: badge.y }}
-                  className="z-20"
+                  animate={{ x: badge.xKeys, y: badge.yKeys, rotate: badge.rKeys }}
+                  transition={{ duration: badge.dur, repeat: Infinity, ease: "easeInOut", repeatType: "loop" }}
+                  className="glass-panel-sm px-2 py-1.5 lg:px-3 lg:py-2 flex items-center gap-1.5 lg:gap-2 whitespace-nowrap hover:scale-105 transition-transform duration-300"
                 >
-                  <motion.div
-                    animate={{ x: badge.xKeys, y: badge.yKeys, rotate: badge.rKeys }}
-                    transition={{ duration: badge.dur, repeat: Infinity, ease: "easeInOut", repeatType: "loop" }}
-                    className="glass-panel-sm px-3 py-2 flex items-center gap-2 whitespace-nowrap hover:scale-105 transition-transform duration-300"
-                  >
-                    <span className="text-sm" style={{ color: "hsl(var(--primary))" }}>{badge.icon}</span>
-                    <span className="font-display text-xs tracking-[0.1em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{badge.label}</span>
-                  </motion.div>
+                  <span className="text-xs lg:text-sm" style={{ color: "hsl(var(--primary))" }}>{badge.icon}</span>
+                  <span className="font-display text-[9px] lg:text-xs tracking-[0.1em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{badge.label}</span>
                 </motion.div>
-                )}
-              </div>
+              </motion.div>
+              )}
 
               {/* Character */}
               <div className="flex flex-col items-center gap-4 z-10">
@@ -176,29 +177,11 @@ export default function Index() {
                   <motion.img
                     src={displayedVisual}
                     alt="Designer 3D Character"
-                    className="w-64 h-auto sm:w-80 md:w-96 lg:w-80 xl:w-[440px] object-contain"
+                    className="w-56 h-auto sm:w-72 md:w-80 lg:w-80 xl:w-[440px] object-contain"
                     animate={charControls}
                     transition={{ y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
                   />
                 </div>
-
-                {/* Badge strip — mobile & tablet only */}
-                <motion.div
-                  className="flex lg:hidden flex-wrap justify-center gap-2 px-4"
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 1.2 }}
-                >
-                  {floatingBadges.map((badge) => (
-                    <div
-                      key={badge.label}
-                      className="glass-panel-sm px-3 py-1.5 flex items-center gap-1.5 whitespace-nowrap"
-                    >
-                      <span className="text-xs" style={{ color: "hsl(var(--primary))" }}>{badge.icon}</span>
-                      <span className="font-display text-[10px] tracking-[0.1em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{badge.label}</span>
-                    </div>
-                  ))}
-                </motion.div>
               </div>
             </div>
           </div>
