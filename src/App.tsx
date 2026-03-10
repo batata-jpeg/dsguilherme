@@ -26,17 +26,19 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <Navigation />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/projects/:id" element={<ProjectDetail />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <Footer />
+            <ClickSpark sparkColor="hsl(211, 100%, 50%)" sparkRadius={30} sparkCount={10} extraScale={1.3}>
+              <Navigation />
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/projects/:id" element={<ProjectDetail />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              <Footer />
+            </ClickSpark>
           </BrowserRouter>
         </TooltipProvider>
       </LanguageProvider>
