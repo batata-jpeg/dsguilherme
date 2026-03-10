@@ -52,10 +52,11 @@ export default function Index() {
   useEffect(() => {
     if (isFirstRender.current) { isFirstRender.current = false; return; }
     const run = async () => {
-      // Quick jump up + slight squish
-      await charControls.start({ y: -36, scaleX: 0.92, scaleY: 1.06, transition: { duration: 0.1, ease: "easeIn" } });
+      // Quick jump up with horizontal pre-wiggle
+      await charControls.start({ y: -60, x: -8, scaleX: 0.88, scaleY: 1.1, transition: { duration: 0.1, ease: "easeIn" } });
       setDisplayedVisual(heroVisual); // swap at peak
-      // Bouncy land back
+      // Wiggle + bouncy land
+      await charControls.start({ y: 0, x: 0, scaleX: 1, scaleY: 1, transition: { type: "spring", stiffness: 480, damping: 12, mass: 0.65 } });
       await charControls.start({ y: 0, scaleX: 1, scaleY: 1, transition: { type: "spring", stiffness: 520, damping: 16, mass: 0.7 } });
     };
     run();
