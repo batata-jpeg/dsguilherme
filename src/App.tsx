@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ClickSpark from "@/components/ClickSpark";
+import ColorBends from "@/components/ColorBends";
 
 import Index from "./pages/Index.tsx";
 import Projects from "./pages/Projects.tsx";
