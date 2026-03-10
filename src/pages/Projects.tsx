@@ -144,25 +144,30 @@ export default function Projects() {
           {filtered.map((proj, i) => (
             <FadeInSection key={proj.id} delay={i * 0.08}>
               <Link to={`/projects/${proj.id}`}>
-                <div className="glass-panel group overflow-hidden">
-                  <div className="relative aspect-[4/5] overflow-hidden">
+                <GlareHover
+                  width="100%"
+                  height="100%"
+                  borderRadius="var(--radius)"
+                  borderColor="hsl(var(--border))"
+                  background="transparent"
+                  glareColor="#ffffff"
+                  glareOpacity={0.18}
+                  glareAngle={-45}
+                  glareSize={220}
+                  transitionDuration={650}
+                  className="group aspect-[4/5]"
+                  style={{ display: "block" }}
+                >
+                  <div className="relative w-full h-full overflow-hidden rounded-[var(--radius)]">
                     <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url(${proj.image})` }} />
-                    <div className="absolute inset-0 transition-opacity duration-300" style={{ background: "linear-gradient(to bottom, transparent 40%, rgba(10,20,50,0.75) 100%)" }} />
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                      style={{ background: "rgba(59,153,252,0.10)" }}>
-                      <div className="glass-panel-sm px-4 py-2 flex items-center gap-2">
-                        <span className="font-display text-xs tracking-widest uppercase" style={{ color: "hsl(var(--primary))" }}>{t("projects.view")}</span>
-                        <ArrowRight className="w-3 h-3" style={{ color: "hsl(var(--primary))" }} />
-                      </div>
-                    </div>
+                    <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 40%, rgba(10,20,50,0.80) 100%)" }} />
                     {/* Bottom title overlay */}
                     <div className="absolute bottom-0 left-0 right-0 p-4">
                       <span className="block font-display text-[10px] tracking-widest uppercase mb-1" style={{ color: "rgba(255,255,255,0.6)" }}>{proj.category}</span>
                       <h3 className="font-display font-bold text-sm uppercase leading-tight text-white">{proj.title}</h3>
                     </div>
                   </div>
-                </div>
+                </GlareHover>
               </Link>
             </FadeInSection>
           ))}
