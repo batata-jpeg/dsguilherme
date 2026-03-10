@@ -247,8 +247,8 @@
 
 /* ─── Gradient Text ──────────────────────────────────────────────────────── */
 .gradient-text {
-  color: hsl(var(--primary));
-  -webkit-text-fill-color: hsl(var(--primary));
+  color: hsl(var(--foreground));
+  -webkit-text-fill-color: hsl(var(--foreground));
 }
 
 /* ─── Section Labels ─────────────────────────────────────────────────────── */
