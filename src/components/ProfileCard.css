@@ -178,7 +178,7 @@
 
 .pc-card:hover .pc-shine,
 .pc-card.active .pc-shine {
-  filter: brightness(0.66) contrast(1.33) saturate(0.33) opacity(0.6);
+  filter: brightness(0.5) contrast(1.1) saturate(0.2) opacity(0.4);
   animation-play-state: paused;
 }
 
