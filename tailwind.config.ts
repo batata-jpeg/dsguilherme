@@ -60,36 +60,40 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // Extended palette
-        navy: {
-          950: "#030615",
-          900: "#010204",
-        },
-        cyan: {
-          glow: "#70FBF9",
-        },
-        magenta: {
-          glow: "#E739F5",
+        // Liquid Glass palette
+        prism: {
+          blue: "#0A84FF",
+          violet: "#BF5AF2",
+          green: "#30D158",
+          amber: "#FFD60A",
+          pink: "#FF375F",
+          teal: "#5AC8FA",
         },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        sm: "calc(var(--radius) - 6px)",
         "2xl": "1.5rem",
         "3xl": "2rem",
+        "4xl": "2.5rem",
       },
       backdropBlur: {
-        glass: "24px",
-        "glass-sm": "12px",
+        glass: "28px",
+        "glass-sm": "16px",
       },
       boxShadow: {
-        "glow-cyan": "0 0 40px rgba(112, 251, 249, 0.3)",
-        "glow-cyan-sm": "0 0 20px rgba(112, 251, 249, 0.2)",
-        "glow-magenta": "0 0 40px rgba(231, 57, 245, 0.3)",
-        "glow-combined": "0 0 60px rgba(112, 251, 249, 0.15), 0 0 120px rgba(231, 57, 245, 0.1)",
-        glass: "0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08)",
-        "glass-lg": "0 24px 64px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06)",
+        glass: "0 8px 40px rgba(0, 100, 220, 0.10), 0 1.5px 0 rgba(255,255,255,0.9) inset",
+        "glass-lg": "0 16px 56px rgba(0, 100, 220, 0.16), 0 1.5px 0 rgba(255,255,255,1) inset",
+        "glass-sm": "0 4px 20px rgba(0, 100, 220, 0.08), 0 1px 0 rgba(255,255,255,0.8) inset",
+        "glow-blue": "0 0 32px rgba(10, 132, 255, 0.28)",
+        "glow-blue-sm": "0 0 16px rgba(10, 132, 255, 0.18)",
+        "glow-violet": "0 0 32px rgba(191, 90, 242, 0.22)",
+        "glow-combined": "0 0 48px rgba(10, 132, 255, 0.14), 0 0 90px rgba(191, 90, 242, 0.09)",
+        // legacy compat
+        "glow-cyan": "0 0 32px rgba(10, 132, 255, 0.28)",
+        "glow-cyan-sm": "0 0 16px rgba(10, 132, 255, 0.18)",
+        "glow-magenta": "0 0 32px rgba(191, 90, 242, 0.22)",
       },
       keyframes: {
         "accordion-down": {
@@ -110,8 +114,8 @@ export default {
           "50%": { transform: "translateY(-12px)" },
         },
         "pulse-glow": {
-          "0%, 100%": { opacity: "0.6", boxShadow: "0 0 20px rgba(112, 251, 249, 0.2)" },
-          "50%": { opacity: "1", boxShadow: "0 0 40px rgba(112, 251, 249, 0.4)" },
+          "0%, 100%": { opacity: "0.6", boxShadow: "0 0 20px rgba(10, 132, 255, 0.2)" },
+          "50%": { opacity: "1", boxShadow: "0 0 40px rgba(10, 132, 255, 0.4)" },
         },
         shimmer: {
           "0%": { transform: "translateX(-100%)" },
@@ -120,6 +124,11 @@ export default {
         "rotate-slow": {
           from: { transform: "rotate(0deg)" },
           to: { transform: "rotate(360deg)" },
+        },
+        "prism-shift": {
+          "0%": { filter: "hue-rotate(0deg) brightness(1)" },
+          "50%": { filter: "hue-rotate(30deg) brightness(1.1)" },
+          "100%": { filter: "hue-rotate(0deg) brightness(1)" },
         },
         "fade-in-up": {
           from: { opacity: "0", transform: "translateY(30px)" },
@@ -139,6 +148,7 @@ export default {
         "pulse-glow": "pulse-glow 3s ease-in-out infinite",
         shimmer: "shimmer 2s infinite",
         "rotate-slow": "rotate-slow 20s linear infinite",
+        "prism-shift": "prism-shift 6s ease-in-out infinite",
         "fade-in-up": "fade-in-up 0.6s ease-out forwards",
         "fade-in": "fade-in 0.4s ease-out forwards",
       },
