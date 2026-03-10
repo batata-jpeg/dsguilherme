@@ -69,8 +69,6 @@ export default function About() {
     <div className="min-h-screen dot-grid" style={{ background: "var(--gradient-bg)" }}>
       {/* Hero */}
       <div className="relative pt-36 pb-20 overflow-hidden">
-        <div className="absolute top-0 right-0 radial-glow-violet opacity-25 pointer-events-none" />
-        <div className="absolute bottom-0 left-1/3 radial-glow-blue opacity-20 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <span className="section-label block mb-6">{t("about.label")}</span>

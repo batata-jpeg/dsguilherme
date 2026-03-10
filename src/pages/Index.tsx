@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { ArrowRight, ChevronDown, ExternalLink, Zap, Award, Users, Layers } from "lucide-react";
@@ -37,18 +37,9 @@ function FadeInSection({ children, delay = 0, className = "" }: { children: Reac
 export default function Index() {
   const { t } = useLanguage();
   const heroRef = useRef<HTMLDivElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
-  useEffect(() => {
-    const handleMouse = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
-    };
-    window.addEventListener("mousemove", handleMouse);
-    return () => window.removeEventListener("mousemove", handleMouse);
-  }, []);
 
   const stats = [
     { value: "7+", label: t("index.stats.years"), icon: Zap },
@@ -88,21 +79,6 @@ export default function Index() {
     <div className="min-h-screen overflow-x-hidden dot-grid" style={{ background: "var(--gradient-bg)" }}>
       {/* ── HERO */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Ambient prismatic glow that follows mouse */}
-        <div
-          className="absolute pointer-events-none transition-all duration-500"
-          style={{
-            left: `${mousePos.x * 100}%`, top: `${mousePos.y * 100}%`,
-            width: "900px", height: "900px",
-            transform: "translate(-50%, -50%)",
-            background: `radial-gradient(circle, rgba(59,153,252,0.08) 0%, rgba(147,84,245,0.05) 40%, transparent 70%)`,
-            filter: "blur(60px)",
-          }}
-        />
-        <div className="absolute top-1/4 left-1/4 radial-glow-violet opacity-50 pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/3 radial-glow-blue opacity-40 pointer-events-none" />
-
-        {/* Decorative floating glass orbs */}
         <div className="absolute top-32 right-24 w-48 h-48 rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle at 35% 35%, rgba(255,255,255,0.6) 0%, rgba(59,153,252,0.08) 60%, transparent 100%)", border: "1px solid rgba(255,255,255,0.7)", boxShadow: "0 8px 40px rgba(59,153,252,0.10), inset 0 1px 0 rgba(255,255,255,0.9)", backdropFilter: "blur(20px)" }} />
         <div className="absolute bottom-40 left-12 w-32 h-32 rounded-full pointer-events-none"
@@ -170,10 +146,8 @@ export default function Index() {
                   className="w-72 h-72 md:w-96 md:h-96 object-contain"
                   animate={{ rotate: [0, 3, -2, 0], y: [0, -10, 5, 0] }}
                   transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                  style={{ transform: `perspective(1000px) rotateX(${(mousePos.y - 0.5) * 8}deg) rotateY(${(mousePos.x - 0.5) * 8}deg)` }} />
-                {/* Glass orb behind image */}
-                <div className="absolute inset-0 pointer-events-none rounded-full"
-                  style={{ background: `radial-gradient(circle at ${mousePos.x * 100}% ${mousePos.y * 100}%, rgba(59,153,252,0.09) 0%, transparent 60%)`, filter: "blur(20px)" }} />
+                  style={{ transform: `perspective(1000px)` }} />
+
               </motion.div>
             </div>
           </div>
@@ -213,9 +187,6 @@ export default function Index() {
       {/* ── PHILOSOPHY */}
       <section className="relative py-32 overflow-hidden">
         {/* Prismatic band */}
-        <div className="absolute left-0 right-0 h-px pointer-events-none" style={{ top: "50%", background: "var(--gradient-prism)", opacity: 0.25 }} />
-        <div className="absolute top-0 right-0 radial-glow-violet opacity-25 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 radial-glow-blue opacity-20 pointer-events-none" />
         <div className="relative max-w-7xl mx-auto px-6">
           <FadeInSection>
             <span className="section-label mb-8 block">{t("index.philosophy.label")}</span>
@@ -345,10 +316,6 @@ export default function Index() {
 
       {/* ── CONTACT CTA */}
       <section className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="radial-glow-blue absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-50" style={{ width: "800px", height: "800px" }} />
-          <div className="radial-glow-violet absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-35" />
-        </div>
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <FadeInSection>
             <span className="section-label justify-center mb-6 flex">{t("index.cta.label")}</span>

@@ -103,8 +103,6 @@ export default function Projects() {
     <div className="min-h-screen dot-grid" style={{ background: "var(--gradient-bg)" }}>
       {/* Header */}
       <div className="relative pt-36 pb-20 overflow-hidden">
-        <div className="absolute top-0 right-1/4 radial-glow-blue opacity-25 pointer-events-none" />
-        <div className="absolute bottom-0 left-1/4 radial-glow-violet opacity-18 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <span className="section-label block mb-6">{t("projects.label")}</span>
