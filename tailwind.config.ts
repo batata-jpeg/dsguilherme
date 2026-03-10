@@ -60,14 +60,12 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // Liquid Glass palette
-        prism: {
-          blue: "#0A84FF",
-          violet: "#BF5AF2",
-          green: "#30D158",
-          amber: "#FFD60A",
-          pink: "#FF375F",
-          teal: "#5AC8FA",
+        // Sage & Mint palette
+        sage: {
+          black: "#000000",
+          mint: "#CFFFE2",
+          teal: "#A2D5C6",
+          offwhite: "#F6F6F6",
         },
       },
       borderRadius: {
