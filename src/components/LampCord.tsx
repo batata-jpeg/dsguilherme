@@ -1,39 +1,90 @@
-import { useState } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
+
+const THRESHOLD = 70;
+const MAX_PULL = 140;
 
 export default function LampCord() {
   const { theme, toggleTheme } = useTheme();
-  const controls = useAnimation();
-  const [pulling, setPulling] = useState(false);
   const isDark = theme === 'dark';
 
-  const handlePull = async () => {
-    if (pulling) return;
-    setPulling(true);
-    await controls.start({
-      y: 44,
-      transition: { duration: 0.13, ease: 'easeOut' },
-    });
-    toggleTheme();
-    await controls.start({
-      y: 0,
-      transition: { type: 'spring', stiffness: 420, damping: 14, mass: 0.7 },
-    });
-    setPulling(false);
+  const [pullY, setPullY] = useState(0);
+  const dragging = useRef(false);
+  const startY = useRef(0);
+  const pullRef = useRef(0);
+  const rafRef = useRef<number | null>(null);
+  const toggleRef = useRef(toggleTheme);
+  toggleRef.current = toggleTheme;
+
+  const springBack = useCallback((from: number) => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    const startTime = performance.now();
+    const duration = 700;
+
+    const tick = (now: number) => {
+      const t = Math.min((now - startTime) / duration, 1);
+      // damped spring: decays exponentially with oscillation
+      const val = from * Math.exp(-7 * t) * (Math.cos(14 * t) + 0.4 * Math.sin(14 * t));
+      setPullY(Math.max(0, val));
+      if (t < 1) {
+        rafRef.current = requestAnimationFrame(tick);
+      } else {
+        setPullY(0);
+        pullRef.current = 0;
+      }
+    };
+    rafRef.current = requestAnimationFrame(tick);
+  }, []);
+
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => {
+      if (!dragging.current) return;
+      const delta = Math.max(0, Math.min(MAX_PULL, e.clientY - startY.current));
+      pullRef.current = delta;
+      setPullY(delta);
+    };
+
+    const onUp = () => {
+      if (!dragging.current) return;
+      dragging.current = false;
+      const pulled = pullRef.current;
+      if (pulled >= THRESHOLD) {
+        toggleRef.current();
+      }
+      springBack(pulled);
+    };
+
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
+    return () => {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onUp);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [springBack]);
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    e.currentTarget.setPointerCapture(e.pointerId);
+    dragging.current = true;
+    startY.current = e.clientY;
+    pullRef.current = 0;
   };
 
-  const cordColor = isDark
-    ? 'rgba(255,255,255,0.22)'
-    : 'rgba(0,0,0,0.18)';
+  const progress = Math.min(pullY / THRESHOLD, 1);
+  const nearThreshold = pullY >= THRESHOLD * 0.75;
 
+  const cordColor = isDark ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.20)';
+  const stripedCord = `repeating-linear-gradient(
+    to bottom,
+    ${cordColor} 0px,
+    ${isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)'} 3px,
+    ${cordColor} 6px
+  )`;
+  const beadSize = 18 + progress * 6;
   const beadBg = isDark
-    ? 'linear-gradient(160deg, rgba(255,255,255,0.85) 0%, rgba(200,200,200,0.6) 100%)'
-    : 'linear-gradient(160deg, rgba(60,60,60,0.8) 0%, rgba(30,30,30,0.6) 100%)';
-
-  const beadShadow = isDark
-    ? '0 2px 10px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.4)'
-    : '0 2px 10px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.15)';
+    ? `linear-gradient(160deg, rgba(255,255,255,${0.7 + progress * 0.25}) 0%, rgba(180,180,180,0.55) 100%)`
+    : `linear-gradient(160deg, rgba(50,50,50,${0.7 + progress * 0.2}) 0%, rgba(20,20,20,0.55) 100%)`;
 
   return (
     <div
@@ -46,9 +97,10 @@ export default function LampCord() {
         flexDirection: 'column',
         alignItems: 'center',
         pointerEvents: 'none',
+        userSelect: 'none',
       }}
     >
-      {/* static segment from top to navbar bottom */}
+      {/* static attachment from top to nav */}
       <div
         style={{
           width: 1.5,
@@ -58,36 +110,25 @@ export default function LampCord() {
         }}
       />
 
-      {/* animated pull section */}
-      <motion.button
-        animate={controls}
-        onClick={handlePull}
-        aria-label={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
-        title={isDark ? 'Puxe para ligar a luz' : 'Puxe para apagar a luz'}
+      {/* draggable cord + bead */}
+      <div
+        onPointerDown={onPointerDown}
         style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          background: 'none',
-          border: 'none',
-          cursor: 'n-resize',
-          padding: 0,
           pointerEvents: 'auto',
-          userSelect: 'none',
+          cursor: dragging.current ? 'grabbing' : 'grab',
+          touchAction: 'none',
         }}
-        whileHover={{ scale: 1.05 }}
+        title={isDark ? 'Arraste para ligar a luz' : 'Arraste para apagar a luz'}
       >
-        {/* rope segment */}
+        {/* dynamic cord */}
         <div
           style={{
-            width: 1.5,
-            height: 40,
-            background: `repeating-linear-gradient(
-              to bottom,
-              ${cordColor} 0px,
-              ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)'} 3px,
-              ${cordColor} 6px
-            )`,
+            width: 1.5 + progress,
+            height: 40 + pullY,
+            background: stripedCord,
             borderRadius: 2,
           }}
         />
@@ -95,34 +136,50 @@ export default function LampCord() {
         {/* knot */}
         <div
           style={{
-            width: 5,
-            height: 5,
+            width: 5 + progress * 2,
+            height: 5 + progress * 2,
             borderRadius: '50%',
             background: cordColor,
             margin: '1px 0',
           }}
         />
 
-        {/* pull bead */}
-        <motion.div
-          animate={{ rotate: pulling ? [0, -8, 8, -4, 4, 0] : 0 }}
-          transition={{ duration: 0.5 }}
+        {/* bead */}
+        <div
           style={{
-            width: 18,
-            height: 18,
+            width: beadSize,
+            height: beadSize,
             borderRadius: '50%',
             background: beadBg,
-            boxShadow: beadShadow,
+            boxShadow: `0 ${2 + progress * 6}px ${10 + progress * 14}px rgba(0,0,0,${0.2 + progress * 0.2}), inset 0 1px 0 rgba(255,255,255,0.3)`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: 8,
+            fontSize: 8 + progress * 2,
             lineHeight: 1,
+            transition: 'box-shadow 0.05s',
           }}
         >
           {isDark ? '☀' : '☾'}
-        </motion.div>
-      </motion.button>
+        </div>
+
+        {/* release hint */}
+        {nearThreshold && (
+          <div
+            style={{
+              marginTop: 6,
+              fontSize: 7,
+              color: isDark ? 'rgba(255,255,255,0.45)' : 'rgba(0,0,0,0.30)',
+              fontFamily: 'var(--font-display)',
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              opacity: (progress - 0.75) / 0.25,
+            }}
+          >
+            solte
+          </div>
+        )}
+      </div>
     </div>
   );
 }
