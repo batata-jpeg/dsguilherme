@@ -149,7 +149,7 @@ export default function Index() {
               <div className="relative z-10"
                 style={{ filter: "drop-shadow(0 24px 60px rgba(59,153,252,0.25)) drop-shadow(0 0 100px rgba(147,84,245,0.15))" }}
               >
-                <AnimatePresence mode="crossfade">
+                <AnimatePresence mode="sync">
                   <motion.img
                     key={theme}
                     src={heroVisual}
