@@ -10,15 +10,15 @@ import aboutPortrait from "@/assets/about-portrait.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const floatingBadges = [
-  { label: "Motion Design", icon: "◈", delay: 0, x: "-10%", y: "10%" },
-  { label: "UI/UX", icon: "◉", delay: 0.5, x: "80%", y: "5%" },
-  { label: "Branding", icon: "◆", delay: 1, x: "85%", y: "60%" },
-  { label: "3D Design", icon: "◎", delay: 1.5, x: "-5%", y: "65%" },
-  { label: "Blender", icon: "⬡", delay: 2, x: "40%", y: "-8%" },
-  { label: "Edição de Imagens", icon: "◇", delay: 0.8, x: "75%", y: "35%" },
-];
+{ label: "Motion Design", icon: "◈", delay: 0, x: "-10%", y: "10%" },
+{ label: "UI/UX", icon: "◉", delay: 0.5, x: "80%", y: "5%" },
+{ label: "Branding", icon: "◆", delay: 1, x: "85%", y: "60%" },
+{ label: "3D Design", icon: "◎", delay: 1.5, x: "-5%", y: "65%" },
+{ label: "Blender", icon: "⬡", delay: 2, x: "40%", y: "-8%" },
+{ label: "Edição de Imagens", icon: "◇", delay: 0.8, x: "75%", y: "35%" }];
 
-function FadeInSection({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+
+function FadeInSection({ children, delay = 0, className = "" }: {children: React.ReactNode;delay?: number;className?: string;}) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   return (
@@ -27,11 +27,11 @@ function FadeInSection({ children, delay = 0, className = "" }: { children: Reac
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
-      className={className}
-    >
+      className={className}>
+      
       {children}
-    </motion.div>
-  );
+    </motion.div>);
+
 }
 
 export default function Index() {
@@ -42,47 +42,47 @@ export default function Index() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const stats = [
-    { value: "7+", label: t("index.stats.years"), icon: Zap },
-    { value: "120+", label: t("index.stats.projects"), icon: Award },
-    { value: "40+", label: t("index.stats.clients"), icon: Users },
-    { value: "6", label: t("index.stats.fields"), icon: Layers },
-  ];
+  { value: "7+", label: t("index.stats.years"), icon: Zap },
+  { value: "120+", label: t("index.stats.projects"), icon: Award },
+  { value: "40+", label: t("index.stats.clients"), icon: Users },
+  { value: "6", label: t("index.stats.fields"), icon: Layers }];
+
 
   const featuredProjects = [
-    {
-      id: "luminary-brand",
-      title: t("proj.luminary.title"),
-      category: t("proj.luminary.category") + " · Identity",
-      description: "A complete luxury brand system featuring custom typography, mark design, and a premium visual language.",
-      image: project1,
-      year: "2024",
-    },
-    {
-      id: "nebula-motion",
-      title: t("proj.nebula.title"),
-      category: t("proj.nebula.category") + " · 3D",
-      description: "Generative motion graphics exploring fluid dynamics and organic form.",
-      image: project2,
-      year: "2024",
-    },
-    {
-      id: "nova-app",
-      title: t("proj.nova.title"),
-      category: t("proj.nova.category") + " · Product",
-      description: "A futuristic mobile OS concept with glassmorphism design language.",
-      image: project3,
-      year: "2023",
-    },
-  ];
+  {
+    id: "luminary-brand",
+    title: t("proj.luminary.title"),
+    category: t("proj.luminary.category") + " · Identity",
+    description: "A complete luxury brand system featuring custom typography, mark design, and a premium visual language.",
+    image: project1,
+    year: "2024"
+  },
+  {
+    id: "nebula-motion",
+    title: t("proj.nebula.title"),
+    category: t("proj.nebula.category") + " · 3D",
+    description: "Generative motion graphics exploring fluid dynamics and organic form.",
+    image: project2,
+    year: "2024"
+  },
+  {
+    id: "nova-app",
+    title: t("proj.nova.title"),
+    category: t("proj.nova.category") + " · Product",
+    description: "A futuristic mobile OS concept with glassmorphism design language.",
+    image: project3,
+    year: "2023"
+  }];
+
 
   return (
     <div className="min-h-screen overflow-x-hidden dot-grid" style={{ background: "var(--gradient-bg)" }}>
       {/* ── HERO */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute top-32 right-24 w-48 h-48 rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle at 35% 35%, rgba(255,255,255,0.6) 0%, rgba(59,153,252,0.08) 60%, transparent 100%)", border: "1px solid rgba(255,255,255,0.7)", boxShadow: "0 8px 40px rgba(59,153,252,0.10), inset 0 1px 0 rgba(255,255,255,0.9)", backdropFilter: "blur(20px)" }} />
+        style={{ background: "radial-gradient(circle at 35% 35%, rgba(255,255,255,0.6) 0%, rgba(59,153,252,0.08) 60%, transparent 100%)", border: "1px solid rgba(255,255,255,0.7)", boxShadow: "0 8px 40px rgba(59,153,252,0.10), inset 0 1px 0 rgba(255,255,255,0.9)", backdropFilter: "blur(20px)" }} />
         <div className="absolute bottom-40 left-12 w-32 h-32 rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle at 35% 35%, rgba(255,255,255,0.5) 0%, rgba(191,90,242,0.06) 60%, transparent 100%)", border: "1px solid rgba(255,255,255,0.6)", boxShadow: "0 8px 32px rgba(191,90,242,0.10), inset 0 1px 0 rgba(255,255,255,0.8)", backdropFilter: "blur(16px)" }} />
+        style={{ background: "radial-gradient(circle at 35% 35%, rgba(255,255,255,0.5) 0%, rgba(191,90,242,0.06) 60%, transparent 100%)", border: "1px solid rgba(255,255,255,0.6)", boxShadow: "0 8px 32px rgba(191,90,242,0.10), inset 0 1px 0 rgba(255,255,255,0.8)", backdropFilter: "blur(16px)" }} />
 
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative z-10 w-full">
           <div className="max-w-7xl mx-auto px-6 pt-28 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -102,7 +102,7 @@ export default function Index() {
               </motion.div>
 
               <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.7 }}
-                className="font-body text-lg leading-relaxed max-w-md" style={{ color: "hsl(var(--muted-foreground))" }}>
+              className="font-body text-lg leading-relaxed max-w-md" style={{ color: "hsl(var(--muted-foreground))" }}>
                 {t("index.hero.description")}
               </motion.p>
 
@@ -128,25 +128,25 @@ export default function Index() {
 
             {/* Right – visual centerpiece */}
             <div className="relative flex items-center justify-center min-h-[500px]">
-              {floatingBadges.map((badge, i) => (
-                <motion.div key={badge.label} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 1 + badge.delay }}
-                  style={{ position: "absolute", left: badge.x, top: badge.y }} className="z-20">
+              {floatingBadges.map((badge, i) =>
+              <motion.div key={badge.label} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 1 + badge.delay }}
+              style={{ position: "absolute", left: badge.x, top: badge.y }} className="z-20">
                   <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 4 + i * 0.5, repeat: Infinity, ease: "easeInOut" }}
-                    className="glass-panel-sm px-3 py-2 flex items-center gap-2 whitespace-nowrap hover:scale-105 transition-transform duration-300">
+                className="glass-panel-sm px-3 py-2 flex items-center gap-2 whitespace-nowrap hover:scale-105 transition-transform duration-300">
                     <span className="text-sm" style={{ color: "hsl(var(--primary))" }}>{badge.icon}</span>
                     <span className="font-display text-xs tracking-[0.1em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{badge.label}</span>
                   </motion.div>
                 </motion.div>
-              ))}
+              )}
               <motion.div initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }} className="relative z-10"
-                style={{ filter: "drop-shadow(0 12px 40px rgba(59,153,252,0.22)) drop-shadow(0 0 80px rgba(147,84,245,0.12))" }}>
+              transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }} className="relative z-10"
+              style={{ filter: "drop-shadow(0 12px 40px rgba(59,153,252,0.22)) drop-shadow(0 0 80px rgba(147,84,245,0.12))" }}>
                 <motion.img src={heroVisual} alt="Liquid Glass Crystal"
-                  className="w-72 h-72 md:w-96 md:h-96 object-contain"
-                  animate={{ rotate: [0, 3, -2, 0], y: [0, -10, 5, 0] }}
-                  transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                  style={{ transform: `perspective(1000px)` }} />
+                className="w-72 h-72 md:w-96 md:h-96 object-contain"
+                animate={{ rotate: [0, 3, -2, 0], y: [0, -10, 5, 0] }}
+                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                style={{ transform: `perspective(1000px)` }} />
 
               </motion.div>
             </div>
@@ -154,7 +154,7 @@ export default function Index() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
           <span className="font-display text-xs tracking-[0.25em] uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>{t("index.hero.scroll")}</span>
           <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
             <ChevronDown className="w-4 h-4" style={{ color: "hsl(var(--primary))" }} />
@@ -168,16 +168,16 @@ export default function Index() {
           <div className="max-w-7xl mx-auto px-6">
             <div className="glass-panel p-1 rounded-2xl">
               <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0"
-                style={{ borderColor: "rgba(10,132,255,0.08)" } as React.CSSProperties}>
-                {stats.map(({ value, label, icon: Icon }, i) => (
-                  <motion.div key={label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                    className="p-8 flex flex-col items-center text-center gap-3">
+              style={{ borderColor: "rgba(10,132,255,0.08)" } as React.CSSProperties}>
+                {stats.map(({ value, label, icon: Icon }, i) =>
+                <motion.div key={label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                className="p-8 flex flex-col items-center text-center gap-3">
                     <Icon className="w-5 h-5 mb-1" style={{ color: "hsl(var(--primary))", opacity: 0.7 }} />
                     <span className="font-display font-extrabold gradient-text" style={{ fontSize: "2.8rem", lineHeight: 1 }}>{value}</span>
                     <span className="font-display text-xs tracking-[0.15em] uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>{label}</span>
                   </motion.div>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -201,7 +201,7 @@ export default function Index() {
           </FadeInSection>
           <FadeInSection delay={0.4}>
             <h2 className="font-display font-extrabold leading-[0.85] tracking-tight mt-4 uppercase"
-              style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)", color: "hsl(var(--muted-foreground))", opacity: 0.5 }}>
+            style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)", color: "hsl(var(--muted-foreground))", opacity: 0.5 }}>
               {t("index.philosophy.author")}
             </h2>
           </FadeInSection>
@@ -235,7 +235,7 @@ export default function Index() {
                   <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${featuredProjects[0].image})` }} />
                   <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,20,50,0.85) 30%, rgba(10,20,50,0.15) 70%)" }} />
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{ background: "rgba(59,153,252,0.04)", backdropFilter: "blur(2px)" }} />
+                  style={{ background: "rgba(59,153,252,0.04)", backdropFilter: "blur(2px)" }} />
                   <div className="absolute bottom-0 left-0 right-0 p-8 space-y-2">
                     <span className="section-label" style={{ color: "rgba(255,255,255,0.7)" }}>{featuredProjects[0].category}</span>
                     <h3 className="font-display font-bold text-2xl uppercase text-white">{featuredProjects[0].title}</h3>
@@ -250,8 +250,8 @@ export default function Index() {
             </FadeInSection>
 
             <div className="space-y-6">
-              {featuredProjects.slice(1).map((proj, i) => (
-                <FadeInSection key={proj.id} delay={0.2 + i * 0.15}>
+              {featuredProjects.slice(1).map((proj, i) =>
+              <FadeInSection key={proj.id} delay={0.2 + i * 0.15}>
                   <Link to={`/projects/${proj.id}`}>
                     <div className="glass-panel group overflow-hidden h-[196px] relative">
                       <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${proj.image})` }} />
@@ -267,7 +267,7 @@ export default function Index() {
                     </div>
                   </Link>
                 </FadeInSection>
-              ))}
+              )}
             </div>
           </div>
 
@@ -282,35 +282,35 @@ export default function Index() {
       {/* ── ABOUT PREVIEW */}
       <section className="relative py-24">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="glass-panel p-12 md:p-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <FadeInSection>
-              <div className="relative">
-                <div className="absolute inset-0 rounded-2xl pointer-events-none"
-                  style={{ background: "radial-gradient(circle at 40% 40%, rgba(59,153,252,0.15) 0%, rgba(147,84,245,0.08) 60%, transparent 80%)", filter: "blur(24px)" }} />
-                <img src={aboutPortrait} alt="Designer Portrait" className="relative rounded-2xl w-full object-cover"
-                  style={{ height: "400px", objectPosition: "center top", border: "1px solid rgba(255,255,255,0.8)", boxShadow: "var(--glass-shadow)" }} />
-              </div>
-            </FadeInSection>
-            <FadeInSection delay={0.2} className="space-y-6">
-              <span className="section-label">{t("index.about.label")}</span>
-              <h2 className="font-display font-bold uppercase" style={{ fontSize: "clamp(1.8rem, 3.5vw, 3rem)" }}>
-                {t("index.about.title")}
-              </h2>
-              <p className="font-body leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
-                {t("index.about.body")}
-              </p>
-              <div className="grid grid-cols-2 gap-3">
-                {["Blender", "Adobe CC", "Cinema 4D", "Figma", "After Effects", "Substance 3D"].map((tool) => (
-                  <div key={tool} className="glass-panel-sm px-3 py-2 text-center">
-                    <span className="font-display text-xs tracking-[0.15em] uppercase" style={{ color: "hsl(var(--primary))" }}>{tool}</span>
-                  </div>
-                ))}
-              </div>
-              <Link to="/about">
-                <button className="btn-glass-primary mt-4">{t("index.about.cta")} <ArrowRight className="w-4 h-4" /></button>
-              </Link>
-            </FadeInSection>
-          </div>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
         </div>
       </section>
 
@@ -337,6 +337,6 @@ export default function Index() {
           </FadeInSection>
         </div>
       </section>
-    </div>
-  );
+    </div>);
+
 }
