@@ -20,7 +20,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative overflow-hidden border-t" style={{ borderColor: "rgba(10,132,255,0.10)" }}>
+    <footer className="relative overflow-hidden border-t" style={{ borderColor: "hsl(var(--border))", background: "hsl(var(--background))" }}>
 
       <div className="relative max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
