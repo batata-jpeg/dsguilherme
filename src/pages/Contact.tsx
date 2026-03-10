@@ -65,8 +65,6 @@ export default function Contact() {
     <div className="min-h-screen dot-grid" style={{ background: "var(--gradient-bg)" }}>
       {/* Header */}
       <div className="relative pt-36 pb-20 overflow-hidden">
-        <div className="absolute top-0 right-0 radial-glow-blue opacity-22 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 radial-glow-violet opacity-18 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <span className="section-label block mb-6">{t("contact.label")}</span>

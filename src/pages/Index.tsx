@@ -198,9 +198,6 @@ export default function Index() {
       {/* ── PHILOSOPHY */}
       <section className="relative py-32 overflow-hidden">
         {/* Prismatic band */}
-        <div className="absolute left-0 right-0 h-px pointer-events-none" style={{ top: "50%", background: "var(--gradient-prism)", opacity: 0.25 }} />
-        <div className="absolute top-0 right-0 radial-glow-violet opacity-25 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 radial-glow-blue opacity-20 pointer-events-none" />
         <div className="relative max-w-7xl mx-auto px-6">
           <FadeInSection>
             <span className="section-label mb-8 block">{t("index.philosophy.label")}</span>
