@@ -39,6 +39,9 @@ function FadeInSection({ children, delay = 0, className = "" }: {children: React
 
 export default function Index() {
   const { t } = useLanguage();
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const heroVisual = isDark ? heroVisualDark : heroVisualLight;
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
