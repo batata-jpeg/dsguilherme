@@ -327,10 +327,6 @@ export default function Index() {
 
       {/* ── CONTACT CTA */}
       <section className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="radial-glow-blue absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-50" style={{ width: "800px", height: "800px" }} />
-          <div className="radial-glow-violet absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-35" />
-        </div>
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <FadeInSection>
             <span className="section-label justify-center mb-6 flex">{t("index.cta.label")}</span>
