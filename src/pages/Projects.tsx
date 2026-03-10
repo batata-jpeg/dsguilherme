@@ -158,7 +158,7 @@ export default function Projects() {
                   className="group aspect-[4/5]"
                   style={{ display: "block" }}
                 >
-                  <div className="relative w-full h-full overflow-hidden rounded-[var(--radius)]">
+                  <div className="relative w-full h-full rounded-[var(--radius)]">
                     <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url(${proj.image})` }} />
                     <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 40%, rgba(10,20,50,0.80) 100%)" }} />
                     {/* Bottom title overlay */}
