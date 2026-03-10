@@ -11,12 +11,13 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import GlareHover from "@/components/GlareHover";
 
 const floatingBadges = [
-{ label: "Motion Design", icon: "◈", delay: 0, x: "-10%", y: "10%" },
-{ label: "UI/UX", icon: "◉", delay: 0.5, x: "80%", y: "5%" },
-{ label: "Branding", icon: "◆", delay: 1, x: "85%", y: "60%" },
-{ label: "3D Design", icon: "◎", delay: 1.5, x: "-5%", y: "65%" },
-{ label: "Blender", icon: "⬡", delay: 2, x: "40%", y: "-8%" },
-{ label: "Edição de Imagens", icon: "◇", delay: 0.8, x: "75%", y: "35%" }];
+  { label: "Motion Design", icon: "◈", delay: 0,   x: "-10%", y: "10%",  xKeys: [0, 12, -8,  5, -14,  0], yKeys: [0, -10,  6, -14,  8,  0], dur: 8   },
+  { label: "UI/UX",         icon: "◉", delay: 0.5, x: "80%",  y: "5%",   xKeys: [0, -10, 14, -6,  10,  0], yKeys: [0,  12, -8,  14, -6,  0], dur: 9   },
+  { label: "Branding",      icon: "◆", delay: 1,   x: "85%",  y: "60%",  xKeys: [0,  8, -12,  4, -10,  0], yKeys: [0, -8,  12, -4,  10,  0], dur: 7.5 },
+  { label: "3D Design",     icon: "◎", delay: 1.5, x: "-5%",  y: "65%",  xKeys: [0, -14,  6, 10,  -8,  0], yKeys: [0,  6,  -14, 8,  -4,  0], dur: 10  },
+  { label: "Blender",       icon: "⬡", delay: 2,   x: "40%",  y: "-8%",  xKeys: [0,  6,  -8, 14,  -6,  0], yKeys: [0, -12,  8, -6,  14,  0], dur: 8.5 },
+  { label: "Imagens",       icon: "◇", delay: 0.8, x: "75%",  y: "35%",  xKeys: [0, -8,  12, -10,  6,  0], yKeys: [0,  10,  -6, 14,  -8,  0], dur: 9.5 },
+];
 
 
 function FadeInSection({ children, delay = 0, className = "" }: {children: React.ReactNode;delay?: number;className?: string;}) {
