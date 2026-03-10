@@ -198,9 +198,9 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Index – Hero
     "index.hero.label": "Designer Gráfico · Artista 3D · Experiências Visuais",
-    "index.hero.h1a": "DESIGN",
-    "index.hero.h1b": "ALÉM DA",
-    "index.hero.h1c": "SUPERFÍCIE",
+    "index.hero.h1a": "SEJA BEM-VINDO",
+    "index.hero.h1b": "AO MEU",
+    "index.hero.h1c": "PORTFÓLIO!",
     "index.hero.description": "",
     "index.hero.cta.projects": "Ver Projetos",
     "index.hero.cta.about": "Sobre Mim",
