@@ -41,6 +41,7 @@ function FadeInSection({ children, delay = 0, className = "" }: {children: React
 export default function Index() {
   const { t } = useLanguage();
   const { theme } = useTheme();
+  const isMobile = useIsMobile();
   const isDark = theme === "dark";
   const heroVisual = isDark ? heroVisualDark : heroVisualLight;
   const heroRef = useRef<HTMLDivElement>(null);
