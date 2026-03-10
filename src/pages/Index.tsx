@@ -229,9 +229,6 @@ export default function Index() {
       <section className="relative py-32 overflow-hidden">
         {/* Prismatic band */}
         <div className="relative max-w-7xl mx-auto px-6">
-          <FadeInSection>
-            <span className="section-label mb-8 block">{t("index.philosophy.label")}</span>
-          </FadeInSection>
           <FadeInSection delay={0.2}>
             <h2 className="font-display font-extrabold leading-[0.85] tracking-tight uppercase" style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)" }}>
               {t("index.philosophy.line1")}
