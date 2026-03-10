@@ -246,11 +246,6 @@ export default function Index() {
               {t("index.philosophy.author")}
             </h2>
           </FadeInSection>
-          <FadeInSection delay={0.6} className="mt-10 max-w-lg">
-            <p className="font-body text-lg leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
-              {t("index.philosophy.body")}
-            </p>
-          </FadeInSection>
         </div>
       </section>
 
