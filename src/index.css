@@ -95,23 +95,25 @@
     --popover: 162 12% 9%;
     --popover-foreground: 0 0% 96%;
 
-    --primary: 144 100% 91%;         /* #CFFFE2 stays vibrant */
+    /* Primary: Mint #CFFFE2 — pops on dark bg */
+    --primary: 144 100% 91%;
     --primary-foreground: 0 0% 4%;
     --primary-glow: 162 38% 74%;
 
-    --secondary: 162 38% 74%;        /* #A2D5C6 */
+    /* Secondary: Sage #A2D5C6 */
+    --secondary: 162 38% 74%;
     --secondary-foreground: 0 0% 4%;
 
     --muted: 162 12% 14%;
-    --muted-foreground: 162 15% 55%;
+    --muted-foreground: 162 18% 58%;
     --accent: 144 100% 91%;
     --accent-foreground: 0 0% 4%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 96%;
 
-    --border: 162 15% 20%;
-    --input: 162 12% 13%;
-    --ring: 162 38% 74%;
+    --border: 162 15% 18%;
+    --input: 162 12% 12%;
+    --ring: 144 100% 91%;
 
     --glass-bg: rgba(162, 213, 198, 0.06);
     --glass-bg-hover: rgba(162, 213, 198, 0.10);
