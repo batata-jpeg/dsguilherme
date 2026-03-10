@@ -128,9 +128,9 @@ export default function Projects() {
               className="glass-panel-sm px-4 py-2 font-display text-xs tracking-[0.15em] uppercase transition-all duration-300"
               style={{
                 color: activeCategory === cat.key ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))",
-                borderColor: activeCategory === cat.key ? "rgba(10,132,255,0.5)" : undefined,
+                borderColor: activeCategory === cat.key ? "rgba(162,213,198,0.6)" : undefined,
                 boxShadow: activeCategory === cat.key ? "var(--glow-blue-sm)" : undefined,
-                background: activeCategory === cat.key ? "rgba(10,132,255,0.10)" : undefined,
+                background: activeCategory === cat.key ? "rgba(207,255,226,0.25)" : undefined,
               }}>
               {cat.label}
             </button>
