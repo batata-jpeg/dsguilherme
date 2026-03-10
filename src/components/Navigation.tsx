@@ -1,9 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { Globe, Moon, Sun } from "lucide-react";
+import { Globe } from "lucide-react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useTheme } from "@/contexts/ThemeContext";
 import PillNav from "@/components/PillNav";
 
 const LOGO_SVG = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%25" stop-color="%230A84FF"/><stop offset="100%25" stop-color="%23BF5AF2"/></linearGradient></defs><rect x="5" y="5" width="14" height="14" rx="3" fill="url(%23g)"/></svg>`;
