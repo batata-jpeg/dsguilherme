@@ -280,9 +280,7 @@ export default function Index() {
       </section>
 
       {/* ── ABOUT PREVIEW */}
-      <section className="relative py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          
+      
 
 
 
@@ -310,9 +308,11 @@ export default function Index() {
 
 
 
-          
-        </div>
-      </section>
+
+
+
+
+      
 
       {/* ── CONTACT CTA */}
       <section className="relative py-32 overflow-hidden">
