@@ -21,9 +21,6 @@ export default function Footer() {
 
   return (
     <footer className="relative overflow-hidden border-t" style={{ borderColor: "rgba(10,132,255,0.10)" }}>
-      {/* Subtle prismatic footer glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-32 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, rgba(59,153,252,0.08) 0%, transparent 70%)", filter: "blur(20px)" }} />
 
       <div className="relative max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
