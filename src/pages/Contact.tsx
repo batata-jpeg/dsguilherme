@@ -3,23 +3,23 @@ import { motion, useInView } from "framer-motion";
 import { Send, Mail, Instagram, Linkedin, Twitter, Github, MapPin, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-function FadeInSection({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+function FadeInSection({ children, delay = 0, className = "" }: {children: React.ReactNode;delay?: number;className?: string;}) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
     <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }} className={className}>
+    transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }} className={className}>
       {children}
-    </motion.div>
-  );
+    </motion.div>);
+
 }
 
 const socials = [
-  { icon: Instagram, label: "Instagram", handle: "@refraction_point", href: "#" },
-  { icon: Linkedin, label: "LinkedIn", handle: "in/refraction-point", href: "#" },
-  { icon: Twitter, label: "Twitter", handle: "@refractionpoint", href: "#" },
-  { icon: Github, label: "GitHub", handle: "refraction-point", href: "#" },
-];
+{ icon: Instagram, label: "Instagram", handle: "@refraction_point", href: "#" },
+{ icon: Linkedin, label: "LinkedIn", handle: "in/refraction-point", href: "#" },
+{ icon: Twitter, label: "Twitter", handle: "@refractionpoint", href: "#" },
+{ icon: Github, label: "GitHub", handle: "refraction-point", href: "#" }];
+
 
 export default function Contact() {
   const { t } = useLanguage();
@@ -28,9 +28,9 @@ export default function Contact() {
   const [focused, setFocused] = useState<string | null>(null);
 
   const services = [
-    t("svc.brand"), t("svc.motion"), t("svc.3d"),
-    t("svc.ui"), t("svc.packaging"), t("svc.direction"),
-  ];
+  t("svc.brand"), t("svc.motion"), t("svc.3d"),
+  t("svc.ui"), t("svc.packaging"), t("svc.direction")];
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -53,7 +53,7 @@ export default function Contact() {
     fontFamily: "var(--font-body)",
     fontSize: "0.95rem",
     outline: "none",
-    transition: "all 0.2s ease",
+    transition: "all 0.2s ease"
   });
 
   return (
@@ -99,7 +99,7 @@ export default function Contact() {
               <div className="flex items-center gap-2 text-xs font-display tracking-[0.1em] uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>
                 <MapPin className="w-3 h-3" />{t("contact.location")}
               </div>
-              <div className="flex items-center gap-2 text-xs font-display tracking-[0.1em] uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>
+              <div className="flex items-center gap-2 text-xs font-display tracking-[0.1em] uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>GUICARVALHOGUIMA@GMAIL.COM
                 <Mail className="w-3 h-3" />hello@refractionpoint.com
               </div>
             </div>
@@ -107,20 +107,20 @@ export default function Contact() {
             <div className="glass-panel p-6 space-y-4">
               <span className="section-label">{t("contact.services.label")}</span>
               <div className="space-y-2">
-                {services.map((svc) => (
-                  <div key={svc} className="glass-panel-sm font-display text-xs tracking-[0.1em] uppercase px-3 py-2 rounded-xl transition-all duration-200"
-                    style={{ color: "hsl(var(--muted-foreground))" }}>
+                {services.map((svc) =>
+                <div key={svc} className="glass-panel-sm font-display text-xs tracking-[0.1em] uppercase px-3 py-2 rounded-xl transition-all duration-200"
+                style={{ color: "hsl(var(--muted-foreground))" }}>
                     {svc}
                   </div>
-                ))}
+                )}
               </div>
             </div>
 
             <div className="glass-panel p-6 space-y-4">
               <span className="section-label">{t("contact.socials.label")}</span>
               <div className="space-y-3">
-                {socials.map(({ icon: Icon, label, handle, href }) => (
-                  <a key={label} href={href} className="flex items-center gap-3 group transition-all duration-200">
+                {socials.map(({ icon: Icon, label, handle, href }) =>
+                <a key={label} href={href} className="flex items-center gap-3 group transition-all duration-200">
                     <div className="glass-panel-sm p-2 group-hover:border-primary/40 transition-colors duration-200">
                       <Icon className="w-4 h-4" style={{ color: "hsl(var(--primary))" }} />
                     </div>
@@ -129,7 +129,7 @@ export default function Contact() {
                       <div className="font-body text-xs" style={{ color: "hsl(var(--muted-foreground))" }}>{handle}</div>
                     </div>
                   </a>
-                ))}
+                )}
               </div>
             </div>
           </FadeInSection>
@@ -137,17 +137,17 @@ export default function Contact() {
           {/* Contact form */}
           <FadeInSection delay={0.2} className="lg:col-span-3">
             <div className="glass-panel p-8 md:p-12">
-              {status === "sent" ? (
-                <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
-                  className="flex flex-col items-center justify-center py-20 text-center gap-6">
+              {status === "sent" ?
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
+              className="flex flex-col items-center justify-center py-20 text-center gap-6">
                   <div className="w-20 h-20 rounded-full flex items-center justify-center glass-panel">
                     <Send className="w-8 h-8" style={{ color: "hsl(var(--primary))" }} />
                   </div>
                   <h3 className="font-display font-bold text-2xl uppercase">{t("contact.form.sent.title")}</h3>
                   <p className="font-body" style={{ color: "hsl(var(--muted-foreground))" }}>{t("contact.form.sent.body")}</p>
-                </motion.div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
+                </motion.div> :
+
+              <form onSubmit={handleSubmit} className="space-y-6">
                   <span className="section-label block mb-8">{t("contact.form.label")}</span>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -156,16 +156,16 @@ export default function Contact() {
                         {t("contact.form.name")}
                       </label>
                       <input name="name" value={form.name} onChange={handleChange}
-                        onFocus={() => setFocused("name")} onBlur={() => setFocused(null)}
-                        placeholder={t("contact.form.name.placeholder")} required style={inputStyle("name")} />
+                    onFocus={() => setFocused("name")} onBlur={() => setFocused(null)}
+                    placeholder={t("contact.form.name.placeholder")} required style={inputStyle("name")} />
                     </div>
                     <div className="space-y-2">
                       <label className="font-display text-xs tracking-[0.15em] uppercase block" style={{ color: "hsl(var(--muted-foreground))" }}>
                         {t("contact.form.email")}
                       </label>
                       <input name="email" type="email" value={form.email} onChange={handleChange}
-                        onFocus={() => setFocused("email")} onBlur={() => setFocused(null)}
-                        placeholder={t("contact.form.email.placeholder")} required style={inputStyle("email")} />
+                    onFocus={() => setFocused("email")} onBlur={() => setFocused(null)}
+                    placeholder={t("contact.form.email.placeholder")} required style={inputStyle("email")} />
                     </div>
                   </div>
 
@@ -174,12 +174,12 @@ export default function Contact() {
                       {t("contact.form.service")}
                     </label>
                     <select name="service" value={form.service} onChange={handleChange}
-                      onFocus={() => setFocused("service")} onBlur={() => setFocused(null)}
-                      style={{ ...inputStyle("service"), appearance: "none" as const }}>
+                  onFocus={() => setFocused("service")} onBlur={() => setFocused(null)}
+                  style={{ ...inputStyle("service"), appearance: "none" as const }}>
                       <option value="" style={{ background: "hsl(var(--background))" }}>{t("contact.form.service.placeholder")}</option>
-                      {services.map((s) => (
-                        <option key={s} value={s} style={{ background: "hsl(var(--background))" }}>{s}</option>
-                      ))}
+                      {services.map((s) =>
+                    <option key={s} value={s} style={{ background: "hsl(var(--background))" }}>{s}</option>
+                    )}
                     </select>
                   </div>
 
@@ -188,25 +188,25 @@ export default function Contact() {
                       {t("contact.form.message")}
                     </label>
                     <textarea name="message" value={form.message} onChange={handleChange}
-                      onFocus={() => setFocused("message")} onBlur={() => setFocused(null)}
-                      placeholder={t("contact.form.message.placeholder")} required rows={6}
-                      style={{ ...inputStyle("message"), resize: "vertical" as const, minHeight: "140px" }} />
+                  onFocus={() => setFocused("message")} onBlur={() => setFocused(null)}
+                  placeholder={t("contact.form.message.placeholder")} required rows={6}
+                  style={{ ...inputStyle("message"), resize: "vertical" as const, minHeight: "140px" }} />
                   </div>
 
                   <button type="submit" disabled={status === "sending"} className="btn-glass-primary w-full justify-center py-4 text-sm"
-                    style={{ opacity: status === "sending" ? 0.7 : 1 }}>
-                    {status === "sending" ? (
-                      <>{t("contact.form.sending")}</>
-                    ) : (
-                      <>{t("contact.form.send")} <Send className="w-4 h-4" /></>
-                    )}
+                style={{ opacity: status === "sending" ? 0.7 : 1 }}>
+                    {status === "sending" ?
+                  <>{t("contact.form.sending")}</> :
+
+                  <>{t("contact.form.send")} <Send className="w-4 h-4" /></>
+                  }
                   </button>
                 </form>
-              )}
+              }
             </div>
           </FadeInSection>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
