@@ -305,7 +305,6 @@
   background: var(--gradient-prism);
   border-radius: 2px;
   opacity: 0.6;
-  filter: blur(0.5px);
 }
 
 /* ─── Scrollbar ──────────────────────────────────────────────────────────── */

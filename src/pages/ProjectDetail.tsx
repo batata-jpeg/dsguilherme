@@ -129,7 +129,7 @@ export default function ProjectDetail() {
                 <span
                   key={tag}
                   className="font-display text-xs tracking-[0.1em] uppercase px-3 py-1 rounded-xl"
-                  style={{ background: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.85)", border: "1px solid rgba(255,255,255,0.25)", backdropFilter: "blur(12px)" }}
+                  style={{ background: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.85)", border: "1px solid rgba(255,255,255,0.25)" }}
                 >
                   {tag}
                 </span>
