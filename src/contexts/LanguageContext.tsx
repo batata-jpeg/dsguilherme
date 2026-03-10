@@ -201,7 +201,7 @@ const translations: Record<Language, Record<string, string>> = {
     "index.hero.h1a": "DESIGN",
     "index.hero.h1b": "ALÉM DA",
     "index.hero.h1c": "SUPERFÍCIE",
-    "index.hero.description": "Criando experiências visuais imersivas na interseção de design, arte, branding e interação digital. Onde conceito se torna sensação.",
+    "index.hero.description": "",
     "index.hero.cta.projects": "Ver Projetos",
     "index.hero.cta.about": "Sobre Mim",
     "index.hero.available": "Disponível para Novos Projetos",
