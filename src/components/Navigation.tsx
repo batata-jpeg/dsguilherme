@@ -28,9 +28,9 @@ export default function Navigation() {
   ];
 
   const isDark = theme === "dark";
-  const baseColor = isDark ? "hsl(224, 35%, 11%)" : "hsl(0, 0%, 100%)";
-  const pillColor = isDark ? "hsl(212, 97%, 60%)" : "hsl(212, 97%, 52%)";
-  const hoveredPillTextColor = isDark ? "hsl(0, 0%, 100%)" : "hsl(212, 97%, 52%)";
+  const baseColor = isDark ? "hsl(224, 35%, 13%)" : "hsl(220, 20%, 97%)";
+  const pillColor = isDark ? "hsl(224, 25%, 22%)" : "hsl(220, 15%, 88%)";
+  const hoveredPillTextColor = isDark ? "hsl(220, 20%, 92%)" : "hsl(220, 25%, 18%)";
 
   const extraControls = (
     <>
@@ -102,7 +102,7 @@ export default function Navigation() {
       baseColor={baseColor}
       pillColor={pillColor}
       hoveredPillTextColor={hoveredPillTextColor}
-      pillTextColor="#ffffff"
+      pillTextColor={isDark ? "hsl(220, 20%, 92%)" : "hsl(220, 25%, 18%)"}
       extraControls={extraControls}
       mobileExtraControls={mobileExtraControls}
       initialLoadAnimation={true}
