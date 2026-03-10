@@ -79,10 +79,10 @@ export default function Index() {
     <div className="min-h-screen overflow-x-hidden dot-grid" style={{ background: "var(--gradient-bg)" }}>
       {/* ── HERO */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
-        <div className="absolute top-32 right-24 w-48 h-48 rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle at 35% 35%, rgba(255,255,255,0.6) 0%, rgba(59,153,252,0.08) 60%, transparent 100%)", border: "1px solid rgba(255,255,255,0.7)", boxShadow: "0 8px 40px rgba(59,153,252,0.10), inset 0 1px 0 rgba(255,255,255,0.9)", backdropFilter: "blur(20px)" }} />
-        <div className="absolute bottom-40 left-12 w-32 h-32 rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle at 35% 35%, rgba(255,255,255,0.5) 0%, rgba(191,90,242,0.06) 60%, transparent 100%)", border: "1px solid rgba(255,255,255,0.6)", boxShadow: "0 8px 32px rgba(191,90,242,0.10), inset 0 1px 0 rgba(255,255,255,0.8)", backdropFilter: "blur(16px)" }} />
+        <div className="absolute top-32 right-24 w-48 h-48 rounded-full pointer-events-none opacity-20"
+        style={{ background: "hsl(var(--primary))", filter: "blur(60px)" }} />
+        <div className="absolute bottom-40 left-12 w-32 h-32 rounded-full pointer-events-none opacity-15"
+        style={{ background: "hsl(var(--secondary))", filter: "blur(50px)" }} />
 
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative z-10 w-full">
           <div className="max-w-7xl mx-auto px-6 pt-28 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
