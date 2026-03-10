@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useInView } from "framer-motion";
 import { ArrowRight, ChevronDown, ExternalLink, Zap, Award, Users, Layers } from "lucide-react";
 import heroVisualDark from "@/assets/hero-character.png";
 import heroVisualLight from "@/assets/hero-character-light.png";
@@ -146,21 +146,22 @@ export default function Index() {
                 </motion.div>
               </motion.div>
               )}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.7 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="relative z-10"
+              <div className="relative z-10"
                 style={{ filter: "drop-shadow(0 24px 60px rgba(59,153,252,0.25)) drop-shadow(0 0 100px rgba(147,84,245,0.15))" }}
               >
-                <motion.img
-                  src={heroVisual}
-                  alt="Designer 3D Character"
-                  className="w-80 h-auto md:w-[440px] object-contain"
-                  animate={{ y: [0, -12, 0] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                />
-              </motion.div>
+                <AnimatePresence mode="sync">
+                  <motion.img
+                    key={theme}
+                    src={heroVisual}
+                    alt="Designer 3D Character"
+                    className="w-80 h-auto md:w-[440px] object-contain"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1, y: [0, -12, 0] }}
+                    exit={{ opacity: 0, position: "absolute" } as any}
+                    transition={{ opacity: { duration: 0.35, ease: "easeInOut" }, y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
+                  />
+                </AnimatePresence>
+              </div>
             </div>
           </div>
         </motion.div>
