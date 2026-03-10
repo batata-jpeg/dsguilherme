@@ -43,22 +43,17 @@ export default function Contact() {
   };
 
   const inputStyle = (name: string) => ({
-    background: focused === name ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.55)",
-    border: `1px solid ${focused === name ? "rgba(10,132,255,0.50)" : "rgba(255,255,255,0.85)"}`,
-    borderTopColor: "rgba(255,255,255,0.95)",
-    boxShadow: focused === name
-      ? "0 0 0 3px rgba(10,132,255,0.10), 0 4px 20px rgba(10,132,255,0.10), inset 0 1px 0 rgba(255,255,255,1)"
-      : "0 2px 12px rgba(0,100,220,0.06), inset 0 1px 0 rgba(255,255,255,0.9)",
+    background: focused === name ? "hsl(var(--input))" : "hsl(var(--background))",
+    border: `1px solid ${focused === name ? "hsl(var(--ring))" : "hsl(var(--border))"}`,
+    boxShadow: focused === name ? "0 0 0 3px hsl(var(--ring) / 0.15)" : "none",
     color: "hsl(var(--foreground))",
-    borderRadius: "14px",
+    borderRadius: "10px",
     padding: "14px 16px",
     width: "100%",
     fontFamily: "var(--font-body)",
     fontSize: "0.95rem",
     outline: "none",
-    transition: "all 0.25s ease",
-    backdropFilter: "blur(16px)",
-    WebkitBackdropFilter: "blur(16px)",
+    transition: "all 0.2s ease",
   });
 
   return (

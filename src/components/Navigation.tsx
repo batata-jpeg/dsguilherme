@@ -196,8 +196,8 @@ export default function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 md:hidden"
-            style={{ background: "rgba(245,248,255,0.92)", backdropFilter: "blur(28px)", WebkitBackdropFilter: "blur(28px)" }}
+          className={`fixed inset-0 z-40 md:hidden`}
+            style={{ background: "hsl(var(--background))" }}
           >
             <div className="flex flex-col items-center justify-center h-full gap-8">
               {navLinks.map((link, i) => (
