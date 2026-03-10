@@ -124,23 +124,51 @@ export default function Index() {
             {/* Right – visual centerpiece */}
             <div className="relative flex items-center justify-center min-h-[500px]">
               {floatingBadges.map((badge, i) =>
-              <motion.div key={badge.label} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 1 + badge.delay }}
-              style={{ position: "absolute", left: badge.x, top: badge.y }} className="z-20">
-                  <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 4 + i * 0.5, repeat: Infinity, ease: "easeInOut" }}
-                className="glass-panel-sm px-3 py-2 flex items-center gap-2 whitespace-nowrap hover:scale-105 transition-transform duration-300">
-                    <span className="text-sm" style={{ color: "hsl(var(--primary))" }}>{badge.icon}</span>
-                    <span className="font-display text-xs tracking-[0.1em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{badge.label}</span>
-                  </motion.div>
+              <motion.div
+                key={badge.label}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 1 + badge.delay }}
+                style={{ position: "absolute", left: badge.x, top: badge.y }}
+                className="z-20"
+              >
+                <motion.div
+                  animate={{ x: badge.xKeys, y: badge.yKeys }}
+                  transition={{ duration: badge.dur, repeat: Infinity, ease: "easeInOut", repeatType: "loop" }}
+                  className="glass-panel-sm px-3 py-2 flex items-center gap-2 whitespace-nowrap hover:scale-105 transition-transform duration-300"
+                >
+                  <span className="text-sm" style={{ color: "hsl(var(--primary))" }}>{badge.icon}</span>
+                  <span className="font-display text-xs tracking-[0.1em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{badge.label}</span>
                 </motion.div>
+              </motion.div>
               )}
-              <motion.div initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }} className="relative z-10"
-              style={{ filter: "drop-shadow(0 24px 60px rgba(59,153,252,0.25)) drop-shadow(0 0 100px rgba(147,84,245,0.15))" }}>
-                <motion.img src={heroVisual} alt="Designer 3D Character"
-                className="w-80 h-auto md:w-[440px] object-contain"
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.7 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="relative z-10"
+              >
+                <GlareHover
+                  width="440px"
+                  height="480px"
+                  background="transparent"
+                  borderRadius="0px"
+                  borderColor="transparent"
+                  glareColor="#ffffff"
+                  glareOpacity={0.18}
+                  glareAngle={-40}
+                  glareSize={220}
+                  transitionDuration={700}
+                >
+                  <motion.img
+                    src={heroVisual}
+                    alt="Designer 3D Character"
+                    className="w-80 h-auto md:w-[440px] object-contain"
+                    style={{ filter: "drop-shadow(0 24px 60px rgba(59,153,252,0.25)) drop-shadow(0 0 100px rgba(147,84,245,0.15))" }}
+                    animate={{ y: [0, -12, 0] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                </GlareHover>
               </motion.div>
             </div>
           </div>
