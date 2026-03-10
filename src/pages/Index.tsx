@@ -43,6 +43,24 @@ export default function Index() {
   const isDark = theme === "dark";
   const heroVisual = isDark ? heroVisualDark : heroVisualLight;
   const heroRef = useRef<HTMLDivElement>(null);
+
+  // Bouncy character swap
+  const charControls = useAnimation();
+  const [displayedVisual, setDisplayedVisual] = useState(heroVisual);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) { isFirstRender.current = false; return; }
+    const run = async () => {
+      // Quick jump up + slight squish
+      await charControls.start({ y: -36, scaleX: 0.92, scaleY: 1.06, transition: { duration: 0.1, ease: "easeIn" } });
+      setDisplayedVisual(heroVisual); // swap at peak
+      // Bouncy land back
+      await charControls.start({ y: 0, scaleX: 1, scaleY: 1, transition: { type: "spring", stiffness: 520, damping: 16, mass: 0.7 } });
+    };
+    run();
+  }, [theme]);
+
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
