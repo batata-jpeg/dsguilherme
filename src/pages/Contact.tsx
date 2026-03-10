@@ -43,26 +43,30 @@ export default function Contact() {
   };
 
   const inputStyle = (name: string) => ({
-    background: focused === name ? "rgba(112,251,249,0.06)" : "rgba(255,255,255,0.03)",
-    border: `1px solid ${focused === name ? "rgba(112,251,249,0.45)" : "rgba(112,251,249,0.12)"}`,
-    boxShadow: focused === name ? "0 0 20px rgba(112,251,249,0.1)" : "none",
+    background: focused === name ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.55)",
+    border: `1px solid ${focused === name ? "rgba(10,132,255,0.50)" : "rgba(255,255,255,0.85)"}`,
+    borderTopColor: "rgba(255,255,255,0.95)",
+    boxShadow: focused === name
+      ? "0 0 0 3px rgba(10,132,255,0.10), 0 4px 20px rgba(10,132,255,0.10), inset 0 1px 0 rgba(255,255,255,1)"
+      : "0 2px 12px rgba(0,100,220,0.06), inset 0 1px 0 rgba(255,255,255,0.9)",
     color: "hsl(var(--foreground))",
-    borderRadius: "12px",
+    borderRadius: "14px",
     padding: "14px 16px",
     width: "100%",
     fontFamily: "var(--font-body)",
     fontSize: "0.95rem",
     outline: "none",
-    transition: "all 0.3s ease",
-    backdropFilter: "blur(12px)",
+    transition: "all 0.25s ease",
+    backdropFilter: "blur(16px)",
+    WebkitBackdropFilter: "blur(16px)",
   });
 
   return (
     <div className="min-h-screen dot-grid" style={{ background: "var(--gradient-bg)" }}>
       {/* Header */}
       <div className="relative pt-36 pb-20 overflow-hidden">
-        <div className="absolute top-0 right-0 radial-glow-cyan opacity-25 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 radial-glow-magenta opacity-20 pointer-events-none" />
+        <div className="absolute top-0 right-0 radial-glow-blue opacity-22 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 radial-glow-violet opacity-18 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection>
             <span className="section-label block mb-6">{t("contact.label")}</span>
@@ -83,7 +87,7 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
           {/* Info sidebar */}
           <FadeInSection delay={0.1} className="lg:col-span-2 space-y-6">
-            <div className="glass-panel p-6 space-y-4" style={{ boxShadow: "var(--glow-cyan-sm)" }}>
+            <div className="glass-panel p-6 space-y-4">
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: "hsl(var(--primary))" }} />
@@ -111,8 +115,8 @@ export default function Contact() {
               <span className="section-label">{t("contact.services.label")}</span>
               <div className="space-y-2">
                 {services.map((svc) => (
-                  <div key={svc} className="font-display text-xs tracking-[0.1em] uppercase px-3 py-2 rounded-xl transition-all duration-200"
-                    style={{ background: "rgba(112,251,249,0.04)", border: "1px solid rgba(112,251,249,0.1)", color: "hsl(var(--muted-foreground))" }}>
+                  <div key={svc} className="glass-panel-sm font-display text-xs tracking-[0.1em] uppercase px-3 py-2 rounded-xl transition-all duration-200"
+                    style={{ color: "hsl(var(--muted-foreground))" }}>
                     {svc}
                   </div>
                 ))}
@@ -139,12 +143,11 @@ export default function Contact() {
 
           {/* Contact form */}
           <FadeInSection delay={0.2} className="lg:col-span-3">
-            <div className="glass-panel p-8 md:p-12" style={{ boxShadow: "var(--glow-combined)" }}>
+            <div className="glass-panel p-8 md:p-12">
               {status === "sent" ? (
                 <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
                   className="flex flex-col items-center justify-center py-20 text-center gap-6">
-                  <div className="w-20 h-20 rounded-full flex items-center justify-center"
-                    style={{ background: "rgba(112,251,249,0.1)", border: "1px solid rgba(112,251,249,0.4)", boxShadow: "var(--glow-cyan)" }}>
+                  <div className="w-20 h-20 rounded-full flex items-center justify-center glass-panel">
                     <Send className="w-8 h-8" style={{ color: "hsl(var(--primary))" }} />
                   </div>
                   <h3 className="font-display font-bold text-2xl uppercase">{t("contact.form.sent.title")}</h3>
@@ -179,7 +182,7 @@ export default function Contact() {
                     </label>
                     <select name="service" value={form.service} onChange={handleChange}
                       onFocus={() => setFocused("service")} onBlur={() => setFocused(null)}
-                      style={{ ...inputStyle("service"), appearance: "none" }}>
+                      style={{ ...inputStyle("service"), appearance: "none" as const }}>
                       <option value="" style={{ background: "hsl(var(--background))" }}>{t("contact.form.service.placeholder")}</option>
                       {services.map((s) => (
                         <option key={s} value={s} style={{ background: "hsl(var(--background))" }}>{s}</option>
@@ -194,11 +197,11 @@ export default function Contact() {
                     <textarea name="message" value={form.message} onChange={handleChange}
                       onFocus={() => setFocused("message")} onBlur={() => setFocused(null)}
                       placeholder={t("contact.form.message.placeholder")} required rows={6}
-                      style={{ ...inputStyle("message"), resize: "vertical", minHeight: "140px" }} />
+                      style={{ ...inputStyle("message"), resize: "vertical" as const, minHeight: "140px" }} />
                   </div>
 
                   <button type="submit" disabled={status === "sending"} className="btn-glass-primary w-full justify-center py-4 text-sm"
-                    style={{ boxShadow: "var(--glow-cyan-sm)", opacity: status === "sending" ? 0.7 : 1 }}>
+                    style={{ opacity: status === "sending" ? 0.7 : 1 }}>
                     {status === "sending" ? (
                       <>{t("contact.form.sending")}</>
                     ) : (
