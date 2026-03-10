@@ -150,7 +150,7 @@ export default function Projects() {
                   borderRadius="var(--radius)"
                   borderColor="hsl(var(--border))"
                   background="transparent"
-                  glareColor="#0A84FF"
+                  glareColor="#ffffff"
                   glareOpacity={0.30}
                   glareAngle={-45}
                   glareSize={220}
