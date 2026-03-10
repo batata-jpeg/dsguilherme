@@ -27,7 +27,6 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
-          <BrowserRouter>
             {/* Fixed shader background */}
             <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
               <ColorBends
