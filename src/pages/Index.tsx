@@ -11,12 +11,12 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import GlareHover from "@/components/GlareHover";
 
 const floatingBadges = [
-  { label: "Motion Design", icon: "◈", delay: 0,   x: "-10%", y: "10%",  xKeys: [0, 12, -8,  5, -14,  0], yKeys: [0, -10,  6, -14,  8,  0], dur: 8   },
-  { label: "UI/UX",         icon: "◉", delay: 0.5, x: "80%",  y: "5%",   xKeys: [0, -10, 14, -6,  10,  0], yKeys: [0,  12, -8,  14, -6,  0], dur: 9   },
-  { label: "Branding",      icon: "◆", delay: 1,   x: "85%",  y: "60%",  xKeys: [0,  8, -12,  4, -10,  0], yKeys: [0, -8,  12, -4,  10,  0], dur: 7.5 },
-  { label: "3D Design",     icon: "◎", delay: 1.5, x: "-5%",  y: "65%",  xKeys: [0, -14,  6, 10,  -8,  0], yKeys: [0,  6,  -14, 8,  -4,  0], dur: 10  },
-  { label: "Blender",       icon: "⬡", delay: 2,   x: "40%",  y: "-8%",  xKeys: [0,  6,  -8, 14,  -6,  0], yKeys: [0, -12,  8, -6,  14,  0], dur: 8.5 },
-  { label: "Imagens",       icon: "◇", delay: 0.8, x: "75%",  y: "35%",  xKeys: [0, -8,  12, -10,  6,  0], yKeys: [0,  10,  -6, 14,  -8,  0], dur: 9.5 },
+  { label: "Motion Design", icon: "◈", delay: 0,   x: "-10%", y: "10%",  xKeys: [0, 28, -22,  12, -26,  0], yKeys: [0, -20, 14, -28, 10,  0], rKeys: [0,  4, -3,  5, -2,  0], dur: 8   },
+  { label: "UI/UX",         icon: "◉", delay: 0.5, x: "80%",  y: "5%",   xKeys: [0, -24, 30, -14, 22,  0], yKeys: [0,  26, -18, 28, -12, 0], rKeys: [0, -3,  5, -4,  3,  0], dur: 9   },
+  { label: "Branding",      icon: "◆", delay: 1,   x: "85%",  y: "60%",  xKeys: [0,  20, -28, 10, -24, 0], yKeys: [0, -18, 26,  -8, 22,  0], rKeys: [0,  5, -4,  3, -5,  0], dur: 7.5 },
+  { label: "3D Design",     icon: "◎", delay: 1.5, x: "-5%",  y: "65%",  xKeys: [0, -30, 14, 24, -18,  0], yKeys: [0,  14, -28, 18, -8,  0], rKeys: [0, -4,  3, -5,  2,  0], dur: 10  },
+  { label: "Blender",       icon: "⬡", delay: 2,   x: "40%",  y: "-8%",  xKeys: [0,  16, -20, 28, -14, 0], yKeys: [0, -26, 18, -14, 28,  0], rKeys: [0,  3, -5,  4, -3,  0], dur: 8.5 },
+  { label: "Imagens",       icon: "◇", delay: 0.8, x: "75%",  y: "35%",  xKeys: [0, -18, 26, -24, 14,  0], yKeys: [0,  22, -12, 28, -18, 0], rKeys: [0, -5,  4, -3,  5,  0], dur: 9.5 },
 ];
 
 
@@ -133,7 +133,7 @@ export default function Index() {
                 className="z-20"
               >
                 <motion.div
-                  animate={{ x: badge.xKeys, y: badge.yKeys }}
+                  animate={{ x: badge.xKeys, y: badge.yKeys, rotate: badge.rKeys }}
                   transition={{ duration: badge.dur, repeat: Infinity, ease: "easeInOut", repeatType: "loop" }}
                   className="glass-panel-sm px-3 py-2 flex items-center gap-2 whitespace-nowrap hover:scale-105 transition-transform duration-300"
                 >
