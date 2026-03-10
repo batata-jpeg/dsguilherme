@@ -10,16 +10,16 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === "light") {
-      root.classList.add("light");
-      root.classList.remove("dark");
-    } else {
+    if (theme === "dark") {
       root.classList.add("dark");
       root.classList.remove("light");
+    } else {
+      root.classList.remove("dark");
+      root.classList.add("light");
     }
   }, [theme]);
 
