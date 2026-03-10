@@ -146,10 +146,8 @@ export default function Index() {
                   className="w-72 h-72 md:w-96 md:h-96 object-contain"
                   animate={{ rotate: [0, 3, -2, 0], y: [0, -10, 5, 0] }}
                   transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                  style={{ transform: `perspective(1000px) rotateX(${(mousePos.y - 0.5) * 8}deg) rotateY(${(mousePos.x - 0.5) * 8}deg)` }} />
-                {/* Glass orb behind image */}
-                <div className="absolute inset-0 pointer-events-none rounded-full"
-                  style={{ background: `radial-gradient(circle at ${mousePos.x * 100}% ${mousePos.y * 100}%, rgba(59,153,252,0.09) 0%, transparent 60%)`, filter: "blur(20px)" }} />
+                  style={{ transform: `perspective(1000px)` }} />
+
               </motion.div>
             </div>
           </div>
