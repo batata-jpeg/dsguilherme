@@ -250,13 +250,15 @@
 }
 
 .pc-avatar-content .avatar {
-  width: 100%;
+  width: 110%;
   position: absolute;
   left: 50%;
   transform-origin: 50% 100%;
   transform: translateX(calc(-50% + (var(--pointer-from-left) - 0.5) * 6px)) translateZ(0)
     scaleY(calc(1 + (var(--pointer-from-top) - 0.5) * 0.02)) scaleX(calc(1 + (var(--pointer-from-left) - 0.5) * 0.01));
-  bottom: -1px;
+  bottom: 0px;
+  object-fit: cover;
+  object-position: center top;
   backface-visibility: hidden;
   will-change: transform;
   transition: transform 120ms ease-out;
