@@ -1,6 +1,6 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useAnimation, useScroll, useTransform, useInView } from "framer-motion";
 import { ArrowRight, ChevronDown, ExternalLink, Zap, Award, Users, Layers } from "lucide-react";
 import heroVisualDark from "@/assets/hero-character.png";
 import heroVisualLight from "@/assets/hero-character-light.png";
@@ -43,6 +43,24 @@ export default function Index() {
   const isDark = theme === "dark";
   const heroVisual = isDark ? heroVisualDark : heroVisualLight;
   const heroRef = useRef<HTMLDivElement>(null);
+
+  // Bouncy character swap
+  const charControls = useAnimation();
+  const [displayedVisual, setDisplayedVisual] = useState(heroVisual);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) { isFirstRender.current = false; return; }
+    const run = async () => {
+      // Quick jump up + slight squish
+      await charControls.start({ y: -36, scaleX: 0.92, scaleY: 1.06, transition: { duration: 0.1, ease: "easeIn" } });
+      setDisplayedVisual(heroVisual); // swap at peak
+      // Bouncy land back
+      await charControls.start({ y: 0, scaleX: 1, scaleY: 1, transition: { type: "spring", stiffness: 520, damping: 16, mass: 0.7 } });
+    };
+    run();
+  }, [theme]);
+
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
@@ -149,18 +167,13 @@ export default function Index() {
               <div className="relative z-10"
                 style={{ filter: "drop-shadow(0 24px 60px rgba(59,153,252,0.25)) drop-shadow(0 0 100px rgba(147,84,245,0.15))" }}
               >
-                <AnimatePresence mode="sync">
-                  <motion.img
-                    key={theme}
-                    src={heroVisual}
-                    alt="Designer 3D Character"
-                    className="w-80 h-auto md:w-[440px] object-contain"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1, y: [0, -12, 0] }}
-                    exit={{ opacity: 0, position: "absolute" } as any}
-                    transition={{ opacity: { duration: 0.35, ease: "easeInOut" }, y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
-                  />
-                </AnimatePresence>
+                <motion.img
+                  src={displayedVisual}
+                  alt="Designer 3D Character"
+                  className="w-80 h-auto md:w-[440px] object-contain"
+                  animate={charControls}
+                  transition={{ y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
+                />
               </div>
             </div>
           </div>
