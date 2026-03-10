@@ -205,7 +205,7 @@ export default function Index() {
 
       {/* ── STATS */}
       <FadeInSection>
-        <section className="relative py-12">
+        <section className="relative py-12 shadow-none">
           <div className="max-w-7xl mx-auto px-6">
             <div className="glass-panel p-1 rounded-2xl">
               <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0"
@@ -226,11 +226,11 @@ export default function Index() {
       </FadeInSection>
 
       {/* ── PHILOSOPHY */}
-      <section className="relative py-32 overflow-hidden">
+      <section className="relative py-32 overflow-hidden shadow-glass-sm">
         {/* Prismatic band */}
         <div className="relative max-w-7xl mx-auto px-6">
           <FadeInSection delay={0.2}>
-            <h2 className="font-display font-extrabold leading-[0.85] tracking-tight uppercase text-slate-50" style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)", color: "hsl(var(--background))" }}>
+            <h2 className="font-display font-extrabold leading-[0.85] tracking-tight uppercase text-white text-7xl" style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)", color: "hsl(var(--background))" }}>
               {t("index.philosophy.line1")}
               <br />
               {t("index.philosophy.line2")}{" "}
