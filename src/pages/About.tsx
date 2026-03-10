@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Award, Briefcase, Clock, Download } from "lucide-react";
-import aboutPortrait from "@/assets/about-portrait.jpg";
+import aboutPortrait from "@/assets/profile-photo.jpg";
 import grainTexture from "@/assets/grain.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import ProfileCard from "@/components/ProfileCard";
