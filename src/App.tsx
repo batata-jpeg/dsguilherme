@@ -7,7 +7,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ClickSpark from "@/components/ClickSpark";
-import LiquidEther from "@/components/LiquidEther";
 import PageTransition from "@/components/PageTransition";
 
 import Index from "./pages/Index.tsx";
