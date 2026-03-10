@@ -4,9 +4,11 @@ import { AnimatePresence } from "framer-motion";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import ClickSpark from "@/components/ClickSpark";
+import PageTransition from "@/components/PageTransition";
 import LampCord from "@/components/LampCord";
-
-// ... keep existing code
 
 import Index from "./pages/Index.tsx";
 import Projects from "./pages/Projects.tsx";
@@ -46,6 +48,7 @@ const App = () => (
           <BrowserRouter>
             <ClickSpark sparkColor="#ffffff" sparkRadius={30} sparkCount={10} extraScale={1.3}>
               <Navigation />
+              <LampCord />
               <AnimatedRoutes />
               <Footer />
             </ClickSpark>
