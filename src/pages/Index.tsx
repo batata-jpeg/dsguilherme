@@ -12,13 +12,17 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useIsMobile } from "@/hooks/use-mobile";
 
+// 7 badges arranged in a rough ellipse around the character (center ~50%,50%)
+// Desktop (x/y): ellipse rx≈40%, ry≈43% — slight negatives OK (overflow visible)
+// Mobile  (mx/my): tighter ellipse fully inside the container
 const floatingBadges = [
-  { label: "Motion Design", icon: "◈", delay: 0,   x: "-10%", y: "10%",  mx: "2%",  my: "6%",  xKeys: [0, 28, -22,  12, -26,  0], yKeys: [0, -20, 14, -28, 10,  0], rKeys: [0,  4, -3,  5, -2,  0], dur: 8   },
-  { label: "UI/UX",         icon: "◉", delay: 0.5, x: "80%",  y: "5%",   mx: "62%", my: "4%",  xKeys: [0, -24, 30, -14, 22,  0], yKeys: [0,  26, -18, 28, -12, 0], rKeys: [0, -3,  5, -4,  3,  0], dur: 9   },
-  { label: "Branding",      icon: "◆", delay: 1,   x: "85%",  y: "60%",  mx: "60%", my: "56%", xKeys: [0,  20, -28, 10, -24, 0], yKeys: [0, -18, 26,  -8, 22,  0], rKeys: [0,  5, -4,  3, -5,  0], dur: 7.5 },
-  { label: "3D Design",     icon: "◎", delay: 1.5, x: "-5%",  y: "65%",  mx: "2%",  my: "64%", xKeys: [0, -30, 14, 24, -18,  0], yKeys: [0,  14, -28, 18, -8,  0], rKeys: [0, -4,  3, -5,  2,  0], dur: 10  },
-  { label: "Blender",       icon: "⬡", delay: 2,   x: "40%",  y: "-8%",  mx: "28%", my: "0%",  xKeys: [0,  16, -20, 28, -14, 0], yKeys: [0, -26, 18, -14, 28,  0], rKeys: [0,  3, -5,  4, -3,  0], dur: 8.5 },
-  { label: "Imagens",       icon: "◇", delay: 0.8, x: "75%",  y: "35%",  mx: "58%", my: "30%", xKeys: [0, -18, 26, -24, 14,  0], yKeys: [0,  22, -12, 28, -18, 0], rKeys: [0, -5,  4, -3,  5,  0], dur: 9.5 },
+  { label: "Motion Design",  icon: "◈", delay: 0,   x: "36%",  y: "0%",   mx: "28%", my: "0%",  xKeys: [0,  22, -16,  8, -20,  0], yKeys: [0, -18, 12, -22,  8,  0], rKeys: [0,  4, -3,  5, -2,  0], dur: 8   },
+  { label: "Edição de Vídeo",icon: "▶", delay: 0.3, x: "72%",  y: "10%",  mx: "58%", my: "8%",  xKeys: [0, -18, 24, -10, 18,  0], yKeys: [0,  20, -14, 22, -10, 0], rKeys: [0, -3,  4, -5,  3,  0], dur: 8.8 },
+  { label: "UI/UX",          icon: "◉", delay: 0.6, x: "84%",  y: "44%",  mx: "66%", my: "38%", xKeys: [0, -20, 28, -12, 20,  0], yKeys: [0,  24, -16, 26, -10, 0], rKeys: [0, -3,  5, -4,  3,  0], dur: 9   },
+  { label: "Branding",       icon: "◆", delay: 1,   x: "68%",  y: "80%",  mx: "55%", my: "74%", xKeys: [0,  18, -24,  8, -20, 0], yKeys: [0, -16, 22,  -6, 18,  0], rKeys: [0,  5, -4,  3, -5,  0], dur: 7.5 },
+  { label: "3D Design",      icon: "◎", delay: 1.3, x: "26%",  y: "86%",  mx: "20%", my: "78%", xKeys: [0, -26, 12, 20, -16,  0], yKeys: [0,  12, -24, 16, -6,  0], rKeys: [0, -4,  3, -5,  2,  0], dur: 10  },
+  { label: "Blender",        icon: "⬡", delay: 1.7, x: "-6%",  y: "44%",  mx: "2%",  my: "40%", xKeys: [0,  14, -18, 24, -12, 0], yKeys: [0, -22, 14, -12, 24,  0], rKeys: [0,  3, -5,  4, -3,  0], dur: 8.5 },
+  { label: "Imagens",        icon: "◇", delay: 0.8, x: "-4%",  y: "12%",  mx: "2%",  my: "10%", xKeys: [0, -16, 22, -20, 12,  0], yKeys: [0,  18, -10, 24, -16, 0], rKeys: [0, -5,  4, -3,  5,  0], dur: 9.5 },
 ];
 
 
