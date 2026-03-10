@@ -45,18 +45,6 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            {/* Fixed fluid background */}
-            <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
-              <LiquidEther
-                colors={['#0A84FF', '#BF5AF2', '#FF375F']}
-                mouseForce={28}
-                cursorSize={120}
-                resolution={0.5}
-                autoDemo={true}
-                autoSpeed={0.4}
-                autoIntensity={2.8}
-              />
-            </div>
             <ClickSpark sparkColor="#ffffff" sparkRadius={30} sparkCount={10} extraScale={1.3}>
               <Navigation />
               <AnimatedRoutes />
