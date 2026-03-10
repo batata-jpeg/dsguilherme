@@ -8,14 +8,16 @@ import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 import aboutPortrait from "@/assets/about-portrait.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
+import GlareHover from "@/components/GlareHover";
 
 const floatingBadges = [
-{ label: "Motion Design", icon: "◈", delay: 0, x: "-10%", y: "10%" },
-{ label: "UI/UX", icon: "◉", delay: 0.5, x: "80%", y: "5%" },
-{ label: "Branding", icon: "◆", delay: 1, x: "85%", y: "60%" },
-{ label: "3D Design", icon: "◎", delay: 1.5, x: "-5%", y: "65%" },
-{ label: "Blender", icon: "⬡", delay: 2, x: "40%", y: "-8%" },
-{ label: "Edição de Imagens", icon: "◇", delay: 0.8, x: "75%", y: "35%" }];
+  { label: "Motion Design", icon: "◈", delay: 0,   x: "-10%", y: "10%",  xKeys: [0, 12, -8,  5, -14,  0], yKeys: [0, -10,  6, -14,  8,  0], dur: 8   },
+  { label: "UI/UX",         icon: "◉", delay: 0.5, x: "80%",  y: "5%",   xKeys: [0, -10, 14, -6,  10,  0], yKeys: [0,  12, -8,  14, -6,  0], dur: 9   },
+  { label: "Branding",      icon: "◆", delay: 1,   x: "85%",  y: "60%",  xKeys: [0,  8, -12,  4, -10,  0], yKeys: [0, -8,  12, -4,  10,  0], dur: 7.5 },
+  { label: "3D Design",     icon: "◎", delay: 1.5, x: "-5%",  y: "65%",  xKeys: [0, -14,  6, 10,  -8,  0], yKeys: [0,  6,  -14, 8,  -4,  0], dur: 10  },
+  { label: "Blender",       icon: "⬡", delay: 2,   x: "40%",  y: "-8%",  xKeys: [0,  6,  -8, 14,  -6,  0], yKeys: [0, -12,  8, -6,  14,  0], dur: 8.5 },
+  { label: "Imagens",       icon: "◇", delay: 0.8, x: "75%",  y: "35%",  xKeys: [0, -8,  12, -10,  6,  0], yKeys: [0,  10,  -6, 14,  -8,  0], dur: 9.5 },
+];
 
 
 function FadeInSection({ children, delay = 0, className = "" }: {children: React.ReactNode;delay?: number;className?: string;}) {
@@ -122,23 +124,51 @@ export default function Index() {
             {/* Right – visual centerpiece */}
             <div className="relative flex items-center justify-center min-h-[500px]">
               {floatingBadges.map((badge, i) =>
-              <motion.div key={badge.label} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 1 + badge.delay }}
-              style={{ position: "absolute", left: badge.x, top: badge.y }} className="z-20">
-                  <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 4 + i * 0.5, repeat: Infinity, ease: "easeInOut" }}
-                className="glass-panel-sm px-3 py-2 flex items-center gap-2 whitespace-nowrap hover:scale-105 transition-transform duration-300">
-                    <span className="text-sm" style={{ color: "hsl(var(--primary))" }}>{badge.icon}</span>
-                    <span className="font-display text-xs tracking-[0.1em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{badge.label}</span>
-                  </motion.div>
+              <motion.div
+                key={badge.label}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 1 + badge.delay }}
+                style={{ position: "absolute", left: badge.x, top: badge.y }}
+                className="z-20"
+              >
+                <motion.div
+                  animate={{ x: badge.xKeys, y: badge.yKeys }}
+                  transition={{ duration: badge.dur, repeat: Infinity, ease: "easeInOut", repeatType: "loop" }}
+                  className="glass-panel-sm px-3 py-2 flex items-center gap-2 whitespace-nowrap hover:scale-105 transition-transform duration-300"
+                >
+                  <span className="text-sm" style={{ color: "hsl(var(--primary))" }}>{badge.icon}</span>
+                  <span className="font-display text-xs tracking-[0.1em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{badge.label}</span>
                 </motion.div>
+              </motion.div>
               )}
-              <motion.div initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }} className="relative z-10"
-              style={{ filter: "drop-shadow(0 24px 60px rgba(59,153,252,0.25)) drop-shadow(0 0 100px rgba(147,84,245,0.15))" }}>
-                <motion.img src={heroVisual} alt="Designer 3D Character"
-                className="w-80 h-auto md:w-[440px] object-contain"
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.7 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="relative z-10"
+              >
+                <GlareHover
+                  width="440px"
+                  height="480px"
+                  background="transparent"
+                  borderRadius="0px"
+                  borderColor="transparent"
+                  glareColor="#ffffff"
+                  glareOpacity={0.18}
+                  glareAngle={-40}
+                  glareSize={220}
+                  transitionDuration={700}
+                >
+                  <motion.img
+                    src={heroVisual}
+                    alt="Designer 3D Character"
+                    className="w-80 h-auto md:w-[440px] object-contain"
+                    style={{ filter: "drop-shadow(0 24px 60px rgba(59,153,252,0.25)) drop-shadow(0 0 100px rgba(147,84,245,0.15))" }}
+                    animate={{ y: [0, -12, 0] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                </GlareHover>
               </motion.div>
             </div>
           </div>
