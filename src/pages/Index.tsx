@@ -83,9 +83,6 @@ export default function Index() {
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative z-10 w-full">
           <div className="max-w-7xl mx-auto px-6 pt-28 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
-                <span className="section-label">{t("index.hero.label")}</span>
-              </motion.div>
 
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }} className="space-y-2">
                 <h1 className="font-display font-extrabold leading-[0.9] tracking-tight uppercase" style={{ fontSize: "clamp(3.5rem, 7vw, 6.5rem)" }}>
