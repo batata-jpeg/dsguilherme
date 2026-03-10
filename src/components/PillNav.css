@@ -18,10 +18,10 @@
 }
 
 .pill-nav {
-  --nav-h: 40px;
-  --logo: 36px;
-  --pill-pad-x: 16px;
-  --pill-gap: 3px;
+  --nav-h: 52px;
+  --logo: 44px;
+  --pill-pad-x: 20px;
+  --pill-gap: 4px;
   width: max-content;
   display: flex;
   align-items: center;
