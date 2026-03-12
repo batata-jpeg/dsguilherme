@@ -202,7 +202,7 @@ export default function LampCord() {
         </div>
 
         {/* release hint */}
-        {nearThreshold && (
+        {nearThreshold ? (
           <div
             style={{
               marginTop: 6,
@@ -215,6 +215,24 @@ export default function LampCord() {
             }}
           >
             solte
+          </div>
+        ) : (
+          <div
+            style={{
+              marginTop: 8,
+              fontSize: 6.5,
+              color: isDark ? 'rgba(255,255,255,0.28)' : 'rgba(0,0,0,0.22)',
+              fontFamily: 'var(--font-display)',
+              letterSpacing: '0.14em',
+              textTransform: 'uppercase',
+              textAlign: 'center',
+              lineHeight: 1.4,
+              pointerEvents: 'none',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {isDark ? 'puxe para' : 'puxe para'}<br />
+            {isDark ? 'ligar a luz' : 'apagar a luz'}
           </div>
         )}
       </div>
