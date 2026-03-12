@@ -15,19 +15,20 @@
   --behind-glow-color: rgba(59, 153, 252, 0.55);
   --behind-glow-size: 25%;
   --inner-gradient: none;
-  --sunpillar-1: hsl(212, 97%, 62%);
-  --sunpillar-2: hsl(200, 100%, 65%);
-  --sunpillar-3: hsl(265, 85%, 68%);
-  --sunpillar-4: hsl(283, 80%, 72%);
-  --sunpillar-5: hsl(212, 97%, 52%);
-  --sunpillar-6: hsl(240, 90%, 70%);
+  /* Vibrant rainbow sunpillars */
+  --sunpillar-1: hsl(0,   100%, 65%);
+  --sunpillar-2: hsl(40,  100%, 60%);
+  --sunpillar-3: hsl(80,  100%, 58%);
+  --sunpillar-4: hsl(160, 100%, 55%);
+  --sunpillar-5: hsl(220, 100%, 65%);
+  --sunpillar-6: hsl(280, 100%, 68%);
   --sunpillar-clr-1: var(--sunpillar-1);
   --sunpillar-clr-2: var(--sunpillar-2);
   --sunpillar-clr-3: var(--sunpillar-3);
   --sunpillar-clr-4: var(--sunpillar-4);
   --sunpillar-clr-5: var(--sunpillar-5);
   --sunpillar-clr-6: var(--sunpillar-6);
-  --card-radius: 30px;
+  --card-radius: 18px;
 }
 
 .pc-card-wrapper {
@@ -39,7 +40,7 @@
 
 .pc-behind {
   position: absolute;
-  inset: 0;
+  inset: -20px;
   z-index: 0;
   pointer-events: none;
   background: radial-gradient(
@@ -47,8 +48,8 @@
     var(--behind-glow-color) 0%,
     transparent var(--behind-glow-size)
   );
-  filter: blur(50px) saturate(1.1);
-  opacity: calc(0.8 * var(--card-opacity));
+  filter: blur(30px) saturate(2.5);
+  opacity: calc(1 * var(--card-opacity));
   transition: opacity 200ms ease;
 }
 
@@ -65,12 +66,15 @@
   border-radius: var(--card-radius);
   position: relative;
   background-blend-mode: color-dodge, normal, normal, normal;
-  animation: glow-bg 12s linear infinite;
-  box-shadow: rgba(0, 0, 0, 0.8) calc((var(--pointer-from-left) * 10px) - 3px)
-    calc((var(--pointer-from-top) * 20px) - 6px) 20px -5px;
-  transition: transform 1s ease;
+  animation: glow-bg 8s linear infinite;
+  box-shadow:
+    rgba(0, 0, 0, 0.85) calc((var(--pointer-from-left) * 14px) - 4px)
+      calc((var(--pointer-from-top) * 24px) - 8px) 28px -4px,
+    0 0 0 1px rgba(255,255,255,0.15),
+    inset 0 0 40px rgba(0,0,0,0.5);
+  transition: transform 1s ease, box-shadow 0.3s ease;
   transform: translateZ(0) rotateX(0deg) rotateY(0deg);
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.92);
   backface-visibility: hidden;
   overflow: hidden;
 }
@@ -111,9 +115,9 @@
   mask-repeat: repeat;
   mask-size: 150%;
   mask-position: top calc(200% - (var(--background-y) * 5)) left calc(100% - var(--background-x));
-  transition: filter 0.8s ease;
-  filter: brightness(0.45) contrast(1.05) saturate(0.12) opacity(0.25);
-  animation: holo-bg 18s linear infinite;
+  transition: filter 0.5s ease;
+  filter: brightness(0.55) contrast(1.3) saturate(1.8) opacity(0.55);
+  animation: holo-bg 6s linear infinite;
   animation-play-state: running;
   mix-blend-mode: color-dodge;
 }
@@ -160,8 +164,8 @@
     center;
   background-blend-mode: color, hard-light;
   background-size:
-    500% 500%,
-    300% 300%,
+    300% 500%,
+    200% 200%,
     200% 200%;
   background-repeat: repeat;
 }
@@ -173,12 +177,12 @@
   background-size: cover;
   grid-area: 1/1;
   opacity: 0;
-  transition: opacity 0.8s ease;
+  transition: opacity 0.5s ease;
 }
 
 .pc-card:hover .pc-shine,
 .pc-card.active .pc-shine {
-  filter: brightness(0.45) contrast(1.05) saturate(0.15) opacity(0.35);
+  filter: brightness(0.6) contrast(1.4) saturate(3.5) opacity(0.9);
   animation-play-state: paused;
 }
 
@@ -198,12 +202,13 @@
       var(--sunpillar-6),
       var(--sunpillar-1),
       var(--sunpillar-2),
-      var(--sunpillar-3)
+      var(--sunpillar-3),
+      var(--sunpillar-4)
     ),
-    radial-gradient(circle at var(--pointer-x) var(--pointer-y), hsl(0, 0%, 60%) 0%, hsla(0, 0%, 20%, 0.1) 90%),
+    radial-gradient(circle at var(--pointer-x) var(--pointer-y), hsl(0, 0%, 80%) 0%, hsla(0, 0%, 20%, 0.1) 90%),
     var(--grain);
   background-size:
-    250% 250%,
+    300% 300%,
     100% 100%,
     220px 220px;
   background-position:
@@ -211,9 +216,9 @@
     center,
     calc(var(--pointer-x) * 0.01) calc(var(--pointer-y) * 0.01);
   background-blend-mode: color-dodge;
-  filter: brightness(calc(1.2 - var(--pointer-from-center) * 0.3)) contrast(calc(var(--pointer-from-center) + 1.2))
-    saturate(calc(0.2 + var(--pointer-from-center) * 0.3));
-  mix-blend-mode: luminosity;
+  filter: brightness(calc(1.5 - var(--pointer-from-center) * 0.2)) contrast(calc(var(--pointer-from-center) + 1.5))
+    saturate(calc(1.5 + var(--pointer-from-center) * 2));
+  mix-blend-mode: color-dodge;
 }
 
 .pc-shine::after {
@@ -225,8 +230,8 @@
     200% 300%,
     700% 700%,
     100% 100%;
-  mix-blend-mode: difference;
-  filter: brightness(0.8) contrast(1.5);
+  mix-blend-mode: overlay;
+  filter: brightness(1) contrast(2) saturate(2);
 }
 
 .pc-glare {
@@ -234,13 +239,18 @@
   overflow: hidden;
   background-image: radial-gradient(
     farthest-corner circle at var(--pointer-x) var(--pointer-y),
-    hsl(248, 15%, 75%) 12%,
-    hsla(207, 20%, 25%, 0.5) 90%
+    hsla(0, 0%, 100%, 0.45) 5%,
+    hsla(200, 80%, 60%, 0.25) 40%,
+    hsla(270, 80%, 50%, 0.15) 80%,
+    transparent 100%
   );
   mix-blend-mode: overlay;
-  filter: brightness(0.6) contrast(1.0);
+  filter: brightness(1) contrast(1.2);
   z-index: 4;
+  opacity: calc(0.3 + var(--pointer-from-center) * 0.7);
+  transition: opacity 0.3s ease;
 }
+
 
 .pc-avatar-content {
   mix-blend-mode: normal;
