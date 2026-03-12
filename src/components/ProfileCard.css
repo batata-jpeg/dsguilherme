@@ -369,35 +369,41 @@
 .pc-details {
   width: 100%;
   position: absolute;
-  top: 3em;
+  bottom: 5.5em;
+  top: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: 0 1em;
 }
 
 .pc-details h3 {
   font-weight: 600;
   margin: 0;
-  font-size: min(5svh, 3em);
-  background-image: linear-gradient(to bottom, #ffffff, hsl(212, 97%, 75%));
+  font-size: min(2.8svh, 1.5em);
+  background-image: linear-gradient(135deg, #CFFFE2 0%, #A2D5C6 100%);
   background-size: 1em 1.5em;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
+  letter-spacing: 0.03em;
 }
 
 .pc-details p {
-  font-weight: 600;
+  font-weight: 500;
   position: relative;
-  top: -12px;
+  top: 0;
   white-space: nowrap;
-  font-size: 16px;
-  margin: 0 auto;
-  width: min-content;
-  background-image: linear-gradient(to bottom, rgba(255,255,255,0.9), hsl(265, 85%, 75%));
+  font-size: 12px;
+  margin: 3px auto 0;
+  width: auto;
+  background-image: linear-gradient(135deg, rgba(207,255,226,0.75) 0%, rgba(162,213,198,0.75) 100%);
   background-size: 1em 1.5em;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 @keyframes glow-bg {
