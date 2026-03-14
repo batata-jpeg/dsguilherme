@@ -15,7 +15,10 @@
   --behind-glow-color: rgba(59, 153, 252, 0.55);
   --behind-glow-size: 25%;
   --inner-gradient: none;
-  /* Softened holographic sunpillars — iridescent, not neon */
+  /* Balatro polychrome: angle+radius driven */
+  --balatro-angle: 0.25turn;
+  --balatro-r: 0;
+  /* Sunpillar fallback muted */
   --sunpillar-1: hsl(0,   60%, 62%);
   --sunpillar-2: hsl(40,  65%, 60%);
   --sunpillar-3: hsl(90,  55%, 56%);
@@ -32,7 +35,7 @@
 }
 
 .pc-card-wrapper {
-  perspective: 500px;
+  perspective: 600px;
   transform: translate3d(0, 0, 0.1px);
   position: relative;
   touch-action: none;
@@ -48,7 +51,7 @@
     var(--behind-glow-color) 0%,
     transparent var(--behind-glow-size)
   );
-  filter: blur(30px) saturate(2.5);
+  filter: blur(30px) saturate(2);
   opacity: calc(1 * var(--card-opacity));
   transition: opacity 200ms ease;
 }
@@ -65,12 +68,10 @@
   aspect-ratio: 0.718;
   border-radius: var(--card-radius);
   position: relative;
-  background-blend-mode: color-dodge, normal, normal, normal;
-  animation: glow-bg 8s linear infinite;
   box-shadow:
     rgba(0, 0, 0, 0.85) calc((var(--pointer-from-left) * 14px) - 4px)
       calc((var(--pointer-from-top) * 24px) - 8px) 28px -4px,
-    0 0 0 1px rgba(255,255,255,0.15),
+    0 0 0 1px rgba(255,255,255,0.12),
     inset 0 0 40px rgba(0,0,0,0.5);
   transition: transform 1s ease, box-shadow 0.3s ease;
   transform: translateZ(0) rotateX(0deg) rotateY(0deg);
@@ -109,6 +110,64 @@
   transform: none;
 }
 
+/* ─── Balatro Rainbow Layer ─────────────────────────────────── */
+/* Uses --balatro-angle as the hue source: hsl(angle 100% 80%)  */
+/* giving a different color depending on where the mouse points  */
+.pc-balatro-rainbow {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  opacity: 0;
+  mix-blend-mode: hard-light;
+  border-radius: var(--card-radius);
+  pointer-events: none;
+  background: linear-gradient(
+    var(--balatro-angle),
+    hsl(var(--balatro-angle) 100% 80% / 65%),
+    hsl(var(--balatro-angle) 100% 80% / 5%) calc(100% * var(--balatro-r))
+  );
+  transition: opacity 500ms ease;
+}
+
+/* ─── Balatro Shine / Texture Layer ────────────────────────── */
+/* Wave-circle texture masked by a directional gradient          */
+.pc-balatro-shine {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  opacity: 0;
+  mix-blend-mode: hard-light;
+  border-radius: var(--card-radius);
+  pointer-events: none;
+  --s: 28px;
+  --c1: hsl(0 0% 82%);
+  --c2: hsl(0 0% 50%);
+  --_g: var(--s) var(--s) radial-gradient(var(--c1) 17%, var(--c2) 18% 35%, #0000 36.5%);
+  background:
+    calc(var(--s) / -4) calc(var(--s) / -4) / var(--_g),
+    calc(var(--s) / 4) calc(var(--s) / 4) / var(--_g),
+    radial-gradient(var(--c2) 34%, var(--c1) 36% 68%, #0000 70%) 0 0 /
+      calc(var(--s) / 2) calc(var(--s) / 2),
+    repeating-linear-gradient(45deg, var(--c1) -12.5% 12.5%, var(--c2) 0 37.5%)
+      0 0 / var(--s) var(--s);
+  mask-image: linear-gradient(
+    var(--balatro-angle),
+    hsl(0 0% 0% / 65%),
+    hsl(0 0% 0% / 0%) calc(100% * var(--balatro-r))
+  );
+  transition: opacity 500ms ease;
+}
+
+/* Show layers on hover */
+.pc-card:hover .pc-balatro-rainbow,
+.pc-card.active .pc-balatro-rainbow,
+.pc-card:hover .pc-balatro-shine,
+.pc-card.active .pc-balatro-shine {
+  opacity: 1;
+  transition: none;
+}
+
+/* ─── Legacy shine kept for ambient animation ───────────────── */
 .pc-shine {
   mask-image: var(--icon);
   mask-mode: luminance;
@@ -116,8 +175,8 @@
   mask-size: 150%;
   mask-position: top calc(200% - (var(--background-y) * 5)) left calc(100% - var(--background-x));
   transition: filter 0.5s ease;
-  filter: brightness(0.5) contrast(1.15) saturate(1.2) opacity(0.45);
-  animation: holo-bg 6s linear infinite;
+  filter: brightness(0.35) contrast(1.1) saturate(1.0) opacity(0.25);
+  animation: holo-bg 8s linear infinite;
   animation-play-state: running;
   mix-blend-mode: color-dodge;
 }
@@ -128,7 +187,7 @@
   --angle: -45deg;
   transform: translate3d(0, 0, 1px);
   overflow: hidden;
-  z-index: 3;
+  z-index: 2;
   background: transparent;
   background-size: cover;
   background-position: center;
@@ -182,7 +241,7 @@
 
 .pc-card:hover .pc-shine,
 .pc-card.active .pc-shine {
-  filter: brightness(0.58) contrast(1.25) saturate(2.2) opacity(0.75);
+  filter: brightness(0.45) contrast(1.2) saturate(1.8) opacity(0.5);
   animation-play-state: paused;
 }
 
@@ -239,18 +298,17 @@
   overflow: hidden;
   background-image: radial-gradient(
     farthest-corner circle at var(--pointer-x) var(--pointer-y),
-    hsla(0, 0%, 100%, 0.45) 5%,
-    hsla(200, 80%, 60%, 0.25) 40%,
-    hsla(270, 80%, 50%, 0.15) 80%,
+    hsla(0, 0%, 100%, 0.35) 5%,
+    hsla(200, 80%, 60%, 0.18) 40%,
+    hsla(270, 80%, 50%, 0.1) 80%,
     transparent 100%
   );
   mix-blend-mode: overlay;
   filter: brightness(1) contrast(1.2);
-  z-index: 4;
-  opacity: calc(0.3 + var(--pointer-from-center) * 0.7);
+  z-index: 5;
+  opacity: calc(0.2 + var(--pointer-from-center) * 0.6);
   transition: opacity 0.3s ease;
 }
-
 
 .pc-avatar-content {
   mix-blend-mode: normal;
