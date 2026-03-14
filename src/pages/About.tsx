@@ -118,9 +118,9 @@ export default function About() {
               handle={t("about.card.handle")}
               status={t("about.card.status")}
               contactText={t("about.cta.work")}
-              behindGlowColor="rgba(160, 80, 255, 0.75)"
-              behindGlowSize="55%"
-              innerGradient="linear-gradient(145deg, rgba(255,80,120,0.30) 0%, rgba(80,200,255,0.25) 50%, rgba(160,80,255,0.30) 100%)"
+              behindGlowColor="rgba(100, 60, 180, 0.45)"
+              behindGlowSize="45%"
+              innerGradient="linear-gradient(145deg, rgba(200,60,90,0.18) 0%, rgba(60,160,220,0.15) 50%, rgba(120,60,200,0.18) 100%)"
               onContactClick={() => navigate("/contact")}
               className="w-full max-w-xs"
             />
