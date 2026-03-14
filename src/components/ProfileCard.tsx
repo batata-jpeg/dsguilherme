@@ -88,6 +88,11 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       const percentY = clamp(100 / height * y);
       const centerX = percentX - 50;
       const centerY = percentY - 50;
+      // Balatro: normalize to [-1, 1] then compute angle + radius
+      const cx = Math.min(1, Math.max(-1, 2 * (x / width) - 1));
+      const cy = Math.min(1, Math.max(-1, 2 * (y / height) - 1));
+      const balatrAngle = Math.atan2(cy, cx) + Math.PI / 2; // radians
+      const balatrRadius = Math.min(1, Math.sqrt(cx * cx + cy * cy));
       const props: Record<string, string> = {
         '--pointer-x': `${percentX}%`,
         '--pointer-y': `${percentY}%`,
@@ -97,7 +102,9 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
         '--pointer-from-top': `${percentY / 100}`,
         '--pointer-from-left': `${percentX / 100}`,
         '--rotate-x': `${round(-(centerX / 5))}deg`,
-        '--rotate-y': `${round(centerY / 4)}deg`
+        '--rotate-y': `${round(centerY / 4)}deg`,
+        '--balatro-angle': `${round(balatrAngle, 4)}rad`,
+        '--balatro-r': `${round(balatrRadius, 4)}`
       };
       for (const [k, v] of Object.entries(props)) wrap.style.setProperty(k, v);
     };
@@ -270,6 +277,9 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
         <div className="pc-card shadow-glass">
           <div className="pc-inside" />
           <div className="pc-shine" />
+          {/* Balatro polychrome layers */}
+          <div className="pc-balatro-rainbow" />
+          <div className="pc-balatro-shine" />
           <div className="pc-glare" />
 
           {/* Avatar */}
