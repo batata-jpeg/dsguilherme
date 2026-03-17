@@ -262,21 +262,21 @@
   filter: brightness(1) contrast(2) saturate(2);
 }
 
+/* ─── White Glare — pure white radial following the mouse ───── */
 .pc-glare {
   transform: translate3d(0, 0, 1.1px);
   overflow: hidden;
   background-image: radial-gradient(
-    farthest-corner circle at var(--pointer-x) var(--pointer-y),
-    hsla(0, 0%, 100%, 0.35) 5%,
-    hsla(200, 80%, 60%, 0.18) 40%,
-    hsla(270, 80%, 50%, 0.1) 80%,
+    circle 55% at var(--pointer-x) var(--pointer-y),
+    hsla(0, 0%, 100%, 0.60) 0%,
+    hsla(0, 0%, 100%, 0.20) 35%,
+    hsla(0, 0%, 100%, 0.04) 65%,
     transparent 100%
   );
-  mix-blend-mode: overlay;
-  filter: brightness(1) contrast(1.2);
+  mix-blend-mode: soft-light;
   z-index: 5;
-  opacity: calc(0.2 + var(--pointer-from-center) * 0.6);
-  transition: opacity 0.3s ease;
+  opacity: calc(var(--card-opacity) * (0.3 + var(--pointer-from-center) * 0.7));
+  transition: opacity 0.2s ease;
 }
 
 .pc-avatar-content {
