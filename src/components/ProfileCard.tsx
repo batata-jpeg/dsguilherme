@@ -277,8 +277,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
         <div className="pc-card shadow-glass">
           <div className="pc-inside" />
           <div className="pc-shine" />
-          {/* Balatro polychrome layers */}
-          <div className="pc-balatro-rainbow" />
+          {/* Grain noise + white glare on hover */}
           <div className="pc-balatro-shine" />
           <div className="pc-glare" />
 
