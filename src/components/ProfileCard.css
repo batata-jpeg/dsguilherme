@@ -111,60 +111,69 @@
 }
 
 /* ─── Balatro Rainbow Layer ─────────────────────────────────── */
-/* Uses --balatro-angle as the hue source: hsl(angle 100% 80%)  */
-/* giving a different color depending on where the mouse points  */
+/* Soft iridescent wash — angle-driven hue, blurred edges        */
 .pc-balatro-rainbow {
   position: absolute;
-  inset: 0;
+  inset: -10%;
   z-index: 3;
   opacity: 0;
-  mix-blend-mode: hard-light;
+  mix-blend-mode: screen;
   border-radius: var(--card-radius);
   pointer-events: none;
-  background: linear-gradient(
-    var(--balatro-angle),
-    hsl(var(--balatro-angle) 100% 80% / 65%),
-    hsl(var(--balatro-angle) 100% 80% / 5%) calc(100% * var(--balatro-r))
-  );
-  transition: opacity 500ms ease;
+  background:
+    radial-gradient(
+      ellipse 120% 120% at var(--pointer-x) var(--pointer-y),
+      hsl(calc(var(--balatro-angle) * 57.3) 55% 72% / 40%),
+      hsl(calc(var(--balatro-angle) * 57.3 + 60) 50% 65% / 22%) 40%,
+      hsl(calc(var(--balatro-angle) * 57.3 + 120) 45% 60% / 10%) 70%,
+      transparent 100%
+    );
+  filter: blur(18px) saturate(1.3);
+  transition: opacity 600ms ease;
 }
 
 /* ─── Balatro Shine / Texture Layer ────────────────────────── */
-/* Wave-circle texture masked by a directional gradient          */
+/* Subtle directional shimmer, soft-blurred, low contrast        */
 .pc-balatro-shine {
   position: absolute;
   inset: 0;
   z-index: 4;
   opacity: 0;
-  mix-blend-mode: hard-light;
+  mix-blend-mode: soft-light;
   border-radius: var(--card-radius);
   pointer-events: none;
-  --s: 28px;
-  --c1: hsl(0 0% 82%);
-  --c2: hsl(0 0% 50%);
-  --_g: var(--s) var(--s) radial-gradient(var(--c1) 17%, var(--c2) 18% 35%, #0000 36.5%);
+  --s: 40px;
+  --c1: hsl(0 0% 90%);
+  --c2: hsl(0 0% 60%);
+  --_g: var(--s) var(--s) radial-gradient(var(--c1) 14%, var(--c2) 15% 32%, #0000 33%);
   background:
     calc(var(--s) / -4) calc(var(--s) / -4) / var(--_g),
     calc(var(--s) / 4) calc(var(--s) / 4) / var(--_g),
-    radial-gradient(var(--c2) 34%, var(--c1) 36% 68%, #0000 70%) 0 0 /
+    radial-gradient(var(--c2) 30%, var(--c1) 32% 60%, #0000 62%) 0 0 /
       calc(var(--s) / 2) calc(var(--s) / 2),
     repeating-linear-gradient(45deg, var(--c1) -12.5% 12.5%, var(--c2) 0 37.5%)
       0 0 / var(--s) var(--s);
-  mask-image: linear-gradient(
-    var(--balatro-angle),
-    hsl(0 0% 0% / 65%),
-    hsl(0 0% 0% / 0%) calc(100% * var(--balatro-r))
+  mask-image: radial-gradient(
+    ellipse 100% 100% at var(--pointer-x) var(--pointer-y),
+    hsl(0 0% 0% / 45%) 0%,
+    hsl(0 0% 0% / 18%) 50%,
+    hsl(0 0% 0% / 0%) 80%
   );
-  transition: opacity 500ms ease;
+  filter: blur(4px);
+  transition: opacity 600ms ease;
 }
 
 /* Show layers on hover */
 .pc-card:hover .pc-balatro-rainbow,
-.pc-card.active .pc-balatro-rainbow,
+.pc-card.active .pc-balatro-rainbow {
+  opacity: 1;
+  transition: opacity 200ms ease;
+}
+
 .pc-card:hover .pc-balatro-shine,
 .pc-card.active .pc-balatro-shine {
-  opacity: 1;
-  transition: none;
+  opacity: 0.75;
+  transition: opacity 200ms ease;
 }
 
 /* ─── Legacy shine kept for ambient animation ───────────────── */
