@@ -75,7 +75,7 @@
     inset 0 0 40px rgba(0,0,0,0.5);
   transition: transform 1s ease, box-shadow 0.3s ease;
   transform: translateZ(0) rotateX(0deg) rotateY(0deg);
-  background: rgba(0, 0, 0, 0.92);
+  background: #b0b0b0;
   backface-visibility: hidden;
   overflow: hidden;
 }
@@ -106,7 +106,7 @@
   inset: 0;
   position: absolute;
   background-image: var(--inner-gradient);
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: #b0b0b0;
   transform: none;
 }
 
