@@ -70,7 +70,7 @@
     --gradient-prism: linear-gradient(135deg, #000000 0%, #A2D5C6 40%, #CFFFE2 70%, #F6F6F6 100%);
 
     /* Typography */
-    --font-display: 'Gellix', 'Syne', sans-serif;
+    --font-display: 'Syne', sans-serif;
     --font-body: 'Inter', sans-serif;
 
     /* Sidebar */
