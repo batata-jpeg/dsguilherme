@@ -1,5 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@400;500;600;700;800&display=swap');
 
+/* ─── Gellix Font ─────────────────────────────────────────── */
+@font-face {
+  font-family: 'Gellix';
+  src: url('/fonts/Gellix-TRIAL-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Gellix';
+  src: url('/fonts/Gellix-TRIAL-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Gellix';
+  src: url('/fonts/Gellix-TRIAL-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Gellix';
+  src: url('/fonts/Gellix-TRIAL-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Gellix';
+  src: url('/fonts/Gellix-TRIAL-ExtraBold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Gellix';
+  src: url('/fonts/Gellix-TRIAL-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -70,7 +114,7 @@
     --gradient-prism: linear-gradient(135deg, #000000 0%, #A2D5C6 40%, #CFFFE2 70%, #F6F6F6 100%);
 
     /* Typography */
-    --font-display: 'Syne', sans-serif;
+    --font-display: 'Gellix', 'Syne', sans-serif;
     --font-body: 'Inter', sans-serif;
 
     /* Sidebar */

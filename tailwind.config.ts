@@ -12,7 +12,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["Syne", "sans-serif"],
+        display: ["Gellix", "Syne", "sans-serif"],
         body: ["Inter", "sans-serif"],
       },
       colors: {
