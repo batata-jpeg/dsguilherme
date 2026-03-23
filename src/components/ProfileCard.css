@@ -110,29 +110,42 @@
   transform: none;
 }
 
-/* ─── Grain Noise Overlay (on hover) ───────────────────────── */
-.pc-balatro-rainbow {
-  display: none; /* Removed: no color effects */
-}
-
-/* Grain texture layer — visible on hover only */
+/* ─── Holographic rainbow layer — follows mouse position ───── */
 .pc-balatro-shine {
   position: absolute;
   inset: 0;
   z-index: 4;
   opacity: 0;
-  mix-blend-mode: overlay;
   border-radius: var(--card-radius);
   pointer-events: none;
-  background-image: var(--grain);
-  background-size: 160px 160px;
-  background-repeat: repeat;
+  mix-blend-mode: color-dodge;
+  background-image:
+    repeating-linear-gradient(
+      calc(var(--balatro-angle) * 1rad + 45deg),
+      hsla(330, 80%, 70%, 0.18) 0%,
+      hsla(20,  80%, 72%, 0.18) 10%,
+      hsla(55,  75%, 68%, 0.18) 20%,
+      hsla(130, 70%, 65%, 0.18) 30%,
+      hsla(200, 75%, 68%, 0.18) 40%,
+      hsla(260, 70%, 70%, 0.18) 50%,
+      hsla(330, 80%, 70%, 0.18) 60%
+    ),
+    radial-gradient(
+      ellipse 80% 60% at var(--pointer-x) var(--pointer-y),
+      hsla(200, 80%, 80%, 0.25) 0%,
+      transparent 70%
+    );
+  background-size: 200% 200%, 100% 100%;
+  background-position:
+    calc(var(--pointer-from-left) * 100%) calc(var(--pointer-from-top) * 100%),
+    center;
+  filter: blur(6px) saturate(1.4);
   transition: opacity 500ms ease;
 }
 
 .pc-card:hover .pc-balatro-shine,
 .pc-card.active .pc-balatro-shine {
-  opacity: 0.55;
+  opacity: 1;
   transition: opacity 250ms ease;
 }
 
