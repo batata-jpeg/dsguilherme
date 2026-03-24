@@ -120,6 +120,7 @@ export default function LampCord() {
 
   return (
     <div
+      data-lamp-cord
       style={{
         position: 'fixed',
         top: 0,

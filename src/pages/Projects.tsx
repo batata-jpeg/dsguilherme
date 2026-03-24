@@ -101,7 +101,7 @@ export default function Projects() {
     : projects.filter((p) => p.categoryKey === activeCategory || p.tags.includes(activeCategory));
 
   return (
-    <div className="min-h-screen dot-grid" style={{ background: "var(--gradient-bg)" }}>
+    <div className="min-h-screen dot-grid bg-transparent">
       {/* Header */}
       <div className="relative pt-36 pb-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">

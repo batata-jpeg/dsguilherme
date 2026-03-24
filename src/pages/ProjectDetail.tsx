@@ -24,7 +24,7 @@ const projects: Record<string, {
 }> = {
   "luminary-brand": {
     title: "Luminary Brand Identity",
-    category: "Branding · Identity",
+    category: "Branding, Identity",
     description: "A complete luxury brand system featuring custom typography, mark design, and a premium visual language for an elite cosmetics label.",
     image: project1,
     year: "2024",
@@ -39,7 +39,7 @@ const projects: Record<string, {
   },
   "nebula-motion": {
     title: "Nebula Motion Series",
-    category: "Motion · 3D",
+    category: "Motion, 3D",
     description: "Generative motion graphics exploring fluid dynamics and organic form through real-time 3D simulations.",
     image: project2,
     year: "2024",
@@ -54,7 +54,7 @@ const projects: Record<string, {
   },
   "nova-app": {
     title: "Nova App Interface",
-    category: "UI/UX · Product",
+    category: "UI/UX, Product",
     description: "A futuristic mobile OS concept with glassmorphism design language demonstrating advanced interface design thinking.",
     image: project3,
     year: "2023",
@@ -69,7 +69,7 @@ const projects: Record<string, {
   },
   "obsidian-packaging": {
     title: "Obsidian Packaging",
-    category: "Identity · Packaging",
+    category: "Identity, Packaging",
     description: "Luxury packaging design for a premium lifestyle brand with matte obsidian finish and holographic foil detailing.",
     image: project4,
     year: "2023",
@@ -84,7 +84,7 @@ const projects: Record<string, {
   },
   "void-type": {
     title: "Void Typography",
-    category: "Branding · Typography",
+    category: "Branding, Typography",
     description: "An explorative typographic system for a conceptual music label, blending brutalism with organic letterform distortion.",
     image: project1,
     year: "2023",
@@ -99,7 +99,7 @@ const projects: Record<string, {
   },
   "prism-visuals": {
     title: "Prism Visuals",
-    category: "3D · Motion",
+    category: "3D, Motion",
     description: "A series of real-time rendered visual identities exploring light refraction and prismatic colour theory.",
     image: project2,
     year: "2022",
@@ -141,7 +141,7 @@ export default function ProjectDetail() {
 
   if (!project) {
     return (
-      <div className="min-h-screen dot-grid flex items-center justify-center" style={{ background: "var(--gradient-bg)" }}>
+      <div className="min-h-screen dot-grid flex items-center justify-center bg-transparent">
         <div className="text-center space-y-4">
           <h1 className="font-display font-bold text-4xl uppercase">Project Not Found</h1>
           <Link to="/projects">
@@ -153,7 +153,7 @@ export default function ProjectDetail() {
   }
 
   return (
-    <div className="min-h-screen" style={{ background: "var(--gradient-bg)" }}>
+    <div className="min-h-screen bg-transparent">
       {/* ── TOP BAR */}
       <div className="sticky top-0 z-40 flex items-center justify-between px-6 py-4"
         style={{ background: "rgba(10,20,50,0.7)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(10,132,255,0.1)" }}>

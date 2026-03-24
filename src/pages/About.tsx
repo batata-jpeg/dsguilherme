@@ -66,7 +66,7 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen dot-grid" style={{ background: "var(--gradient-bg)" }}>
+    <div className="min-h-screen dot-grid bg-transparent">
       {/* Hero */}
       <div className="relative pt-36 pb-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">

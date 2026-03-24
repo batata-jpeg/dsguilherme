@@ -16,16 +16,23 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.about": "About",
     "nav.contact": "Contact",
     "nav.cta": "Let's Talk",
+    "scrollToTop.aria": "Back to top",
+    "contact.quick.label": "Quick contact",
+    "contact.quick.subtitle": "The fastest way to reach me — choose a channel below.",
+    "contact.whatsapp.title": "WhatsApp",
+    "contact.whatsapp.body": "Message me directly",
+    "contact.email.cta": "Send email",
+    "contact.linkedin.cta": "LinkedIn profile",
 
     // Index – Hero
-    "index.hero.label": "Graphic Designer · 3D Artist · Visual Experiences",
-    "index.hero.h1a": "DESIGN",
-    "index.hero.h1b": "BEYOND",
-    "index.hero.h1c": "THE SURFACE",
+    "index.hero.label": "Graphic Designer, 3D Artist, Visual Experiences",
+    "index.hero.h1a": "GUILHERME",
+    "index.hero.h1b": "CARVALHO",
+    "index.hero.h1c": "GRAPHIC DESIGNER, 3D AND MOTION",
     "index.hero.description": "",
     "index.hero.cta.projects": "View Projects",
     "index.hero.cta.about": "About Me",
-    "index.hero.available": "Available for New Projects",
+    "index.hero.available": "AVAILABLE FOR WORK!",
     "index.hero.scroll": "Scroll",
 
     // Index – Stats
@@ -62,6 +69,7 @@ const translations: Record<Language, Record<string, string>> = {
     "index.cta.line3": "REMARKABLE.",
     "index.cta.body": "Ready to bring your vision to life? I'm available for select projects and collaborations.",
     "index.cta.btn": "Start a Conversation",
+    "index.cta.formLink": "Or send a message through the contact form",
 
     // About
     "about.label": "About Me",
@@ -152,10 +160,11 @@ const translations: Record<Language, Record<string, string>> = {
     "contact.available": "Available for Projects",
     "contact.available.body": "Currently accepting select projects for Q1–Q2 2025. Response time is typically within 24 hours.",
     "contact.response": "Response within 24h",
-    "contact.location": "New York, USA · Remote Worldwide",
+    "contact.location": "New York, USA — Remote worldwide",
     "contact.services.label": "Services",
     "contact.socials.label": "Social Media",
     "contact.form.label": "Send a Message",
+    "contact.form.secondaryHint": "Optional — for a detailed brief.",
     "contact.form.name": "Name",
     "contact.form.name.placeholder": "Your name",
     "contact.form.email": "Email",
@@ -184,8 +193,8 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.status.available": "Available for Work",
     "footer.status.body": "Open to new projects & collaborations.",
     "footer.status.cta": "Get in Touch",
-    "footer.copyright": "© 2024 Refraction Point. All rights reserved.",
-    "footer.disciplines": "Branding · 3D · Motion · Identity",
+    "footer.copyright": "© 2025 Guima. All rights reserved.",
+    "footer.disciplines": "Branding, 3D, Motion, Identity",
   },
 
   pt: {
@@ -195,16 +204,23 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.about": "Sobre",
     "nav.contact": "Contato",
     "nav.cta": "Fale Comigo",
+    "scrollToTop.aria": "Voltar ao topo",
+    "contact.quick.label": "Contacto rápido",
+    "contact.quick.subtitle": "A forma mais rápida de falar comigo — escolhe um canal abaixo.",
+    "contact.whatsapp.title": "WhatsApp",
+    "contact.whatsapp.body": "Fala comigo por mensagem",
+    "contact.email.cta": "Enviar e-mail",
+    "contact.linkedin.cta": "Perfil no LinkedIn",
 
     // Index – Hero
-    "index.hero.label": "Designer Gráfico · Artista 3D · Experiências Visuais",
-    "index.hero.h1a": "SEJA BEM-VINDO",
-    "index.hero.h1b": "AO MEU",
-    "index.hero.h1c": "PORTFÓLIO!",
+    "index.hero.label": "Designer gráfico, artista 3D, experiências visuais",
+    "index.hero.h1a": "GUILHERME",
+    "index.hero.h1b": "CARVALHO",
+    "index.hero.h1c": "DESIGNER GRÁFICO, 3D E MOTION",
     "index.hero.description": "",
     "index.hero.cta.projects": "Ver Projetos",
     "index.hero.cta.about": "Sobre Mim",
-    "index.hero.available": "Disponível para Novos Projetos",
+    "index.hero.available": "DISPONÍVEL PARA TRABALHO!",
     "index.hero.scroll": "Rolar",
 
     // Index – Stats
@@ -241,6 +257,7 @@ const translations: Record<Language, Record<string, string>> = {
     "index.cta.line3": "EXTRAORDINÁRIO.",
     "index.cta.body": "Pronto para dar vida à sua visão? Estou disponível para projetos e colaborações selecionados.",
     "index.cta.btn": "Iniciar uma Conversa",
+    "index.cta.formLink": "Ou envia uma mensagem pelo formulário de contacto",
 
     // About
     "about.label": "Sobre Mim",
@@ -331,10 +348,11 @@ const translations: Record<Language, Record<string, string>> = {
     "contact.available": "Disponível para Projetos",
     "contact.available.body": "Aceitando projetos selecionados para o 1º–2º trimestre de 2025. Tempo de resposta geralmente dentro de 24 horas.",
     "contact.response": "Resposta em até 24h",
-    "contact.location": "Nova York, EUA · Remoto Mundialmente",
+    "contact.location": "Nova York, EUA — Remoto em todo o mundo",
     "contact.services.label": "Serviços",
     "contact.socials.label": "Redes Sociais",
     "contact.form.label": "Enviar Mensagem",
+    "contact.form.secondaryHint": "Opcional — para um briefing detalhado.",
     "contact.form.name": "Nome",
     "contact.form.name.placeholder": "Seu nome",
     "contact.form.email": "E-mail",
@@ -363,8 +381,8 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.status.available": "Disponível para Trabalho",
     "footer.status.body": "Aberto a novos projetos e colaborações.",
     "footer.status.cta": "Entrar em Contato",
-    "footer.copyright": "© 2024 Refraction Point. Todos os direitos reservados.",
-    "footer.disciplines": "Branding · 3D · Motion · Identidade",
+    "footer.copyright": "© 2025 Guima. Todos os direitos reservados.",
+    "footer.disciplines": "Branding, 3D, Motion, Identidade",
   },
 };
 

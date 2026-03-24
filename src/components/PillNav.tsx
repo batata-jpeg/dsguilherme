@@ -192,7 +192,7 @@ const PillNav = ({
 
   return (
     <div className="pill-nav-container">
-      <nav className={`pill-nav ${className}`} aria-label="Primary" style={cssVars}>
+      <nav className={`pill-nav pill-nav--liquid-glass ${className}`} aria-label="Primary" style={cssVars}>
         {isRouterLink(logoHref) ? (
           <Link
             className="pill-logo"

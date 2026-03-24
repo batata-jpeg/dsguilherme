@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion, useAnimation, useScroll, useTransform, useInView } from "framer-motion";
-import { ArrowRight, ChevronDown, ExternalLink, Zap, Award, Users, Layers } from "lucide-react";
+import { ArrowRight, ChevronDown, ExternalLink, Zap, Award, Users, Layers, MessageCircle, Mail, Linkedin } from "lucide-react";
 import heroVisualDark from "@/assets/hero-character.png";
 import heroVisualLight from "@/assets/hero-character-light.png";
 import project1 from "@/assets/project-1.jpg";
@@ -11,6 +11,9 @@ import aboutPortrait from "@/assets/about-portrait.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { MAILTO_HREF, SOCIAL, WHATSAPP_CHAT_URL } from "@/config/links";
+import HeroTypewriter from "@/components/HeroTypewriter";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
 // 7 badges arranged in a rough ellipse around the character (center ~50%,50%)
 // Desktop (x/y): ellipse rx≈40%, ry≈43% — slight negatives OK (overflow visible)
@@ -43,7 +46,17 @@ function FadeInSection({ children, delay = 0, className = "" }: {children: React
 }
 
 export default function Index() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const reduceMotion = usePrefersReducedMotion();
+  const [heroTyped, setHeroTyped] = useState(reduceMotion);
+
+  useEffect(() => {
+    setHeroTyped(reduceMotion);
+  }, [language, reduceMotion]);
+
+  const onHeroTypeComplete = useCallback(() => {
+    setHeroTyped(true);
+  }, []);
   const { theme } = useTheme();
   const isMobile = useIsMobile();
   const isDark = theme === "dark";
@@ -83,7 +96,7 @@ export default function Index() {
   {
     id: "luminary-brand",
     title: t("proj.luminary.title"),
-    category: t("proj.luminary.category") + " · Identity",
+    category: `${t("proj.luminary.category")}, Identity`,
     description: "A complete luxury brand system featuring custom typography, mark design, and a premium visual language.",
     image: project1,
     year: "2024"
@@ -91,7 +104,7 @@ export default function Index() {
   {
     id: "nebula-motion",
     title: t("proj.nebula.title"),
-    category: t("proj.nebula.category") + " · 3D",
+    category: `${t("proj.nebula.category")}, 3D`,
     description: "Generative motion graphics exploring fluid dynamics and organic form.",
     image: project2,
     year: "2024"
@@ -99,7 +112,7 @@ export default function Index() {
   {
     id: "nova-app",
     title: t("proj.nova.title"),
-    category: t("proj.nova.category") + " · Product",
+    category: `${t("proj.nova.category")}, Product`,
     description: "A futuristic mobile OS concept with glassmorphism design language.",
     image: project3,
     year: "2023"
@@ -107,7 +120,7 @@ export default function Index() {
 
 
   return (
-    <div className="min-h-screen overflow-x-hidden dot-grid" style={{ background: "var(--gradient-bg)" }}>
+    <div className="min-h-screen overflow-x-hidden dot-grid bg-transparent">
       {/* ── HERO */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
 
@@ -116,21 +129,36 @@ export default function Index() {
             <div className="space-y-8">
 
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }} className="space-y-2">
-                <h1 className="font-display font-extrabold leading-[0.9] tracking-tight uppercase text-7xl" style={{ fontSize: "clamp(3.5rem, 7vw, 6.5rem)" }}>
-                  {t("index.hero.h1a")}
-                  <br />
-                  <span className="gradient-text">{t("index.hero.h1b")}</span>
-                  <br />
-                  {t("index.hero.h1c")}
-                </h1>
+                <HeroTypewriter
+                  line1={t("index.hero.h1a")}
+                  line2={t("index.hero.h1b")}
+                  line3={t("index.hero.h1c")}
+                  resetKey={language}
+                  reducedMotion={reduceMotion}
+                  onComplete={onHeroTypeComplete}
+                  msPerChar={62}
+                  pauseBetweenLines={520}
+                  className="font-display font-extrabold leading-[0.9] tracking-tight uppercase text-7xl"
+                  style={{ fontSize: "clamp(3.5rem, 7vw, 6.5rem)" }}
+                />
               </motion.div>
 
-              <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.7 }}
-              className="font-body text-lg leading-relaxed max-w-md" style={{ color: "hsl(var(--muted-foreground))" }}>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={heroTyped ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="font-body text-lg leading-relaxed max-w-md"
+                style={{ color: "hsl(var(--muted-foreground))" }}
+              >
                 {t("index.hero.description")}
               </motion.p>
 
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.9 }} className="flex flex-wrap gap-4">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={heroTyped ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.55, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-wrap gap-4"
+              >
                 <Link to="/projects">
                   <button className="btn-glass-primary">{t("index.hero.cta.projects")} <ArrowRight className="w-4 h-4" /></button>
                 </Link>
@@ -139,12 +167,28 @@ export default function Index() {
                 </Link>
               </motion.div>
 
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }} className="inline-flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: "hsl(var(--primary))" }} />
-                  <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: "hsl(var(--primary))" }} />
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={heroTyped ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.55, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="avail-for-work-badge inline-flex items-center gap-3 rounded-full border px-3.5 py-2 sm:px-4 sm:py-2.5 backdrop-blur-[10px] motion-reduce:animate-none"
+              >
+                <span className="relative flex h-2.5 w-2.5 shrink-0" aria-hidden>
+                  <span
+                    className="avail-for-work-badge__dot-glow absolute inset-[-4px] rounded-full bg-primary/25 motion-reduce:animate-none"
+                  />
+                  <span
+                    className="relative block h-2.5 w-2.5 rounded-full ring-[1.5px] ring-primary/45"
+                    style={{
+                      background: "hsl(var(--primary))",
+                      boxShadow: "0 0 12px hsl(var(--primary) / 0.4)",
+                    }}
+                  />
                 </span>
-                <span className="font-display text-xs tracking-[0.2em] uppercase" style={{ color: "hsl(var(--primary))" }}>
+                <span
+                  className="font-display text-[0.68rem] sm:text-xs tracking-[0.18em] sm:tracking-[0.2em] uppercase font-bold leading-tight"
+                  style={{ color: "hsl(var(--primary))" }}
+                >
                   {t("index.hero.available")}
                 </span>
               </motion.div>
@@ -205,7 +249,7 @@ export default function Index() {
 
 
       {/* ── PHILOSOPHY */}
-      <section className="relative py-32 overflow-hidden shadow-glass-sm">
+      <section className="relative py-32 overflow-hidden">
         {/* Prismatic band */}
         <div className="relative max-w-7xl mx-auto px-6">
           <FadeInSection delay={0.2}>
@@ -340,11 +384,35 @@ export default function Index() {
             <p className="font-body text-lg mb-10 mx-auto max-w-md" style={{ color: "hsl(var(--muted-foreground))" }}>
               {t("index.cta.body")}
             </p>
-            <Link to="/contact">
-              <button className="btn-glass-primary px-10 py-4 text-base">
-                {t("index.cta.btn")} <ArrowRight className="w-5 h-5" />
-              </button>
-            </Link>
+            <div className="flex flex-col sm:flex-row flex-wrap items-stretch justify-center gap-3 max-w-xl mx-auto">
+              <a
+                href={WHATSAPP_CHAT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-glass-primary px-8 py-4 text-sm sm:text-base justify-center"
+              >
+                <MessageCircle className="w-5 h-5 shrink-0" />
+                {t("contact.whatsapp.title")}
+              </a>
+              <a href={MAILTO_HREF} className="btn-glass-secondary px-8 py-4 text-sm sm:text-base justify-center">
+                <Mail className="w-5 h-5 shrink-0" />
+                {t("contact.email.cta")}
+              </a>
+              <a
+                href={SOCIAL.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-glass-secondary px-8 py-4 text-sm sm:text-base justify-center"
+              >
+                <Linkedin className="w-5 h-5 shrink-0" />
+                {t("contact.linkedin.cta")}
+              </a>
+            </div>
+            <p className="font-body text-sm mt-8" style={{ color: "hsl(var(--muted-foreground))" }}>
+              <Link to="/contact" className="underline underline-offset-4 hover:opacity-90 transition-opacity">
+                {t("index.cta.formLink")}
+              </Link>
+            </p>
           </FadeInSection>
         </div>
       </section>
