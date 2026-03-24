@@ -394,7 +394,7 @@ export default function ProjectDetail() {
 }
 
 function Divider() {
-  return <div style={{ height: "1px", background: "rgba(10,132,255,0.1)" }} />;
+  return <div style={{ height: "1px", background: "hsl(var(--border))" }} />;
 }
 
 function SectionLabel({ icon, label }: { icon: React.ReactNode; label: string }) {
