@@ -9,6 +9,8 @@ import Footer from "@/components/Footer";
 import ClickSpark from "@/components/ClickSpark";
 import PageTransition from "@/components/PageTransition";
 import LampCord from "@/components/LampCord";
+import ScrollToTop from "@/components/ScrollToTop";
+import SiteBackground from "@/components/SiteBackground";
 
 import Index from "./pages/Index.tsx";
 import Projects from "./pages/Projects.tsx";
@@ -50,11 +52,15 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <ClickSpark sparkColor="#ffffff" sparkRadius={30} sparkCount={10} extraScale={1.3}>
-              <Navigation />
-              <LampCord />
-              <AnimatedRoutes />
-            </ClickSpark>
+            <SiteBackground />
+            <div className="relative z-10 min-h-screen">
+              <ClickSpark sparkColor="#ffffff" sparkRadius={30} sparkCount={10} extraScale={1.3}>
+                <Navigation />
+                <LampCord />
+                <AnimatedRoutes />
+              </ClickSpark>
+              <ScrollToTop />
+            </div>
           </BrowserRouter>
         </TooltipProvider>
       </LanguageProvider>

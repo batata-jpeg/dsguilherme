@@ -6,7 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import PillNav from "@/components/PillNav";
 
-const LOGO_SVG = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%25" stop-color="%230A84FF"/><stop offset="100%25" stop-color="%23BF5AF2"/></linearGradient></defs><rect x="5" y="5" width="14" height="14" rx="3" fill="url(%23g)"/></svg>`;
+const LOGO_SVG = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%25" stop-color="%2300ffd1"/><stop offset="50%25" stop-color="%238a5cff"/><stop offset="100%25" stop-color="%23ff5c7a"/></linearGradient></defs><rect x="5" y="5" width="14" height="14" rx="3" fill="url(%23g)"/></svg>`;
 
 export default function Navigation() {
   const location = useLocation();
@@ -28,9 +28,9 @@ export default function Navigation() {
   ];
 
   const isDark = theme === "dark";
-  const baseColor = isDark ? "hsl(224, 35%, 13%)" : "hsl(220, 20%, 97%)";
-  const pillColor = isDark ? "hsl(224, 25%, 22%)" : "hsl(220, 15%, 88%)";
-  const hoveredPillTextColor = isDark ? "hsl(220, 20%, 92%)" : "hsl(220, 25%, 18%)";
+  const baseColor = isDark ? "hsl(0, 0%, 7%)" : "hsl(0, 0%, 98%)";
+  const pillColor = isDark ? "hsl(0, 0%, 12%)" : "hsl(0, 0%, 92%)";
+  const hoveredPillTextColor = isDark ? "hsl(165, 55%, 12%)" : "hsl(260, 25%, 22%)";
 
   const extraControls = (
     <motion.button
@@ -69,13 +69,13 @@ export default function Navigation() {
   return (
     <PillNav
       logo={LOGO_SVG}
-      logoAlt="Refraction Point"
+      logoAlt="Guima"
       items={items}
       activeHref={location.pathname}
       baseColor={baseColor}
       pillColor={pillColor}
       hoveredPillTextColor={hoveredPillTextColor}
-      pillTextColor={isDark ? "hsl(220, 20%, 92%)" : "hsl(220, 25%, 18%)"}
+      pillTextColor={isDark ? "hsl(0, 0%, 94%)" : "hsl(260, 15%, 18%)"}
       extraControls={extraControls}
       mobileExtraControls={mobileExtraControls}
       initialLoadAnimation={true}
