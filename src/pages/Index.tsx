@@ -217,8 +217,7 @@ export default function Index() {
             </h2>
           </FadeInSection>
           <FadeInSection delay={0.4}>
-            <h2 className="font-display font-extrabold leading-[0.85] tracking-tight mt-4 uppercase text-5xl text-muted-foreground text-justify"
-            style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)", color: "hsl(var(--muted-foreground))", opacity: 0.5 }}>
+            <h2 className="font-display font-extrabold leading-[0.85] tracking-tight mt-4 uppercase text-5xl text-muted-foreground text-justify">
               {t("index.philosophy.author")}
             </h2>
           </FadeInSection>
