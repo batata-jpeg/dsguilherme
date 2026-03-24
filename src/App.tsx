@@ -23,18 +23,22 @@ const queryClient = new QueryClient();
 
 function AnimatedRoutes() {
   const location = useLocation();
+  const isProjectDetail = location.pathname.startsWith("/projects/") && location.pathname !== "/projects/";
 
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<PageTransition><Index /></PageTransition>} />
-        <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
-        <Route path="/projects/:id" element={<PageTransition><ProjectDetail /></PageTransition>} />
-        <Route path="/about" element={<PageTransition><About /></PageTransition>} />
-        <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
-        <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
-      </Routes>
-    </AnimatePresence>
+    <>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<PageTransition><Index /></PageTransition>} />
+          <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
+          <Route path="/projects/:id" element={<PageTransition><ProjectDetail /></PageTransition>} />
+          <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+          <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+          <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+        </Routes>
+      </AnimatePresence>
+      {!isProjectDetail && <Footer />}
+    </>
   );
 }
 
@@ -50,7 +54,6 @@ const App = () => (
               <Navigation />
               <LampCord />
               <AnimatedRoutes />
-              <Footer />
             </ClickSpark>
           </BrowserRouter>
         </TooltipProvider>
