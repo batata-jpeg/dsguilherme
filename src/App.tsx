@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { useLocation } from "react-router-dom";
 import ClickSpark from "@/components/ClickSpark";
 import PageTransition from "@/components/PageTransition";
 import LampCord from "@/components/LampCord";
