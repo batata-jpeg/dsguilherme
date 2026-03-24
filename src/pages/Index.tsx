@@ -209,7 +209,7 @@ export default function Index() {
         {/* Prismatic band */}
         <div className="relative max-w-7xl mx-auto px-6">
           <FadeInSection delay={0.2}>
-            <h2 className="font-display font-extrabold leading-[0.85] tracking-tight uppercase text-7xl text-left" style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)", color: "hsl(var(--foreground))" }}>
+            <h2 className="font-display font-extrabold leading-[0.85] tracking-tight uppercase text-7xl text-justify" style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)", color: "hsl(var(--foreground))" }}>
               {t("index.philosophy.line1")}
               <br />
               {t("index.philosophy.line2")}{" "}
