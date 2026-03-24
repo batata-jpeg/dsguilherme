@@ -117,7 +117,7 @@ const projects: Record<string, {
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
   const project = id ? projects[id] : null;
-  const [descOpen, setDescOpen] = useState(false);
+  const [descOpen, setDescOpen] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
