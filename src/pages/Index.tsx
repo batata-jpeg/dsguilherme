@@ -203,27 +203,6 @@ export default function Index() {
         </motion.div>
       </section>
 
-      {/* ── STATS */}
-      <FadeInSection>
-        <section className="relative py-12 shadow-none">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="glass-panel p-1 rounded-2xl">
-              <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0"
-              style={{ borderColor: "rgba(10,132,255,0.08)" } as React.CSSProperties}>
-                {stats.map(({ value, label, icon: Icon }, i) =>
-                <motion.div key={label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className="p-8 flex flex-col items-center text-center gap-3">
-                    <Icon className="w-5 h-5 mb-1" style={{ color: "hsl(var(--primary))", opacity: 0.7 }} />
-                    <span className="font-display font-extrabold gradient-text" style={{ fontSize: "2.8rem", lineHeight: 1 }}>{value}</span>
-                    <span className="font-display text-xs tracking-[0.15em] uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>{label}</span>
-                  </motion.div>
-                )}
-              </div>
-            </div>
-          </div>
-        </section>
-      </FadeInSection>
 
       {/* ── PHILOSOPHY */}
       <section className="relative py-32 overflow-hidden shadow-glass-sm">
