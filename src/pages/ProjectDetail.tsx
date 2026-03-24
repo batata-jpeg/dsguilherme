@@ -117,7 +117,7 @@ const projects: Record<string, {
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
   const project = id ? projects[id] : null;
-  const [descOpen, setDescOpen] = useState(false);
+  const [descOpen, setDescOpen] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -245,14 +245,14 @@ export default function ProjectDetail() {
               className="fixed right-0 top-0 h-full z-50 overflow-y-auto"
               style={{
                 width: "380px",
-                background: "rgba(8,16,42,0.97)",
+                background: "hsl(var(--background))",
                 backdropFilter: "blur(20px)",
-                borderLeft: "1px solid rgba(10,132,255,0.15)",
+                borderLeft: "1px solid hsl(var(--border))",
               }}
             >
               {/* Panel header */}
               <div className="sticky top-0 flex items-center justify-between px-6 py-5 z-10"
-                style={{ background: "rgba(8,16,42,0.95)", borderBottom: "1px solid rgba(10,132,255,0.1)" }}>
+                style={{ background: "hsl(var(--background))", borderBottom: "1px solid hsl(var(--border))" }}>
                 <span className="font-display text-xs tracking-[0.2em] uppercase" style={{ color: "hsl(var(--primary))" }}>
                   Project Description
                 </span>
@@ -394,7 +394,7 @@ export default function ProjectDetail() {
 }
 
 function Divider() {
-  return <div style={{ height: "1px", background: "rgba(10,132,255,0.1)" }} />;
+  return <div style={{ height: "1px", background: "hsl(var(--border))" }} />;
 }
 
 function SectionLabel({ icon, label }: { icon: React.ReactNode; label: string }) {
