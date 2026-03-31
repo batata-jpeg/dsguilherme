@@ -67,43 +67,7 @@ export default function About() {
 
   return (
     <div className="min-h-screen dot-grid bg-transparent">
-      {/* Hero */}
-      <div className="relative pt-36 pb-20 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
-          <FadeInSection>
-            <span className="section-label block mb-6">{t("about.label")}</span>
-          </FadeInSection>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <FadeInSection delay={0.1}>
-              <h1 className="font-display font-extrabold uppercase leading-[0.85]" style={{ fontSize: "clamp(3rem, 6vw, 6rem)" }}>
-                {t("about.h1a")}
-                <br />
-                <span className="gradient-text">{t("about.h1b")}</span>
-                <br />
-                {t("about.h1c")}
-                <br />
-                {t("about.h1d")}
-              </h1>
-            </FadeInSection>
-            <FadeInSection delay={0.3} className="space-y-6">
-              <p className="font-body text-xl leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
-                {t("about.intro1")}
-              </p>
-              <p className="font-body leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
-                {t("about.intro2")}
-              </p>
-              <div className="flex gap-4 flex-wrap">
-                <Link to="/contact">
-                  <button className="btn-glass-primary">{t("about.cta.work")} <ArrowRight className="w-4 h-4" /></button>
-                </Link>
-                <button className="btn-glass-secondary flex items-center gap-2">
-                  <Download className="w-4 h-4" /> {t("about.cta.cv")}
-                </button>
-              </div>
-            </FadeInSection>
-          </div>
-        </div>
-      </div>
+
 
       {/* Portrait + Bio */}
       <div className="max-w-7xl mx-auto px-6 py-20">
