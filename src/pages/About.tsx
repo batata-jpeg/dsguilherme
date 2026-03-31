@@ -72,7 +72,7 @@ export default function About() {
       {/* Portrait + Bio */}
       <div className="max-w-7xl mx-auto px-6 py-20">
         <div className="glass-panel p-8 md:p-14 grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
-          <FadeInSection className="lg:col-span-2 flex justify-center">
+          <FadeInSection className="lg:col-span-2 flex flex-col items-center gap-4">
             <ProfileCard
               avatarUrl={aboutPortrait}
               miniAvatarUrl={aboutPortrait}
@@ -87,6 +87,14 @@ export default function About() {
               onContactClick={() => navigate("/contact")}
               className="w-full max-w-xs"
             />
+            <div className="flex gap-3 w-full max-w-xs">
+              <a href="/cv-pt.pdf" download className="btn-glass-secondary flex items-center justify-center gap-2 flex-1 text-xs">
+                <Download className="w-3.5 h-3.5" /> CV Português
+              </a>
+              <a href="/cv-en.pdf" download className="btn-glass-secondary flex items-center justify-center gap-2 flex-1 text-xs">
+                <Download className="w-3.5 h-3.5" /> CV English
+              </a>
+            </div>
           </FadeInSection>
 
           <FadeInSection delay={0.2} className="lg:col-span-3 space-y-10">
