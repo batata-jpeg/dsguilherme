@@ -176,25 +176,4 @@ export default function About() {
         </div>
       </div>
 
-      {/* Awards */}
-      <div className="max-w-7xl mx-auto px-6 pb-32">
-        <FadeInSection>
-          <span className="section-label block mb-10">{t("about.awards.label")}</span>
-        </FadeInSection>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {awards.map((award, i) => (
-            <FadeInSection key={award.title} delay={i * 0.1}>
-              <div className="glass-panel p-6 flex items-center justify-between group">
-                <div className="flex items-center gap-4">
-                  <Award className="w-5 h-5 flex-shrink-0" style={{ color: "hsl(var(--primary))", opacity: 0.7 }} />
-                  <span className="font-display font-600 text-sm tracking-[0.08em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{award.title}</span>
-                </div>
-                <span className="font-display text-sm gradient-text font-bold flex-shrink-0">{award.year}</span>
-              </div>
-            </FadeInSection>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
+

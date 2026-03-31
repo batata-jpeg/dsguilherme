@@ -47,7 +47,7 @@ export default function HeroTypewriter({
 
     const schedule = (fn: () => void, ms: number) => {
       const id = window.setTimeout(fn, ms);
-      timeouts.push(id);
+      timeouts.push(id as unknown as ReturnType<typeof setTimeout>);
       return id;
     };
 
