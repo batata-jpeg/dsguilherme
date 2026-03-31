@@ -110,7 +110,7 @@
   transform: none;
 }
 
-/* ─── Holographic rainbow layer — follows mouse position ───── */
+/* ─── Holographic noisy rainbow layer — follows mouse position ───── */
 .pc-balatro-shine {
   position: absolute;
   inset: 0;
@@ -122,26 +122,39 @@
   background-image:
     repeating-linear-gradient(
       calc(var(--balatro-angle) * 1rad + 30deg),
-      hsla(330, 100%, 65%, 0.55) 0%,
-      hsla(20,  100%, 65%, 0.55) 10%,
-      hsla(55,  100%, 60%, 0.55) 20%,
-      hsla(130, 100%, 58%, 0.55) 30%,
-      hsla(200, 100%, 62%, 0.55) 40%,
-      hsla(260, 100%, 65%, 0.55) 50%,
-      hsla(330, 100%, 65%, 0.55) 60%
+      hsla(330, 100%, 70%, 0.35) 0%,
+      hsla(20,  100%, 70%, 0.35) 10%,
+      hsla(55,  100%, 65%, 0.35) 20%,
+      hsla(130, 100%, 62%, 0.35) 30%,
+      hsla(200, 100%, 68%, 0.35) 40%,
+      hsla(260, 100%, 70%, 0.35) 50%,
+      hsla(330, 100%, 70%, 0.35) 60%
     ),
     radial-gradient(
       ellipse 90% 70% at var(--pointer-x) var(--pointer-y),
-      hsla(200, 100%, 85%, 0.55) 0%,
-      hsla(260, 100%, 75%, 0.25) 40%,
+      hsla(200, 100%, 88%, 0.4) 0%,
+      hsla(260, 100%, 78%, 0.18) 40%,
       transparent 70%
     );
   background-size: 150% 150%, 100% 100%;
   background-position:
     calc(var(--pointer-from-left) * 100%) calc(var(--pointer-from-top) * 100%),
     center;
-  filter: blur(3px) saturate(2.5) contrast(1.1);
+  filter: blur(6px) saturate(2) contrast(1.05);
   transition: opacity 500ms ease;
+}
+
+/* Grain noise overlay on hover */
+.pc-balatro-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--card-radius);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+  mix-blend-mode: overlay;
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 .pc-card:hover .pc-balatro-shine,
