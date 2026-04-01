@@ -111,7 +111,7 @@
 }
 
 /* ─── Holographic noisy rainbow layer — follows mouse position ───── */
-/* ─── Holographic grain noise — intense colorful particles ───── */
+/* ─── Holographic grain noise — mouse-reactive colorful effect ───── */
 .pc-balatro-shine {
   position: absolute;
   inset: 0;
@@ -121,54 +121,56 @@
   pointer-events: none;
   mix-blend-mode: screen;
   background-image:
+    radial-gradient(
+      ellipse 70% 55% at var(--pointer-x) var(--pointer-y),
+      hsla(200, 100%, 80%, 0.55) 0%,
+      hsla(260, 100%, 72%, 0.35) 20%,
+      hsla(320, 100%, 68%, 0.2) 40%,
+      transparent 65%
+    ),
     repeating-linear-gradient(
       calc(var(--balatro-angle) * 1rad + 30deg),
-      hsla(280, 100%, 65%, 0.5) 0%,
-      hsla(200, 100%, 70%, 0.5) 12%,
-      hsla(160, 100%, 60%, 0.5) 24%,
-      hsla(55,  100%, 65%, 0.4) 36%,
-      hsla(320, 100%, 68%, 0.5) 48%,
-      hsla(220, 100%, 72%, 0.5) 60%,
-      hsla(280, 100%, 65%, 0.5) 72%
-    ),
-    radial-gradient(
-      ellipse 80% 60% at var(--pointer-x) var(--pointer-y),
-      hsla(200, 100%, 85%, 0.5) 0%,
-      hsla(270, 100%, 75%, 0.3) 30%,
-      hsla(320, 100%, 70%, 0.15) 55%,
-      transparent 75%
+      hsla(280, 80%, 65%, 0.25) 0%,
+      hsla(200, 80%, 70%, 0.25) 14%,
+      hsla(160, 80%, 60%, 0.2) 28%,
+      hsla(320, 80%, 68%, 0.25) 42%,
+      hsla(220, 80%, 72%, 0.25) 56%,
+      hsla(280, 80%, 65%, 0.25) 70%
     );
-  background-size: 200% 200%, 100% 100%;
+  background-size: 100% 100%, 180% 180%;
   background-position:
-    calc(var(--pointer-from-left) * 100%) calc(var(--pointer-from-top) * 100%),
-    center;
-  filter: saturate(2.5) contrast(1.15);
+    center,
+    calc(var(--pointer-from-left) * 100%) calc(var(--pointer-from-top) * 100%);
+  filter: saturate(1.8) contrast(1.1);
   transition: opacity 400ms ease;
 }
 
-/* Dense colorful grain noise particles */
+/* Subtle grain noise texture */
 .pc-balatro-shine::after {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: var(--card-radius);
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.8' numOctaves='6' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.8'/%3E%3C/svg%3E");
-  background-size: 128px 128px;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 100px 100px;
   mix-blend-mode: color-dodge;
-  opacity: 1;
+  opacity: 0.6;
   pointer-events: none;
 }
 
-/* Second noise layer for extra density */
+/* Removed second noise layer — single grain is enough */
 .pc-balatro-shine::before {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: var(--card-radius);
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='4' seed='42' stitchTiles='stitch'/%3E%3CfeColorMatrix type='hueRotate' values='120'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)' opacity='0.6'/%3E%3C/svg%3E");
-  background-size: 80px 80px;
-  mix-blend-mode: screen;
-  opacity: 0.7;
+  background: radial-gradient(
+    circle 40% at var(--pointer-x) var(--pointer-y),
+    hsla(0, 0%, 100%, 0.12) 0%,
+    transparent 100%
+  );
+  mix-blend-mode: overlay;
+  opacity: 1;
   pointer-events: none;
 }
 
