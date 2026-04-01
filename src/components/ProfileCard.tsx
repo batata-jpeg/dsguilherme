@@ -14,7 +14,7 @@ const ANIMATION_CONFIG = {
 const clamp = (v: number, min = 0, max = 100) => Math.min(Math.max(v, min), max);
 const round = (v: number, precision = 3) => parseFloat(v.toFixed(precision));
 const adjust = (v: number, fMin: number, fMax: number, tMin: number, tMax: number) =>
-round(tMin + (tMax - tMin) * (v - fMin) / (fMax - fMin));
+  round(tMin + (tMax - tMin) * (v - fMin) / (fMax - fMin));
 
 interface ProfileCardProps {
   avatarUrl?: string;
@@ -88,11 +88,6 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       const percentY = clamp(100 / height * y);
       const centerX = percentX - 50;
       const centerY = percentY - 50;
-      // Balatro: normalize to [-1, 1] then compute angle + radius
-      const cx = Math.min(1, Math.max(-1, 2 * (x / width) - 1));
-      const cy = Math.min(1, Math.max(-1, 2 * (y / height) - 1));
-      const balatrAngle = Math.atan2(cy, cx) + Math.PI / 2; // radians
-      const balatrRadius = Math.min(1, Math.sqrt(cx * cx + cy * cy));
       const props: Record<string, string> = {
         '--pointer-x': `${percentX}%`,
         '--pointer-y': `${percentY}%`,
@@ -103,8 +98,6 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
         '--pointer-from-left': `${percentX / 100}`,
         '--rotate-x': `${round(-(centerX / 5))}deg`,
         '--rotate-y': `${round(centerY / 4)}deg`,
-        '--balatro-angle': `${round(balatrAngle, 4)}rad`,
-        '--balatro-r': `${round(balatrRadius, 4)}`
       };
       for (const [k, v] of Object.entries(props)) wrap.style.setProperty(k, v);
     };
@@ -125,7 +118,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       } else {
         running = false;
         lastTs = 0;
-        if (rafId) {cancelAnimationFrame(rafId);rafId = null;}
+        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
       }
     };
 
@@ -138,11 +131,11 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
 
     return {
       setImmediate(x: number, y: number) {
-        currentX = x;currentY = y;
+        currentX = x; currentY = y;
         setVarsFromXY(currentX, currentY);
       },
       setTarget(x: number, y: number) {
-        targetX = x;targetY = y;
+        targetX = x; targetY = y;
         start();
       },
       toCenter() {
@@ -159,7 +152,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       },
       cancel() {
         if (rafId) cancelAnimationFrame(rafId);
-        rafId = null;running = false;lastTs = 0;
+        rafId = null; running = false; lastTs = 0;
       }
     };
   }, [enableTilt]);
@@ -228,7 +221,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
 
     const handleClick = () => {
       if (!enableMobileTilt || location.protocol !== 'https:') return;
-      const anyMotion = window.DeviceMotionEvent as typeof DeviceMotionEvent & {requestPermission?: () => Promise<string>;};
+      const anyMotion = window.DeviceMotionEvent as typeof DeviceMotionEvent & { requestPermission?: () => Promise<string>; };
       if (anyMotion && typeof anyMotion.requestPermission === 'function') {
         anyMotion.requestPermission().then((state) => {
           if (state === 'granted') window.addEventListener('deviceorientation', handleDeviceOrientation as EventListener);
@@ -274,11 +267,9 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     <div ref={wrapRef} className={`pc-card-wrapper ${className}`} style={cardStyle}>
       {behindGlowEnabled && <div className="pc-behind" />}
       <div ref={shellRef} className="pc-card-shell">
-        <div className="pc-card shadow-glass">
+        <div className="pc-card">
           <div className="pc-inside" />
           <div className="pc-shine" />
-          {/* Grain noise + white glare on hover */}
-          <div className="pc-balatro-shine" />
           <div className="pc-glare" />
 
           {/* Avatar */}
@@ -287,32 +278,32 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
               className="avatar"
               src={avatarUrl}
               alt={name}
-              onError={(e) => {(e.target as HTMLImageElement).style.display = 'none';}} />
-            
-            {showUserInfo
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
+              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+            />
+            {showUserInfo && (
+              <div className="pc-user-info">
+                <div className="pc-user-details">
+                  <div className="pc-mini-avatar">
+                    <img
+                      src={miniAvatarUrl || avatarUrl}
+                      alt={name}
+                      onError={(e) => {
+                        const t = e.target as HTMLImageElement;
+                        t.style.opacity = '0.5';
+                        t.src = avatarUrl;
+                      }}
+                    />
+                  </div>
+                  <div className="pc-user-text">
+                    <div className="pc-handle">@{handle}</div>
+                    <div className="pc-status">{status}</div>
+                  </div>
+                </div>
+                <button className="pc-contact-btn" onClick={handleContactClick}>
+                  {contactText}
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Text details */}
@@ -324,8 +315,8 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
           </div>
         </div>
       </div>
-    </div>);
-
+    </div>
+  );
 };
 
 const ProfileCard = React.memo(ProfileCardComponent);
