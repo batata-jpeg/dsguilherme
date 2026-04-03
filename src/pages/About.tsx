@@ -84,7 +84,6 @@ export default function About() {
               showUserInfo={true}
               className="w-full max-w-xs"
             />
-            />
             <div className="flex gap-3 w-full max-w-xs">
               <a href="/cv-pt.pdf" download className="btn-glass-secondary flex items-center justify-center gap-2 flex-1 text-xs">
                 <Download className="w-3.5 h-3.5" /> CV Português
