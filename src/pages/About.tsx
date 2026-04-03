@@ -81,10 +81,7 @@ export default function About() {
               title={t("about.card.title")}
               handle={t("about.card.handle")}
               status={t("about.card.status")}
-              contactText={t("about.cta.work")}
-              behindGlowColor="rgba(100, 60, 180, 0.45)"
-              behindGlowSize="45%"
-              onContactClick={() => navigate("/contact")}
+              showUserInfo={true}
               className="w-full max-w-xs"
             />
             <div className="flex gap-3 w-full max-w-xs">
