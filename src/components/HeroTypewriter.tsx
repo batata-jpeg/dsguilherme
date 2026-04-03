@@ -102,12 +102,12 @@ export default function HeroTypewriter({
     >
       {l1}
       {c1 ? <Cursor /> : null}
-      <br />
+      {line2 && <br />}
       <span className="gradient-text">
         {l2}
         {c2 ? <Cursor /> : null}
       </span>
-      <br />
+      {line3 && <br />}
       {l3}
       {c3 ? <Cursor /> : null}
     </h1>

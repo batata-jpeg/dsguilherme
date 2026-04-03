@@ -138,7 +138,7 @@ export default function Index() {
                   onComplete={onHeroTypeComplete}
                   msPerChar={62}
                   pauseBetweenLines={520}
-                  className="font-display font-extrabold leading-[0.9] tracking-tight uppercase text-7xl"
+                  className="font-display font-extrabold leading-[0.9] tracking-tight uppercase text-7xl text-left"
                   style={{ fontSize: "clamp(3.5rem, 7vw, 6.5rem)" }}
                 />
               </motion.div>
