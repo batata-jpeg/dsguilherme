@@ -73,24 +73,26 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-6 py-20">
         <div className="glass-panel p-8 md:p-14 grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
           <FadeInSection className="lg:col-span-2 flex flex-col items-center gap-4">
-            <ProfileCard
-              avatarUrl={aboutPortrait}
-              miniAvatarUrl={aboutPortrait}
-              grainUrl={grainTexture}
-              name={t("about.card.name")}
-              title={t("about.card.title")}
-              handle={t("about.card.handle")}
-              status={t("about.card.status")}
-              showUserInfo={true}
-              className="w-full"
-            />
-            <div className="flex gap-3 w-full mt-2">
-              <a href="/cv-pt.pdf" download className="btn-glass-secondary flex items-center justify-center gap-2 flex-1 text-sm py-3 px-4">
-                <Download className="w-4 h-4" /> CV Português
-              </a>
-              <a href="/cv-en.pdf" download className="btn-glass-secondary flex items-center justify-center gap-2 flex-1 text-sm py-3 px-4">
-                <Download className="w-4 h-4" /> CV English
-              </a>
+            <div className="w-fit flex flex-col items-stretch gap-4">
+              <ProfileCard
+                avatarUrl={aboutPortrait}
+                miniAvatarUrl={aboutPortrait}
+                grainUrl={grainTexture}
+                name={t("about.card.name")}
+                title={t("about.card.title")}
+                handle={t("about.card.handle")}
+                status={t("about.card.status")}
+                showUserInfo={true}
+                className="w-full mx-auto"
+              />
+              <div className="flex gap-3 w-full">
+                <a href="/cv-pt.pdf" download className="btn-glass-secondary flex items-center justify-center gap-2 flex-1 text-sm py-3 px-4">
+                  <Download className="w-4 h-4" /> CV Português
+                </a>
+                <a href="/cv-en.pdf" download className="btn-glass-secondary flex items-center justify-center gap-2 flex-1 text-sm py-3 px-4">
+                  <Download className="w-4 h-4" /> CV English
+                </a>
+              </div>
             </div>
           </FadeInSection>
 
