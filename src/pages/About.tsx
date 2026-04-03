@@ -82,9 +82,9 @@ export default function About() {
               handle={t("about.card.handle")}
               status={t("about.card.status")}
               showUserInfo={true}
-              className="w-full max-w-xs"
+              className="w-full"
             />
-            <div className="flex gap-3 w-full max-w-xs mt-2" style={{ maxWidth: '100%' }}>
+            <div className="flex gap-3 w-full mt-2">
               <a href="/cv-pt.pdf" download className="btn-glass-secondary flex items-center justify-center gap-2 flex-1 text-sm py-3 px-4">
                 <Download className="w-4 h-4" /> CV Português
               </a>
