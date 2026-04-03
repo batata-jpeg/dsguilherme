@@ -113,7 +113,7 @@
   mask-size: 150%;
   mask-position: top calc(200% - (var(--background-y) * 5)) left calc(100% - var(--background-x));
   transition: filter 0.8s ease;
-  filter: brightness(0.55) contrast(1.2) saturate(0.25) opacity(0.35);
+  filter: brightness(0.4) contrast(1.1) saturate(0.15) opacity(0.2);
   animation: holo-bg 18s linear infinite;
   animation-play-state: running;
   mix-blend-mode: color-dodge;
