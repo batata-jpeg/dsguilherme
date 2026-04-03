@@ -374,7 +374,7 @@ export default function Index() {
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <FadeInSection>
             <span className="section-label justify-center mb-6 flex">{t("index.cta.label")}</span>
-            <h2 className="font-display font-extrabold uppercase leading-tight mb-6" style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}>
+            <h2 className="font-display font-extrabold uppercase leading-tight mb-6 text-5xl" style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}>
               {t("index.cta.line1")}
               <br />
               <span className="gradient-text">{t("index.cta.line2")}</span>
