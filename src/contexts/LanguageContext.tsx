@@ -26,9 +26,9 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Index – Hero
     "index.hero.label": "Graphic Designer, 3D Artist, Visual Experiences",
-    "index.hero.h1a": "GUILHERME",
-    "index.hero.h1b": "CARVALHO",
-    "index.hero.h1c": "GRAPHIC DESIGNER, 3D AND MOTION",
+    "index.hero.h1a": "WELCOME TO MY",
+    "index.hero.h1b": "PORTFOLIO",
+    "index.hero.h1c": "",
     "index.hero.description": "",
     "index.hero.cta.projects": "View Projects",
     "index.hero.cta.about": "About Me",
