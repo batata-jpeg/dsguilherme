@@ -271,7 +271,7 @@ const translations: Record<Language, Record<string, string>> = {
     "about.cta.cv": "Baixar CV",
     "about.card.name": "Guilherme Carvalho",
     "about.card.title": "Artista Visual",
-    "about.card.handle": "guilhermecarvalho",
+    "about.card.handle": "carvalhoguilherme_",
     "about.card.status": "Disponível",
     "about.story.label": "A História",
     "about.story.p1": "Minha jornada começou no design gráfico tradicional, mas rapidamente se expandiu para 3D, motion e os territórios emergentes onde essas disciplinas se dissolvem umas nas outras. Estudei na School of Visual Arts em Nova York antes de trabalhar em alguns dos mais respeitados estúdios de design da cidade.",
