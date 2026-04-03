@@ -84,12 +84,12 @@ export default function About() {
               showUserInfo={true}
               className="w-full max-w-xs"
             />
-            <div className="flex gap-3 w-full max-w-xs">
-              <a href="/cv-pt.pdf" download className="btn-glass-secondary flex items-center justify-center gap-2 flex-1 text-xs">
-                <Download className="w-3.5 h-3.5" /> CV Português
+            <div className="flex gap-3 w-full max-w-xs mt-2">
+              <a href="/cv-pt.pdf" download className="btn-glass-secondary flex items-center justify-center gap-2 flex-1 text-sm py-3 px-4">
+                <Download className="w-4 h-4" /> CV Português
               </a>
-              <a href="/cv-en.pdf" download className="btn-glass-secondary flex items-center justify-center gap-2 flex-1 text-xs">
-                <Download className="w-3.5 h-3.5" /> CV English
+              <a href="/cv-en.pdf" download className="btn-glass-secondary flex items-center justify-center gap-2 flex-1 text-sm py-3 px-4">
+                <Download className="w-4 h-4" /> CV English
               </a>
             </div>
           </FadeInSection>
