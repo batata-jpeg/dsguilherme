@@ -122,17 +122,11 @@
 }
 
 .gooey-nav-container .effect.text {
-  color: white;
-  transition: color 0.3s ease;
-  font-family: var(--font-display, inherit);
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  display: none;
 }
 
 .gooey-nav-container .effect.text.active {
-  color: white;
+  display: none;
 }
 
 .gooey-nav-container .effect.filter {
