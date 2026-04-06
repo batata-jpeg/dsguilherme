@@ -252,8 +252,8 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Index – Contact CTA
     "index.cta.label": "Contato",
-    "index.cta.line1": "VAMOS TRANSFORMAR A",
-    "index.cta.line2": "SUA IDEIA",
+    "index.cta.line1": "VAMOS TRANSFORMAR",
+    "index.cta.line2": "A SUA IDEIA",
     "index.cta.line3": "EM REALIDADE!",
     "index.cta.body": "Pronto para dar vida à sua visão? Estou disponível para projetos e colaborações selecionados.",
     "index.cta.btn": "Iniciar uma Conversa",
