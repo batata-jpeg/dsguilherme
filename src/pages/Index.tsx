@@ -2,6 +2,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion, useAnimation, useScroll, useTransform, useInView } from "framer-motion";
 import { ArrowRight, ChevronDown, ExternalLink, Zap, Award, Users, Layers, MessageCircle, Mail, Linkedin } from "lucide-react";
+import GooeyNav from "@/components/GooeyNav";
 import heroVisualDark from "@/assets/hero-character.png";
 import heroVisualLight from "@/assets/hero-character-light.png";
 import project1 from "@/assets/project-1.jpg";
@@ -377,30 +378,19 @@ export default function Index() {
             <p className="font-body text-lg mb-10 mx-auto max-w-md" style={{ color: "hsl(var(--muted-foreground))" }}>
               {t("index.cta.body")}
             </p>
-            <div className="flex flex-col sm:flex-row flex-wrap items-stretch justify-center gap-3 max-w-xl mx-auto">
-              <a
-                href={WHATSAPP_CHAT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-glass-primary px-8 py-4 text-sm sm:text-base justify-center"
-              >
-                <MessageCircle className="w-5 h-5 shrink-0" />
-                {t("contact.whatsapp.title")}
-              </a>
-              <a href={MAILTO_HREF} className="btn-glass-secondary px-8 py-4 text-sm sm:text-base justify-center">
-                <Mail className="w-5 h-5 shrink-0" />
-                {t("contact.email.cta")}
-              </a>
-              <a
-                href={SOCIAL.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-glass-secondary px-8 py-4 text-sm sm:text-base justify-center"
-              >
-                <Linkedin className="w-5 h-5 shrink-0" />
-                {t("contact.linkedin.cta")}
-              </a>
-            </div>
+            <GooeyNav
+              items={[
+                { label: "WhatsApp", href: WHATSAPP_CHAT_URL, icon: <MessageCircle className="w-5 h-5 shrink-0" />, external: true },
+                { label: t("contact.email.cta"), href: MAILTO_HREF, icon: <Mail className="w-5 h-5 shrink-0" /> },
+                { label: t("contact.linkedin.cta"), href: SOCIAL.linkedin, icon: <Linkedin className="w-5 h-5 shrink-0" />, external: true },
+              ]}
+              particleCount={15}
+              particleDistances={[90, 10]}
+              particleR={100}
+              animationTime={600}
+              timeVariance={300}
+              colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+            />
             <p className="font-body text-sm mt-8" style={{ color: "hsl(var(--muted-foreground))" }}>
               <Link to="/contact" className="underline underline-offset-4 hover:opacity-90 transition-opacity">
                 {t("index.cta.formLink")}
