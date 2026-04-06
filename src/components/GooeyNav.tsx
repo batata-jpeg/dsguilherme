@@ -176,16 +176,16 @@ const GooeyNav = ({
   return (
     <div className="gooey-nav-container" ref={containerRef}>
       <nav>
-        <ul ref={navRef}>
+        <ul ref={navRef} onMouseLeave={handleMouseLeave}>
           {items.map((item, index) => (
             <li
               key={index}
               className={activeIndex === index ? 'active' : ''}
-              onClick={(e) => handleClick(e, index)}
+              onMouseEnter={(e) => handleHover(e, index)}
             >
               <a
                 href={item.href}
-                onClick={(e) => e.preventDefault()}
+                onClick={(e) => handleClick(e, index)}
                 target={item.external ? '_blank' : undefined}
                 rel={item.external ? 'noopener noreferrer' : undefined}
               >
