@@ -111,8 +111,9 @@ const GooeyNav = ({
     textRef.current.innerText = element.innerText;
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLLIElement>, index: number) => {
+  const handleHover = (e: React.MouseEvent<HTMLLIElement>, index: number) => {
     const liEl = e.currentTarget;
+    if (activeIndex === index) return;
     setActiveIndex(index);
     updateEffectPosition(liEl);
 
@@ -130,13 +131,27 @@ const GooeyNav = ({
     if (filterRef.current) {
       makeParticles(filterRef.current);
     }
+  };
 
-    // Navigate after effect
+  const handleClick = (e: React.MouseEvent, index: number) => {
+    e.preventDefault();
     const item = items[index];
     if (item.href.startsWith('mailto:')) {
       window.location.href = item.href;
     } else if (item.external) {
       window.open(item.href, '_blank', 'noopener,noreferrer');
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setActiveIndex(-1);
+    if (filterRef.current) {
+      const particles = filterRef.current.querySelectorAll('.particle');
+      particles.forEach((p) => filterRef.current!.removeChild(p));
+      filterRef.current.classList.remove('active');
+    }
+    if (textRef.current) {
+      textRef.current.classList.remove('active');
     }
   };
 
@@ -161,16 +176,16 @@ const GooeyNav = ({
   return (
     <div className="gooey-nav-container" ref={containerRef}>
       <nav>
-        <ul ref={navRef}>
+        <ul ref={navRef} onMouseLeave={handleMouseLeave}>
           {items.map((item, index) => (
             <li
               key={index}
               className={activeIndex === index ? 'active' : ''}
-              onClick={(e) => handleClick(e, index)}
+              onMouseEnter={(e) => handleHover(e, index)}
             >
               <a
                 href={item.href}
-                onClick={(e) => e.preventDefault()}
+                onClick={(e) => handleClick(e, index)}
                 target={item.external ? '_blank' : undefined}
                 rel={item.external ? 'noopener noreferrer' : undefined}
               >
