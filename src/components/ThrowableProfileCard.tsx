@@ -14,8 +14,8 @@ interface ThrowableProfileCardProps {
   className?: string;
 }
 
-const VELOCITY_THRESHOLD = 300;
-const FLY_DISTANCE = 2000;
+const VELOCITY_THRESHOLD = 120;
+const FLY_DISTANCE = 2500;
 
 const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
   avatarUrls,
