@@ -5,7 +5,7 @@ import { ArrowRight, Award, Briefcase, Clock, Download } from "lucide-react";
 import aboutPortrait from "@/assets/profile-photo.jpg";
 import grainTexture from "@/assets/grain.png";
 import { useLanguage } from "@/contexts/LanguageContext";
-import ProfileCard from "@/components/ProfileCard";
+import ThrowableProfileCard from "@/components/ThrowableProfileCard";
 
 function FadeInSection({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -74,8 +74,8 @@ export default function About() {
         <div className="glass-panel p-8 md:p-14 grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
           <FadeInSection className="lg:col-span-2 flex flex-col items-center gap-4">
             <div className="w-fit flex flex-col items-stretch gap-4">
-              <ProfileCard
-                avatarUrl={aboutPortrait}
+              <ThrowableProfileCard
+                avatarUrls={[aboutPortrait]}
                 miniAvatarUrl={aboutPortrait}
                 grainUrl={grainTexture}
                 name={t("about.card.name")}
