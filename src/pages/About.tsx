@@ -5,7 +5,7 @@ import { ArrowRight, Award, Briefcase, Clock, Download } from "lucide-react";
 import aboutPortrait from "@/assets/profile-photo.jpg";
 import grainTexture from "@/assets/grain.png";
 import { useLanguage } from "@/contexts/LanguageContext";
-import ProfileCard from "@/components/ProfileCard";
+import ThrowableProfileCard from "@/components/ThrowableProfileCard";
 
 function FadeInSection({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
