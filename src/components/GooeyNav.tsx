@@ -112,25 +112,8 @@ const GooeyNav = ({
   };
 
   const handleHover = (e: React.MouseEvent<HTMLLIElement>, index: number) => {
-    const liEl = e.currentTarget;
     if (activeIndex === index) return;
     setActiveIndex(index);
-    updateEffectPosition(liEl);
-
-    if (filterRef.current) {
-      const particles = filterRef.current.querySelectorAll('.particle');
-      particles.forEach((p) => filterRef.current!.removeChild(p));
-    }
-
-    if (textRef.current) {
-      textRef.current.classList.remove('active');
-      void textRef.current.offsetWidth;
-      textRef.current.classList.add('active');
-    }
-
-    if (filterRef.current) {
-      makeParticles(filterRef.current);
-    }
   };
 
   const handleClick = (e: React.MouseEvent, index: number) => {
