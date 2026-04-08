@@ -17,8 +17,8 @@ interface ThrowableProfileCardProps {
 const VELOCITY_THRESHOLD = 50;
 const FLY_DISTANCE = 2500;
 const STACK_OFFSETS = [
-  { x: -12, y: 4, rotate: -2.5, scale: 0.97 },
-  { x: -22, y: 8, rotate: -4.5, scale: 0.94 },
+  { x: -18, y: 6, rotate: -3.5, scale: 0.96 },
+  { x: -34, y: 12, rotate: -6.5, scale: 0.92 },
 ];
 
 const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
