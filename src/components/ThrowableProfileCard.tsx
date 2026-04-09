@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProfileCard from './ProfileCard';
@@ -33,6 +33,7 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const mainCardRef = useRef<HTMLDivElement>(null);
 
   const setCardVars = useCallback((el: HTMLElement, clientX: number, clientY: number) => {
@@ -77,14 +78,56 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
   }, [clearCardVars]);
 
   const goNext = useCallback(() => {
-    setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % avatarUrls.length);
-  }, [avatarUrls.length]);
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    // Fade out the avatar image
+    const el = mainCardRef.current;
+    const avatar = el?.querySelector('.avatar') as HTMLElement;
+    if (avatar) {
+      avatar.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      avatar.style.opacity = '0';
+      avatar.style.transform = 'translateX(-20px)';
+    }
+    setTimeout(() => {
+      setDirection(1);
+      setCurrentIndex((prev) => (prev + 1) % avatarUrls.length);
+    }, 300);
+  }, [avatarUrls.length, isTransitioning]);
 
   const goPrev = useCallback(() => {
-    setDirection(-1);
-    setCurrentIndex((prev) => (prev - 1 + avatarUrls.length) % avatarUrls.length);
-  }, [avatarUrls.length]);
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    const el = mainCardRef.current;
+    const avatar = el?.querySelector('.avatar') as HTMLElement;
+    if (avatar) {
+      avatar.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      avatar.style.opacity = '0';
+      avatar.style.transform = 'translateX(20px)';
+    }
+    setTimeout(() => {
+      setDirection(-1);
+      setCurrentIndex((prev) => (prev - 1 + avatarUrls.length) % avatarUrls.length);
+    }, 300);
+  }, [avatarUrls.length, isTransitioning]);
+
+  // Fade in after index changes
+  useEffect(() => {
+    const el = mainCardRef.current;
+    const avatar = el?.querySelector('.avatar') as HTMLElement;
+    if (avatar) {
+      // Start from transparent with slight offset
+      avatar.style.transition = 'none';
+      avatar.style.opacity = '0';
+      avatar.style.transform = direction > 0 ? 'translateX(20px)' : 'translateX(-20px)';
+      // Force reflow
+      avatar.getBoundingClientRect();
+      // Animate in
+      avatar.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+      avatar.style.opacity = '1';
+      avatar.style.transform = 'translateX(0)';
+      setTimeout(() => setIsTransitioning(false), 350);
+    }
+  }, [currentIndex, direction]);
 
   const imageVariants = {
     enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 60 : -60 }),
