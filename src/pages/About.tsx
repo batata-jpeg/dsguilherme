@@ -23,7 +23,7 @@ function FadeInSection({ children, delay = 0, className = "" }: { children: Reac
 const tools = [
   "Blender", "Adobe Illustrator", "After Effects",
   "Figma", "Photoshop", "InDesign",
-  "TouchDesigner", "PREMIERE", "IINTELIGENCIA ARTIFICIAL", "KeyShot",
+  "TouchDesigner", "PREMIERE", "IINTELIGENCIA ARTIFICIAL",
 ];
 
 export default function About() {
