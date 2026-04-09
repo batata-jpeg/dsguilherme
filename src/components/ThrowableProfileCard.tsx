@@ -1,5 +1,5 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef, useCallback } from 'react';
+import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProfileCard from './ProfileCard';
 
@@ -32,8 +32,6 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
   className = '',
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const mainCardRef = useRef<HTMLDivElement>(null);
 
   const setCardVars = useCallback((el: HTMLElement, clientX: number, clientY: number) => {
@@ -46,8 +44,8 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
     const ly = clientY - rect.top;
     const w = rect.width || 1;
     const h = rect.height || 1;
-    const px = clamp(100 / w * lx);
-    const py = clamp(100 / h * ly);
+    const px = clamp((100 / w) * lx);
+    const py = clamp((100 / h) * ly);
     const cx = px - 50;
     const cy = py - 50;
     wrapper.style.setProperty('--pointer-x', `${px}%`);
@@ -78,62 +76,12 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
   }, [clearCardVars]);
 
   const goNext = useCallback(() => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    // Fade out the avatar image
-    const el = mainCardRef.current;
-    const avatar = el?.querySelector('.avatar') as HTMLElement;
-    if (avatar) {
-      avatar.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-      avatar.style.opacity = '0';
-      avatar.style.transform = 'translateX(-20px)';
-    }
-    setTimeout(() => {
-      setDirection(1);
-      setCurrentIndex((prev) => (prev + 1) % avatarUrls.length);
-    }, 300);
-  }, [avatarUrls.length, isTransitioning]);
+    setCurrentIndex((prev) => (prev + 1) % avatarUrls.length);
+  }, [avatarUrls.length]);
 
   const goPrev = useCallback(() => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    const el = mainCardRef.current;
-    const avatar = el?.querySelector('.avatar') as HTMLElement;
-    if (avatar) {
-      avatar.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-      avatar.style.opacity = '0';
-      avatar.style.transform = 'translateX(20px)';
-    }
-    setTimeout(() => {
-      setDirection(-1);
-      setCurrentIndex((prev) => (prev - 1 + avatarUrls.length) % avatarUrls.length);
-    }, 300);
-  }, [avatarUrls.length, isTransitioning]);
-
-  // Fade in after index changes
-  useEffect(() => {
-    const el = mainCardRef.current;
-    const avatar = el?.querySelector('.avatar') as HTMLElement;
-    if (avatar) {
-      // Start from transparent with slight offset
-      avatar.style.transition = 'none';
-      avatar.style.opacity = '0';
-      avatar.style.transform = direction > 0 ? 'translateX(20px)' : 'translateX(-20px)';
-      // Force reflow
-      avatar.getBoundingClientRect();
-      // Animate in
-      avatar.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
-      avatar.style.opacity = '1';
-      avatar.style.transform = 'translateX(0)';
-      setTimeout(() => setIsTransitioning(false), 350);
-    }
-  }, [currentIndex, direction]);
-
-  const imageVariants = {
-    enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 60 : -60 }),
-    center: { opacity: 1, x: 0 },
-    exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -60 : 60 }),
-  };
+    setCurrentIndex((prev) => (prev - 1 + avatarUrls.length) % avatarUrls.length);
+  }, [avatarUrls.length]);
 
   return (
     <div className={`relative ${className}`}>
@@ -156,7 +104,6 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
           className="w-full mx-auto pointer-events-none"
         />
 
-        {/* Navigation buttons */}
         {avatarUrls.length > 1 && (
           <>
             <button
@@ -189,7 +136,6 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
         )}
       </div>
 
-      {/* Hint text */}
       <motion.p
         className="text-center mt-3 font-display text-xs tracking-[0.15em] uppercase select-none"
         style={{ color: 'hsl(var(--muted-foreground))' }}
@@ -204,3 +150,4 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
 };
 
 export default ThrowableProfileCard;
+
