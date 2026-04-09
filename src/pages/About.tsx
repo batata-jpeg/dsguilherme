@@ -95,8 +95,8 @@ export default function About() {
           <FadeInSection delay={0.2} className="lg:col-span-3 space-y-10">
             <div className="space-y-4">
               <span className="section-label">{t("about.story.label")}</span>
-              <p className="font-body leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>{t("about.story.p1")}</p>
-              <p className="font-body leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>{t("about.story.p2")}</p>
+              <p className="font-body leading-relaxed whitespace-pre-line" style={{ color: "hsl(var(--muted-foreground))" }}>{t("about.story.p1")}</p>
+              <p className="font-body leading-relaxed whitespace-pre-line" style={{ color: "hsl(var(--muted-foreground))" }}>{t("about.story.p2")}</p>
             </div>
 
             <div className="grid grid-cols-3 gap-4">
@@ -171,7 +171,7 @@ export default function About() {
                   </span>
                 </div>
                 <div>
-                  <p className="font-body text-sm leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>{exp.description}</p>
+                  <p className="font-body text-sm leading-relaxed whitespace-pre-line" style={{ color: "hsl(var(--muted-foreground))" }}>{exp.description}</p>
                 </div>
               </div>
             </FadeInSection>
