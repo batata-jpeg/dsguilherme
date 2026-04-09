@@ -33,6 +33,7 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const mainCardRef = useRef<HTMLDivElement>(null);
 
   const setCardVars = useCallback((el: HTMLElement, clientX: number, clientY: number) => {
