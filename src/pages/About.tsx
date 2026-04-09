@@ -52,12 +52,6 @@ export default function About() {
       period: t("about.exp.1.period"),
       description: t("about.exp.1.desc"),
     },
-    {
-      role: t("about.exp.2.role"),
-      company: t("about.exp.2.company"),
-      period: t("about.exp.2.period"),
-      description: t("about.exp.2.desc"),
-    },
   ];
 
   const awards = [
