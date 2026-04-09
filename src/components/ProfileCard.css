@@ -76,7 +76,8 @@
 }
 
 .pc-card:hover,
-.pc-card.active {
+.pc-card.active,
+.pc-card-shell.active .pc-card {
   transition: none;
   transform: translateZ(0) rotateX(var(--rotate-y)) rotateY(var(--rotate-x));
 }
@@ -178,15 +179,18 @@
 }
 
 .pc-card:hover .pc-shine,
-.pc-card.active .pc-shine {
+.pc-card.active .pc-shine,
+.pc-card-shell.active .pc-shine {
   filter: brightness(0.5) contrast(1.15) saturate(0.25);
   animation-play-state: paused;
 }
 
 .pc-card:hover .pc-shine::before,
 .pc-card.active .pc-shine::before,
+.pc-card-shell.active .pc-shine::before,
 .pc-card:hover .pc-shine::after,
-.pc-card.active .pc-shine::after {
+.pc-card.active .pc-shine::after,
+.pc-card-shell.active .pc-shine::after {
   opacity: 1;
 }
 
