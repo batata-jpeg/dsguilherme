@@ -77,7 +77,7 @@ export default function About() {
           <FadeInSection className="lg:col-span-2 flex flex-col items-center gap-4">
             <div className="w-fit flex flex-col items-stretch gap-4">
               <ThrowableProfileCard
-                avatarUrls={[aboutPortrait]}
+                avatarUrls={[aboutPortrait, profilePhoto2, profilePhoto3]}
                 miniAvatarUrl={aboutPortrait}
                 grainUrl={grainTexture}
                 name={t("about.card.name")}
