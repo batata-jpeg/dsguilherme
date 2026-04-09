@@ -306,13 +306,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
             )}
           </div>
 
-          {/* Text details */}
-          <div className="pc-content">
-            <div className="pc-details">
-              <h3>{name}</h3>
-              <p>{title}</p>
-            </div>
-          </div>
+          {/* Text details removed intentionally */}
         </div>
       </div>
     </div>
