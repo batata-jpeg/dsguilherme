@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProfileCard from './ProfileCard';
@@ -33,6 +33,13 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const mainCardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    avatarUrls.forEach((url) => {
+      const img = new Image();
+      img.src = url;
+    });
+  }, [avatarUrls]);
 
   const setCardVars = useCallback((el: HTMLElement, clientX: number, clientY: number) => {
     const wrapper = el.querySelector('.pc-card-wrapper') as HTMLElement;
