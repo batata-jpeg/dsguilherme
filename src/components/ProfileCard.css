@@ -266,7 +266,7 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center center;
   transform-origin: 50% 100%;
   transform: translateX(calc((var(--pointer-from-left) - 0.5) * 6px)) translateZ(0)
