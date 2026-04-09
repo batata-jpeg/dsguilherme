@@ -23,7 +23,7 @@ function FadeInSection({ children, delay = 0, className = "" }: { children: Reac
 const tools = [
   "Blender", "Adobe Illustrator", "After Effects",
   "Figma", "Photoshop", "InDesign",
-  "TouchDesigner", "Houdini", "Protopie", "KeyShot",
+  "TouchDesigner", "PREMIERE", "IINTELIGENCIA ARTIFICIAL", "KeyShot",
 ];
 
 export default function About() {
@@ -108,7 +108,7 @@ export default function About() {
             <div className="grid grid-cols-3 gap-4">
               {[
                 { icon: Clock, value: "7+", label: t("about.stats.years") },
-                { icon: Briefcase, value: "120+", label: t("about.stats.projects") },
+                { icon: Briefcase, value: "68+", label: t("about.stats.projects") },
                 { icon: Award, value: "8", label: t("about.stats.awards") },
               ].map(({ icon: Icon, value, label }) => (
                 <div key={label} className="glass-panel-sm p-4 text-center">
