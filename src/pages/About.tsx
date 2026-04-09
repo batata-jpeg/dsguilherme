@@ -109,7 +109,7 @@ export default function About() {
               {[
                 { icon: Clock, value: "7+", label: t("about.stats.years") },
                 { icon: Briefcase, value: "68+", label: t("about.stats.projects") },
-                { icon: Award, value: "8", label: t("about.stats.awards") },
+                { icon: Award, value: "5", label: t("about.stats.awards") },
               ].map(({ icon: Icon, value, label }) => (
                 <div key={label} className="glass-panel-sm p-4 text-center">
                   <Icon className="w-4 h-4 mx-auto mb-2" style={{ color: "hsl(var(--primary))", opacity: 0.7 }} />
