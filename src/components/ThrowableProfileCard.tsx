@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { motion, useAnimation, useMotionValue, PanInfo, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProfileCard from './ProfileCard';
 
 const clamp = (v: number, min = 0, max = 100) => Math.min(Math.max(v, min), max);
@@ -19,13 +20,6 @@ interface ThrowableProfileCardProps {
   className?: string;
 }
 
-const VELOCITY_THRESHOLD = 50;
-const FLY_DISTANCE = 2500;
-const STACK_OFFSETS = [
-  { x: -28, y: 8, rotate: -4.5, scale: 0.95 },
-  { x: -54, y: 16, rotate: -8, scale: 0.90 },
-];
-
 const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
   avatarUrls,
   miniAvatarUrl,
@@ -38,12 +32,7 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
   className = '',
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isFlying, setIsFlying] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-  const controls = useAnimation();
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [direction, setDirection] = useState(0);
   const mainCardRef = useRef<HTMLDivElement>(null);
 
   const setCardVars = useCallback((el: HTMLElement, clientX: number, clientY: number) => {
@@ -52,12 +41,12 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
     const card = el.querySelector('.pc-card') as HTMLElement;
     if (!wrapper || !shell || !card) return;
     const rect = card.getBoundingClientRect();
-    const x = clientX - rect.left;
-    const y = clientY - rect.top;
+    const lx = clientX - rect.left;
+    const ly = clientY - rect.top;
     const w = rect.width || 1;
     const h = rect.height || 1;
-    const px = clamp(100 / w * x);
-    const py = clamp(100 / h * y);
+    const px = clamp(100 / w * lx);
+    const py = clamp(100 / h * ly);
     const cx = px - 50;
     const cy = py - 50;
     wrapper.style.setProperty('--pointer-x', `${px}%`);
@@ -87,144 +76,75 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
     if (el) clearCardVars(el);
   }, [clearCardVars]);
 
-  const getAvatar = (offset: number) =>
-    avatarUrls[(currentIndex + offset) % avatarUrls.length];
-
-  const nextImage = useCallback(() => {
+  const goNext = useCallback(() => {
+    setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % avatarUrls.length);
   }, [avatarUrls.length]);
 
-  const handleDragStart = () => {
-    setIsDragging(true);
+  const goPrev = useCallback(() => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev - 1 + avatarUrls.length) % avatarUrls.length);
+  }, [avatarUrls.length]);
+
+  const imageVariants = {
+    enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 60 : -60 }),
+    center: { opacity: 1, x: 0 },
+    exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -60 : 60 }),
   };
 
-  const handleDragEnd = useCallback(
-    async (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-      const vx = info.velocity.x;
-      const vy = info.velocity.y;
-      const speed = Math.sqrt(vx * vx + vy * vy);
-
-      if (speed > VELOCITY_THRESHOLD) {
-        setIsFlying(true);
-
-        const angle = Math.atan2(vy, vx);
-        const flyX = Math.cos(angle) * FLY_DISTANCE;
-        const flyY = Math.sin(angle) * FLY_DISTANCE;
-        const spin = (Math.random() - 0.5) * 720;
-
-        await controls.start({
-          x: flyX,
-          y: flyY,
-          rotate: spin,
-          scale: 0.5,
-          opacity: 0,
-          transition: {
-            duration: 0.6,
-            ease: [0.25, 0.1, 0.25, 1],
-          },
-        });
-
-        nextImage();
-
-        controls.set({ x: 0, y: 0, rotate: 0, scale: 0.3, opacity: 0 });
-
-        await controls.start({
-          scale: 1,
-          opacity: 1,
-          transition: {
-            duration: 0.5,
-            ease: [0.16, 1, 0.3, 1],
-          },
-        });
-
-        setIsFlying(false);
-        setIsDragging(false);
-      } else {
-        controls.start({
-          x: 0,
-          y: 0,
-          rotate: 0,
-          transition: {
-            type: 'spring',
-            stiffness: 400,
-            damping: 25,
-          },
-        });
-        setIsDragging(false);
-      }
-    },
-    [controls, nextImage]
-  );
-
   return (
-    <div ref={containerRef} className={`relative ${className}`} style={{ touchAction: 'none' }}>
-      {/* Stack cards behind (furthest first) */}
-      {STACK_OFFSETS.slice().reverse().map((offset, reverseIdx) => {
-        const stackIdx = STACK_OFFSETS.length - reverseIdx; // 2, 1
-        const avatar = getAvatar(stackIdx);
-
-        return (
-          <motion.div
-            key={`stack-${stackIdx}`}
-            className="absolute inset-0 select-none pointer-events-none"
-            animate={{
-              x: isDragging ? offset.x * 0.3 : offset.x,
-              y: isDragging ? offset.y * 0.3 : offset.y,
-              rotate: isDragging ? offset.rotate * 0.3 : offset.rotate,
-              scale: isDragging && stackIdx === 1 ? 1 : offset.scale,
-            }}
-            transition={{
-              type: 'spring',
-              stiffness: 300,
-              damping: 25,
-            }}
-            style={{ zIndex: -stackIdx }}
-          >
-            <ProfileCard
-              avatarUrl={avatar}
-              miniAvatarUrl={miniAvatarUrl || avatar}
-              grainUrl={grainUrl}
-              name={name}
-              title={title}
-              handle={handle}
-              status={status}
-              showUserInfo={showUserInfo}
-              enableTilt={false}
-              className="w-full mx-auto pointer-events-none opacity-60"
-            />
-          </motion.div>
-        );
-      })}
-
-      {/* Main draggable card */}
-      <motion.div
-        drag
-        dragElastic={0.8}
-        dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-        onDragStart={handleDragStart}
-        onDragEnd={handleDragEnd}
-        animate={controls}
-        style={{ x, y, cursor: isFlying ? 'default' : 'grab', zIndex: 10 }}
-        whileDrag={{ cursor: 'grabbing', scale: 1.04 }}
-        className="relative select-none"
+    <div className={`relative ${className}`}>
+      <div
+        ref={mainCardRef}
+        className="relative"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
-        <div ref={mainCardRef}>
-          <ProfileCard
-            avatarUrl={getAvatar(0)}
-            miniAvatarUrl={miniAvatarUrl || getAvatar(0)}
-            grainUrl={grainUrl}
-            name={name}
-            title={title}
-            handle={handle}
-            status={status}
-            showUserInfo={showUserInfo}
-            enableTilt={false}
-            className="w-full mx-auto pointer-events-none"
-          />
-        </div>
-      </motion.div>
+        <ProfileCard
+          avatarUrl={avatarUrls[currentIndex]}
+          miniAvatarUrl={miniAvatarUrl || avatarUrls[currentIndex]}
+          grainUrl={grainUrl}
+          name={name}
+          title={title}
+          handle={handle}
+          status={status}
+          showUserInfo={showUserInfo}
+          enableTilt={false}
+          className="w-full mx-auto pointer-events-none"
+        />
+
+        {/* Navigation buttons */}
+        {avatarUrls.length > 1 && (
+          <>
+            <button
+              onClick={goPrev}
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
+              style={{
+                background: 'rgba(255,255,255,0.1)',
+                backdropFilter: 'blur(8px)',
+                border: '1px solid rgba(255,255,255,0.15)',
+                color: 'hsl(var(--foreground))',
+              }}
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={goNext}
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
+              style={{
+                background: 'rgba(255,255,255,0.1)',
+                backdropFilter: 'blur(8px)',
+                border: '1px solid rgba(255,255,255,0.15)',
+                color: 'hsl(var(--foreground))',
+              }}
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </>
+        )}
+      </div>
 
       {/* Hint text */}
       <motion.p
@@ -234,7 +154,7 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
         animate={{ opacity: 0.5 }}
         transition={{ delay: 1.5, duration: 0.8 }}
       >
-        ✦ Arraste e jogue para trocar ✦
+        ✦ Clique nos botões para trocar a imagem ✦
       </motion.p>
     </div>
   );
