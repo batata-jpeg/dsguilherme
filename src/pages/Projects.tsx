@@ -102,7 +102,7 @@ export default function Projects() {
                   glareAngle={-45}
                   glareSize={220}
                   transitionDuration={650}
-                  className="group aspect-[4/5]"
+                  className="group aspect-[3/5]"
                   style={{ display: "block" }}
                 >
                   <div className="relative w-full h-full rounded-[var(--radius)]">
