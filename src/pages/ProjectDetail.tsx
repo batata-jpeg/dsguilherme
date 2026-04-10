@@ -31,7 +31,7 @@ const projects: Record<string, {
     year: "2024",
     client: "Projeto Pessoal",
     audience: "Jogadores de RPG de mesa e board games",
-    tags: ["Identity", "Branding"],
+    tags: ["Identidade", "Branding"],
     tools: ["Adobe Illustrator", "Adobe Photoshop", "Blender"],
     challenge: "Criar uma identidade visual coesa e imersiva para um jogo de tabuleiro RPG com temática sobrenatural e investigativa.",
     process: "Desenvolvimento do logotipo com tipografia customizada, criação das ilustrações de cartas e personagens, design do tabuleiro e materiais gráficos complementares como fichas confidenciais e manual de regras.",
@@ -180,7 +180,7 @@ export default function ProjectDetail() {
               <div className="sticky top-0 flex items-center justify-between px-6 py-5 z-10"
                 style={{ background: "hsl(var(--background))", borderBottom: "1px solid hsl(var(--border))" }}>
                 <span className="font-display text-xs tracking-[0.2em] uppercase" style={{ color: "hsl(var(--primary))" }}>
-                  Project Description
+                  Descrição do Projeto
                 </span>
                 <button onClick={() => setDescOpen(false)}
                   className="glass-panel-sm p-1.5 hover:scale-105 transition-transform">
@@ -204,16 +204,16 @@ export default function ProjectDetail() {
 
                 {/* Meta grid */}
                 <div className="space-y-4">
-                  <MetaRow icon={<Calendar className="w-4 h-4" />} label="Year" value={project.year} />
-                  <MetaRow icon={<User className="w-4 h-4" />} label="Client" value={project.client} />
-                  <MetaRow icon={<Target className="w-4 h-4" />} label="Audience" value={project.audience} />
+                  <MetaRow icon={<Calendar className="w-4 h-4" />} label="Ano" value={project.year} />
+                  <MetaRow icon={<User className="w-4 h-4" />} label="Cliente" value={project.client} />
+                  <MetaRow icon={<Target className="w-4 h-4" />} label="Público-alvo" value={project.audience} />
                 </div>
 
                 <Divider />
 
                 {/* Description */}
                 <div>
-                  <SectionLabel icon={<AlignLeft className="w-3.5 h-3.5" />} label="About the Project" />
+                  <SectionLabel icon={<AlignLeft className="w-3.5 h-3.5" />} label="Sobre o Projeto" />
                   <p className="font-body text-sm leading-relaxed mt-3" style={{ color: "hsl(var(--muted-foreground))" }}>
                     {project.description}
                   </p>
@@ -223,7 +223,7 @@ export default function ProjectDetail() {
 
                 {/* Challenge */}
                 <div>
-                  <SectionLabel icon={<ChevronRight className="w-3.5 h-3.5" />} label="The Challenge" />
+                  <SectionLabel icon={<ChevronRight className="w-3.5 h-3.5" />} label="O Desafio" />
                   <p className="font-body text-sm leading-relaxed mt-3" style={{ color: "hsl(var(--muted-foreground))" }}>
                     {project.challenge}
                   </p>
@@ -231,7 +231,7 @@ export default function ProjectDetail() {
 
                 {/* Process */}
                 <div>
-                  <SectionLabel icon={<ChevronRight className="w-3.5 h-3.5" />} label="The Process" />
+                  <SectionLabel icon={<ChevronRight className="w-3.5 h-3.5" />} label="O Processo" />
                   <p className="font-body text-sm leading-relaxed mt-3" style={{ color: "hsl(var(--muted-foreground))" }}>
                     {project.process}
                   </p>
@@ -239,7 +239,7 @@ export default function ProjectDetail() {
 
                 {/* Outcome */}
                 <div>
-                  <SectionLabel icon={<ChevronRight className="w-3.5 h-3.5" />} label="The Outcome" />
+                  <SectionLabel icon={<ChevronRight className="w-3.5 h-3.5" />} label="O Resultado" />
                   <p className="font-body text-sm leading-relaxed mt-3" style={{ color: "hsl(var(--muted-foreground))" }}>
                     {project.outcome}
                   </p>
@@ -249,7 +249,7 @@ export default function ProjectDetail() {
 
                 {/* Tools */}
                 <div>
-                  <SectionLabel icon={<Wrench className="w-3.5 h-3.5" />} label="Tools Used" />
+                  <SectionLabel icon={<Wrench className="w-3.5 h-3.5" />} label="Ferramentas Utilizadas" />
                   <div className="flex flex-wrap gap-2 mt-3">
                     {project.tools.map((tool) => (
                       <span key={tool} className="glass-panel-sm px-3 py-1 font-display text-xs tracking-[0.1em] uppercase"
