@@ -6,6 +6,7 @@ import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 import project4 from "@/assets/project-4.jpg";
+import project5 from "@/assets/project-5.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import GlareHover from "@/components/GlareHover";
 
@@ -26,73 +27,19 @@ export default function Projects() {
 
   const categories = [
     { key: "all", label: t("projects.filter.all") },
-    { key: "Branding", label: "Branding" },
-    { key: "Motion", label: "Motion" },
-    { key: "UI/UX", label: "UI/UX" },
-    { key: "3D", label: "3D" },
     { key: "Identity", label: "Identity" },
   ];
 
   const projects = [
     {
-      id: "luminary-brand",
-      title: t("proj.luminary.title"),
-      category: t("proj.luminary.category"),
-      categoryKey: "Branding",
-      description: t("proj.luminary.desc"),
-      image: project1,
-      year: "2024",
-      tags: ["Branding", "Identity", "Typography"],
-    },
-    {
-      id: "nebula-motion",
-      title: t("proj.nebula.title"),
-      category: t("proj.nebula.category"),
-      categoryKey: "Motion",
-      description: t("proj.nebula.desc"),
-      image: project2,
-      year: "2024",
-      tags: ["Motion", "3D", "Generative"],
-    },
-    {
-      id: "nova-app",
-      title: t("proj.nova.title"),
-      category: t("proj.nova.category"),
-      categoryKey: "UI/UX",
-      description: t("proj.nova.desc"),
-      image: project3,
-      year: "2023",
-      tags: ["UI/UX", "Product", "Mobile"],
-    },
-    {
-      id: "obsidian-packaging",
-      title: t("proj.obsidian.title"),
-      category: t("proj.obsidian.category"),
+      id: "armagedom-rpg",
+      title: "ARMAGEDOM - RPG",
+      category: "Identidade",
       categoryKey: "Identity",
-      description: t("proj.obsidian.desc"),
-      image: project4,
-      year: "2023",
-      tags: ["Identity", "Packaging", "Luxury"],
-    },
-    {
-      id: "void-type",
-      title: t("proj.void.title"),
-      category: t("proj.void.category"),
-      categoryKey: "Branding",
-      description: t("proj.void.desc"),
+      description: "Identidade visual completa para o jogo de tabuleiro RPG Armagedom.",
       image: project1,
-      year: "2023",
-      tags: ["Typography", "Branding"],
-    },
-    {
-      id: "prism-visuals",
-      title: t("proj.prism.title"),
-      category: t("proj.prism.category"),
-      categoryKey: "3D",
-      description: t("proj.prism.desc"),
-      image: project2,
-      year: "2022",
-      tags: ["3D", "Motion", "Identity"],
+      year: "2024",
+      tags: ["Identity", "Branding"],
     },
   ];
 
