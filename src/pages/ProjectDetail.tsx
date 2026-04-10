@@ -147,7 +147,7 @@ export default function ProjectDetail() {
                 <img
                   src={img}
                   alt={`${project.title} — slide ${i + 1}`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                   loading={i === 0 ? "eager" : "lazy"}
                 />
                 {/* slide counter */}
