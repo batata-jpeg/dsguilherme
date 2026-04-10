@@ -293,7 +293,7 @@ export default function ProjectDetail() {
             style={{
               bottom: "2rem",
               right: "2rem",
-              background: "rgba(8,16,42,0.92)",
+              background: "hsl(var(--background) / 0.92)",
               backdropFilter: "blur(16px)",
               border: "1px solid rgba(10,132,255,0.35)",
               borderRadius: "9999px",
