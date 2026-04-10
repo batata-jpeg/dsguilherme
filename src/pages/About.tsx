@@ -159,12 +159,12 @@ export default function About() {
         <div className="space-y-4">
           {experience.map((exp, i) => (
             <FadeInSection key={exp.company} delay={i * 0.1}>
-              <div className="glass-panel p-4 sm:p-6 md:p-8 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-8 items-start">
+              <div className="glass-panel p-4 sm:p-6 lg:p-8 grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-8 items-start">
                 <div>
                   <div className="font-display font-bold uppercase text-sm sm:text-base" style={{ color: "hsl(var(--foreground))" }}>{exp.role}</div>
                   <div className="font-display text-xs sm:text-sm mt-1 gradient-text font-600">{exp.company}</div>
                 </div>
-                <div className="md:text-center">
+                <div className="lg:text-center">
                   <span className="glass-panel-sm px-3 py-1 inline-block">
                     <span className="font-display text-[10px] sm:text-xs tracking-[0.15em] uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>{exp.period}</span>
                   </span>

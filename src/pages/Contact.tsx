@@ -102,28 +102,28 @@ export default function Contact() {
   });
 
   return (
-    <div className="min-h-screen dot-grid bg-transparent">
-      <div className="relative pt-36 pb-20 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
+    <div className="min-h-screen dot-grid bg-transparent overflow-x-hidden">
+      <div className="relative pt-24 sm:pt-36 pb-14 sm:pb-20 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <FadeInSection>
             <span className="section-label block mb-6">{t("contact.label")}</span>
             <h1
               className="font-display font-extrabold uppercase leading-[0.85] mb-6"
-              style={{ fontSize: "clamp(3rem, 7vw, 7rem)" }}
+              style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)" }}
             >
               {t("contact.h1a")}
               <br />
               <span className="gradient-text">{t("contact.h1b")}</span>
             </h1>
-            <p className="font-body text-xl max-w-lg" style={{ color: "hsl(var(--muted-foreground))" }}>
+            <p className="font-body text-base sm:text-xl max-w-lg" style={{ color: "hsl(var(--muted-foreground))" }}>
               {t("contact.description")}
             </p>
           </FadeInSection>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 pb-32">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-20 sm:pb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12">
           <FadeInSection delay={0.1} className="lg:col-span-3 space-y-6">
             <div className="glass-panel p-6 space-y-4">
               <div className="flex items-center gap-2">
