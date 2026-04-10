@@ -115,7 +115,7 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
           <>
             <button
               onClick={goPrev}
-              className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
+              className="absolute -left-2 sm:left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
               style={{
                 background: 'rgba(255,255,255,0.1)',
                 backdropFilter: 'blur(8px)',
@@ -128,7 +128,7 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
             </button>
             <button
               onClick={goNext}
-              className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
+              className="absolute -right-2 sm:right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
               style={{
                 background: 'rgba(255,255,255,0.1)',
                 backdropFilter: 'blur(8px)',
