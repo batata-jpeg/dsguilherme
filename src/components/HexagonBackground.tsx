@@ -11,8 +11,8 @@ interface HexCell {
 const HEX_SIZE = 38;
 const COLS_EXTRA = 4;
 const ROWS_EXTRA = 4;
-const HOVER_RADIUS = 120;
-const MAX_ELEVATION = 1;
+const HOVER_RADIUS = 180;
+const MAX_ELEVATION = 2.5;
 
 function flatHexPoints(cx: number, cy: number, size: number): string {
   const pts: string[] = [];
@@ -74,9 +74,9 @@ export default function HexagonBackground({ className = "" }: { className?: stri
 
     const feDropShadow = document.createElementNS("http://www.w3.org/2000/svg", "feDropShadow");
     feDropShadow.setAttribute("dx", "0");
-    feDropShadow.setAttribute("dy", "2");
-    feDropShadow.setAttribute("stdDeviation", "3");
-    feDropShadow.setAttribute("flood-color", "rgba(0,0,0,0.12)");
+    feDropShadow.setAttribute("dy", "4");
+    feDropShadow.setAttribute("stdDeviation", "5");
+    feDropShadow.setAttribute("flood-color", "rgba(0,0,0,0.22)");
     filter.appendChild(feDropShadow);
     defs.appendChild(filter);
     svg.appendChild(defs);
@@ -137,8 +137,8 @@ export default function HexagonBackground({ className = "" }: { className?: stri
         if (!poly) continue;
 
         if (e > 0.01) {
-          const shade = Math.round(255 - e * 12);
-          const lift = e * 4;
+          const shade = Math.round(255 - e * 18);
+          const lift = e * 8;
           poly.setAttribute("fill", `rgb(${shade},${shade},${shade})`);
           poly.setAttribute("stroke", `rgb(${Math.round(200 - e * 40)},${Math.round(200 - e * 40)},${Math.round(200 - e * 40)})`);
           poly.setAttribute("filter", "url(#hex-shadow)");
