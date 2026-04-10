@@ -74,9 +74,9 @@ export default function HexagonBackground({ className = "" }: { className?: stri
 
     const feDropShadow = document.createElementNS("http://www.w3.org/2000/svg", "feDropShadow");
     feDropShadow.setAttribute("dx", "0");
-    feDropShadow.setAttribute("dy", "2");
-    feDropShadow.setAttribute("stdDeviation", "3");
-    feDropShadow.setAttribute("flood-color", "rgba(0,0,0,0.12)");
+    feDropShadow.setAttribute("dy", "4");
+    feDropShadow.setAttribute("stdDeviation", "5");
+    feDropShadow.setAttribute("flood-color", "rgba(0,0,0,0.22)");
     filter.appendChild(feDropShadow);
     defs.appendChild(filter);
     svg.appendChild(defs);
