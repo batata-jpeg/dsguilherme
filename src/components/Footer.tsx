@@ -26,8 +26,8 @@ export default function Footer() {
       className="relative overflow-hidden border-t"
       style={{ borderColor: "hsl(var(--border))", background: "hsl(var(--background))" }}
     >
-      <div className="relative max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-12">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-xl glass-panel-sm flex items-center justify-center">
@@ -37,10 +37,10 @@ export default function Footer() {
                 Guima
               </span>
             </div>
-            <p className="font-body text-sm leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
+            <p className="font-body text-sm leading-relaxed max-w-md" style={{ color: "hsl(var(--muted-foreground))" }}>
               {t("footer.tagline")}
             </p>
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
               {socials.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
@@ -77,9 +77,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-4 sm:col-span-2 lg:col-span-1">
             <span className="section-label">{t("footer.status.label")}</span>
-            <div className="glass-panel-sm p-4 space-y-3">
+            <div className="glass-panel-sm p-4 space-y-3 max-w-md lg:max-w-none">
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
                   <span
@@ -95,7 +95,7 @@ export default function Footer() {
               <p className="font-body text-xs" style={{ color: "hsl(var(--muted-foreground))" }}>
                 {t("footer.status.body")}
               </p>
-              <Link to="/contact">
+              <Link to="/contact" className="block">
                 <button className="btn-glass-primary text-xs w-full justify-center mt-2">{t("footer.status.cta")}</button>
               </Link>
             </div>
@@ -103,13 +103,13 @@ export default function Footer() {
         </div>
 
         <div
-          className="mt-12 pt-6 flex flex-col md:flex-row justify-between items-center gap-4"
+          className="mt-10 sm:mt-12 pt-6 flex flex-col lg:flex-row justify-between items-center gap-3 sm:gap-4 text-center lg:text-left"
           style={{ borderTop: "1px solid hsl(var(--border) / 0.35)" }}
         >
-          <p className="font-display text-xs tracking-[0.15em] uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>
+          <p className="font-display text-[10px] sm:text-xs tracking-[0.12em] sm:tracking-[0.15em] uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>
             {t("footer.copyright")}
           </p>
-          <p className="font-display text-xs tracking-[0.15em] uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>
+          <p className="font-display text-[10px] sm:text-xs tracking-[0.12em] sm:tracking-[0.15em] uppercase max-w-full break-words" style={{ color: "hsl(var(--muted-foreground))" }}>
             {t("footer.disciplines")}
           </p>
         </div>
