@@ -23,6 +23,13 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const queryClient = new QueryClient();
 
+function NavigationWrapper() {
+  const location = useLocation();
+  const isProjectDetail = location.pathname.startsWith("/projects/") && location.pathname !== "/projects/";
+  if (isProjectDetail) return null;
+  return <Navigation />;
+}
+
 function AnimatedRoutes() {
   const location = useLocation();
   const isProjectDetail = location.pathname.startsWith("/projects/") && location.pathname !== "/projects/";
