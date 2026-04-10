@@ -97,12 +97,12 @@ const translations: Record<Language, Record<string, string>> = {
     "about.awards.label": "Recognition",
 
     // Experience entries
-    "about.exp.0.role": "Senior Creative Director",
-    "about.exp.0.company": "Studio Nexus",
+    "about.exp.0.role": "Intern - Packaging Design",
+    "about.exp.0.company": "Ecobrindes - Sao Paulo, SP",
     "about.exp.0.period": "2022 — Present",
     "about.exp.0.desc": "Leading a 12-person creative team across branding, digital, and motion projects for Fortune 500 clients and emerging luxury brands.",
-    "about.exp.1.role": "Lead Brand Designer",
-    "about.exp.1.company": "Paradigm Agency",
+    "about.exp.1.role": "Freelancer",
+    "about.exp.1.company": "Freelance",
     "about.exp.1.period": "2019 — 2022",
     "about.exp.1.desc": "Directed visual identity projects for technology and lifestyle brands, establishing design systems used across global campaigns.",
     "about.exp.2.role": "Visual Designer",
@@ -285,12 +285,12 @@ const translations: Record<Language, Record<string, string>> = {
     "about.awards.label": "Reconhecimentos",
 
     // Experience entries
-    "about.exp.0.role": "Diretor Criativo Sênior",
-    "about.exp.0.company": "Studio Nexus",
+    "about.exp.0.role": "ESTAGIÁRIO - DESIGN DE EMBALAGEM",
+    "about.exp.0.company": "ECOBRINDES - SAO PAULO, SP",
     "about.exp.0.period": "DEZ 2024 - JUL 2025",
     "about.exp.0.desc": "Atuava na digitação e formatação de documentos, garantindo padronização.\nCriava materiais gráficos como papelaria corporativa, layouts e artes para redes sociais.\nDesenvolvia ilustrações e tratava imagens para melhorar a qualidade visual.",
-    "about.exp.1.role": "Designer de Marca Líder",
-    "about.exp.1.company": "Paradigm Agency",
+    "about.exp.1.role": "FREELANCER",
+    "about.exp.1.company": "FREELANCE",
     "about.exp.1.period": "2019 — 2022",
     "about.exp.1.desc": "Realizava tratamento e edição de imagens para aprimorar a qualidade visual dos projetos.\nCriava layouts estratégicos focados em comunicação clara e atraente.\nGerenciava demandas de forma autônoma, garantindo prazos, organização e satisfação do cliente.",
     "about.exp.2.role": "Designer Visual",
