@@ -419,12 +419,12 @@ export default function ProjectDetail() {
                 style={{
                   bottom: "2rem",
                   right: "2rem",
-                  background: "hsl(var(--background) / 0.92)",
+                  background: "rgba(8,16,42,0.92)",
                   backdropFilter: "blur(16px)",
                   border: "1px solid rgba(10,132,255,0.35)",
                   borderRadius: "9999px",
                   padding: "0.75rem 1.25rem",
-                  color: "hsl(var(--foreground))",
+                  color: "#fff",
                   boxShadow: "0 0 24px rgba(10,132,255,0.2), 0 8px 32px rgba(0,0,0,0.4)",
                 }}
                 whileHover={{ scale: 1.06, boxShadow: "0 0 36px rgba(10,132,255,0.35), 0 8px 40px rgba(0,0,0,0.5)" }}
