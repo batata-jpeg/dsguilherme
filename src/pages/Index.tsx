@@ -95,26 +95,24 @@ export default function Index() {
 
   const featuredProjects = [
   {
-    id: "luminary-brand",
-    title: t("proj.luminary.title"),
-    category: `${t("proj.luminary.category")}, Identity`,
-    description: "A complete luxury brand system featuring custom typography, mark design, and a premium visual language.",
+    id: "armagedom-rpg",
+    title: "ARMAGEDOM - RPG",
+    category: "Identidade",
+    description: "Identidade visual completa para o jogo de tabuleiro RPG Armagedom.",
     image: project1,
-    year: "2024"
   },
   {
-    id: "nebula-motion",
-    title: t("proj.nebula.title"),
-    category: `${t("proj.nebula.category")}, 3D`,
-    description: "Generative motion graphics exploring fluid dynamics and organic form.",
+    id: "armagedom-rpg",
+    title: "ARMAGEDOM - RPG",
+    category: "Identidade",
+    description: "Design de cartas e componentes do jogo.",
     image: project2,
-    year: "2024"
   },
   {
-    id: "nova-app",
-    title: t("proj.nova.title"),
-    category: `${t("proj.nova.category")}, Product`,
-    description: "A futuristic mobile OS concept with glassmorphism design language.",
+    id: "armagedom-rpg",
+    title: "ARMAGEDOM - RPG",
+    category: "Identidade",
+    description: "Tabuleiro e materiais gráficos.",
     image: project3,
     year: "2023"
   }];
