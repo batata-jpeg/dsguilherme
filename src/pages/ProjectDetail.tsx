@@ -45,8 +45,10 @@ export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
   const project = id ? projects[id] : null;
   const [descOpen, setDescOpen] = useState(true);
+  const [mobileView, setMobileView] = useState<"slides" | "description">("slides");
   const [isFullscreen, setIsFullscreen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   const enterFullscreen = useCallback(() => {
     if (containerRef.current?.requestFullscreen) {
