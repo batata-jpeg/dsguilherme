@@ -24,18 +24,18 @@ const projects: Record<string, {
   slides: string[];
 }> = {
   "armagedom-rpg": {
-    title: "ARMAGEDOM - RPG",
-    category: "Identidade",
-    description: "Identidade visual completa para o jogo de tabuleiro RPG Armagedom, incluindo logotipo, cartas, tabuleiro, manual de regras e fichas de personagens.",
+    title: "ARMAGEDOM – JOGO DE TABULEIRO RPG",
+    category: "Game Design, Identidade Visual, Ilustração",
+    description: "Armagedom é um jogo de tabuleiro com mecânicas de RPG que combina estratégia, narrativa e tomada de decisão em um universo distópico. O projeto envolveu a criação completa do sistema do jogo — incluindo regras, dinâmica de progressão, design visual e construção de mundo — resultando em uma experiência imersiva e autoral.\n\nO jogo utiliza cartas, dados e um tabuleiro modular para conduzir partidas cooperativas ou competitivas, onde os jogadores assumem papéis únicos dentro de uma narrativa em constante evolução.",
     image: project1,
     year: "2024",
-    client: "Projeto Pessoal",
-    audience: "Jogadores de RPG de mesa e board games",
-    tags: ["Identidade", "Branding"],
-    tools: ["Adobe Illustrator", "Adobe Photoshop", "Blender"],
-    challenge: "Criar uma identidade visual coesa e imersiva para um jogo de tabuleiro RPG com temática sobrenatural e investigativa.",
-    process: "Desenvolvimento do logotipo com tipografia customizada, criação das ilustrações de cartas e personagens, design do tabuleiro e materiais gráficos complementares como fichas confidenciais e manual de regras.",
-    outcome: "Um sistema visual completo que transmite a atmosfera sombria e misteriosa do jogo, com todos os materiais prontos para produção.",
+    client: "Projeto Acadêmico (Universidade)",
+    audience: "Jogadores de RPG e jogos de tabuleiro, 16–35 anos, interessados em estratégia, narrativa imersiva e estética dark fantasy",
+    tags: ["Game Design", "Jogo de Tabuleiro", "RPG", "Identidade Visual", "Ilustração", "Design de Produto"],
+    tools: ["Illustrator", "Photoshop", "InDesign", "Figma"],
+    challenge: "O principal desafio foi equilibrar três pilares fundamentais: jogabilidade estratégica, clareza de regras e uma identidade visual forte e coerente. Era necessário criar um sistema acessível para novos jogadores, mas com profundidade suficiente para manter o engajamento a longo prazo.\n\nAlém disso, o projeto exigiu a construção de um universo consistente, onde narrativa, mecânica e estética funcionassem de forma integrada, evitando que o jogo se tornasse apenas visualmente atrativo, mas superficial em gameplay.",
+    process: "O desenvolvimento começou com a criação do conceito narrativo e definição do universo do jogo, seguido pela prototipagem das mecânicas principais (movimento, combate e progressão).\n\nEm paralelo, foi desenvolvido todo o sistema visual:\n\n• Identidade gráfica baseada em alto contraste (preto, branco e vermelho)\n• Ilustrações autorais para cartas e personagens\n• Design do tabuleiro e das peças físicas\n• Criação de manuais e materiais de apoio\n\nForam realizadas diversas iterações e testes de jogabilidade para ajustar regras, balanceamento e fluxo da experiência.",
+    outcome: "O resultado foi um jogo completo e funcional, com sistema próprio de regras, identidade visual consolidada e alto nível de imersão. O projeto demonstra domínio de game design, direção de arte e desenvolvimento de produto físico.\n\nO sistema final apresenta forte coesão entre narrativa e mecânica, proporcionando uma experiência envolvente e estratégica para os jogadores.",
     slides: [project1, project2, project3, project4, project5],
   },
 };
