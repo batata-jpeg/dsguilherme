@@ -203,7 +203,7 @@ html.light .pill-nav--liquid-glass .mobile-menu-controls .ctrl-btn {
   gap: 8px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .pill-nav-container {
     left: 0;
     transform: none;
@@ -223,7 +223,7 @@ html.light .pill-nav--liquid-glass .mobile-menu-controls .ctrl-btn {
   box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .pill-nav {
     width: 100%;
     justify-content: space-between;
