@@ -274,7 +274,7 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInSection className="flex justify-between items-end mb-14">
             <div>
-              <span className="section-label block mb-4">{t("index.featured.label")}</span>
+              
               <h2 className="font-display font-bold uppercase" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}>
                 {t("index.featured.title")}
               </h2>
