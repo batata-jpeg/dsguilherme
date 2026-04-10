@@ -430,7 +430,7 @@ html.light .pill-nav--liquid-glass .pill-nav-items::before {
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .desktop-only {
     display: none;
   }
@@ -438,6 +438,9 @@ html.light .pill-nav--liquid-glass .pill-nav-items::before {
     display: block;
   }
   .pill-nav-controls {
+    display: none;
+  }
+}
     display: none;
   }
 }
@@ -459,7 +462,7 @@ html.light .pill-nav--liquid-glass .pill-nav-items::before {
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .mobile-menu-button {
     display: flex;
   }
