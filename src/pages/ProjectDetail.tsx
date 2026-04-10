@@ -173,6 +173,7 @@ export default function ProjectDetail() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
                 className="px-4 py-8 pb-28 space-y-8"
+                style={{ background: "hsl(var(--background))", minHeight: "100vh" }}
               >
                 {/* Title */}
                 <div>
