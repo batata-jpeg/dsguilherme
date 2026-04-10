@@ -85,7 +85,7 @@ export default function ProjectDetail() {
     <div className="min-h-screen bg-transparent">
       {/* ── TOP BAR */}
       <div className="sticky top-0 z-40 flex items-center justify-between px-4 sm:px-6 py-4"
-        style={{ background: "rgba(10,20,50,0.7)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(10,132,255,0.1)" }}>
+        style={{ background: "hsl(var(--background) / 0.85)", backdropFilter: "blur(12px)", borderBottom: "1px solid hsl(var(--border))" }}>
         <Link to="/projects">
           <button className="btn-glass-primary text-xs flex items-center gap-2">
             <ArrowLeft className="w-4 h-4" /> All Projects
