@@ -11,8 +11,8 @@ interface HexCell {
 const HEX_SIZE = 38;
 const COLS_EXTRA = 4;
 const ROWS_EXTRA = 4;
-const HOVER_RADIUS = 120;
-const MAX_ELEVATION = 1;
+const HOVER_RADIUS = 180;
+const MAX_ELEVATION = 2.5;
 
 function flatHexPoints(cx: number, cy: number, size: number): string {
   const pts: string[] = [];
@@ -137,8 +137,8 @@ export default function HexagonBackground({ className = "" }: { className?: stri
         if (!poly) continue;
 
         if (e > 0.01) {
-          const shade = Math.round(255 - e * 12);
-          const lift = e * 4;
+          const shade = Math.round(255 - e * 18);
+          const lift = e * 8;
           poly.setAttribute("fill", `rgb(${shade},${shade},${shade})`);
           poly.setAttribute("stroke", `rgb(${Math.round(200 - e * 40)},${Math.round(200 - e * 40)},${Math.round(200 - e * 40)})`);
           poly.setAttribute("filter", "url(#hex-shadow)");
