@@ -441,9 +441,6 @@ html.light .pill-nav--liquid-glass .pill-nav-items::before {
     display: none;
   }
 }
-    display: none;
-  }
-}
 
 .mobile-menu-button {
   width: var(--nav-h);
