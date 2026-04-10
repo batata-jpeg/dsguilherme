@@ -51,7 +51,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Index – Featured
     "index.featured.label": "Featured Work",
-    "index.featured.title": "SELECTED PROJECTS",
+    "index.featured.title": "FEATURED PROJECTS",
     "index.featured.cta": "All Projects",
     "index.featured.view": "View Project",
     "index.featured.view.short": "View",
@@ -239,7 +239,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Index – Featured
     "index.featured.label": "Trabalhos em Destaque",
-    "index.featured.title": "PROJETOS SELECIONADOS",
+    "index.featured.title": "PROJETOS EM DESTAQUE",
     "index.featured.cta": "Todos os Projetos",
     "index.featured.view": "Ver Projeto",
     "index.featured.view.short": "Ver",
