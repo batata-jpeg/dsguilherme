@@ -55,7 +55,7 @@ const App = () => (
             <SiteBackground />
             <div className="relative z-10 min-h-screen">
               <ClickSpark sparkColor="#ffffff" sparkRadius={30} sparkCount={10} extraScale={1.3}>
-                <Navigation />
+                <NavigationWrapper />
                 <LampCord />
                 <AnimatedRoutes />
               </ClickSpark>
