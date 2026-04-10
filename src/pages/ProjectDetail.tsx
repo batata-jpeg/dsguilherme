@@ -1,7 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Maximize, Minimize, X, ChevronRight, Calendar, Wrench, User, Target, AlignLeft } from "lucide-react";
+import { ArrowLeft, Maximize, Minimize, X, ChevronRight, Calendar, Wrench, User, Target, AlignLeft, FileText, Images } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
