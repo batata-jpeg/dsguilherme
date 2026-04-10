@@ -48,18 +48,18 @@ export default function Projects() {
     : projects.filter((p) => p.categoryKey === activeCategory || p.tags.includes(activeCategory));
 
   return (
-    <div className="min-h-screen dot-grid bg-transparent">
+    <div className="min-h-screen dot-grid bg-transparent overflow-x-hidden">
       {/* Header */}
-      <div className="relative pt-36 pb-20 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
+      <div className="relative pt-24 sm:pt-36 pb-14 sm:pb-20 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <FadeInSection>
             <span className="section-label block mb-6">{t("projects.label")}</span>
-            <h1 className="font-display font-extrabold uppercase leading-tight mb-6" style={{ fontSize: "clamp(3rem, 7vw, 7rem)" }}>
+            <h1 className="font-display font-extrabold uppercase leading-tight mb-6" style={{ fontSize: "clamp(2.5rem, 7vw, 7rem)" }}>
               {t("projects.h1a")}
               <br />
               <span className="gradient-text">{t("projects.h1b")}</span>
             </h1>
-            <p className="font-body text-lg max-w-xl" style={{ color: "hsl(var(--muted-foreground))" }}>
+            <p className="font-body text-base sm:text-lg max-w-xl" style={{ color: "hsl(var(--muted-foreground))" }}>
               {t("projects.description")}
             </p>
           </FadeInSection>
@@ -67,12 +67,14 @@ export default function Projects() {
       </div>
 
       {/* Filters */}
-      <div className="max-w-7xl mx-auto px-6 pb-12">
-        <FadeInSection className="flex flex-wrap gap-3 items-center">
-          <Filter className="w-4 h-4 mr-1" style={{ color: "hsl(var(--muted-foreground))" }} />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-10 sm:pb-12">
+        <FadeInSection className="flex flex-wrap gap-2 sm:gap-3 items-center">
+          <div className="glass-panel-sm p-2">
+            <Filter className="w-4 h-4" style={{ color: "hsl(var(--muted-foreground))" }} />
+          </div>
           {categories.map((cat) => (
             <button key={cat.key} onClick={() => setActiveCategory(cat.key)}
-              className="glass-panel-sm px-4 py-2 font-display text-xs tracking-[0.15em] uppercase transition-all duration-300"
+              className="glass-panel-sm px-3 sm:px-4 py-2 font-display text-[10px] sm:text-xs tracking-[0.12em] sm:tracking-[0.15em] uppercase transition-all duration-300"
               style={{
                 color: activeCategory === cat.key ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))",
                 borderColor: activeCategory === cat.key ? "rgba(162,213,198,0.6)" : undefined,
@@ -86,8 +88,8 @@ export default function Projects() {
       </div>
 
       {/* Grid */}
-      <div className="max-w-7xl mx-auto px-6 pb-32">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-20 sm:pb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8">
           {filtered.map((proj, i) => (
             <FadeInSection key={proj.id} delay={i * 0.08}>
               <Link to={`/projects/${proj.id}`}>
@@ -102,16 +104,15 @@ export default function Projects() {
                   glareAngle={-45}
                   glareSize={220}
                   transitionDuration={650}
-                  className="group aspect-[16/9]"
+                  className="group aspect-[16/10]"
                   style={{ display: "block" }}
                 >
                   <div className="relative w-full h-full rounded-[var(--radius)]">
                     <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${proj.image})` }} />
                     <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 40%, rgba(10,20,50,0.80) 100%)" }} />
-                    {/* Bottom title overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <span className="block font-display text-[10px] tracking-widest uppercase mb-1" style={{ color: "rgba(255,255,255,0.6)" }}>{proj.category}</span>
-                      <h3 className="font-display font-bold text-sm uppercase leading-tight text-white">{proj.title}</h3>
+                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
+                      <span className="block font-display text-[10px] sm:text-xs tracking-widest uppercase mb-1" style={{ color: "rgba(255,255,255,0.6)" }}>{proj.category}</span>
+                      <h3 className="font-display font-bold text-sm sm:text-base uppercase leading-tight text-white">{proj.title}</h3>
                     </div>
                   </div>
                 </GlareHover>
