@@ -103,7 +103,7 @@ export default function ProjectDetail() {
       </div>
 
       {/* ── MAIN CONTENT (slides + optional description panel) */}
-      <div ref={containerRef} className="relative flex" style={isFullscreen ? { background: "#000", minHeight: "100vh" } : {}}>
+      <div ref={containerRef} className="relative flex" style={isFullscreen ? { background: "#000", height: "100vh", overflow: "auto" } : {}}>
 
         {/* SLIDES FEED */}
         <div
