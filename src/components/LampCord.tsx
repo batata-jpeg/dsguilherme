@@ -12,9 +12,6 @@ export default function LampCord() {
   const location = useLocation();
   const isDark = theme === 'dark';
 
-  // On mobile/tablet, only show on home page
-  if (isMobile && location.pathname !== '/') return null;
-
   const [pullY, setPullY] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const dragging = useRef(false);
