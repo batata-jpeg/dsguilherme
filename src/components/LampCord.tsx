@@ -107,6 +107,9 @@ export default function LampCord() {
     startDrag(e.touches[0].clientY);
   };
 
+  // On mobile/tablet, only show on home page
+  if (isMobile && location.pathname !== '/') return null;
+
   const progress = Math.min(pullY / THRESHOLD, 1);
   const nearThreshold = pullY >= THRESHOLD * 0.75;
 
