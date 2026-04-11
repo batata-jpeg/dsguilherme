@@ -125,7 +125,7 @@ export default function LampCord() {
       style={{
         position: 'fixed',
         top: 0,
-        right: '2.5rem',
+        right: '1.25rem',
         zIndex: 98,
         flexDirection: 'column',
         alignItems: 'center',
