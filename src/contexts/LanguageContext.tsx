@@ -152,6 +152,32 @@ const translations: Record<Language, Record<string, string>> = {
     "proj.prism.category": "3D",
     "proj.prism.desc": "A comprehensive 3D visual system for a music label, including stage design concepts, album art, and promotional materials.",
 
+    // Armagedom project detail
+    "projdet.armagedom.title": "ARMAGEDOM – RPG BOARD GAME",
+    "projdet.armagedom.category": "Game Design, Visual Identity, Illustration",
+    "projdet.armagedom.description": "Armagedom is a board game with RPG mechanics that combines strategy, narrative, and decision-making in a dystopian universe. The project involved the complete creation of the game system — including rules, progression dynamics, visual design, and world-building — resulting in an immersive and original experience.\n\nThe game uses cards, dice, and a modular board for cooperative or competitive matches, where players take on unique roles within an ever-evolving narrative.",
+    "projdet.armagedom.client": "Academic Project (University)",
+    "projdet.armagedom.audience": "RPG and board game players, ages 16–35, interested in strategy, immersive narrative, and dark fantasy aesthetics",
+    "projdet.armagedom.challenge": "The main challenge was balancing three fundamental pillars: strategic gameplay, rule clarity, and a strong, cohesive visual identity. It was necessary to create a system accessible to new players but with enough depth to maintain long-term engagement.\n\nAdditionally, the project required building a consistent universe where narrative, mechanics, and aesthetics worked seamlessly together, avoiding a game that was visually attractive but superficial in gameplay.",
+    "projdet.armagedom.process": "Development began with creating the narrative concept and defining the game universe, followed by prototyping the main mechanics (movement, combat, and progression).\n\nIn parallel, the entire visual system was developed:\n\n• Graphic identity based on high contrast (black, white, and red)\n• Original illustrations for cards and characters\n• Board and physical piece design\n• Creation of manuals and support materials\n\nSeveral iterations and playtests were conducted to adjust rules, balance, and experience flow.",
+    "projdet.armagedom.outcome": "The result was a complete and functional game with its own rule system, consolidated visual identity, and a high level of immersion. The project demonstrates mastery of game design, art direction, and physical product development.\n\nThe final system presents strong cohesion between narrative and mechanics, providing an engaging and strategic experience for players.",
+    "projdet.armagedom.cardCategory": "Identity",
+    "projdet.armagedom.cardDesc": "Complete visual identity for the RPG board game Armagedom.",
+
+    // Project detail UI labels
+    "projdet.label.year": "Year",
+    "projdet.label.client": "Client",
+    "projdet.label.audience": "Target Audience",
+    "projdet.label.about": "About the Project",
+    "projdet.label.challenge": "The Challenge",
+    "projdet.label.process": "The Process",
+    "projdet.label.outcome": "The Outcome",
+    "projdet.label.tools": "Tools Used",
+    "projdet.label.tags": "Tags",
+    "projdet.label.descPanel": "Project Description",
+    "projdet.label.backToSlides": "Back to Images",
+    "projdet.label.backToProjects": "All Projects",
+
     // Contact
     "contact.label": "Contact",
     "contact.h1a": "LET'S",
@@ -339,6 +365,32 @@ const translations: Record<Language, Record<string, string>> = {
     "proj.prism.title": "Sistema Visual Prism",
     "proj.prism.category": "3D",
     "proj.prism.desc": "Um sistema visual 3D abrangente para uma gravadora, incluindo conceitos de cenário, capa de álbum e materiais promocionais.",
+
+    // Armagedom project detail
+    "projdet.armagedom.title": "ARMAGEDOM – JOGO DE TABULEIRO RPG",
+    "projdet.armagedom.category": "Game Design, Identidade Visual, Ilustração",
+    "projdet.armagedom.description": "Armagedom é um jogo de tabuleiro com mecânicas de RPG que combina estratégia, narrativa e tomada de decisão em um universo distópico. O projeto envolveu a criação completa do sistema do jogo — incluindo regras, dinâmica de progressão, design visual e construção de mundo — resultando em uma experiência imersiva e autoral.\n\nO jogo utiliza cartas, dados e um tabuleiro modular para conduzir partidas cooperativas ou competitivas, onde os jogadores assumem papéis únicos dentro de uma narrativa em constante evolução.",
+    "projdet.armagedom.client": "Projeto Acadêmico (Universidade)",
+    "projdet.armagedom.audience": "Jogadores de RPG e jogos de tabuleiro, 16–35 anos, interessados em estratégia, narrativa imersiva e estética dark fantasy",
+    "projdet.armagedom.challenge": "O principal desafio foi equilibrar três pilares fundamentais: jogabilidade estratégica, clareza de regras e uma identidade visual forte e coerente. Era necessário criar um sistema acessível para novos jogadores, mas com profundidade suficiente para manter o engajamento a longo prazo.\n\nAlém disso, o projeto exigiu a construção de um universo consistente, onde narrativa, mecânica e estética funcionassem de forma integrada, evitando que o jogo se tornasse apenas visualmente atrativo, mas superficial em gameplay.",
+    "projdet.armagedom.process": "O desenvolvimento começou com a criação do conceito narrativo e definição do universo do jogo, seguido pela prototipagem das mecânicas principais (movimento, combate e progressão).\n\nEm paralelo, foi desenvolvido todo o sistema visual:\n\n• Identidade gráfica baseada em alto contraste (preto, branco e vermelho)\n• Ilustrações autorais para cartas e personagens\n• Design do tabuleiro e das peças físicas\n• Criação de manuais e materiais de apoio\n\nForam realizadas diversas iterações e testes de jogabilidade para ajustar regras, balanceamento e fluxo da experiência.",
+    "projdet.armagedom.outcome": "O resultado foi um jogo completo e funcional, com sistema próprio de regras, identidade visual consolidada e alto nível de imersão. O projeto demonstra domínio de game design, direção de arte e desenvolvimento de produto físico.\n\nO sistema final apresenta forte coesão entre narrativa e mecânica, proporcionando uma experiência envolvente e estratégica para os jogadores.",
+    "projdet.armagedom.cardCategory": "Identidade",
+    "projdet.armagedom.cardDesc": "Identidade visual completa para o jogo de tabuleiro RPG Armagedom.",
+
+    // Project detail UI labels
+    "projdet.label.year": "Ano",
+    "projdet.label.client": "Cliente",
+    "projdet.label.audience": "Público-alvo",
+    "projdet.label.about": "Sobre o Projeto",
+    "projdet.label.challenge": "O Desafio",
+    "projdet.label.process": "O Processo",
+    "projdet.label.outcome": "O Resultado",
+    "projdet.label.tools": "Ferramentas Utilizadas",
+    "projdet.label.tags": "Tags",
+    "projdet.label.descPanel": "Descrição do Projeto",
+    "projdet.label.backToSlides": "Voltar para Imagens",
+    "projdet.label.backToProjects": "Todos os Projetos",
 
     // Contact
     "contact.label": "Contato",
