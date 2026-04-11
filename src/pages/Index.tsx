@@ -84,7 +84,7 @@ export default function Index() {
 
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, isMobile ? 1 : 0]);
 
   const stats = [
   { value: "5+", label: t("index.stats.years"), icon: Zap },
@@ -219,7 +219,7 @@ export default function Index() {
                   <motion.img
                     src={displayedVisual}
                     alt="Designer 3D Character"
-                    className="w-40 h-auto max-w-full sm:w-56 md:w-72 lg:w-80 xl:w-[440px] object-contain"
+                    className="w-64 h-auto max-w-full sm:w-72 md:w-80 lg:w-80 xl:w-[440px] object-contain"
                     animate={charControls}
                     transition={{ y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
                   />
