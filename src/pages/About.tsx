@@ -67,8 +67,8 @@ export default function About() {
       {/* Portrait + Bio */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
         <div className="glass-panel p-5 sm:p-8 md:p-14 grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-start">
-          <FadeInSection className="lg:col-span-2 flex flex-col items-center gap-4">
-            <div className="w-full max-w-[320px] sm:max-w-none sm:w-fit flex flex-col items-stretch gap-4">
+          <FadeInSection className="lg:col-span-2 flex flex-col items-center gap-4 w-full">
+            <div className="w-full max-w-[320px] sm:max-w-none sm:w-fit flex flex-col items-stretch gap-4 mx-auto">
               <ThrowableProfileCard
                 avatarUrls={[aboutPortrait, profilePhoto2, profilePhoto3]}
                 miniAvatarUrl={aboutPortrait}
