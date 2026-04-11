@@ -121,7 +121,7 @@ export default function LampCord() {
   return (
     <div
       data-lamp-cord
-      className="hidden lg:flex"
+      className="flex"
       style={{
         position: 'fixed',
         top: 0,
