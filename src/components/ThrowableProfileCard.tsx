@@ -34,6 +34,8 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const mainCardRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
+  const gyroActiveRef = useRef(false);
 
   useEffect(() => {
     avatarUrls.forEach((url) => {
@@ -41,6 +43,82 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
       img.src = url;
     });
   }, [avatarUrls]);
+
+  // Device orientation (gyroscope) for mobile/tablet
+  useEffect(() => {
+    if (!isMobile) return;
+    const el = mainCardRef.current;
+    if (!el) return;
+
+    const sensitivity = 4;
+    const betaOffset = 40; // typical phone holding angle
+
+    const handleOrientation = (event: DeviceOrientationEvent) => {
+      const { beta, gamma } = event;
+      if (beta == null || gamma == null) return;
+
+      const wrapper = el.querySelector('.pc-card-wrapper') as HTMLElement;
+      const shell = el.querySelector('.pc-card-shell') as HTMLElement;
+      if (!wrapper || !shell) return;
+
+      const card = el.querySelector('.pc-card') as HTMLElement;
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      const w = rect.width || 1;
+      const h = rect.height || 1;
+
+      // Map gamma (-45 to 45) → x across card, beta (offset ± 45) → y across card
+      const lx = clamp(w / 2 + gamma * sensitivity, 0, w);
+      const ly = clamp(h / 2 + (beta - betaOffset) * sensitivity, 0, h);
+
+      const px = clamp((100 / w) * lx);
+      const py = clamp((100 / h) * ly);
+      const cx = px - 50;
+      const cy = py - 50;
+
+      wrapper.style.setProperty('--pointer-x', `${px}%`);
+      wrapper.style.setProperty('--pointer-y', `${py}%`);
+      wrapper.style.setProperty('--background-x', `${adjust(px, 0, 100, 35, 65)}%`);
+      wrapper.style.setProperty('--background-y', `${adjust(py, 0, 100, 35, 65)}%`);
+      wrapper.style.setProperty('--pointer-from-center', `${clamp(Math.hypot(py - 50, px - 50) / 50, 0, 1)}`);
+      wrapper.style.setProperty('--pointer-from-top', `${py / 100}`);
+      wrapper.style.setProperty('--pointer-from-left', `${px / 100}`);
+      wrapper.style.setProperty('--rotate-x', `${round(-(cx / 5))}deg`);
+      wrapper.style.setProperty('--rotate-y', `${round(cy / 4)}deg`);
+      shell.classList.add('active');
+    };
+
+    const enableGyro = () => {
+      if (gyroActiveRef.current) return;
+      const anyMotion = window.DeviceMotionEvent as typeof DeviceMotionEvent & { requestPermission?: () => Promise<string> };
+      if (anyMotion && typeof anyMotion.requestPermission === 'function') {
+        anyMotion.requestPermission().then((state) => {
+          if (state === 'granted') {
+            window.addEventListener('deviceorientation', handleOrientation);
+            gyroActiveRef.current = true;
+          }
+        }).catch(console.error);
+      } else {
+        window.addEventListener('deviceorientation', handleOrientation);
+        gyroActiveRef.current = true;
+      }
+    };
+
+    // Auto-enable on non-iOS, tap-to-enable on iOS (permission required)
+    const anyMotion = window.DeviceMotionEvent as typeof DeviceMotionEvent & { requestPermission?: () => Promise<string> };
+    if (anyMotion && typeof anyMotion.requestPermission === 'function') {
+      // iOS: need user gesture
+      el.addEventListener('click', enableGyro);
+    } else {
+      enableGyro();
+    }
+
+    return () => {
+      window.removeEventListener('deviceorientation', handleOrientation);
+      el.removeEventListener('click', enableGyro);
+      gyroActiveRef.current = false;
+    };
+  }, [isMobile]);
 
   const setCardVars = useCallback((el: HTMLElement, clientX: number, clientY: number) => {
     const wrapper = el.querySelector('.pc-card-wrapper') as HTMLElement;
