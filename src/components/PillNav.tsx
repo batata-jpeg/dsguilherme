@@ -280,7 +280,7 @@ const PillNav = ({
               {isRouterLink(item.href) ? (
                 <Link
                   to={item.href}
-                  className={`mobile-menu-link${activeHref === item.href ? ' is-active' : ''}`}
+                  className={`mobile-menu-link${activeHref === item.href ? ' is-active text-foreground' : ''}`}
                   onClick={() => { setIsMobileMenuOpen(false); }}
                 >
                   {item.label}
@@ -288,7 +288,7 @@ const PillNav = ({
               ) : (
                 <a
                   href={item.href}
-                  className={`mobile-menu-link${activeHref === item.href ? ' is-active' : ''}`}
+                  className={`mobile-menu-link${activeHref === item.href ? ' is-active text-foreground' : ''}`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.label}
