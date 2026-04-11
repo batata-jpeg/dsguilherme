@@ -34,9 +34,9 @@ export default function Projects() {
     {
       id: "armagedom-rpg",
       title: "ARMAGEDOM - RPG",
-      category: "Identidade",
+      category: t("projdet.armagedom.cardCategory"),
       categoryKey: "Identity",
-      description: "Identidade visual completa para o jogo de tabuleiro RPG Armagedom.",
+      description: t("projdet.armagedom.cardDesc"),
       image: project1,
       year: "2024",
       tags: ["Identity", "Branding"],
