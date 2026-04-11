@@ -225,16 +225,6 @@ export default function Index() {
                   />
                 </div>
 
-                {isMobile && (
-                  <div className="flex max-w-xl flex-wrap justify-center gap-2 sm:gap-3">
-                    {floatingBadges.map((badge) => (
-                      <div key={badge.label} className="glass-panel-sm px-2.5 py-2 sm:px-3 sm:py-2 flex items-center gap-2">
-                        <span className="text-xs" style={{ color: "hsl(var(--primary))" }}>{badge.icon}</span>
-                        <span className="font-display text-[10px] sm:text-xs tracking-[0.1em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{badge.label}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
               </div>
             </div>
           </div>
