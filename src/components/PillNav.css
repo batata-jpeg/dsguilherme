@@ -174,7 +174,7 @@ html.light .pill-nav--liquid-glass .mobile-menu-popover .mobile-menu-link {
     hsl(var(--background) / 0.85) 100%
   );
   border: 1px solid hsl(var(--border));
-  color: hsl(var(--foreground));
+  color: hsl(0 0% 0%);
 }
 
 html.dark .pill-nav--liquid-glass .mobile-menu-controls .ctrl-btn {
@@ -190,7 +190,7 @@ html.light .pill-nav--liquid-glass .mobile-menu-controls .ctrl-btn {
     hsl(var(--background) / 0.85) 100%
   );
   border: 1px solid hsl(var(--border));
-  color: hsl(var(--foreground));
+  color: hsl(0 0% 0%);
 }
 
 .pill-nav-container {
