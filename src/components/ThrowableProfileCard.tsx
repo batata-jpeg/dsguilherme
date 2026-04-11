@@ -231,6 +231,18 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
       >
         ✦ Clique nos botões para trocar a imagem ✦
       </motion.p>
+
+      {isMobile && (
+        <motion.p
+          className="text-center mt-2 font-display text-[10px] tracking-[0.12em] uppercase select-none"
+          style={{ color: 'hsl(var(--muted-foreground))' }}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: [0, 0.6, 0.3, 0.6], y: 0 }}
+          transition={{ delay: 2.2, duration: 2.5, repeat: Infinity, repeatDelay: 3 }}
+        >
+          📱 Mova o celular para ver o efeito 3D
+        </motion.p>
+      )}
     </div>
   );
 };
