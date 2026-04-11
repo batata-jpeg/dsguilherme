@@ -88,7 +88,7 @@ export default function ProjectDetail() {
         style={{ background: "rgba(10,20,50,0.85)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(10,132,255,0.15)" }}>
         <Link to="/projects">
           <button className="btn-glass-primary text-xs flex items-center gap-2">
-            <ArrowLeft className="w-4 h-4" /> All Projects
+            <ArrowLeft className="w-4 h-4" /> {t("projdet.label.backToProjects")}
           </button>
         </Link>
         <div className="flex items-center gap-3">
@@ -186,31 +186,31 @@ export default function ProjectDetail() {
                 </div>
                 <Divider />
                 <div className="space-y-4">
-                  <MetaRow icon={<Calendar className="w-4 h-4" />} label="Ano" value={project.year} />
-                  <MetaRow icon={<User className="w-4 h-4" />} label="Cliente" value={project.client} />
-                  <MetaRow icon={<Target className="w-4 h-4" />} label="Público-alvo" value={project.audience} />
+                  <MetaRow icon={<Calendar className="w-4 h-4" />} label={t("projdet.label.year")} value={project.year} />
+                  <MetaRow icon={<User className="w-4 h-4" />} label={t("projdet.label.client")} value={project.client} />
+                  <MetaRow icon={<Target className="w-4 h-4" />} label={t("projdet.label.audience")} value={project.audience} />
                 </div>
                 <Divider />
                 <div>
-                  <SectionLabel icon={<AlignLeft className="w-3.5 h-3.5" />} label="Sobre o Projeto" />
+                  <SectionLabel icon={<AlignLeft className="w-3.5 h-3.5" />} label={t("projdet.label.about")} />
                   <p className="font-body text-sm leading-relaxed mt-3" style={{ color: "hsl(var(--muted-foreground))" }}>{project.description}</p>
                 </div>
                 <Divider />
                 <div>
-                  <SectionLabel icon={<ChevronRight className="w-3.5 h-3.5" />} label="O Desafio" />
+                  <SectionLabel icon={<ChevronRight className="w-3.5 h-3.5" />} label={t("projdet.label.challenge")} />
                   <p className="font-body text-sm leading-relaxed mt-3" style={{ color: "hsl(var(--muted-foreground))" }}>{project.challenge}</p>
                 </div>
                 <div>
-                  <SectionLabel icon={<ChevronRight className="w-3.5 h-3.5" />} label="O Processo" />
+                  <SectionLabel icon={<ChevronRight className="w-3.5 h-3.5" />} label={t("projdet.label.process")} />
                   <p className="font-body text-sm leading-relaxed mt-3" style={{ color: "hsl(var(--muted-foreground))" }}>{project.process}</p>
                 </div>
                 <div>
-                  <SectionLabel icon={<ChevronRight className="w-3.5 h-3.5" />} label="O Resultado" />
+                  <SectionLabel icon={<ChevronRight className="w-3.5 h-3.5" />} label={t("projdet.label.outcome")} />
                   <p className="font-body text-sm leading-relaxed mt-3" style={{ color: "hsl(var(--muted-foreground))" }}>{project.outcome}</p>
                 </div>
                 <Divider />
                 <div>
-                  <SectionLabel icon={<Wrench className="w-3.5 h-3.5" />} label="Ferramentas Utilizadas" />
+                  <SectionLabel icon={<Wrench className="w-3.5 h-3.5" />} label={t("projdet.label.tools")} />
                   <div className="flex flex-wrap gap-2 mt-3">
                     {project.tools.map((tool) => (
                       <span key={tool} className="glass-panel-sm px-3 py-1 font-display text-xs tracking-[0.1em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{tool}</span>
@@ -219,7 +219,7 @@ export default function ProjectDetail() {
                 </div>
                 <Divider />
                 <div>
-                  <SectionLabel icon={<Target className="w-3.5 h-3.5" />} label="Tags" />
+                  <SectionLabel icon={<Target className="w-3.5 h-3.5" />} label={t("projdet.label.tags")} />
                   <div className="flex flex-wrap gap-2 mt-3">
                     {project.tags.map((tag) => (
                       <span key={tag} className="font-display text-xs tracking-[0.1em] uppercase px-3 py-1 rounded-full"
@@ -253,12 +253,12 @@ export default function ProjectDetail() {
             {mobileView === "slides" ? (
               <>
                 <FileText className="w-4 h-4" />
-                Descrição do Projeto
+                {t("projdet.label.descPanel")}
               </>
             ) : (
               <>
                 <Images className="w-4 h-4" />
-                Voltar para Imagens
+                {t("projdet.label.backToSlides")}
               </>
             )}
           </motion.button>
@@ -340,7 +340,7 @@ export default function ProjectDetail() {
                   <div className="sticky top-0 flex items-center justify-between px-6 py-5 z-10"
                     style={{ background: "hsl(var(--background))", borderBottom: "1px solid hsl(var(--border))" }}>
                     <span className="font-display text-xs tracking-[0.2em] uppercase" style={{ color: "hsl(var(--primary))" }}>
-                      Descrição do Projeto
+                      {t("projdet.label.descPanel")}
                     </span>
                     <button onClick={() => setDescOpen(false)}
                       className="glass-panel-sm p-1.5 hover:scale-105 transition-transform">
@@ -359,31 +359,31 @@ export default function ProjectDetail() {
                     </div>
                     <Divider />
                     <div className="space-y-4">
-                      <MetaRow icon={<Calendar className="w-4 h-4" />} label="Ano" value={project.year} />
-                      <MetaRow icon={<User className="w-4 h-4" />} label="Cliente" value={project.client} />
-                      <MetaRow icon={<Target className="w-4 h-4" />} label="Público-alvo" value={project.audience} />
+                      <MetaRow icon={<Calendar className="w-4 h-4" />} label={t("projdet.label.year")} value={project.year} />
+                      <MetaRow icon={<User className="w-4 h-4" />} label={t("projdet.label.client")} value={project.client} />
+                      <MetaRow icon={<Target className="w-4 h-4" />} label={t("projdet.label.audience")} value={project.audience} />
                     </div>
                     <Divider />
                     <div>
-                      <SectionLabel icon={<AlignLeft className="w-3.5 h-3.5" />} label="Sobre o Projeto" />
+                      <SectionLabel icon={<AlignLeft className="w-3.5 h-3.5" />} label={t("projdet.label.about")} />
                       <p className="font-body text-sm leading-relaxed mt-3" style={{ color: "hsl(var(--muted-foreground))" }}>{project.description}</p>
                     </div>
                     <Divider />
                     <div>
-                      <SectionLabel icon={<ChevronRight className="w-3.5 h-3.5" />} label="O Desafio" />
+                      <SectionLabel icon={<ChevronRight className="w-3.5 h-3.5" />} label={t("projdet.label.challenge")} />
                       <p className="font-body text-sm leading-relaxed mt-3" style={{ color: "hsl(var(--muted-foreground))" }}>{project.challenge}</p>
                     </div>
                     <div>
-                      <SectionLabel icon={<ChevronRight className="w-3.5 h-3.5" />} label="O Processo" />
+                      <SectionLabel icon={<ChevronRight className="w-3.5 h-3.5" />} label={t("projdet.label.process")} />
                       <p className="font-body text-sm leading-relaxed mt-3" style={{ color: "hsl(var(--muted-foreground))" }}>{project.process}</p>
                     </div>
                     <div>
-                      <SectionLabel icon={<ChevronRight className="w-3.5 h-3.5" />} label="O Resultado" />
+                      <SectionLabel icon={<ChevronRight className="w-3.5 h-3.5" />} label={t("projdet.label.outcome")} />
                       <p className="font-body text-sm leading-relaxed mt-3" style={{ color: "hsl(var(--muted-foreground))" }}>{project.outcome}</p>
                     </div>
                     <Divider />
                     <div>
-                      <SectionLabel icon={<Wrench className="w-3.5 h-3.5" />} label="Ferramentas Utilizadas" />
+                      <SectionLabel icon={<Wrench className="w-3.5 h-3.5" />} label={t("projdet.label.tools")} />
                       <div className="flex flex-wrap gap-2 mt-3">
                         {project.tools.map((tool) => (
                           <span key={tool} className="glass-panel-sm px-3 py-1 font-display text-xs tracking-[0.1em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{tool}</span>
@@ -392,7 +392,7 @@ export default function ProjectDetail() {
                     </div>
                     <Divider />
                     <div>
-                      <SectionLabel icon={<Target className="w-3.5 h-3.5" />} label="Tags" />
+                      <SectionLabel icon={<Target className="w-3.5 h-3.5" />} label={t("projdet.label.tags")} />
                       <div className="flex flex-wrap gap-2 mt-3">
                         {project.tags.map((tag) => (
                           <span key={tag} className="font-display text-xs tracking-[0.1em] uppercase px-3 py-1 rounded-full"
@@ -436,7 +436,7 @@ export default function ProjectDetail() {
                   <span className="relative inline-flex rounded-full h-2 w-2"
                     style={{ background: "hsl(var(--primary))" }} />
                 </span>
-                Descrição do Projeto
+                {t("projdet.label.descPanel")}
               </motion.button>
             )}
           </AnimatePresence>
