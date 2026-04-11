@@ -465,3 +465,22 @@
   .pc-status { font-size: 8px; }
   .pc-contact-btn { padding: 4px 8px; font-size: 9px; border-radius: 50px; }
 }
+
+/* Disable holographic effects on mobile/tablet */
+@media (max-width: 1023px) {
+  .pc-card-wrapper {
+    perspective: none;
+  }
+  .pc-card-shell {
+    transform: none !important;
+  }
+  .pc-card {
+    transform: none !important;
+  }
+  .pc-shine,
+  .pc-glare,
+  .pc-inside,
+  .pc-behind {
+    display: none !important;
+  }
+}
