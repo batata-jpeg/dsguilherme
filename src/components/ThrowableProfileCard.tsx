@@ -2,7 +2,7 @@ import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProfileCard from './ProfileCard';
-import { useIsMobile } from '@/hooks/use-mobile';
+
 
 const clamp = (v: number, min = 0, max = 100) => Math.min(Math.max(v, min), max);
 const round = (v: number, precision = 3) => parseFloat(v.toFixed(precision));
