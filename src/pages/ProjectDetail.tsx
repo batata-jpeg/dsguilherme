@@ -3,47 +3,47 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, Maximize, Minimize, X, ChevronRight, Calendar, Wrench, User, Target, AlignLeft, FileText, Images } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useLanguage } from "@/contexts/LanguageContext";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 import project4 from "@/assets/project-4.jpg";
 import project5 from "@/assets/project-5.jpg";
 
-const projects: Record<string, {
-  title: string;
-  category: string;
-  description: string;
+const projectStaticData: Record<string, {
   image: string;
   year: string;
-  client: string;
-  audience: string;
   tags: string[];
   tools: string[];
-  challenge: string;
-  process: string;
-  outcome: string;
   slides: string[];
+  translationPrefix: string;
 }> = {
   "armagedom-rpg": {
-    title: "ARMAGEDOM – JOGO DE TABULEIRO RPG",
-    category: "Game Design, Identidade Visual, Ilustração",
-    description: "Armagedom é um jogo de tabuleiro com mecânicas de RPG que combina estratégia, narrativa e tomada de decisão em um universo distópico. O projeto envolveu a criação completa do sistema do jogo — incluindo regras, dinâmica de progressão, design visual e construção de mundo — resultando em uma experiência imersiva e autoral.\n\nO jogo utiliza cartas, dados e um tabuleiro modular para conduzir partidas cooperativas ou competitivas, onde os jogadores assumem papéis únicos dentro de uma narrativa em constante evolução.",
     image: project1,
     year: "2024",
-    client: "Projeto Acadêmico (Universidade)",
-    audience: "Jogadores de RPG e jogos de tabuleiro, 16–35 anos, interessados em estratégia, narrativa imersiva e estética dark fantasy",
-    tags: ["Game Design", "Jogo de Tabuleiro", "RPG", "Identidade Visual", "Ilustração", "Design de Produto"],
+    tags: ["Game Design", "RPG", "Identity", "Illustration", "Product Design"],
     tools: ["Illustrator", "Photoshop", "InDesign", "Figma"],
-    challenge: "O principal desafio foi equilibrar três pilares fundamentais: jogabilidade estratégica, clareza de regras e uma identidade visual forte e coerente. Era necessário criar um sistema acessível para novos jogadores, mas com profundidade suficiente para manter o engajamento a longo prazo.\n\nAlém disso, o projeto exigiu a construção de um universo consistente, onde narrativa, mecânica e estética funcionassem de forma integrada, evitando que o jogo se tornasse apenas visualmente atrativo, mas superficial em gameplay.",
-    process: "O desenvolvimento começou com a criação do conceito narrativo e definição do universo do jogo, seguido pela prototipagem das mecânicas principais (movimento, combate e progressão).\n\nEm paralelo, foi desenvolvido todo o sistema visual:\n\n• Identidade gráfica baseada em alto contraste (preto, branco e vermelho)\n• Ilustrações autorais para cartas e personagens\n• Design do tabuleiro e das peças físicas\n• Criação de manuais e materiais de apoio\n\nForam realizadas diversas iterações e testes de jogabilidade para ajustar regras, balanceamento e fluxo da experiência.",
-    outcome: "O resultado foi um jogo completo e funcional, com sistema próprio de regras, identidade visual consolidada e alto nível de imersão. O projeto demonstra domínio de game design, direção de arte e desenvolvimento de produto físico.\n\nO sistema final apresenta forte coesão entre narrativa e mecânica, proporcionando uma experiência envolvente e estratégica para os jogadores.",
     slides: [project1, project2, project3, project4, project5],
+    translationPrefix: "projdet.armagedom",
   },
 };
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
-  const project = id ? projects[id] : null;
+  const { t } = useLanguage();
+  const staticData = id ? projectStaticData[id] : null;
+  const prefix = staticData?.translationPrefix ?? "";
+  const project = staticData ? {
+    ...staticData,
+    title: t(`${prefix}.title`),
+    category: t(`${prefix}.category`),
+    description: t(`${prefix}.description`),
+    client: t(`${prefix}.client`),
+    audience: t(`${prefix}.audience`),
+    challenge: t(`${prefix}.challenge`),
+    process: t(`${prefix}.process`),
+    outcome: t(`${prefix}.outcome`),
+  } : null;
   const [descOpen, setDescOpen] = useState(true);
   const [mobileView, setMobileView] = useState<"slides" | "description">("slides");
   const [isFullscreen, setIsFullscreen] = useState(false);
