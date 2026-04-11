@@ -240,7 +240,7 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
           animate={{ opacity: [0, 0.6, 0.3, 0.6], y: 0 }}
           transition={{ delay: 2.2, duration: 2.5, repeat: Infinity, repeatDelay: 3 }}
         >
-          📱 Mova o celular para ver o efeito 3D
+          📱 Clique na imagem e mova o celular/tablet para ver o efeito
         </motion.p>
       )}
     </div>
