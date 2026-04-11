@@ -215,11 +215,11 @@ export default function Index() {
               ))}
 
               <div className="flex w-full flex-col items-center gap-4 z-10">
-                <div className="flex w-full justify-center" style={{ filter: "drop-shadow(0 24px 60px rgba(59,153,252,0.25)) drop-shadow(0 0 100px rgba(147,84,245,0.15))" }}>
+                <div className="flex w-full justify-center" style={isMobile ? undefined : { filter: "drop-shadow(0 24px 60px rgba(59,153,252,0.25)) drop-shadow(0 0 100px rgba(147,84,245,0.15))" }}>
                   <motion.img
                     src={displayedVisual}
                     alt="Designer 3D Character"
-                    className="w-64 h-auto max-w-full sm:w-72 md:w-80 lg:w-80 xl:w-[440px] object-contain"
+                    className="w-80 h-auto max-w-full sm:w-96 md:w-[420px] lg:w-80 xl:w-[440px] object-contain"
                     animate={charControls}
                     transition={{ y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
                   />
