@@ -121,11 +121,11 @@ export default function LampCord() {
   return (
     <div
       data-lamp-cord
-      className="hidden lg:flex"
+      className="flex"
       style={{
         position: 'fixed',
         top: 0,
-        right: '2.5rem',
+        right: '1.25rem',
         zIndex: 98,
         flexDirection: 'column',
         alignItems: 'center',
