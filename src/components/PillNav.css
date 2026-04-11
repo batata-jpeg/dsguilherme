@@ -170,11 +170,11 @@ html.dark .pill-nav--liquid-glass .mobile-menu-popover .mobile-menu-link {
 html.light .pill-nav--liquid-glass .mobile-menu-popover .mobile-menu-link {
   background: linear-gradient(
     145deg,
-    hsl(var(--foreground) / 0.94) 0%,
-    hsl(var(--foreground) / 0.88) 100%
+    hsl(var(--background) / 0.92) 0%,
+    hsl(var(--background) / 0.85) 100%
   );
-  border: 1px solid hsl(var(--primary) / 0.22);
-  color: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--foreground));
 }
 
 html.dark .pill-nav--liquid-glass .mobile-menu-controls .ctrl-btn {
