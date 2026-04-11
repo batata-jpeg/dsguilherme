@@ -130,7 +130,7 @@ html.dark .pill-nav--liquid-glass .hamburger-line {
 }
 
 html.light .pill-nav--liquid-glass .hamburger-line {
-  background: linear-gradient(90deg, hsl(var(--background)) 0%, hsl(var(--primary)) 100%);
+  background: linear-gradient(90deg, hsl(var(--foreground)) 0%, hsl(var(--primary)) 100%);
 }
 
 html.dark .pill-nav--liquid-glass .mobile-menu-popover {
