@@ -1,12 +1,19 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const THRESHOLD = 70;
 const MAX_PULL = 140;
 
 export default function LampCord() {
   const { theme, toggleTheme } = useTheme();
+  const isMobile = useIsMobile();
+  const location = useLocation();
   const isDark = theme === 'dark';
+
+  // On mobile/tablet, only show on home page
+  if (isMobile && location.pathname !== '/') return null;
 
   const [pullY, setPullY] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
