@@ -3,8 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronUp } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const NEAR_END_PX = 320;
-const MIN_SCROLL_Y = 240;
+const MIN_SCROLL_Y = 300;
 
 export default function ScrollToTop() {
   const { t } = useLanguage();
@@ -12,10 +11,7 @@ export default function ScrollToTop() {
 
   useEffect(() => {
     const update = () => {
-      const doc = document.documentElement;
-      const scrollBottom = window.scrollY + window.innerHeight;
-      const nearEnd = doc.scrollHeight - scrollBottom <= NEAR_END_PX;
-      setVisible(nearEnd && window.scrollY >= MIN_SCROLL_Y);
+      setVisible(window.scrollY >= MIN_SCROLL_Y);
     };
 
     update();

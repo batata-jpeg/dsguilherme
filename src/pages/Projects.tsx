@@ -8,7 +8,7 @@ import project3 from "@/assets/project-3.jpg";
 import project4 from "@/assets/project-4.jpg";
 import project5 from "@/assets/project-5.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
-import GlareHover from "@/components/GlareHover";
+import BorderGlow from "@/components/BorderGlow";
 
 function FadeInSection({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -50,7 +50,7 @@ export default function Projects() {
   return (
     <div className="min-h-screen dot-grid bg-transparent overflow-x-hidden">
       {/* Header */}
-      <div className="relative pt-24 sm:pt-36 pb-14 sm:pb-20 overflow-hidden">
+      <div className="relative pt-20 sm:pt-24 pb-14 sm:pb-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <FadeInSection>
             <span className="section-label block mb-6">{t("projects.label")}</span>
@@ -92,30 +92,28 @@ export default function Projects() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8">
           {filtered.map((proj, i) => (
             <FadeInSection key={proj.id} delay={i * 0.08}>
-              <Link to={`/projects/${proj.id}`}>
-                <GlareHover
-                  width="100%"
-                  height="100%"
-                  borderRadius="var(--radius)"
-                  borderColor="hsl(var(--border))"
-                  background="transparent"
-                  glareColor="#ffffff"
-                  glareOpacity={0.30}
-                  glareAngle={-45}
-                  glareSize={220}
-                  transitionDuration={650}
-                  className="group aspect-[16/10]"
-                  style={{ display: "block" }}
+              <Link to={`/projects/${proj.id}`} className="block aspect-[16/10]">
+                <BorderGlow
+                  className="group w-full h-full"
+                  backgroundColor="#08111e"
+                  borderRadius={8}
+                  glowColor="213 100 65"
+                  glowRadius={80}
+                  glowIntensity={3}
+                  edgeSensitivity={15}
+                  coneSpread={35}
+                  colors={["#0a84ff", "#9354f5", "#38bdf8"]}
+                  fillOpacity={0.6}
                 >
-                  <div className="relative w-full h-full rounded-[var(--radius)]">
-                    <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${proj.image})` }} />
+                  <div className="relative w-full h-full">
+                    <div className="absolute inset-0 bg-center [background-size:110%_auto] sm:bg-cover sm:bg-center" style={{ backgroundImage: `url(${proj.image})` }} />
                     <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 40%, rgba(10,20,50,0.80) 100%)" }} />
                     <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
                       <span className="block font-display text-[10px] sm:text-xs tracking-widest uppercase mb-1" style={{ color: "rgba(255,255,255,0.6)" }}>{proj.category}</span>
                       <h3 className="font-display font-bold text-sm sm:text-base uppercase leading-tight text-white">{proj.title}</h3>
                     </div>
                   </div>
-                </GlareHover>
+                </BorderGlow>
               </Link>
             </FadeInSection>
           ))}

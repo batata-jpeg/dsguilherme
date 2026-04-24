@@ -442,7 +442,7 @@
 }
 
 @media (max-width: 480px) {
-  .pc-card { height: 60svh; max-height: 380px; }
+  .pc-card { height: 55svh; max-height: 340px; }
   .pc-details { top: 1.5em; }
   .pc-details h3 { font-size: min(3.5svh, 2em); }
   .pc-details p { font-size: 12px; top: -8px; }
@@ -466,16 +466,24 @@
   .pc-contact-btn { padding: 4px 8px; font-size: 9px; border-radius: 50px; }
 }
 
-/* Disable holographic effects on mobile/tablet */
+/* Disable holographic effects on mobile/tablet + fix sizing */
 @media (max-width: 1023px) {
   .pc-card-wrapper {
     perspective: none;
+    display: flex;
+    justify-content: center;
   }
   .pc-card-shell {
     transform: none !important;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
   .pc-card {
     transform: none !important;
+    height: auto !important;
+    max-height: none !important;
+    width: min(85vw, 380px) !important;
   }
   .pc-shine,
   .pc-glare,

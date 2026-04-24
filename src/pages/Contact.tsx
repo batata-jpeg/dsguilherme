@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
 import { motion, useInView } from "framer-motion";
 import { Send, Mail, Instagram, Linkedin, Github, MapPin, Clock, MessageCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -84,7 +85,20 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
-    setTimeout(() => setStatus("sent"), 2000);
+    emailjs
+      .send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: form.name,
+          from_email: form.email,
+          service: form.service,
+          message: form.message,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
+      .then(() => setStatus("sent"))
+      .catch(() => setStatus("idle"));
   };
 
   const inputStyle = (name: string) => ({
@@ -103,7 +117,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen dot-grid bg-transparent overflow-x-hidden">
-      <div className="relative pt-24 sm:pt-36 pb-14 sm:pb-20 overflow-hidden">
+      <div className="relative pt-20 sm:pt-24 pb-14 sm:pb-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <FadeInSection>
             <span className="section-label block mb-6">{t("contact.label")}</span>

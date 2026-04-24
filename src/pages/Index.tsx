@@ -11,6 +11,7 @@ import project3 from "@/assets/project-3.jpg";
 import aboutPortrait from "@/assets/about-portrait.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
+import Logo from "@/components/Logo";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { MAILTO_HREF, SOCIAL, WHATSAPP_CHAT_URL } from "@/config/links";
 import HeroTypewriter from "@/components/HeroTypewriter";
@@ -70,14 +71,19 @@ export default function Index() {
   const isFirstRender = useRef(true);
 
   useEffect(() => {
-    if (isFirstRender.current) {isFirstRender.current = false;return;}
+    if (isFirstRender.current) { isFirstRender.current = false; return; }
     const run = async () => {
-      setDisplayedVisual(heroVisual); // swap immediately
-      // Quick jump up with horizontal pre-wiggle
-      await charControls.start({ y: -60, x: -8, scaleX: 0.88, scaleY: 1.1, transition: { duration: 0.1, ease: "easeIn" } });
-      // Wiggle + bouncy land
-      await charControls.start({ y: 0, x: 0, scaleX: 1, scaleY: 1, transition: { type: "spring", stiffness: 480, damping: 12, mass: 0.65 } });
-      await charControls.start({ y: 0, scaleX: 1, scaleY: 1, transition: { type: "spring", stiffness: 520, damping: 16, mass: 0.7 } });
+      setDisplayedVisual(heroVisual); // swap during view-transition capture
+      // Wait for the light-burst transition to finish, then reveal with a bounce
+      await new Promise(r => setTimeout(r, 1520));
+      await charControls.start({
+        y: -18, scaleY: 1.06, scaleX: 0.96,
+        transition: { duration: 0.11, ease: "easeOut" },
+      });
+      await charControls.start({
+        y: 0, scaleY: 1, scaleX: 1,
+        transition: { type: "spring", stiffness: 460, damping: 13, mass: 0.7 },
+      });
     };
     run();
   }, [theme]);
@@ -123,7 +129,7 @@ export default function Index() {
       {/* ── HERO */}
       <section ref={heroRef} className="relative flex min-h-[100svh] items-center overflow-hidden">
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative z-10 w-full">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-24 sm:pt-28 pb-14 sm:pb-16 grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-14 sm:pb-16 grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center">
             <div className="space-y-6 sm:space-y-8">
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }} className="space-y-2">
                 <HeroTypewriter
@@ -243,14 +249,14 @@ export default function Index() {
       <section className="relative py-20 sm:py-32 overflow-hidden">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
           <FadeInSection delay={0.2}>
-            <h2 className="font-display font-extrabold leading-[0.85] tracking-tight uppercase text-left" style={{ fontSize: "clamp(2.25rem, 8vw, 7rem)", color: "hsl(var(--foreground))" }}>
+            <h2 className="font-display font-extrabold leading-[0.85] tracking-tight uppercase text-center" style={{ fontSize: "clamp(2.25rem, 8vw, 7rem)", color: "hsl(var(--foreground))" }}>
               {t("index.philosophy.line1")}
               <br />
               {t("index.philosophy.line2")} <span className="gradient-text">{t("index.philosophy.accent")}</span>
             </h2>
           </FadeInSection>
           <FadeInSection delay={0.4}>
-            <h2 className="font-display font-extrabold leading-[0.9] tracking-tight mt-4 uppercase text-left text-muted-foreground" style={{ fontSize: "clamp(1.75rem, 6vw, 3rem)" }}>
+            <h2 className="font-display font-extrabold leading-[0.9] tracking-tight mt-4 uppercase text-center text-muted-foreground" style={{ fontSize: "clamp(1.75rem, 6vw, 3rem)" }}>
               {t("index.philosophy.author")}
             </h2>
           </FadeInSection>
@@ -274,42 +280,30 @@ export default function Index() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6">
             <FadeInSection delay={0.1} className="lg:col-span-2">
               <Link to={`/projects/${featuredProjects[0].id}`}>
-                <div className="glass-panel group overflow-hidden relative aspect-[4/5] sm:aspect-[16/10] lg:aspect-auto lg:h-[420px]">
-                  <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${featuredProjects[0].image})` }} />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,20,50,0.85) 30%, rgba(10,20,50,0.15) 70%)" }} />
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: "rgba(59,153,252,0.08)" }} />
-                  <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 space-y-2">
-                    <span className="section-label" style={{ color: "rgba(255,255,255,0.7)" }}>{featuredProjects[0].category}</span>
-                    <h3 className="font-display font-bold text-xl sm:text-2xl uppercase text-white">{featuredProjects[0].title}</h3>
-                    <p className="font-body text-xs sm:text-sm leading-relaxed text-white/60 max-w-2xl">{featuredProjects[0].description}</p>
-                    <div className="flex items-center gap-2 pt-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                      <span className="font-display text-xs tracking-widest uppercase text-white/80">{t("index.featured.view")}</span>
-                      <ExternalLink className="w-3 h-3 text-white/80" />
-                    </div>
+                <div className="glass-panel group overflow-hidden relative aspect-[16/10] lg:aspect-auto lg:h-[420px] bg-[#08111e]">
+                  <div className="absolute inset-0 bg-no-repeat bg-center [background-size:110%_auto] sm:bg-cover sm:bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${featuredProjects[0].image})` }} />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 40%, rgba(10,20,50,0.80) 100%)" }} />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
+                    <span className="block font-display text-[10px] sm:text-xs tracking-widest uppercase mb-1" style={{ color: "rgba(255,255,255,0.6)" }}>{featuredProjects[0].category}</span>
+                    <h3 className="font-display font-bold text-sm sm:text-base uppercase leading-tight text-white">{featuredProjects[0].title}</h3>
                   </div>
                 </div>
               </Link>
             </FadeInSection>
 
             <div className="space-y-5 sm:space-y-6">
-              {featuredProjects.slice(1).map((proj, i) => (
-                <FadeInSection key={proj.id} delay={0.2 + i * 0.15}>
-                  <Link to={`/projects/${proj.id}`}>
-                    <div className="glass-panel group overflow-hidden relative aspect-[16/10] lg:aspect-auto lg:h-[196px]">
-                      <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${proj.image})` }} />
-                      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,20,50,0.85) 40%, rgba(10,20,50,0.1) 100%)" }} />
-                      <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 space-y-1">
-                        <span className="font-display text-[10px] sm:text-xs tracking-[0.12em] uppercase text-white/60">{proj.category}</span>
-                        <h3 className="font-display font-bold text-base uppercase text-white">{proj.title}</h3>
-                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <span className="font-display text-xs tracking-widest uppercase text-white/80">{t("index.featured.view.short")}</span>
-                          <ArrowRight className="w-3 h-3 text-white/80" />
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                </FadeInSection>
-              ))}
+              <div className="glass-panel relative aspect-[16/10] lg:aspect-auto lg:h-[196px] flex items-center justify-center"
+                style={{ borderStyle: "dashed", opacity: 0.4 }}>
+                <span className="font-display text-[10px] tracking-[0.2em] uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>
+                  Em breve
+                </span>
+              </div>
+              <div className="glass-panel relative aspect-[16/10] lg:aspect-auto lg:h-[196px] flex items-center justify-center"
+                style={{ borderStyle: "dashed", opacity: 0.4 }}>
+                <span className="font-display text-[10px] tracking-[0.2em] uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>
+                  Em breve
+                </span>
+              </div>
             </div>
           </div>
 

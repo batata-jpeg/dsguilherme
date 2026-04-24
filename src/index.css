@@ -192,6 +192,7 @@
   html {
     scroll-behavior: smooth;
     background: transparent;
+    overflow-x: hidden;
   }
 
   body {
@@ -205,25 +206,14 @@
       color 0.45s ease;
   }
 
-  /* Smooth theme transitions for all elements */
-  *, *::before, *::after {
-    transition:
-      background-color 0.45s ease,
-      border-color 0.45s ease,
-      color 0.45s ease,
-      box-shadow 0.45s ease,
-      fill 0.45s ease,
-      stroke 0.45s ease;
-  }
-
-  /* Exclude elements where transition would feel wrong */
+  /* Theme transitions — only on interactive/surface elements, not everything */
   button, a, input, textarea, select,
   [role="button"], [data-radix-collection-item] {
     transition:
-      background-color 0.45s ease,
-      border-color 0.45s ease,
-      color 0.45s ease,
-      box-shadow 0.45s ease,
+      background-color 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease,
+      box-shadow 0.2s ease,
       opacity 0.2s ease,
       transform 0.2s ease;
   }
@@ -520,6 +510,53 @@ html.light .avail-for-work-badge {
   }
   .avail-for-work-badge__dot-glow {
     opacity: 0.55;
+  }
+}
+
+/* ─── View Transition — lamp light burst (soft edge) ───────── */
+
+/* Register --vt-r as an animatable length so the mask gradient interpolates */
+@property --vt-r {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+::view-transition-old(root) {
+  animation: none;
+  z-index: 0;
+}
+
+::view-transition-new(root) {
+  --vt-r: 0px;
+  z-index: 1;
+  animation: vt-light-expand 1.5s cubic-bezier(0.25, 1, 0.35, 1) forwards;
+  /* soft-edge mask: solid circle up to --vt-r, then a 220px blurry falloff */
+  -webkit-mask-image: radial-gradient(
+    circle at var(--vt-origin-x, 50%) var(--vt-origin-y, 50%),
+    black var(--vt-r),
+    rgba(0, 0, 0, 0.55) calc(var(--vt-r) + 80px),
+    rgba(0, 0, 0, 0.18) calc(var(--vt-r) + 150px),
+    transparent calc(var(--vt-r) + 220px)
+  );
+  mask-image: radial-gradient(
+    circle at var(--vt-origin-x, 50%) var(--vt-origin-y, 50%),
+    black var(--vt-r),
+    rgba(0, 0, 0, 0.55) calc(var(--vt-r) + 80px),
+    rgba(0, 0, 0, 0.18) calc(var(--vt-r) + 150px),
+    transparent calc(var(--vt-r) + 220px)
+  );
+}
+
+@keyframes vt-light-expand {
+  from { --vt-r: 0px; }
+  to   { --vt-r: 2800px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01ms !important;
   }
 }
 

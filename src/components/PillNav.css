@@ -1,16 +1,14 @@
-/* ─── Liquid glass navbar ───────────────────────────────────────────────── */
+/* ─── Liquid glass — desktop elements ──────────────────────────────────── */
 .pill-nav--liquid-glass .pill-nav-items,
 .pill-nav--liquid-glass .pill-logo,
-.pill-nav--liquid-glass .pill-nav-controls,
-.pill-nav--liquid-glass .mobile-menu-button {
+.pill-nav--liquid-glass .pill-nav-controls {
   background: transparent;
   box-shadow: none;
 }
 
 html.dark .pill-nav--liquid-glass .pill-nav-items,
 html.dark .pill-nav--liquid-glass .pill-logo,
-html.dark .pill-nav--liquid-glass .pill-nav-controls,
-html.dark .pill-nav--liquid-glass .mobile-menu-button {
+html.dark .pill-nav--liquid-glass .pill-nav-controls {
   background: linear-gradient(
     145deg,
     rgba(255, 255, 255, 0.09) 0%,
@@ -29,21 +27,6 @@ html.dark .pill-nav--liquid-glass .mobile-menu-button {
 html.light .pill-nav--liquid-glass .pill-nav-items,
 html.light .pill-nav--liquid-glass .pill-logo,
 html.light .pill-nav--liquid-glass .pill-nav-controls {
-  background: linear-gradient(
-    155deg,
-    hsl(var(--background) / 0.88) 0%,
-    hsl(var(--background) / 0.72) 50%,
-    hsl(var(--background-deep) / 0.52) 100%
-  );
-  backdrop-filter: blur(20px) saturate(155%);
-  -webkit-backdrop-filter: blur(20px) saturate(155%);
-  border: 1px solid hsl(var(--border));
-  box-shadow:
-    0 4px 28px hsl(var(--foreground) / 0.08),
-    0 1px 0 hsl(var(--background) / 0.95) inset;
-}
-
-html.light .pill-nav--liquid-glass .mobile-menu-button {
   background: linear-gradient(
     155deg,
     hsl(var(--background) / 0.88) 0%,
@@ -125,76 +108,9 @@ html.light .pill-nav--liquid-glass .pill-nav-controls .ctrl-btn {
     0 8px 18px hsl(var(--foreground) / 0.12);
 }
 
-html.dark .pill-nav--liquid-glass .hamburger-line {
-  background: linear-gradient(90deg, #00ffd1, #c4a8ff);
-}
-
-html.light .pill-nav--liquid-glass .hamburger-line {
-  background: linear-gradient(90deg, hsl(var(--foreground)) 0%, hsl(var(--primary)) 100%);
-}
-
-html.dark .pill-nav--liquid-glass .mobile-menu-popover {
-  background: linear-gradient(
-    165deg,
-    rgba(22, 22, 28, 0.82) 0%,
-    rgba(12, 12, 18, 0.88) 100%
-  );
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow:
-    0 16px 48px rgba(0, 0, 0, 0.45),
-    0 1px 0 rgba(255, 255, 255, 0.08) inset;
-}
-
-html.light .pill-nav--liquid-glass .mobile-menu-popover {
-  background: linear-gradient(
-    165deg,
-    hsl(var(--background) / 0.94) 0%,
-    hsl(var(--background-deep) / 0.86) 100%
-  );
-  backdrop-filter: blur(22px) saturate(150%);
-  -webkit-backdrop-filter: blur(22px) saturate(150%);
-  border: 1px solid hsl(var(--border));
-  box-shadow: 0 16px 40px hsl(var(--foreground) / 0.12);
-}
-
-html.dark .pill-nav--liquid-glass .mobile-menu-popover .mobile-menu-link {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--pill-text, rgba(255, 255, 255, 0.92));
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-html.light .pill-nav--liquid-glass .mobile-menu-popover .mobile-menu-link {
-  background: linear-gradient(
-    145deg,
-    hsl(var(--background) / 0.92) 0%,
-    hsl(var(--background) / 0.85) 100%
-  );
-  border: 1px solid hsl(var(--border));
-  color: hsl(0 0% 0%);
-}
-
-html.dark .pill-nav--liquid-glass .mobile-menu-controls .ctrl-btn {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--pill-text, #fff);
-}
-
-html.light .pill-nav--liquid-glass .mobile-menu-controls .ctrl-btn {
-  background: linear-gradient(
-    145deg,
-    hsl(var(--background) / 0.92) 0%,
-    hsl(var(--background) / 0.85) 100%
-  );
-  border: 1px solid hsl(var(--border));
-  color: hsl(0 0% 0%);
-}
-
+/* ─── Nav container ─────────────────────────────────────────────────────── */
 .pill-nav-container {
-  position: fixed;
+  position: absolute;
   top: 1em;
   left: 50%;
   transform: translateX(-50%);
@@ -209,9 +125,11 @@ html.light .pill-nav--liquid-glass .mobile-menu-controls .ctrl-btn {
     left: 0;
     transform: none;
     width: 100%;
+    padding: 0 0.5rem;
   }
 }
 
+/* ─── Main nav bar ──────────────────────────────────────────────────────── */
 .pill-nav {
   --nav-h: 52px;
   --logo: 44px;
@@ -233,6 +151,7 @@ html.light .pill-nav--liquid-glass .mobile-menu-controls .ctrl-btn {
   }
 }
 
+/* ─── Nav items container ───────────────────────────────────────────────── */
 .pill-nav-items {
   position: relative;
   display: flex;
@@ -252,7 +171,8 @@ html.dark .pill-nav--liquid-glass .pill-nav-items::before {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(ellipse 130% 90% at 25% -20%, rgba(255, 255, 255, 0.16) 0%, transparent 52%),
+  background:
+    radial-gradient(ellipse 130% 90% at 25% -20%, rgba(255, 255, 255, 0.16) 0%, transparent 52%),
     radial-gradient(ellipse 80% 60% at 100% 100%, rgba(138, 92, 255, 0.12) 0%, transparent 45%);
   pointer-events: none;
   z-index: 0;
@@ -266,6 +186,17 @@ html.light .pill-nav--liquid-glass .pill-nav-items::before {
   background: radial-gradient(ellipse 120% 80% at 20% 0%, rgba(255, 255, 255, 0.85) 0%, transparent 50%);
   pointer-events: none;
   z-index: 0;
+}
+
+/* ─── Logo ──────────────────────────────────────────────────────────────── */
+.pill-logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  flex-shrink: 0;
+  padding: 0 6px;
+  height: var(--nav-h);
 }
 
 .pill-logo {
@@ -289,6 +220,7 @@ html.light .pill-nav--liquid-glass .pill-nav-items::before {
   display: block;
 }
 
+/* ─── Pill list ─────────────────────────────────────────────────────────── */
 .pill-list {
   list-style: none;
   display: flex;
@@ -309,6 +241,7 @@ html.light .pill-nav--liquid-glass .pill-nav-items::before {
   height: 100%;
 }
 
+/* ─── Individual pill ───────────────────────────────────────────────────── */
 .pill {
   display: inline-flex;
   align-items: center;
@@ -386,7 +319,7 @@ html.light .pill-nav--liquid-glass .pill-nav-items::before {
   z-index: 4;
 }
 
-/* Controls pill */
+/* ─── Desktop controls pill ─────────────────────────────────────────────── */
 .pill-nav-controls {
   height: var(--nav-h, 40px);
   background: var(--base);
@@ -423,31 +356,26 @@ html.light .pill-nav--liquid-glass .pill-nav-items::before {
   opacity: 0.85;
 }
 
-.desktop-only {
-  display: block;
-}
-
-.mobile-only {
-  display: none;
-}
+/* ─── Visibility utils ──────────────────────────────────────────────────── */
+.desktop-only { display: block; }
+.mobile-only  { display: none;  }
 
 @media (max-width: 1024px) {
-  .desktop-only {
-    display: none;
-  }
-  .mobile-only {
-    display: block;
-  }
-  .pill-nav-controls {
-    display: none;
-  }
+  .desktop-only      { display: none;  }
+  .mobile-only       { display: block; }
+  .pill-nav-controls { display: none;  }
 }
 
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MOBILE & TABLET NAV
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Hamburger button ──────────────────────────────────────────────────── */
 .mobile-menu-button {
   width: var(--nav-h);
   height: var(--nav-h);
   border-radius: 50%;
-  background: var(--base, #fff);
   border: none;
   display: none;
   flex-direction: column;
@@ -457,79 +385,181 @@ html.light .pill-nav--liquid-glass .pill-nav-items::before {
   cursor: pointer;
   padding: 0;
   position: relative;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  transition: transform 0.15s ease;
+}
+
+.mobile-menu-button:active {
+  transform: scale(0.92);
 }
 
 @media (max-width: 1024px) {
-  .mobile-menu-button {
-    display: flex;
-  }
+  .mobile-menu-button { display: flex; }
 }
 
+html.dark .mobile-menu-button {
+  background: rgba(18, 18, 26, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.45),
+    0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+html.light .mobile-menu-button {
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  backdrop-filter: blur(20px) saturate(155%);
+  -webkit-backdrop-filter: blur(20px) saturate(155%);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.1),
+    0 1px 0 rgba(255, 255, 255, 1) inset;
+}
+
+/* ─── Hamburger lines ───────────────────────────────────────────────────── */
 .hamburger-line {
   width: 16px;
   height: 2px;
-  background: var(--pill-bg, #0A84FF);
   border-radius: 1px;
   transform-origin: center;
+  display: block;
 }
 
+html.dark .hamburger-line {
+  background: linear-gradient(90deg, #00ffd1, #c4a8ff);
+}
+
+html.light .hamburger-line {
+  background: linear-gradient(90deg, #111111 0%, hsl(var(--primary)) 100%);
+}
+
+/* ─── Mobile menu popover ───────────────────────────────────────────────── */
 .mobile-menu-popover {
   position: fixed;
-  top: 4.2em;
+  top: 4.5em;
   left: 1rem;
   right: 1rem;
-  background: var(--base, #fff);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border-radius: 22px;
   z-index: 98;
   opacity: 0;
   transform-origin: top center;
   visibility: hidden;
+  overflow: hidden;
 }
 
+html.dark .mobile-menu-popover {
+  background: rgba(10, 10, 16, 0.96);
+  backdrop-filter: blur(32px) saturate(165%);
+  -webkit-backdrop-filter: blur(32px) saturate(165%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.6),
+    0 1px 0 rgba(255, 255, 255, 0.07) inset;
+}
+
+html.light .mobile-menu-popover {
+  background: rgba(255, 255, 255, 0.99);
+  backdrop-filter: blur(28px) saturate(150%);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow:
+    0 20px 52px rgba(0, 0, 0, 0.1),
+    0 1px 0 rgba(255, 255, 255, 1) inset;
+}
+
+/* ─── Nav links list ────────────────────────────────────────────────────── */
 .mobile-menu-list {
   list-style: none;
   margin: 0;
-  padding: 6px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.mobile-menu-popover .mobile-menu-link {
-  display: block;
-  padding: 12px 16px;
-  color: #fff;
-  background-color: var(--pill-bg, #0A84FF);
+/* ─── Individual nav link ───────────────────────────────────────────────── */
+.mobile-menu-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 18px;
   text-decoration: none;
   font-family: var(--font-display, 'Gellix', sans-serif);
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  border-radius: 14px;
-  transition: all 0.2s ease;
+  border-radius: 16px;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
 }
 
-.mobile-menu-popover .mobile-menu-link:hover,
-.mobile-menu-popover .mobile-menu-link.is-active {
-  opacity: 0.85;
+/* Dark mode links */
+html.dark .mobile-menu-link {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.82);
 }
 
+html.dark .mobile-menu-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+html.dark .mobile-menu-link.is-active {
+  background: rgba(0, 255, 209, 0.08);
+  border-color: rgba(0, 255, 209, 0.24);
+  color: #ffffff;
+}
+
+/* Light mode links */
+html.light .mobile-menu-link {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  color: #000000;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+html.light .mobile-menu-link:hover {
+  background: #f6f6f8;
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+html.light .mobile-menu-link.is-active {
+  background: #f0f0f3;
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #000000;
+}
+
+/* ─── Active indicator dot ──────────────────────────────────────────────── */
+.mobile-active-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+html.dark .mobile-active-dot {
+  background: linear-gradient(135deg, #00ffd1, #8a5cff);
+  box-shadow: 0 0 8px rgba(0, 255, 209, 0.55);
+}
+
+html.light .mobile-active-dot {
+  background: linear-gradient(135deg, #0d9488, #7c3aed);
+}
+
+/* ─── Controls (language toggle) ───────────────────────────────────────── */
 .mobile-menu-controls {
   display: flex;
   gap: 6px;
-  padding: 0 6px 6px;
+  padding: 0 8px 8px;
 }
 
 .mobile-menu-controls .ctrl-btn {
   flex: 1;
-  padding: 10px;
-  background: var(--pill-bg);
-  color: #fff;
-  border: none;
-  border-radius: 14px;
+  padding: 13px;
+  border-radius: 16px;
   cursor: pointer;
   font-family: var(--font-display, 'Gellix', sans-serif);
   font-size: 0.68rem;
@@ -540,4 +570,28 @@ html.light .pill-nav--liquid-glass .pill-nav-items::before {
   align-items: center;
   justify-content: center;
   gap: 5px;
+  transition: background 0.18s ease, box-shadow 0.18s ease, color 0.18s ease;
+}
+
+html.dark .mobile-menu-controls .ctrl-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+html.dark .mobile-menu-controls .ctrl-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+html.light .mobile-menu-controls .ctrl-btn {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  color: #000000;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+html.light .mobile-menu-controls .ctrl-btn:hover {
+  background: #f6f6f8;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
 }

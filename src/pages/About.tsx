@@ -8,6 +8,7 @@ import profilePhoto3 from "@/assets/profile-photo-3-black.jpg";
 import grainTexture from "@/assets/grain.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import ThrowableProfileCard from "@/components/ThrowableProfileCard";
+import Logo from "@/components/Logo";
 
 function FadeInSection({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -65,10 +66,11 @@ export default function About() {
     <div className="min-h-screen dot-grid bg-transparent overflow-x-hidden">
 
       {/* Portrait + Bio */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-12 sm:pb-20">
         <div className="glass-panel p-5 sm:p-8 md:p-14 grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-start">
           <FadeInSection className="lg:col-span-2 flex flex-col items-center gap-4 w-full">
-            <div className="w-full max-w-[320px] sm:max-w-none sm:w-fit flex flex-col items-stretch gap-4 mx-auto lg:mx-0" style={{ transform: 'translateX(5px)' }}>
+            <div className="w-full flex flex-col items-center gap-4">
+              <Logo height={64} />
               <ThrowableProfileCard
                 avatarUrls={[aboutPortrait, profilePhoto2, profilePhoto3]}
                 miniAvatarUrl={aboutPortrait}
@@ -78,7 +80,7 @@ export default function About() {
                 handle={t("about.card.handle")}
                 status={t("about.card.status")}
                 showUserInfo={true}
-                className="w-full mx-auto"
+                className="w-full"
               />
               <div className="flex flex-col sm:flex-row gap-3 w-full">
                 <a href="/cv-pt.pdf" download className="btn-glass-secondary flex items-center justify-center gap-2 flex-1 text-xs sm:text-sm py-3 px-3 sm:px-4">

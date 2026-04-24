@@ -45,10 +45,40 @@ export default function ProjectDetail() {
     outcome: t(`${prefix}.outcome`),
   } : null;
   const [descOpen, setDescOpen] = useState(true);
+  const [descWidth, setDescWidth] = useState(380);
+  const [isResizing, setIsResizing] = useState(false);
   const [mobileView, setMobileView] = useState<"slides" | "description">("slides");
   const [isFullscreen, setIsFullscreen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const dragRef = useRef<{ startX: number; startWidth: number } | null>(null);
   const isMobile = useIsMobile();
+
+  const startResize = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    dragRef.current = { startX: e.clientX, startWidth: descWidth };
+    setIsResizing(true);
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+
+    const onMouseMove = (e: MouseEvent) => {
+      if (!dragRef.current) return;
+      const delta = dragRef.current.startX - e.clientX;
+      const newWidth = Math.min(window.innerWidth * 0.6, Math.max(280, dragRef.current.startWidth + delta));
+      setDescWidth(newWidth);
+    };
+
+    const onMouseUp = () => {
+      dragRef.current = null;
+      setIsResizing(false);
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+  }, [descWidth]);
 
   const enterFullscreen = useCallback(() => {
     if (containerRef.current?.requestFullscreen) {
@@ -269,8 +299,11 @@ export default function ProjectDetail() {
           <div ref={containerRef} className="relative flex" style={isFullscreen ? { background: "#000", height: "100vh", overflow: "auto" } : {}}>
             {/* SLIDES FEED */}
             <div
-              className="flex-1 transition-all duration-500"
-              style={{ marginRight: descOpen ? "380px" : "0" }}
+              className="flex-1"
+              style={{
+                marginRight: descOpen ? `${descWidth}px` : "0",
+                transition: isResizing ? "none" : "margin-right 0.4s cubic-bezier(0.16,1,0.3,1)",
+              }}
             >
               {/* Project title */}
               <div className="max-w-[1920px] mx-auto px-6 pt-12 pb-8">
@@ -325,18 +358,47 @@ export default function ProjectDetail() {
             <AnimatePresence>
               {descOpen && (
                 <motion.aside
-                  initial={{ x: 380, opacity: 0 }}
+                  initial={{ x: descWidth, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  exit={{ x: 380, opacity: 0 }}
+                  exit={{ x: descWidth, opacity: 0 }}
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   className="fixed right-0 top-0 h-full z-50 overflow-y-auto"
                   style={{
-                    width: "380px",
+                    width: `${descWidth}px`,
                     background: "hsl(var(--background))",
                     backdropFilter: "blur(20px)",
                     borderLeft: "1px solid hsl(var(--border))",
+                    userSelect: isResizing ? "none" : "auto",
                   }}
                 >
+                  {/* ── DRAG HANDLE */}
+                  <div
+                    onMouseDown={startResize}
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                      top: 0,
+                      bottom: 0,
+                      width: "6px",
+                      cursor: "col-resize",
+                      zIndex: 10,
+                      background: isResizing ? "rgba(10,132,255,0.35)" : "transparent",
+                      transition: "background 0.2s",
+                    }}
+                    onMouseEnter={e => (e.currentTarget.style.background = "rgba(10,132,255,0.25)")}
+                    onMouseLeave={e => { if (!isResizing) e.currentTarget.style.background = "transparent"; }}
+                  >
+                    <div style={{
+                      position: "absolute",
+                      left: "2px",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      width: "2px",
+                      height: "40px",
+                      borderRadius: "2px",
+                      background: "rgba(10,132,255,0.5)",
+                    }} />
+                  </div>
                   <div className="sticky top-0 flex items-center justify-between px-6 py-5 z-10"
                     style={{ background: "hsl(var(--background))", borderBottom: "1px solid hsl(var(--border))" }}>
                     <span className="font-display text-xs tracking-[0.2em] uppercase" style={{ color: "hsl(var(--primary))" }}>

@@ -42,7 +42,15 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
   }, [theme]);
 
-  const toggleTheme = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  const toggleTheme = () => {
+    const next: Theme = theme === "dark" ? "light" : "dark";
+    if (typeof document !== "undefined" && "startViewTransition" in document) {
+      (document as Document & { startViewTransition: (cb: () => void) => void })
+        .startViewTransition(() => setTheme(next));
+    } else {
+      setTheme(next);
+    }
+  };
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

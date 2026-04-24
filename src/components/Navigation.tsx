@@ -5,8 +5,7 @@ import { useLocation } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import PillNav from "@/components/PillNav";
-
-const LOGO_SVG = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%25" stop-color="%2300ffd1"/><stop offset="50%25" stop-color="%238a5cff"/><stop offset="100%25" stop-color="%23ff5c7a"/></linearGradient></defs><rect x="5" y="5" width="14" height="14" rx="3" fill="url(%23g)"/></svg>`;
+import Logo from "@/components/Logo";
 
 export default function Navigation() {
   const location = useLocation();
@@ -68,7 +67,8 @@ export default function Navigation() {
 
   return (
     <PillNav
-      logo={LOGO_SVG}
+      logo=""
+      logoNode={<Logo height={64} />}
       logoAlt="Guima"
       items={items}
       activeHref={location.pathname}
@@ -78,7 +78,7 @@ export default function Navigation() {
       pillTextColor={isDark ? "hsl(0, 0%, 94%)" : "hsl(260, 15%, 18%)"}
       extraControls={extraControls}
       mobileExtraControls={mobileExtraControls}
-      initialLoadAnimation={true}
+      initialLoadAnimation={false}
     />
   );
 }

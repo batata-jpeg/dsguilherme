@@ -3,6 +3,7 @@ import { Github, Linkedin, Instagram, ArrowUpRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import BehanceIcon from "@/components/icons/BehanceIcon";
 import { SOCIAL } from "@/config/links";
+import Logo from "@/components/Logo";
 
 const socials = [
   { icon: Github, href: SOCIAL.github, label: "GitHub" },
@@ -29,13 +30,8 @@ export default function Footer() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-12">
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl glass-panel-sm flex items-center justify-center">
-                <div className="w-3 h-3 rounded-sm" style={{ background: "var(--gradient-text)" }} />
-              </div>
-              <span className="font-display font-bold text-sm tracking-widest uppercase" style={{ color: "hsl(var(--foreground))" }}>
-                Guima
-              </span>
+            <div className="flex items-center">
+              <Logo height={80} style={{ marginLeft: "-27px" }} />
             </div>
             <p className="font-body text-sm leading-relaxed max-w-md" style={{ color: "hsl(var(--muted-foreground))" }}>
               {t("footer.tagline")}

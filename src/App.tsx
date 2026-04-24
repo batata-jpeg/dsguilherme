@@ -60,10 +60,10 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <SiteBackground />
+            <LampCord />
             <div className="relative z-10 min-h-screen">
+              <NavigationWrapper />
               <ClickSpark sparkColor="#ffffff" sparkRadius={30} sparkCount={10} extraScale={1.3}>
-                <NavigationWrapper />
-                <LampCord />
                 <AnimatedRoutes />
               </ClickSpark>
               <ScrollToTop />

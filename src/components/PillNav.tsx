@@ -12,6 +12,7 @@ interface NavItem {
 interface PillNavProps {
   logo: string;
   logoAlt?: string;
+  logoNode?: React.ReactNode;
   items: NavItem[];
   activeHref?: string;
   className?: string;
@@ -39,6 +40,7 @@ const isRouterLink = (href?: string) => !!href && !isExternalLink(href);
 const PillNav = ({
   logo,
   logoAlt = 'Logo',
+  logoNode,
   items,
   activeHref,
   className = '',
@@ -195,23 +197,23 @@ const PillNav = ({
       <nav className={`pill-nav pill-nav--liquid-glass ${className}`} aria-label="Primary" style={cssVars}>
         {isRouterLink(logoHref) ? (
           <Link
-            className="pill-logo"
+            className={`${logoNode ? "pill-logo-link" : "pill-logo"} desktop-only`}
             to={logoHref}
             aria-label="Home"
-            onMouseEnter={handleLogoEnter}
+            onMouseEnter={logoNode ? undefined : handleLogoEnter}
             ref={(el) => { logoRef.current = el; }}
           >
-            <img src={logo} alt={logoAlt} ref={logoImgRef} />
+            {logoNode ?? <img src={logo} alt={logoAlt} ref={logoImgRef} />}
           </Link>
         ) : (
           <a
-            className="pill-logo"
+            className={`${logoNode ? "pill-logo-link" : "pill-logo"} desktop-only`}
             href={logoHref}
             aria-label="Home"
-            onMouseEnter={handleLogoEnter}
+            onMouseEnter={logoNode ? undefined : handleLogoEnter}
             ref={(el) => { logoRef.current = el; }}
           >
-            <img src={logo} alt={logoAlt} ref={logoImgRef} />
+            {logoNode ?? <img src={logo} alt={logoAlt} ref={logoImgRef} />}
           </a>
         )}
 
@@ -266,32 +268,33 @@ const PillNav = ({
           onClick={toggleMobileMenu}
           aria-label="Toggle menu"
           ref={hamburgerRef}
-          style={cssVars}
         >
           <span className="hamburger-line" />
           <span className="hamburger-line" />
         </button>
       </nav>
 
-      <div className="mobile-menu-popover mobile-only" ref={mobileMenuRef} style={cssVars}>
+      <div className="mobile-menu-popover mobile-only" ref={mobileMenuRef}>
         <ul className="mobile-menu-list">
           {items.map((item, i) => (
             <li key={item.href || `mobile-item-${i}`}>
               {isRouterLink(item.href) ? (
                 <Link
                   to={item.href}
-                  className={`mobile-menu-link${activeHref === item.href ? ' is-active text-foreground' : ''}`}
-                  onClick={() => { setIsMobileMenuOpen(false); }}
+                  className={`mobile-menu-link${activeHref === item.href ? ' is-active' : ''}`}
+                  onClick={toggleMobileMenu}
                 >
                   {item.label}
+                  {activeHref === item.href && <span className="mobile-active-dot" aria-hidden="true" />}
                 </Link>
               ) : (
                 <a
                   href={item.href}
-                  className={`mobile-menu-link${activeHref === item.href ? ' is-active text-foreground' : ''}`}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`mobile-menu-link${activeHref === item.href ? ' is-active' : ''}`}
+                  onClick={toggleMobileMenu}
                 >
                   {item.label}
+                  {activeHref === item.href && <span className="mobile-active-dot" aria-hidden="true" />}
                 </a>
               )}
             </li>

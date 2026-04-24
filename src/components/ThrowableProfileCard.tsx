@@ -92,10 +92,10 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
   }, [avatarUrls.length]);
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={`flex flex-col items-center ${className}`}>
       <div
         ref={mainCardRef}
-        className="relative"
+        className="relative w-fit"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
@@ -145,7 +145,7 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
       </div>
 
       <motion.p
-        className="text-center mt-3 font-display text-xs tracking-[0.15em] uppercase select-none"
+        className="text-center mt-3 font-display text-[10px] sm:text-xs tracking-[0.08em] sm:tracking-[0.15em] uppercase select-none px-2 w-full break-words"
         style={{ color: 'hsl(var(--muted-foreground))' }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.5 }}
