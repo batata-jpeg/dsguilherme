@@ -300,7 +300,7 @@ const translations: Record<Language, Record<string, string>> = {
     "about.card.handle": "carvalhoguilherme_",
     "about.card.status": "Disponível",
     "about.story.label": "A História",
-    "about.story.p1": "Sou GUILHERME CARVALHO, designer gráfico especializado em criar soluções visuais inovadoras e eficazes. Com 7 anos de experiência, meu trabalho abrange desde identidades visuais até interfaces digitais, sempre com foco em estética e funcionalidade. Estou sempre em busca de novos desafios que me permitam aplicar criatividade e habiliades técnicas para transformar ideias em realidade.",
+    "about.story.p1": "Sou GUILHERME CARVALHO GUIMARÃES, designer gráfico especializado em criar soluções visuais inovadoras e eficazes. Com 7 anos de experiência, meu trabalho abrange desde identidades visuais até interfaces digitais, sempre com foco em estética e funcionalidade. Estou sempre em busca de novos desafios que me permitam aplicar criatividade e habiliades técnicas para transformar ideias em realidade.",
     "about.story.p2": "Nascido e criado na cidade de Uberlândia-MG, aos 18 anos deicidi começar a atuar com o design gráfico de fato, sendo aquilo que eu mais gostava, me mudando para São Paulo - SP, tendo a expectativa de me especializar no assunto.",
     "about.stats.years": "Anos",
     "about.stats.projects": "Projetos",
