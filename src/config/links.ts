@@ -5,7 +5,7 @@ function envStr(key: string, fallback: string): string {
 
 export const CONTACT_EMAIL = envStr("VITE_CONTACT_EMAIL", "guicarvalhoguima@gmail.com");
 export const MAILTO_HREF = `mailto:${CONTACT_EMAIL}`;
-export const WHATSAPP_CHAT_URL = envStr("VITE_WHATSAPP_URL", "https://w.app/hmzide");
+export const WHATSAPP_CHAT_URL = envStr("VITE_WHATSAPP_URL", "https://wa.me/5534998855454?text=Ol%C3%A1%2C%20gostaria%20de%20contratar%20um%20servi%C3%A7o%20seu!");
 
 export const SOCIAL = {
   linkedin: envStr(
