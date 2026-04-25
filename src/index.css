@@ -203,8 +203,6 @@
     color: hsl(var(--foreground));
     min-height: 100vh;
     overflow-x: hidden;
-    overscroll-behavior-y: none;
-    -webkit-overflow-scrolling: touch;
     transition:
       background-color 0.45s ease,
       color 0.45s ease;
