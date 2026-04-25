@@ -360,10 +360,17 @@
   background: transparent;
 }
 
-.pc-contact-btn:hover {
-  border-color: rgba(255, 255, 255, 0.4);
-  transform: translateY(-1px);
-  transition: all 0.2s ease;
+@media (hover: hover) {
+  .pc-contact-btn:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+  }
+}
+
+.pc-contact-btn:active {
+  transform: scale(0.96);
+  opacity: 0.85;
 }
 
 .pc-content:not(.pc-avatar-content) {

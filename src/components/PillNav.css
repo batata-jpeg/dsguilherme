@@ -352,8 +352,15 @@ html.light .pill-nav--liquid-glass .pill-nav-items::before {
   overflow: hidden;
 }
 
-.pill-nav-controls .ctrl-btn:hover {
-  opacity: 0.85;
+@media (hover: hover) {
+  .pill-nav-controls .ctrl-btn:hover {
+    opacity: 0.85;
+  }
+}
+
+.pill-nav-controls .ctrl-btn:active {
+  opacity: 0.7;
+  transform: scale(0.95);
 }
 
 /* ─── Visibility utils ──────────────────────────────────────────────────── */
@@ -500,7 +507,15 @@ html.dark .mobile-menu-link {
   color: rgba(255, 255, 255, 0.82);
 }
 
-html.dark .mobile-menu-link:hover {
+@media (hover: hover) {
+  html.dark .mobile-menu-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+  }
+}
+
+html.dark .mobile-menu-link:active {
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.16);
   color: #ffffff;
@@ -520,7 +535,15 @@ html.light .mobile-menu-link {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
-html.light .mobile-menu-link:hover {
+@media (hover: hover) {
+  html.light .mobile-menu-link:hover {
+    background: #f6f6f8;
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  }
+}
+
+html.light .mobile-menu-link:active {
   background: #f6f6f8;
   border-color: rgba(0, 0, 0, 0.1);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
@@ -579,7 +602,14 @@ html.dark .mobile-menu-controls .ctrl-btn {
   color: rgba(255, 255, 255, 0.82);
 }
 
-html.dark .mobile-menu-controls .ctrl-btn:hover {
+@media (hover: hover) {
+  html.dark .mobile-menu-controls .ctrl-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+  }
+}
+
+html.dark .mobile-menu-controls .ctrl-btn:active {
   background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
 }
@@ -591,7 +621,14 @@ html.light .mobile-menu-controls .ctrl-btn {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
-html.light .mobile-menu-controls .ctrl-btn:hover {
+@media (hover: hover) {
+  html.light .mobile-menu-controls .ctrl-btn:hover {
+    background: #f6f6f8;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  }
+}
+
+html.light .mobile-menu-controls .ctrl-btn:active {
   background: #f6f6f8;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
 }

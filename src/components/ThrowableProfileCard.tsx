@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProfileCard from './ProfileCard';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 
 const clamp = (v: number, min = 0, max = 100) => Math.min(Math.max(v, min), max);
@@ -34,6 +35,7 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const mainCardRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     avatarUrls.forEach((url) => {
@@ -74,14 +76,16 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
   }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (isMobile) return;
     const el = mainCardRef.current;
     if (el) setCardVars(el, e.clientX, e.clientY);
-  }, [setCardVars]);
+  }, [setCardVars, isMobile]);
 
   const handleMouseLeave = useCallback(() => {
+    if (isMobile) return;
     const el = mainCardRef.current;
     if (el) clearCardVars(el);
-  }, [clearCardVars]);
+  }, [clearCardVars, isMobile]);
 
   const goNext = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % avatarUrls.length);
@@ -116,7 +120,7 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
           <>
             <button
               onClick={goPrev}
-              className="absolute -left-2 sm:left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
+              className="absolute -left-2 sm:left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 active:scale-95"
               style={{
                 background: 'rgba(255,255,255,0.1)',
                 backdropFilter: 'blur(8px)',
@@ -129,7 +133,7 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
             </button>
             <button
               onClick={goNext}
-              className="absolute -right-2 sm:right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
+              className="absolute -right-2 sm:right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 active:scale-95"
               style={{
                 background: 'rgba(255,255,255,0.1)',
                 backdropFilter: 'blur(8px)',

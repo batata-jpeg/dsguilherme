@@ -2,6 +2,7 @@ import ColorBends from "@/components/ColorBends";
 import HexagonBackground from "@/components/HexagonBackground";
 import { useTheme } from "@/contexts/ThemeContext";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
 export const SITE_BEND_COLORS = ["#ff5c7a", "#8a5cff", "#00ffd1"] as const;
@@ -9,7 +10,10 @@ export const SITE_BEND_COLORS = ["#ff5c7a", "#8a5cff", "#00ffd1"] as const;
 export default function SiteBackground() {
   const { theme } = useTheme();
   const reduceMotion = usePrefersReducedMotion();
+  const isMobile = useIsMobile();
   const isLight = theme === "light";
+  // Disable heavy WebGL on mobile/tablet to prevent flicker and save battery
+  const useStaticBg = reduceMotion || isMobile;
 
   return (
     <div
@@ -26,7 +30,7 @@ export default function SiteBackground() {
           <div className="pointer-events-auto h-full w-full min-h-[100dvh]">
             <HexagonBackground className="h-full min-h-[100dvh] w-full" />
           </div>
-        ) : reduceMotion ? (
+        ) : useStaticBg ? (
           <div className="relative h-full w-full min-h-[100dvh] bg-black">
             <div
               className="absolute inset-0"
@@ -39,6 +43,16 @@ export default function SiteBackground() {
                 `,
               }}
             />
+            {/* Mobile: subtle slow-pulse animation instead of WebGL */}
+            {isMobile && !reduceMotion && (
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: `radial-gradient(ellipse 60% 40% at 50% 50%, rgba(138, 92, 255, 0.08) 0%, transparent 60%)`,
+                  animation: "mobile-bg-pulse 6s ease-in-out infinite",
+                }}
+              />
+            )}
             <div className="absolute inset-0 z-[1] site-bg-dark-veil" aria-hidden />
           </div>
         ) : (

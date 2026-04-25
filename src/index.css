@@ -193,6 +193,8 @@
     scroll-behavior: smooth;
     background: transparent;
     overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
@@ -201,6 +203,8 @@
     color: hsl(var(--foreground));
     min-height: 100vh;
     overflow-x: hidden;
+    overscroll-behavior-y: none;
+    -webkit-overflow-scrolling: touch;
     transition:
       background-color 0.45s ease,
       color 0.45s ease;
@@ -261,10 +265,12 @@
   transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
 }
 
-.glass-panel:hover {
-  border-color: var(--glass-border-hover);
-  box-shadow: var(--glass-shadow-hover);
-  transform: translateY(-1px);
+@media (hover: hover) {
+  .glass-panel:hover {
+    border-color: var(--glass-border-hover);
+    box-shadow: var(--glass-shadow-hover);
+    transform: translateY(-1px);
+  }
 }
 
 .glass-panel-sm {
@@ -296,10 +302,17 @@
   box-shadow: 0 2px 16px hsl(var(--primary) / 0.25);
 }
 
-.btn-glass-primary:hover {
-  background: hsl(var(--primary) / 0.85);
-  box-shadow: 0 4px 24px hsl(var(--primary) / 0.40);
-  transform: translateY(-1px);
+@media (hover: hover) {
+  .btn-glass-primary:hover {
+    background: hsl(var(--primary) / 0.85);
+    box-shadow: 0 4px 24px hsl(var(--primary) / 0.40);
+    transform: translateY(-1px);
+  }
+}
+
+.btn-glass-primary:active {
+  transform: scale(0.97);
+  opacity: 0.9;
 }
 
 .btn-glass-secondary {
@@ -320,10 +333,17 @@
   cursor: pointer;
 }
 
-.btn-glass-secondary:hover {
-  background: hsl(var(--primary) / 0.10);
-  border-color: hsl(var(--primary) / 0.80);
-  transform: translateY(-1px);
+@media (hover: hover) {
+  .btn-glass-secondary:hover {
+    background: hsl(var(--primary) / 0.10);
+    border-color: hsl(var(--primary) / 0.80);
+    transform: translateY(-1px);
+  }
+}
+
+.btn-glass-secondary:active {
+  transform: scale(0.97);
+  opacity: 0.85;
 }
 
 /* ─── Gradient Text ──────────────────────────────────────────────────────── */
@@ -453,6 +473,11 @@
   to { transform: rotate(360deg); }
 }
 
+@keyframes mobile-bg-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
 /* Hero — selo “disponível para trabalho”: pulso singelo, cor sólida (sem gradiente multicolor no texto) */
 .avail-for-work-badge {
   border-color: hsl(var(--primary) / 0.42);
@@ -557,6 +582,14 @@ html.light .avail-for-work-badge {
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation-duration: 0.01ms !important;
+  }
+}
+
+/* Disable view transitions on mobile/touch — prevents black flicker on scroll */
+@media (max-width: 1023px) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
   }
 }
 
