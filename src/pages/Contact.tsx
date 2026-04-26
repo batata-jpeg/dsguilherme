@@ -90,10 +90,17 @@ export default function Contact() {
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         {
-          from_name: form.name,
+          // send every naming variant so the template works regardless of variable names
+          from_name:  form.name,
           from_email: form.email,
-          service: form.service,
-          message: form.message,
+          name:       form.name,
+          nome:       form.name,
+          email:      form.email,
+          reply_to:   form.email,   // makes "Responder" button work in email client
+          service:    form.service,
+          servico:    form.service,
+          message:    form.message,
+          mensagem:   form.message,
         },
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       )
