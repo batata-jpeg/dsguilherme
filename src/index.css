@@ -583,11 +583,4 @@ html.light .avail-for-work-badge {
   }
 }
 
-/* Disable view transitions on mobile/touch — prevents black flicker on scroll */
-@media (max-width: 1023px) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none !important;
-  }
-}
 
