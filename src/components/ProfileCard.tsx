@@ -173,6 +173,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     const shell = shellRef.current;
     if (!shell || !tiltEngine) return;
     shell.classList.add('active', 'entering');
+    wrapRef.current?.classList.add('active');
     if (enterTimerRef.current) window.clearTimeout(enterTimerRef.current);
     enterTimerRef.current = window.setTimeout(() => {
       shell.classList.remove('entering');
@@ -189,6 +190,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       const { x, y, tx, ty } = tiltEngine.getCurrent();
       if (Math.hypot(tx - x, ty - y) < 0.6) {
         shell.classList.remove('active');
+        wrapRef.current?.classList.remove('active');
         leaveRafRef.current = null;
       } else {
         leaveRafRef.current = requestAnimationFrame(checkSettle);
@@ -198,15 +200,26 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     leaveRafRef.current = requestAnimationFrame(checkSettle);
   }, [tiltEngine]);
 
+  const neutralBetaRef = useRef<number | null>(null);
+
   const handleDeviceOrientation = useCallback((event: DeviceOrientationEvent) => {
     const shell = shellRef.current;
     if (!shell || !tiltEngine) return;
     const { beta, gamma } = event;
     if (beta == null || gamma == null) return;
+
+    // Calibrate neutral hold angle on first reading
+    if (neutralBetaRef.current === null) neutralBetaRef.current = beta;
+
+    // Activate shine + glow effects
+    shell.classList.add('active');
+    wrapRef.current?.classList.add('active');
+
     const centerX = shell.clientWidth / 2;
     const centerY = shell.clientHeight / 2;
+    const betaDev = beta - neutralBetaRef.current;
     const x = clamp(centerX + gamma * mobileTiltSensitivity, 0, shell.clientWidth);
-    const y = clamp(centerY + (beta - ANIMATION_CONFIG.DEVICE_BETA_OFFSET) * mobileTiltSensitivity, 0, shell.clientHeight);
+    const y = clamp(centerY + betaDev * mobileTiltSensitivity, 0, shell.clientHeight);
     tiltEngine.setTarget(x, y);
   }, [tiltEngine, mobileTiltSensitivity]);
 
@@ -219,15 +232,21 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     shell.addEventListener('pointermove', handlePointerMove as EventListener);
     shell.addEventListener('pointerleave', handlePointerLeave as EventListener);
 
+    // Auto-start gyro on Android (no permission needed)
+    const anyOrientation = window.DeviceOrientationEvent as typeof DeviceOrientationEvent & { requestPermission?: () => Promise<string>; };
+    const needsPermission = typeof anyOrientation?.requestPermission === 'function';
+
+    if (enableMobileTilt && !needsPermission) {
+      window.addEventListener('deviceorientation', handleDeviceOrientation as EventListener, true);
+    }
+
+    // iOS 13+: request permission on tap
     const handleClick = () => {
-      if (!enableMobileTilt || location.protocol !== 'https:') return;
-      const anyMotion = window.DeviceMotionEvent as typeof DeviceMotionEvent & { requestPermission?: () => Promise<string>; };
-      if (anyMotion && typeof anyMotion.requestPermission === 'function') {
-        anyMotion.requestPermission().then((state) => {
-          if (state === 'granted') window.addEventListener('deviceorientation', handleDeviceOrientation as EventListener);
+      if (!enableMobileTilt) return;
+      if (needsPermission) {
+        anyOrientation.requestPermission!().then((state) => {
+          if (state === 'granted') window.addEventListener('deviceorientation', handleDeviceOrientation as EventListener, true);
         }).catch(console.error);
-      } else {
-        window.addEventListener('deviceorientation', handleDeviceOrientation as EventListener);
       }
     };
     shell.addEventListener('click', handleClick);
@@ -243,7 +262,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       shell.removeEventListener('pointermove', handlePointerMove as EventListener);
       shell.removeEventListener('pointerleave', handlePointerLeave as EventListener);
       shell.removeEventListener('click', handleClick);
-      window.removeEventListener('deviceorientation', handleDeviceOrientation as EventListener);
+      window.removeEventListener('deviceorientation', handleDeviceOrientation as EventListener, true);
       if (enterTimerRef.current) window.clearTimeout(enterTimerRef.current);
       if (leaveRafRef.current) cancelAnimationFrame(leaveRafRef.current);
       tiltEngine.cancel();
