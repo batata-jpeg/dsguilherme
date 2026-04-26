@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProfileCard from './ProfileCard';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface ThrowableProfileCardProps {
   avatarUrls:     string[];
@@ -26,10 +28,22 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
   className = '',
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const isMobile = useIsMobile();
+
+  // iOS permission state
+  const [needsIOSTap, setNeedsIOSTap] = useState(false);
 
   useEffect(() => {
     avatarUrls.forEach(url => { const img = new Image(); img.src = url; });
   }, [avatarUrls]);
+
+  useEffect(() => {
+    if (!isMobile) return;
+    const anyOri = window.DeviceOrientationEvent as typeof DeviceOrientationEvent & {
+      requestPermission?: () => Promise<string>;
+    };
+    setNeedsIOSTap(typeof anyOri?.requestPermission === 'function');
+  }, [isMobile]);
 
   const goNext = useCallback(() => setCurrentIndex(p => (p + 1) % avatarUrls.length), [avatarUrls.length]);
   const goPrev = useCallback(() => setCurrentIndex(p => (p - 1 + avatarUrls.length) % avatarUrls.length), [avatarUrls.length]);
@@ -46,6 +60,9 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
           handle={handle}
           status={status}
           showUserInfo={showUserInfo}
+          enableTilt={true}
+          enableMobileTilt={isMobile}
+          mobileTiltSensitivity={8}
         />
 
         {avatarUrls.length > 1 && (
@@ -69,6 +86,20 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
           </>
         )}
       </div>
+
+      <motion.p
+        className="text-center mt-3 font-display text-[10px] sm:text-xs tracking-[0.08em] sm:tracking-[0.15em] uppercase select-none px-2 w-full break-words"
+        style={{ color: 'hsl(var(--muted-foreground))' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.5 }}
+        transition={{ delay: 1.5, duration: 0.8 }}
+      >
+        {isMobile
+          ? needsIOSTap
+            ? '✦ Toque no card para ativar o giroscópio ✦'
+            : '✦ Gire o celular para interagir com o card ✦'
+          : '✦ Passe o mouse sobre o card para o efeito ✦'}
+      </motion.p>
     </div>
   );
 };
