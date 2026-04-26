@@ -31,13 +31,13 @@
 
 /* ─── Wrapper ─────────────────────────────────────────────────── */
 .pc-card-wrapper {
-  perspective: 500px;
+  perspective: 600px;
   transform: translate3d(0, 0, 0.1px);
   position: relative;
   touch-action: none;
 }
 
-/* ─── Behind glow ─────────────────────────────────────────────── */
+/* ─── Behind glow — only activated by JS (.active) ───────────── */
 .pc-behind {
   position: absolute;
   inset: 0;
@@ -49,11 +49,11 @@
     transparent var(--behind-glow-size)
   );
   filter: blur(50px) saturate(1.1);
-  opacity: calc(0.8 * var(--card-opacity));
-  transition: opacity 200ms ease;
+  opacity: calc(0.6 * var(--card-opacity));
+  transition: opacity 300ms ease;
 }
 
-.pc-card-wrapper:hover,
+/* JS adds/removes .active — this is the single source of truth */
 .pc-card-wrapper.active {
   --card-opacity: 1;
 }
@@ -73,25 +73,26 @@
   border-radius: var(--card-radius);
   position:     relative;
   animation:    glow-bg 12s linear infinite;
+  box-shadow:   0 12px 40px rgba(0, 0, 0, 0.7);
+  transition:   transform 0.8s ease, box-shadow 0.4s ease;
+  transform:    translateZ(0) rotateX(0deg) rotateY(0deg);
+  background:   rgba(0, 0, 0, 0.9);
+  backface-visibility: hidden;
+  overflow:     hidden;
+}
+
+/* Tilt — activated only by JS adding .active to the shell */
+.pc-card-shell.active .pc-card {
+  transition: none;
+  transform: translateZ(0) rotateX(var(--rotate-y)) rotateY(var(--rotate-x));
   box-shadow:
     rgba(0, 0, 0, 0.8)
     calc((var(--pointer-from-left) * 10px) - 3px)
     calc((var(--pointer-from-top)  * 20px) - 6px)
     20px -5px;
-  transition:         transform 1s ease;
-  transform:          translateZ(0) rotateX(0deg) rotateY(0deg);
-  background:         rgba(0, 0, 0, 0.9);
-  backface-visibility: hidden;
-  overflow:           hidden;
 }
 
-/* Tilt — triggered by CSS hover (desktop) OR JS 'active' on shell (gyro) */
-.pc-card:hover,
-.pc-card-shell.active .pc-card {
-  transition: none;
-  transform: translateZ(0) rotateX(var(--rotate-y)) rotateY(var(--rotate-x));
-}
-
+/* Smooth snap-in on first pointer enter */
 .pc-card-shell.entering .pc-card {
   transition: transform 180ms ease-out;
 }
@@ -113,7 +114,7 @@
   transform:        none;
 }
 
-/* ─── Holographic shine ───────────────────────────────────────── */
+/* ─── Holographic shine — very subtle at rest ─────────────────── */
 .pc-shine {
   mask-image:   var(--icon);
   mask-mode:    luminance;
@@ -121,7 +122,8 @@
   mask-size:    150%;
   mask-position: top calc(200% - (var(--background-y) * 5)) left calc(100% - var(--background-x));
   transition:   filter 0.8s ease;
-  filter:       brightness(0.66) contrast(1.33) saturate(0.33) opacity(0.5);
+  /* Subtle resting state */
+  filter:       brightness(0.4) contrast(1.1) saturate(0.15) opacity(0.2);
   animation:    holo-bg 18s linear infinite;
   animation-play-state: running;
   mix-blend-mode: color-dodge;
@@ -185,18 +187,15 @@
   transition:          opacity 0.8s ease;
 }
 
-/* Activate shine: hover (desktop) OR active shell (gyro) */
-.pc-card:hover .pc-shine,
+/* Activate shine — only when JS adds .active to shell */
 .pc-card-shell.active .pc-shine {
-  filter: brightness(0.85) contrast(1.5) saturate(0.5);
+  filter: brightness(0.5) contrast(1.15) saturate(0.25);
   animation-play-state: paused;
 }
 
-.pc-card:hover .pc-shine::before,
-.pc-card:hover .pc-shine::after,
 .pc-card-shell.active .pc-shine::before,
 .pc-card-shell.active .pc-shine::after {
-  opacity: 1;
+  opacity: 0.6;
 }
 
 .pc-shine::before {
@@ -222,9 +221,9 @@
     calc(var(--pointer-x) * 0.01) calc(var(--pointer-y) * 0.01);
   background-blend-mode: color-dodge;
   filter:
-    brightness(calc(2 - var(--pointer-from-center)))
-    contrast(calc(var(--pointer-from-center) + 2))
-    saturate(calc(0.5 + var(--pointer-from-center)));
+    brightness(calc(1.5 - var(--pointer-from-center) * 0.5))
+    contrast(calc(var(--pointer-from-center) + 1.5))
+    saturate(calc(0.3 + var(--pointer-from-center) * 0.4));
   mix-blend-mode: luminosity;
 }
 
@@ -238,46 +237,48 @@
     700% 700%,
     100% 100%;
   mix-blend-mode: difference;
-  filter: brightness(0.8) contrast(1.5);
+  filter: brightness(0.7) contrast(1.3);
 }
 
-/* ─── Glare ───────────────────────────────────────────────────── */
+/* ─── Glare — very subtle ─────────────────────────────────────── */
 .pc-glare {
   transform: translate3d(0, 0, 1.1px);
   overflow:  hidden;
   background-image: radial-gradient(
     farthest-corner circle at var(--pointer-x) var(--pointer-y),
-    hsl(248, 25%, 80%) 12%,
-    hsla(207, 40%, 30%, 0.8) 90%
+    hsla(248, 25%, 90%, 0.12) 12%,
+    hsla(207, 40%, 30%, 0.04) 90%
   );
   mix-blend-mode: overlay;
-  filter: brightness(0.8) contrast(1.2);
+  filter: brightness(0.9) contrast(1.1);
+  opacity: 0;
+  transition: opacity 0.4s ease;
   z-index: 4;
 }
 
-/* ─── Avatar ──────────────────────────────────────────────────── */
+.pc-card-shell.active .pc-glare {
+  opacity: 1;
+}
+
+/* ─── Avatar — consistent fill across all images ─────────────── */
 .pc-avatar-content {
-  mix-blend-mode:     luminosity;
   overflow:           hidden;
-  transform:          translateZ(2);
+  transform:          translateZ(0);
   backface-visibility: hidden;
+  /* Normal blend so photos look natural, no dark top shadow */
+  mix-blend-mode:     normal;
 }
 
 .pc-avatar-content .avatar {
   width:           100%;
+  height:          100%;
   position:        absolute;
-  left:            50%;
-  transform-origin: 50% 100%;
-  transform:
-    translateX(calc(-50% + (var(--pointer-from-left) - 0.5) * 6px))
-    translateZ(0)
-    scaleY(calc(1 + (var(--pointer-from-top)  - 0.5) * 0.02))
-    scaleX(calc(1 + (var(--pointer-from-left) - 0.5) * 0.01));
-  bottom:               -1px;
-  backface-visibility:  hidden;
-  will-change:          transform;
-  transition:           transform 120ms ease-out;
-  border-radius:        var(--card-radius);
+  inset:           0;
+  object-fit:      cover;
+  object-position: center top;
+  border-radius:   var(--card-radius);
+  transform:       translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* ─── User info bar ───────────────────────────────────────────── */

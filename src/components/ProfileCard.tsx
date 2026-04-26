@@ -94,8 +94,8 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
         '--pointer-from-center': `${clamp(Math.hypot(py - 50, px - 50) / 50, 0, 1)}`,
         '--pointer-from-top':    `${py / 100}`,
         '--pointer-from-left':   `${px / 100}`,
-        '--rotate-x':            `${round(-(cx / 5))}deg`,
-        '--rotate-y':            `${round(cy  / 4)}deg`,
+        '--rotate-x':            `${round(-(cx / 9))}deg`,
+        '--rotate-y':            `${round(cy  / 7)}deg`,
       };
       for (const [k, v] of Object.entries(props)) wrap.style.setProperty(k, v);
     };
@@ -171,19 +171,11 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     const shell = shellRef.current;
     const wrap  = wrapRef.current;
     if (!shell || !tiltEngine) return;
-    tiltEngine.toCenter();
-    const checkSettle = () => {
-      const { x, y, tx, ty } = tiltEngine.getCurrent();
-      if (Math.hypot(tx - x, ty - y) < 0.6) {
-        shell.classList.remove('active');
-        wrap?.classList.remove('active');
-        leaveRafRef.current = null;
-      } else {
-        leaveRafRef.current = requestAnimationFrame(checkSettle);
-      }
-    };
-    if (leaveRafRef.current) cancelAnimationFrame(leaveRafRef.current);
-    leaveRafRef.current = requestAnimationFrame(checkSettle);
+    // Deactivate immediately — CSS transitions handle the visual fade/return
+    shell.classList.remove('active');
+    wrap?.classList.remove('active');
+    if (leaveRafRef.current) { cancelAnimationFrame(leaveRafRef.current); leaveRafRef.current = null; }
+    tiltEngine.toCenter(); // reset vars so next enter starts from centre
   }, [tiltEngine]);
 
   // ── Gyroscope handler (mobile/tablet) ────────────────────────────────────
