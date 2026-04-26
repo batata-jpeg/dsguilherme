@@ -123,7 +123,7 @@
   mask-position: top calc(200% - (var(--background-y) * 5)) left calc(100% - var(--background-x));
   transition:   filter 0.8s ease;
   /* Subtle resting state */
-  filter:       brightness(0.4) contrast(1.1) saturate(0.15) opacity(0.2);
+  filter:       brightness(0.45) contrast(1.1) saturate(0.2) opacity(0.25);
   animation:    holo-bg 18s linear infinite;
   animation-play-state: running;
   mix-blend-mode: color-dodge;
@@ -189,13 +189,13 @@
 
 /* Activate shine — only when JS adds .active to shell */
 .pc-card-shell.active .pc-shine {
-  filter: brightness(0.5) contrast(1.15) saturate(0.25);
+  filter: brightness(0.65) contrast(1.35) saturate(0.55);
   animation-play-state: paused;
 }
 
 .pc-card-shell.active .pc-shine::before,
 .pc-card-shell.active .pc-shine::after {
-  opacity: 0.6;
+  opacity: 0.85;
 }
 
 .pc-shine::before {
@@ -221,9 +221,9 @@
     calc(var(--pointer-x) * 0.01) calc(var(--pointer-y) * 0.01);
   background-blend-mode: color-dodge;
   filter:
-    brightness(calc(1.5 - var(--pointer-from-center) * 0.5))
-    contrast(calc(var(--pointer-from-center) + 1.5))
-    saturate(calc(0.3 + var(--pointer-from-center) * 0.4));
+    brightness(calc(1.8 - var(--pointer-from-center) * 0.5))
+    contrast(calc(var(--pointer-from-center) + 1.8))
+    saturate(calc(0.5 + var(--pointer-from-center) * 0.6));
   mix-blend-mode: luminosity;
 }
 

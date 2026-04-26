@@ -94,8 +94,8 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
         '--pointer-from-center': `${clamp(Math.hypot(py - 50, px - 50) / 50, 0, 1)}`,
         '--pointer-from-top':    `${py / 100}`,
         '--pointer-from-left':   `${px / 100}`,
-        '--rotate-x':            `${round(-(cx / 9))}deg`,
-        '--rotate-y':            `${round(cy  / 7)}deg`,
+        '--rotate-x':            `${round(-(cx / 7))}deg`,
+        '--rotate-y':            `${round(cy  / 5.5)}deg`,
       };
       for (const [k, v] of Object.entries(props)) wrap.style.setProperty(k, v);
     };
