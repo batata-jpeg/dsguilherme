@@ -102,18 +102,18 @@ export default function Index() {
 
   const featuredProjects = [
   {
-    id: "armagedom-rpg",
-    title: "ARMAGEDOM - RPG",
-    category: t("projdet.armagedom.cardCategory"),
-    description: t("projdet.armagedom.cardDesc"),
-    image: project1,
-  },
-  {
     id: "gazz-energy",
     title: "GAZZ ENERGY",
     category: t("projdet.gazz.cardCategory"),
     description: t("projdet.gazz.cardDesc"),
     image: GAZZ_THUMB,
+  },
+  {
+    id: "armagedom-rpg",
+    title: "ARMAGEDOM - RPG",
+    category: t("projdet.armagedom.cardCategory"),
+    description: t("projdet.armagedom.cardDesc"),
+    image: project1,
   }];
 
 
