@@ -11,6 +11,7 @@ import PageTransition from "@/components/PageTransition";
 import LampCord from "@/components/LampCord";
 import ScrollToTop from "@/components/ScrollToTop";
 import SiteBackground from "@/components/SiteBackground";
+import HardwareAccelPopup from "@/components/HardwareAccelPopup";
 
 import Index from "./pages/Index.tsx";
 import Projects from "./pages/Projects.tsx";
@@ -59,6 +60,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <HardwareAccelPopup />
             <SiteBackground />
             <LampCord />
             <div className="relative z-10 min-h-screen">
