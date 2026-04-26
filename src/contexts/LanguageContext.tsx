@@ -164,6 +164,18 @@ const translations: Record<Language, Record<string, string>> = {
     "projdet.armagedom.cardCategory": "Identity",
     "projdet.armagedom.cardDesc": "Complete visual identity for the RPG board game Armagedom.",
 
+    // Gazz Energy project detail
+    "projdet.gazz.title": "GAZZ ENERGY",
+    "projdet.gazz.category": "Branding, Packaging, Retail Experience",
+    "projdet.gazz.description": "Gazz Energy is an energy supplement brand created for the IED (Istituto Europeo di Design) challenge in partnership with Magazine Luiza. The project covers the complete construction of the brand — from visual identity and logo design to packaging in multiple formats and an immersive 3D retail experience.\n\nThe brand was conceived to target a young urban audience focused on daily performance and focus, positioning itself in the energy supplement segment with an identity that balances intensity with accessibility.",
+    "projdet.gazz.client": "IED — Istituto Europeo di Design + Magazine Luiza",
+    "projdet.gazz.audience": "Young urban adults (18–35), focused on daily performance, productivity and active lifestyle",
+    "projdet.gazz.challenge": "The main challenge was creating a brand that stood out in a highly competitive segment — facing direct competitors like Red Bull — while maintaining a unique and differentiated visual language.\n\nIt was also necessary to develop an inclusive identity that communicated energy and modernity without alienating more diverse audience segments, and to create a complete brand system applicable to packaging, retail environments, and brand communications.",
+    "projdet.gazz.process": "The project began with brand strategy: defining positioning, tone of voice, and the visual pillars of the brand.\n\nThe visual identity was built on three concepts:\n\n• Geometric Typography — bold, strong letterforms conveying energy and performance\n• Movement — diagonal patterns and dynamic textures inspired by speed\n• Versatility — a color system spanning both intense and soft palettes for different product lines\n\nWith the identity defined, packaging was developed for three product formats (sachets, cans, and bottles) in three flavors (Citrus, Blueberry, and Açaí). Finally, a complete 3D retail environment was created in Blender — including store interior, product displays, and brand applications.",
+    "projdet.gazz.outcome": "The result is a complete brand system with strong visual cohesion across all touchpoints. Gazz Energy demonstrates the ability to build a brand from scratch — from strategic positioning to three-dimensional physical execution.\n\nThe project showcases mastery of visual identity, multi-format packaging design, brand pattern systems, and 3D retail environment creation, delivering a consistent and immersive brand experience.",
+    "projdet.gazz.cardCategory": "Branding",
+    "projdet.gazz.cardDesc": "Complete brand identity, packaging system and 3D retail experience for Gazz Energy.",
+
     // Project detail UI labels
     "projdet.label.year": "Year",
     "projdet.label.client": "Client",
@@ -377,6 +389,18 @@ const translations: Record<Language, Record<string, string>> = {
     "projdet.armagedom.outcome": "O resultado foi um jogo completo e funcional, com sistema próprio de regras, identidade visual consolidada e alto nível de imersão. O projeto demonstra domínio de game design, direção de arte e desenvolvimento de produto físico.\n\nO sistema final apresenta forte coesão entre narrativa e mecânica, proporcionando uma experiência envolvente e estratégica para os jogadores.",
     "projdet.armagedom.cardCategory": "Identidade",
     "projdet.armagedom.cardDesc": "Identidade visual completa para o jogo de tabuleiro RPG Armagedom.",
+
+    // Gazz Energy project detail
+    "projdet.gazz.title": "GAZZ ENERGY",
+    "projdet.gazz.category": "Branding, Embalagem, Experiência de Varejo",
+    "projdet.gazz.description": "Gazz Energy é uma marca de suplementos energéticos criada para o desafio do IED (Istituto Europeo di Design) em parceria com a Magazine Luiza. O projeto cobre a construção completa da marca — desde a identidade visual e design do logotipo até as embalagens em múltiplos formatos e uma experiência de varejo 3D imersiva.\n\nA marca foi concebida para atingir um público jovem urbano focado em performance e foco diários, posicionando-se no segmento de suplementos energéticos com uma identidade que equilibra intensidade e acessibilidade.",
+    "projdet.gazz.client": "IED — Istituto Europeo di Design + Magazine Luiza",
+    "projdet.gazz.audience": "Jovens adultos urbanos (18–35 anos), focados em performance diária, produtividade e estilo de vida ativo",
+    "projdet.gazz.challenge": "O principal desafio foi criar uma marca que se destacasse em um segmento altamente competitivo — enfrentando concorrentes diretos como Red Bull — mantendo uma linguagem visual única e diferenciada.\n\nTambém era necessário desenvolver uma identidade inclusiva que comunicasse energia e modernidade sem alienar segmentos de público mais diversos, e criar um sistema de marca completo aplicável a embalagens, ambientes de varejo e comunicações de marca.",
+    "projdet.gazz.process": "O projeto começou com a estratégia de marca: definição de posicionamento, tom de voz e os pilares visuais da marca.\n\nA identidade visual foi construída sobre três conceitos:\n\n• Tipografia Geométrica — letras fortes e marcantes que transmitem energia e performance\n• Movimento — padrões diagonais e texturas dinâmicas inspiradas na velocidade\n• Versatilidade — um sistema de cores que abrange paletas intensas e suaves para diferentes linhas de produto\n\nCom a identidade definida, foram desenvolvidas embalagens para três formatos de produto (sachês, latas e garrafas) em três sabores (Citrus, Blueberry e Açaí). Por fim, um ambiente de varejo 3D completo foi criado no Blender — incluindo interior da loja, displays de produto e aplicações de marca.",
+    "projdet.gazz.outcome": "O resultado é um sistema de marca completo com forte coesão visual em todos os pontos de contato. Gazz Energy demonstra a capacidade de construir uma marca do zero — do posicionamento estratégico à execução física tridimensional.\n\nO projeto exibe domínio de identidade visual, design de embalagem em múltiplos formatos, sistemas de padrões de marca e criação de ambientes de varejo 3D, entregando uma experiência de marca consistente e imersiva.",
+    "projdet.gazz.cardCategory": "Branding",
+    "projdet.gazz.cardDesc": "Identidade de marca completa, sistema de embalagens e experiência de varejo 3D para a Gazz Energy.",
 
     // Project detail UI labels
     "projdet.label.year": "Ano",

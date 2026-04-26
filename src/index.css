@@ -584,3 +584,13 @@ html.light .avail-for-work-badge {
 }
 
 
+
+/* Slide fade-in — CSS-only, no JS overhead */
+@keyframes slideFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.slide-fade-in {
+  opacity: 0;
+  animation: slideFadeIn 0.55s ease forwards;
+}

@@ -8,6 +8,7 @@ import heroVisualLight from "@/assets/hero-character-light.png";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
+const GAZZ_THUMB = "/gazz/gazz-01.jpg";
 import aboutPortrait from "@/assets/about-portrait.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -103,24 +104,16 @@ export default function Index() {
   {
     id: "armagedom-rpg",
     title: "ARMAGEDOM - RPG",
-    category: "Identidade",
-    description: "Identidade visual completa para o jogo de tabuleiro RPG Armagedom.",
+    category: t("projdet.armagedom.cardCategory"),
+    description: t("projdet.armagedom.cardDesc"),
     image: project1,
   },
   {
-    id: "armagedom-rpg",
-    title: "ARMAGEDOM - RPG",
-    category: "Identidade",
-    description: "Design de cartas e componentes do jogo.",
-    image: project2,
-  },
-  {
-    id: "armagedom-rpg",
-    title: "ARMAGEDOM - RPG",
-    category: "Identidade",
-    description: "Tabuleiro e materiais gráficos.",
-    image: project3,
-    year: "2023"
+    id: "gazz-energy",
+    title: "GAZZ ENERGY",
+    category: t("projdet.gazz.cardCategory"),
+    description: t("projdet.gazz.cardDesc"),
+    image: GAZZ_THUMB,
   }];
 
 
@@ -292,12 +285,18 @@ export default function Index() {
             </FadeInSection>
 
             <div className="space-y-5 sm:space-y-6">
-              <div className="glass-panel relative aspect-[16/10] lg:aspect-auto lg:h-[196px] flex items-center justify-center"
-                style={{ borderStyle: "dashed", opacity: 0.4 }}>
-                <span className="font-display text-[10px] tracking-[0.2em] uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>
-                  Em breve
-                </span>
-              </div>
+              <FadeInSection delay={0.2}>
+                <Link to={`/projects/${featuredProjects[1].id}`}>
+                  <div className="glass-panel group overflow-hidden relative aspect-[16/10] lg:aspect-auto lg:h-[196px] bg-[#08111e]">
+                    <div className="absolute inset-0 bg-no-repeat bg-center bg-cover transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${featuredProjects[1].image})` }} />
+                    <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 30%, rgba(10,20,50,0.85) 100%)" }} />
+                    <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
+                      <span className="block font-display text-[10px] tracking-widest uppercase mb-1" style={{ color: "rgba(255,255,255,0.6)" }}>{featuredProjects[1].category}</span>
+                      <h3 className="font-display font-bold text-xs sm:text-sm uppercase leading-tight text-white">{featuredProjects[1].title}</h3>
+                    </div>
+                  </div>
+                </Link>
+              </FadeInSection>
               <div className="glass-panel relative aspect-[16/10] lg:aspect-auto lg:h-[196px] flex items-center justify-center"
                 style={{ borderStyle: "dashed", opacity: 0.4 }}>
                 <span className="font-display text-[10px] tracking-[0.2em] uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>

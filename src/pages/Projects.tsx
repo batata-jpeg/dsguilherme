@@ -7,6 +7,7 @@ import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 import project4 from "@/assets/project-4.jpg";
 import project5 from "@/assets/project-5.jpg";
+const GAZZ_THUMB = "/gazz/gazz-01.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import BorderGlow from "@/components/BorderGlow";
 
@@ -28,6 +29,7 @@ export default function Projects() {
   const categories = [
     { key: "all", label: t("projects.filter.all") },
     { key: "Identity", label: "Identity" },
+    { key: "Branding", label: "Branding" },
   ];
 
   const projects = [
@@ -40,6 +42,16 @@ export default function Projects() {
       image: project1,
       year: "2024",
       tags: ["Identity", "Branding"],
+    },
+    {
+      id: "gazz-energy",
+      title: "GAZZ ENERGY",
+      category: t("projdet.gazz.cardCategory"),
+      categoryKey: "Branding",
+      description: t("projdet.gazz.cardDesc"),
+      image: GAZZ_THUMB,
+      year: "2024",
+      tags: ["Branding", "Packaging", "3D"],
     },
   ];
 

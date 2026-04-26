@@ -9,6 +9,23 @@ import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 import project4 from "@/assets/project-4.jpg";
 import project5 from "@/assets/project-5.jpg";
+const gazzSlides = [
+  "/gazz/gazz-01.jpg",
+  "/gazz/gazz-02.jpg",
+  "/gazz/gazz-04.jpg",
+  "/gazz/gazz-06.jpg",
+  "/gazz/gazz-07.jpg",
+  "/gazz/gazz-08.jpg",
+  "/gazz/gazz-11.jpg",
+  "/gazz/gazz-13.jpg",
+  "/gazz/gazz-14.jpg",
+  "/gazz/gazz-15.jpg",
+  "/gazz/gazz-17.jpg",
+  "/gazz/gazz-18.jpg",
+  "/gazz/gazz-19.jpg",
+  "/gazz/gazz-20.jpg",
+  "/gazz/gazz-21.jpg",
+];
 
 const projectStaticData: Record<string, {
   image: string;
@@ -25,6 +42,14 @@ const projectStaticData: Record<string, {
     tools: ["Illustrator", "Photoshop", "InDesign", "Figma"],
     slides: [project1, project2, project3, project4, project5],
     translationPrefix: "projdet.armagedom",
+  },
+  "gazz-energy": {
+    image: "/gazz/gazz-01.jpg",
+    year: "2024",
+    tags: ["Branding", "Packaging", "3D", "Visual Identity", "Retail Experience", "Creative Direction"],
+    tools: ["Illustrator", "Photoshop", "Blender", "Figma"],
+    slides: gazzSlides,
+    translationPrefix: "projdet.gazz",
   },
 };
 
@@ -167,18 +192,15 @@ export default function ProjectDetail() {
                 {/* Slides */}
                 <div className="px-4 pb-28 space-y-3">
                   {project.slides.map((img, i) => (
-                    <motion.div
+                    <div
                       key={i}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-40px" }}
-                      transition={{ duration: 0.5, delay: i * 0.05 }}
-                      className="relative w-full overflow-hidden"
+                      className="relative w-full overflow-hidden slide-fade-in"
                       style={{
                         aspectRatio: "16/9",
                         borderRadius: "var(--radius)",
                         border: "1px solid rgba(10,132,255,0.1)",
                         background: "#0a1432",
+                        animationDelay: `${i * 0.06}s`,
                       }}
                     >
                       <img
@@ -186,12 +208,13 @@ export default function ProjectDetail() {
                         alt={`${project.title} — slide ${i + 1}`}
                         className="w-full h-full object-contain"
                         loading={i === 0 ? "eager" : "lazy"}
+                        decoding={i === 0 ? "sync" : "async"}
                       />
                       <div className="absolute bottom-3 right-3 font-display text-[10px] tracking-widest"
                         style={{ color: "rgba(255,255,255,0.4)" }}>
                         {String(i + 1).padStart(2, "0")} / {String(project.slides.length).padStart(2, "0")}
                       </div>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </motion.div>
@@ -325,18 +348,15 @@ export default function ProjectDetail() {
               {/* 16:9 slides stacked vertically */}
               <div className="max-w-[1920px] mx-auto px-6 pb-24 space-y-4">
                 {project.slides.map((img, i) => (
-                  <motion.div
+                  <div
                     key={i}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-60px" }}
-                    transition={{ duration: 0.7, delay: i * 0.05 }}
-                    className="relative w-full overflow-hidden"
+                    className="relative w-full overflow-hidden slide-fade-in"
                     style={{
                       aspectRatio: "16/9",
                       borderRadius: "var(--radius)",
                       border: "1px solid rgba(10,132,255,0.1)",
                       background: "#0a1432",
+                      animationDelay: `${i * 0.06}s`,
                     }}
                   >
                     <img
@@ -344,12 +364,13 @@ export default function ProjectDetail() {
                       alt={`${project.title} — slide ${i + 1}`}
                       className="w-full h-full object-contain"
                       loading={i === 0 ? "eager" : "lazy"}
+                      decoding={i === 0 ? "sync" : "async"}
                     />
                     <div className="absolute bottom-4 right-4 font-display text-xs tracking-widest"
                       style={{ color: "rgba(255,255,255,0.4)" }}>
                       {String(i + 1).padStart(2, "0")} / {String(project.slides.length).padStart(2, "0")}
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>
