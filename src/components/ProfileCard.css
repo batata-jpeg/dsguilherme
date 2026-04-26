@@ -384,21 +384,14 @@
   }
 }
 
-/* ─── Mobile: tone down holographic (gyro keeps it permanently active) ─── */
+/* ─── Mobile/tablet: disable tilt and holographic entirely ───────────── */
 @media (max-width: 1023px) {
-  .pc-card-shell.active .pc-shine {
-    filter: brightness(0.52) contrast(1.2) saturate(0.35);
-  }
-  .pc-card-shell.active .pc-shine::before,
-  .pc-card-shell.active .pc-shine::after {
-    opacity: 0.55;
-  }
-  .pc-shine::before {
-    filter:
-      brightness(calc(1.5 - var(--pointer-from-center) * 0.3))
-      contrast(calc(var(--pointer-from-center) + 1.5))
-      saturate(calc(0.3 + var(--pointer-from-center) * 0.35));
-  }
+  .pc-card-wrapper  { perspective: none; touch-action: auto; }
+  .pc-card-shell.active .pc-card,
+  .pc-card-shell.entering .pc-card { transform: none !important; transition: none; }
+  .pc-shine, .pc-glare { display: none; }
+  .pc-behind         { display: none; }
+  .pc-card           { box-shadow: 0 8px 32px rgba(0,0,0,0.6); animation: none; }
 }
 
 /* ─── Responsive ──────────────────────────────────────────────── */
