@@ -62,7 +62,7 @@ const ThrowableProfileCard: React.FC<ThrowableProfileCardProps> = ({
           showUserInfo={showUserInfo}
           enableTilt={true}
           enableMobileTilt={isMobile}
-          mobileTiltSensitivity={8}
+          mobileTiltSensitivity={5}
         />
 
         {avatarUrls.length > 1 && (

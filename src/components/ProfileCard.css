@@ -384,33 +384,50 @@
   }
 }
 
+/* ─── Mobile: tone down holographic (gyro keeps it permanently active) ─── */
+@media (max-width: 1023px) {
+  .pc-card-shell.active .pc-shine {
+    filter: brightness(0.52) contrast(1.2) saturate(0.35);
+  }
+  .pc-card-shell.active .pc-shine::before,
+  .pc-card-shell.active .pc-shine::after {
+    opacity: 0.55;
+  }
+  .pc-shine::before {
+    filter:
+      brightness(calc(1.5 - var(--pointer-from-center) * 0.3))
+      contrast(calc(var(--pointer-from-center) + 1.5))
+      saturate(calc(0.3 + var(--pointer-from-center) * 0.35));
+  }
+}
+
 /* ─── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .pc-card        { height: 70svh; max-height: 450px; }
-  .pc-user-info   { --ui-inset: 15px; padding: 10px 12px; }
-  .pc-mini-avatar { width: 28px; height: 28px; }
+  .pc-card        { height: 72svh; max-height: 480px; }
+  .pc-user-info   { --ui-inset: 16px; padding: 10px 12px; }
+  .pc-mini-avatar { width: 36px; height: 36px; }
   .pc-user-details{ gap: 10px; }
   .pc-handle      { font-size: 13px; }
-  .pc-status      { font-size: 10px; }
-  .pc-contact-btn { padding: 6px 12px; font-size: 11px; }
+  .pc-status      { font-size: 11px; }
+  .pc-contact-btn { padding: 8px 14px; font-size: 11px; }
 }
 
 @media (max-width: 480px) {
-  .pc-card        { height: 55svh; max-height: 340px; }
-  .pc-user-info   { --ui-inset: 12px; padding: 8px 10px; }
-  .pc-mini-avatar { width: 24px; height: 24px; }
-  .pc-user-details{ gap: 8px; }
+  .pc-card        { height: 70svh; max-height: 440px; }
+  .pc-user-info   { --ui-inset: 14px; padding: 9px 11px; }
+  .pc-mini-avatar { width: 32px; height: 32px; }
+  .pc-user-details{ gap: 9px; }
   .pc-handle      { font-size: 12px; }
-  .pc-status      { font-size: 9px; }
-  .pc-contact-btn { padding: 5px 10px; font-size: 10px; border-radius: 50px; }
+  .pc-status      { font-size: 10px; }
+  .pc-contact-btn { padding: 7px 12px; font-size: 11px; border-radius: 50px; }
 }
 
 @media (max-width: 320px) {
-  .pc-card        { height: 55svh; max-height: 320px; }
-  .pc-user-info   { padding: 6px 8px; }
-  .pc-mini-avatar { width: 20px; height: 20px; }
-  .pc-user-details{ gap: 6px; }
+  .pc-card        { height: 66svh; max-height: 400px; }
+  .pc-user-info   { --ui-inset: 12px; padding: 7px 9px; }
+  .pc-mini-avatar { width: 28px; height: 28px; }
+  .pc-user-details{ gap: 7px; }
   .pc-handle      { font-size: 11px; }
-  .pc-status      { font-size: 8px; }
-  .pc-contact-btn { padding: 4px 8px; font-size: 9px; border-radius: 50px; }
+  .pc-status      { font-size: 9px; }
+  .pc-contact-btn { padding: 5px 10px; font-size: 10px; border-radius: 50px; }
 }
