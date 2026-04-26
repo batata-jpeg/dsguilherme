@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SpotlightCard from './SpotlightCard';
 import './HardwareAccelPopup.css';
 
-const STORAGE_KEY = 'hw-accel-popup-dismissed';
 
 interface BrowserInfo {
   name:  string;
@@ -94,7 +93,6 @@ export default function HardwareAccelPopup() {
     // Only show on desktop
     const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
     if (!isDesktop) return;
-    if (localStorage.getItem(STORAGE_KEY)) return;
 
     setBrowser(detectBrowser());
     // Small delay so the page renders first
@@ -104,7 +102,6 @@ export default function HardwareAccelPopup() {
 
   const dismiss = useCallback(() => {
     setVisible(false);
-    localStorage.setItem(STORAGE_KEY, '1');
   }, []);
 
   const handleCopy = useCallback(async () => {
