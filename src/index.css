@@ -191,10 +191,18 @@
 
   html {
     scroll-behavior: smooth;
-    background: transparent;
+    background: #000;
     overflow-x: hidden;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+  }
+
+  html.light {
+    background: hsl(260, 25%, 97%);
+  }
+
+  html.dark {
+    background: hsl(0, 0%, 4%);
   }
 
   body {
