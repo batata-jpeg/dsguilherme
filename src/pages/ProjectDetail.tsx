@@ -45,7 +45,7 @@ const projectStaticData: Record<string, {
   },
   "gazz-energy": {
     image: "/gazz/gazz-01.jpg",
-    year: "2024",
+    year: "2025",
     tags: ["Branding", "Packaging", "3D", "Visual Identity", "Retail Experience", "Creative Direction"],
     tools: ["Illustrator", "Photoshop", "Blender", "Figma"],
     slides: gazzSlides,

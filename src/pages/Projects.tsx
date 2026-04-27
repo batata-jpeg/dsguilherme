@@ -50,7 +50,7 @@ export default function Projects() {
       categoryKey: "Branding",
       description: t("projdet.gazz.cardDesc"),
       image: GAZZ_THUMB,
-      year: "2024",
+      year: "2025",
       tags: ["Branding", "Packaging", "3D"],
     },
   ];
