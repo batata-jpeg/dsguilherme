@@ -371,7 +371,7 @@ function ProjectStrip({
           style={{
             background: dk
               ? "linear-gradient(90deg, rgba(5,10,20,0.99) 0%, rgba(5,10,20,0.82) 55%, rgba(5,10,20,0.4) 100%)"
-              : "linear-gradient(90deg, rgba(240,245,255,0.99) 0%, rgba(240,245,255,0.86) 55%, rgba(240,245,255,0.5) 100%)",
+              : "linear-gradient(90deg, rgba(190,200,218,0.99) 0%, rgba(190,200,218,0.88) 55%, rgba(190,200,218,0.55) 100%)",
             transition: "background 0.35s ease",
           }}
         />
