@@ -384,7 +384,7 @@ function ProjectStrip({
           <motion.h2
             className="font-display font-extrabold uppercase leading-none"
             animate={{
-              color: isHovered ? (dk ? "#ffffff" : "#0a0f1e") : dk ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.38)",
+              color: isHovered ? "#ffffff" : dk ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.55)",
             }}
             style={{ fontSize: isHovered ? "clamp(2.4rem, 4vw, 4rem)" : "clamp(1.8rem, 3.2vw, 3.2rem)", transition: "font-size 0.22s ease" }}
             transition={{ duration: 0.22 }}
