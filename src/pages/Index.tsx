@@ -5,10 +5,8 @@ import { ArrowRight, ChevronDown, ExternalLink, Zap, Award, Users, Layers, Messa
 import GooeyNav from "@/components/GooeyNav";
 import heroVisualDark from "@/assets/hero-character.png";
 import heroVisualLight from "@/assets/hero-character-light.png";
-import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
-const GAZZ_THUMB = "/gazz/gazz-01.jpg";
 import aboutPortrait from "@/assets/about-portrait.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -98,23 +96,6 @@ export default function Index() {
   { value: "78+", label: t("index.stats.projects"), icon: Award },
   { value: "40+", label: t("index.stats.clients"), icon: Users },
   { value: "6", label: t("index.stats.fields"), icon: Layers }];
-
-
-  const featuredProjects = [
-  {
-    id: "gazz-energy",
-    title: "GAZZ ENERGY",
-    category: t("projdet.gazz.cardCategory"),
-    description: t("projdet.gazz.cardDesc"),
-    image: GAZZ_THUMB,
-  },
-  {
-    id: "armagedom-rpg",
-    title: "ARMAGEDOM - RPG",
-    category: t("projdet.armagedom.cardCategory"),
-    description: t("projdet.armagedom.cardDesc"),
-    image: project1,
-  }];
 
 
   return (
@@ -252,64 +233,6 @@ export default function Index() {
             <h2 className="font-display font-extrabold leading-[0.9] tracking-tight mt-4 uppercase text-center text-muted-foreground" style={{ fontSize: "clamp(1.75rem, 6vw, 3rem)" }}>
               {t("index.philosophy.author")}
             </h2>
-          </FadeInSection>
-        </div>
-      </section>
-
-      {/* ── FEATURED PROJECTS */}
-      <section className="relative py-20 sm:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <FadeInSection className="flex flex-col gap-6 mb-10 sm:mb-14 lg:flex-row lg:justify-between lg:items-end">
-            <div>
-              <h2 className="font-display font-bold uppercase" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}>
-                {t("index.featured.title")}
-              </h2>
-            </div>
-            <Link to="/projects" className="hidden lg:flex">
-              <button className="btn-glass-primary">{t("index.featured.cta")} <ArrowRight className="w-4 h-4" /></button>
-            </Link>
-          </FadeInSection>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6">
-            <FadeInSection delay={0.1} className="lg:col-span-2">
-              <Link to={`/projects/${featuredProjects[0].id}`}>
-                <div className="glass-panel group overflow-hidden relative aspect-[16/10] lg:aspect-auto lg:h-[420px] bg-[#08111e]">
-                  <div className="absolute inset-0 bg-no-repeat bg-center [background-size:110%_auto] sm:bg-cover sm:bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${featuredProjects[0].image})` }} />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 40%, rgba(10,20,50,0.80) 100%)" }} />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
-                    <span className="block font-display text-[10px] sm:text-xs tracking-widest uppercase mb-1" style={{ color: "rgba(255,255,255,0.6)" }}>{featuredProjects[0].category}</span>
-                    <h3 className="font-display font-bold text-sm sm:text-base uppercase leading-tight text-white">{featuredProjects[0].title}</h3>
-                  </div>
-                </div>
-              </Link>
-            </FadeInSection>
-
-            <div className="space-y-5 sm:space-y-6">
-              <FadeInSection delay={0.2}>
-                <Link to={`/projects/${featuredProjects[1].id}`}>
-                  <div className="glass-panel group overflow-hidden relative aspect-[16/10] lg:aspect-auto lg:h-[196px] bg-[#08111e]">
-                    <div className="absolute inset-0 bg-no-repeat bg-center bg-cover transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${featuredProjects[1].image})` }} />
-                    <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 30%, rgba(10,20,50,0.85) 100%)" }} />
-                    <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
-                      <span className="block font-display text-[10px] tracking-widest uppercase mb-1" style={{ color: "rgba(255,255,255,0.6)" }}>{featuredProjects[1].category}</span>
-                      <h3 className="font-display font-bold text-xs sm:text-sm uppercase leading-tight text-white">{featuredProjects[1].title}</h3>
-                    </div>
-                  </div>
-                </Link>
-              </FadeInSection>
-              <div className="glass-panel relative aspect-[16/10] lg:aspect-auto lg:h-[196px] flex items-center justify-center"
-                style={{ borderStyle: "dashed", opacity: 0.4 }}>
-                <span className="font-display text-[10px] tracking-[0.2em] uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>
-                  Em breve
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <FadeInSection className="lg:hidden mt-8 text-center">
-            <Link to="/projects" className="inline-flex w-full sm:w-auto">
-              <button className="btn-glass-primary w-full sm:w-auto justify-center">{t("index.featured.cta")} <ArrowRight className="w-4 h-4" /></button>
-            </Link>
           </FadeInSection>
         </div>
       </section>
