@@ -29,6 +29,7 @@ const gazzSlides = [
 
 const projectStaticData: Record<string, {
   image: string;
+  logoImage?: string;
   year: string;
   tags: string[];
   tools: string[];
@@ -45,6 +46,7 @@ const projectStaticData: Record<string, {
   },
   "gazz-energy": {
     image: "/gazz/gazz-01.jpg",
+    logoImage: "/gazz/gazz-01.jpg",
     year: "2025",
     tags: ["Branding", "Packaging", "3D", "Visual Identity", "Retail Experience", "Creative Direction"],
     tools: ["Illustrator", "Photoshop", "Blender", "Figma"],
@@ -60,6 +62,7 @@ export default function ProjectDetail() {
   const prefix = staticData?.translationPrefix ?? "";
   const project = staticData ? {
     ...staticData,
+    logoImage: staticData.logoImage ?? staticData.image,
     title: t(`${prefix}.title`),
     category: t(`${prefix}.category`),
     description: t(`${prefix}.description`),
@@ -190,7 +193,7 @@ export default function ProjectDetail() {
                 </div>
 
                 {/* Slides */}
-                <div className="px-4 pb-28 space-y-3">
+                <div className="px-4 space-y-3">
                   {project.slides.map((img, i) => (
                     <div
                       key={i}
@@ -216,6 +219,56 @@ export default function ProjectDetail() {
                       </div>
                     </div>
                   ))}
+                </div>
+
+                {/* ── PROJECT INFO BANNER (mobile) */}
+                <div
+                  className="pb-28"
+                  style={{
+                    background: "#07090f",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    marginTop: "0.75rem",
+                    padding: "2.5rem 1.25rem 8rem",
+                  }}
+                >
+                  <p
+                    className="font-display text-[10px] tracking-[0.3em] uppercase mb-3"
+                    style={{ color: "hsl(var(--primary))" }}
+                  >
+                    {project.category}
+                  </p>
+                  <h2
+                    className="font-display font-extrabold uppercase leading-[0.92] mb-5"
+                    style={{ fontSize: "clamp(2rem, 10vw, 3rem)", color: "#fff", letterSpacing: "-0.02em" }}
+                  >
+                    {project.title}
+                  </h2>
+                  <p
+                    className="font-body text-sm leading-relaxed mb-6"
+                    style={{ color: "rgba(255,255,255,0.52)" }}
+                  >
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {project.tags.slice(0, 4).map((tag) => (
+                      <span
+                        key={tag}
+                        className="font-display text-[10px] tracking-[0.18em] uppercase px-3 py-1 rounded-full"
+                        style={{
+                          border: "1px solid rgba(255,255,255,0.16)",
+                          color: "rgba(255,255,255,0.55)",
+                        }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <img
+                    src={project.logoImage ?? project.image}
+                    alt={`${project.title} logo`}
+                    className="w-full object-contain"
+                    style={{ maxHeight: "220px" }}
+                  />
                 </div>
               </motion.div>
             ) : (
@@ -372,6 +425,75 @@ export default function ProjectDetail() {
                     </div>
                   </div>
                 ))}
+              </div>
+
+              {/* ── PROJECT INFO BANNER */}
+              <div
+                style={{
+                  background: "#07090f",
+                  borderTop: "1px solid rgba(255,255,255,0.06)",
+                  padding: "clamp(3.5rem, 6vw, 6rem) clamp(1.5rem, 5vw, 6rem)",
+                }}
+              >
+                <div
+                  className="max-w-[1920px] mx-auto flex items-center gap-12 lg:gap-20"
+                >
+                  {/* Left: text */}
+                  <div className="flex-1 min-w-0 flex flex-col gap-6">
+                    <p
+                      className="font-display text-[11px] tracking-[0.35em] uppercase"
+                      style={{ color: "hsl(var(--primary))" }}
+                    >
+                      {project.category}
+                    </p>
+                    <h2
+                      className="font-display font-extrabold uppercase leading-[0.92]"
+                      style={{
+                        fontSize: "clamp(2.8rem, 5vw, 5.5rem)",
+                        color: "#fff",
+                        letterSpacing: "-0.02em",
+                      }}
+                    >
+                      {project.title}
+                    </h2>
+                    <p
+                      className="font-body leading-relaxed max-w-[520px]"
+                      style={{
+                        fontSize: "clamp(0.82rem, 1vw, 0.95rem)",
+                        color: "rgba(255,255,255,0.52)",
+                      }}
+                    >
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.slice(0, 4).map((tag) => (
+                        <span
+                          key={tag}
+                          className="font-display text-[10px] tracking-[0.2em] uppercase px-3 py-1 rounded-full"
+                          style={{
+                            border: "1px solid rgba(255,255,255,0.16)",
+                            color: "rgba(255,255,255,0.55)",
+                          }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right: logo / image */}
+                  <div
+                    className="flex-1 flex items-center justify-center"
+                    style={{ minHeight: "260px" }}
+                  >
+                    <img
+                      src={project.logoImage ?? project.image}
+                      alt={`${project.title} logo`}
+                      className="w-full object-contain"
+                      style={{ maxHeight: "380px", maxWidth: "560px" }}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
