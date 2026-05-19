@@ -1,6 +1,6 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronUp } from "lucide-react";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
@@ -39,12 +39,73 @@ type Project = {
 };
 
 // ── MacOS Modal ──────────────────────────────────────────────────────────────
+
+function DescPanelContent({ project, dk }: { project: Project; dk: boolean }) {
+  return (
+    <div className="flex flex-col flex-1 overflow-y-auto" style={{ padding: "28px 24px" }}>
+      <div className="mb-5">
+        <span className="block font-display text-[9px] tracking-[0.22em] uppercase mb-1" style={{ color: "hsl(var(--primary))" }}>
+          {project.category} · {project.year}
+        </span>
+        <h3 className="font-display font-extrabold uppercase text-lg leading-tight" style={{ color: dk ? "rgba(255,255,255,0.92)" : "rgba(0,0,0,0.88)" }}>
+          {project.title}
+        </h3>
+      </div>
+      <p className="font-body text-sm leading-relaxed mb-5" style={{ color: dk ? "rgba(255,255,255,0.62)" : "rgba(0,0,0,0.62)", whiteSpace: "pre-line" }}>
+        {project.description}
+      </p>
+      <div className="mb-5" style={{ height: 1, background: dk ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.06)" }} />
+      {[{ label: "Cliente", value: project.client }, { label: "Público", value: project.audience }].map(({ label, value }) => (
+        <div key={label} className="mb-4">
+          <span className="block font-display text-[9px] tracking-[0.18em] uppercase mb-1" style={{ color: "hsl(var(--primary))" }}>{label}</span>
+          <p className="font-body text-xs leading-relaxed" style={{ color: dk ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.55)" }}>{value}</p>
+        </div>
+      ))}
+      <div className="mb-5" style={{ height: 1, background: dk ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.06)" }} />
+      {[{ label: "Desafio", value: project.challenge }, { label: "Processo", value: project.process }, { label: "Resultado", value: project.outcome }].map(({ label, value }) => (
+        <div key={label} className="mb-5">
+          <span className="block font-display text-[9px] tracking-[0.18em] uppercase mb-1.5" style={{ color: dk ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)" }}>{label}</span>
+          <p className="font-body text-xs leading-relaxed" style={{ color: dk ? "rgba(255,255,255,0.52)" : "rgba(0,0,0,0.52)", whiteSpace: "pre-line" }}>{value}</p>
+        </div>
+      ))}
+      <div className="mb-5" style={{ height: 1, background: dk ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.06)" }} />
+      <div className="mb-4">
+        <span className="block font-display text-[9px] tracking-[0.18em] uppercase mb-2" style={{ color: dk ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.3)" }}>Disciplinas</span>
+        <div className="flex flex-wrap gap-1.5">
+          {project.tags.map(tag => (
+            <span key={tag} className="font-display text-[8px] tracking-[0.12em] uppercase px-2 py-1 rounded"
+              style={{ background: dk ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)", color: dk ? "rgba(255,255,255,0.38)" : "rgba(0,0,0,0.45)", border: `1px solid ${dk ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.08)"}` }}>
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div>
+        <span className="block font-display text-[9px] tracking-[0.18em] uppercase mb-2" style={{ color: dk ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.3)" }}>Ferramentas</span>
+        <div className="flex flex-wrap gap-1.5">
+          {project.tools.map(tool => (
+            <span key={tool} className="font-display text-[8px] tracking-[0.12em] uppercase px-2 py-1 rounded"
+              style={{ background: "rgba(162,213,198,0.08)", color: "rgba(162,213,198,0.75)", border: "1px solid rgba(162,213,198,0.15)" }}>
+              {tool}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function MacOSModal({ project, onClose }: { project: Project; onClose: () => void }) {
   const { theme } = useTheme();
   const dk = theme === "dark";
   const [current, setCurrent] = useState(0);
   const [dir, setDir] = useState(0);
   const [showDesc, setShowDesc] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [descWidth, setDescWidth] = useState(400);
+  const [isResizingDesc, setIsResizingDesc] = useState(false);
+  const descDragRef = useRef<{ startX: number; startWidth: number } | null>(null);
 
   const go = useCallback((d: number) => {
     setDir(d);
@@ -63,234 +124,242 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
   };
 
   const windowSpring = { type: "spring", stiffness: 360, damping: 36 } as const;
-  const windowAnim = { initial: { scale: 0.87, opacity: 0, y: 24 }, animate: { scale: 1, opacity: 1, y: 0 }, exit: { scale: 0.87, opacity: 0, y: 24 } };
+
+  const startDescResize = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    descDragRef.current = { startX: e.clientX, startWidth: descWidth };
+    setIsResizingDesc(true);
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+    const onMove = (ev: MouseEvent) => {
+      if (!descDragRef.current) return;
+      const delta = descDragRef.current.startX - ev.clientX;
+      setDescWidth(Math.min(window.innerWidth * 0.55, Math.max(260, descDragRef.current.startWidth + delta)));
+    };
+    const onUp = () => {
+      descDragRef.current = null;
+      setIsResizingDesc(false);
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+  }, [descWidth]);
+
+  const chromeBg  = dk ? "#111d2e" : "#e2e8f0";
+  const chromeBdr = `1px solid ${dk ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)"}`;
+
+  const TrafficLights = ({ onRed = onClose }: { onRed?: () => void }) => (
+    <div className="flex items-center gap-2">
+      <button onClick={onRed}                          className="w-[13px] h-[13px] rounded-full hover:opacity-75 transition-opacity" style={{ background: "#ff5f57" }} />
+      <button onClick={() => setIsMinimized(true)}     className="w-[13px] h-[13px] rounded-full hover:opacity-75 transition-opacity" style={{ background: "#ffbd2e" }} />
+      <button onClick={() => setIsExpanded(e => !e)}   className="w-[13px] h-[13px] rounded-full hover:opacity-75 transition-opacity" style={{ background: "#28c941" }} />
+    </div>
+  );
+
+  const NavArrows = () => (
+    <div className="flex items-center gap-1.5 mx-auto">
+      {[{ d: -1, Icon: ChevronLeft }, { d: 1, Icon: ChevronRight }].map(({ d, Icon }) => (
+        <button key={d} onClick={() => go(d)}
+          className="flex items-center justify-center w-6 h-6 rounded-full"
+          style={{ background: dk ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)", border: `1px solid ${dk ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`, color: dk ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.5)" }}>
+          <Icon className="w-3.5 h-3.5" />
+        </button>
+      ))}
+    </div>
+  );
+
+  const Carousel = () => (
+    <div className="relative flex-1 overflow-hidden bg-black">
+      <AnimatePresence custom={dir}>
+        <motion.img
+          key={current}
+          src={project.slides[current]}
+          alt={`Slide ${current + 1}`}
+          custom={dir}
+          variants={slideVariants}
+          initial="enter" animate="center" exit="exit"
+          transition={{ type: "spring", stiffness: 380, damping: 40 }}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      </AnimatePresence>
+      {project.slides.length > 1 && (
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+          {project.slides.map((_, i) => (
+            <button key={i} onClick={() => goTo(i)} className="rounded-full transition-all duration-200"
+              style={{ width: i === current ? 18 : 5, height: 5, background: i === current ? "hsl(var(--primary))" : "rgba(255,255,255,0.3)" }} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <motion.div
-      className="fixed inset-0 z-[100] flex items-center justify-center"
-      style={{ padding: "clamp(12px, 2.5vw, 36px)" }}
+      className="fixed inset-0 z-[100]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      style={{
+        pointerEvents: isMinimized ? "none" : "auto",
+        ...(isExpanded ? {} : { display: "flex", alignItems: "center", justifyContent: "center", padding: "clamp(12px,2.5vw,36px)" }),
+      }}
     >
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0"
-        style={{ background: "rgba(0,0,0,0.86)", backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)" }}
-        onClick={onClose}
-      />
 
-      {/* Windows row — auto width so the outer flex-center slides everything left as description appears */}
-      <div
-        className="relative z-10 flex items-stretch"
-        style={{ gap: 10, height: "min(88vh, 860px)" }}
-      >
-        {/* ── Main image window — fixed width, never resizes */}
-        <motion.div
-          className="relative flex flex-col overflow-hidden rounded-2xl flex-shrink-0"
-          style={{
-            width: "min(90vw, 1220px)",
-            background: dk ? "#08101d" : "#f0f4f8",
-            boxShadow: dk
-              ? "0 60px 160px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.07)"
-              : "0 40px 120px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.08)",
-          }}
-          {...windowAnim}
-          transition={windowSpring}
-        >
-          {/* Chrome bar */}
-          <div
-            className="flex items-center shrink-0 h-11 px-4 gap-4"
-            style={{
-              background: dk ? "#111d2e" : "#e2e8f0",
-              borderBottom: `1px solid ${dk ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)"}`,
-            }}
-          >
-            <div className="flex items-center gap-2">
-              <button onClick={onClose} className="w-[13px] h-[13px] rounded-full hover:opacity-75 transition-opacity" style={{ background: "#ff5f57" }} />
-              <div className="w-[13px] h-[13px] rounded-full" style={{ background: "#ffbd2e" }} />
-              <div className="w-[13px] h-[13px] rounded-full" style={{ background: "#28c941" }} />
+      {/* ══ EXPANDED / FULLSCREEN ══════════════════════════════════════════════ */}
+      {isExpanded && (
+        <div className="absolute inset-0 flex" style={{ background: dk ? "#05090f" : "#f0f4f8" }}>
+          {/* Main column */}
+          <div className="flex flex-col flex-1 overflow-hidden"
+            style={{ marginRight: showDesc ? descWidth : 0, transition: isResizingDesc ? "none" : "margin-right 0.35s cubic-bezier(0.16,1,0.3,1)" }}>
+            {/* Chrome */}
+            <div className="flex items-center shrink-0 h-11 px-4 gap-4" style={{ background: chromeBg, borderBottom: chromeBdr }}>
+              <TrafficLights />
+              <NavArrows />
+              <motion.button onClick={() => setShowDesc(d => !d)}
+                className="font-display text-[9px] tracking-[0.14em] uppercase px-3 py-1 rounded-full"
+                animate={{ borderColor: showDesc ? "rgba(162,213,198,0.7)" : dk ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.15)", color: showDesc ? "rgb(162,213,198)" : dk ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)", background: showDesc ? "rgba(162,213,198,0.08)" : "transparent" }}
+                style={{ border: "1px solid" }} transition={{ duration: 0.2 }}>
+                Descrição do Projeto
+              </motion.button>
             </div>
-
-            <div className="flex items-center gap-1.5 mx-auto">
-              <button onClick={() => go(-1)} className="flex items-center justify-center w-6 h-6 rounded-full transition-colors" style={{ background: dk ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)", border: `1px solid ${dk ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`, color: dk ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.5)" }}>
-                <ChevronLeft className="w-3.5 h-3.5" />
-              </button>
-              <button onClick={() => go(1)} className="flex items-center justify-center w-6 h-6 rounded-full transition-colors" style={{ background: dk ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)", border: `1px solid ${dk ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`, color: dk ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.5)" }}>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-
-            <motion.button
-              onClick={() => setShowDesc(d => !d)}
-              className="font-display text-[9px] tracking-[0.14em] uppercase px-3 py-1 rounded-full"
-              animate={{
-                borderColor: showDesc ? "rgba(162,213,198,0.7)" : dk ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.15)",
-                color: showDesc ? "rgb(162,213,198)" : dk ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)",
-                background: showDesc ? "rgba(162,213,198,0.08)" : "transparent",
-              }}
-              style={{ border: "1px solid" }}
-              transition={{ duration: 0.2 }}
-            >
-              Descrição do Projeto
-            </motion.button>
+            <Carousel />
           </div>
 
-          {/* Image carousel */}
-          <div className="relative flex-1 overflow-hidden bg-black">
-            <AnimatePresence custom={dir}>
-              <motion.img
-                key={current}
-                src={project.slides[current]}
-                alt={`Slide ${current + 1}`}
-                custom={dir}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ type: "spring", stiffness: 380, damping: 40 }}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            </AnimatePresence>
-
-            {project.slides.length > 1 && (
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
-                {project.slides.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => goTo(i)}
-                    className="rounded-full transition-all duration-200"
-                    style={{
-                      width: i === current ? 18 : 5,
-                      height: 5,
-                      background: i === current ? "hsl(var(--primary))" : "rgba(255,255,255,0.3)",
-                    }}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        </motion.div>
-
-        {/* ── Description window — separate macOS window, same spring animation + lateral expansion */}
-        <AnimatePresence>
-          {showDesc && (
-            // Outer wrapper: animates width for the lateral expansion mechanic
-            <motion.div
-              className="flex-shrink-0 overflow-hidden"
-              initial={{ width: 0 }}
-              animate={{ width: 440 }}
-              exit={{ width: 0 }}
-              transition={windowSpring}
-            >
-              {/* Inner window: same pop-in animation as main window */}
+          {/* Resizable description panel */}
+          <AnimatePresence>
+            {showDesc && (
               <motion.div
-                className="flex flex-col overflow-hidden rounded-2xl h-full"
-                style={{
-                  width: 440,
-                  background: dk ? "#0d1520" : "#f7f9fc",
-                  boxShadow: `0 0 0 1px ${dk ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`,
-                }}
-                {...windowAnim}
-                transition={{ ...windowSpring, delay: 0.05 }}
+                initial={{ x: descWidth }} animate={{ x: 0 }} exit={{ x: descWidth }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="fixed right-0 top-0 bottom-0 flex flex-col z-20"
+                style={{ width: descWidth, background: dk ? "#0d1520" : "#f7f9fc", borderLeft: `1px solid ${dk ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`, userSelect: isResizingDesc ? "none" : "auto" }}
               >
-                {/* Own Chrome bar */}
-                <div
-                  className="flex items-center shrink-0 h-11 px-4 gap-3"
-                  style={{
-                    background: dk ? "#111d2e" : "#e2e8f0",
-                    borderBottom: `1px solid ${dk ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)"}`,
-                  }}
-                >
+                {/* Drag handle */}
+                <div onMouseDown={startDescResize}
+                  className="absolute left-0 top-0 bottom-0 w-[6px] cursor-col-resize z-30"
+                  style={{ transition: "background 0.2s" }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "rgba(10,132,255,0.2)"; }}
+                  onMouseLeave={e => { if (!isResizingDesc) e.currentTarget.style.background = "transparent"; }}>
+                  <div style={{ position: "absolute", left: 2, top: "50%", transform: "translateY(-50%)", width: 2, height: 40, borderRadius: 2, background: "rgba(10,132,255,0.45)" }} />
+                </div>
+                {/* Chrome */}
+                <div className="flex items-center shrink-0 h-11 px-4 gap-3" style={{ background: chromeBg, borderBottom: chromeBdr }}>
                   <div className="flex items-center gap-2">
-                    <button onClick={() => setShowDesc(false)} className="w-[13px] h-[13px] rounded-full hover:opacity-75 transition-opacity" style={{ background: "#ff5f57" }} />
+                    <button onClick={() => setShowDesc(false)} className="w-[13px] h-[13px] rounded-full hover:opacity-75" style={{ background: "#ff5f57" }} />
                     <div className="w-[13px] h-[13px] rounded-full" style={{ background: "#ffbd2e" }} />
                     <div className="w-[13px] h-[13px] rounded-full" style={{ background: "#28c941" }} />
                   </div>
-                  <span className="font-display text-[9px] tracking-[0.2em] uppercase ml-2" style={{ color: dk ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.28)" }}>
-                    Descrição
-                  </span>
+                  <span className="font-display text-[9px] tracking-[0.2em] uppercase ml-2" style={{ color: dk ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.28)" }}>Descrição</span>
                 </div>
-
-                {/* Content */}
-                <div className="flex flex-col flex-1 overflow-y-auto" style={{ padding: "28px 24px", gap: 0 }}>
-
-                  {/* Header */}
-                  <div className="mb-5">
-                    <span className="block font-display text-[9px] tracking-[0.22em] uppercase mb-1" style={{ color: "hsl(var(--primary))" }}>
-                      {project.category} · {project.year}
-                    </span>
-                    <h3 className="font-display font-extrabold uppercase text-lg leading-tight" style={{ color: dk ? "rgba(255,255,255,0.92)" : "rgba(0,0,0,0.88)" }}>
-                      {project.title}
-                    </h3>
-                  </div>
-
-                  {/* Description */}
-                  <p className="font-body text-sm leading-relaxed mb-5" style={{ color: dk ? "rgba(255,255,255,0.62)" : "rgba(0,0,0,0.62)", whiteSpace: "pre-line" }}>
-                    {project.description}
-                  </p>
-
-                  <div className="mb-5" style={{ height: 1, background: dk ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.06)" }} />
-
-                  {/* Client & Audience */}
-                  {[
-                    { label: "Cliente", value: project.client },
-                    { label: "Público", value: project.audience },
-                  ].map(({ label, value }) => (
-                    <div key={label} className="mb-4">
-                      <span className="block font-display text-[9px] tracking-[0.18em] uppercase mb-1" style={{ color: "hsl(var(--primary))" }}>{label}</span>
-                      <p className="font-body text-xs leading-relaxed" style={{ color: dk ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.55)" }}>{value}</p>
-                    </div>
-                  ))}
-
-                  <div className="mb-5" style={{ height: 1, background: dk ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.06)" }} />
-
-                  {/* Challenge / Process / Outcome */}
-                  {[
-                    { label: "Desafio", value: project.challenge },
-                    { label: "Processo", value: project.process },
-                    { label: "Resultado", value: project.outcome },
-                  ].map(({ label, value }) => (
-                    <div key={label} className="mb-5">
-                      <span className="block font-display text-[9px] tracking-[0.18em] uppercase mb-1.5" style={{ color: dk ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)" }}>{label}</span>
-                      <p className="font-body text-xs leading-relaxed" style={{ color: dk ? "rgba(255,255,255,0.52)" : "rgba(0,0,0,0.52)", whiteSpace: "pre-line" }}>{value}</p>
-                    </div>
-                  ))}
-
-                  <div className="mb-5" style={{ height: 1, background: dk ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.06)" }} />
-
-                  {/* Tags */}
-                  <div className="mb-4">
-                    <span className="block font-display text-[9px] tracking-[0.18em] uppercase mb-2" style={{ color: dk ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.3)" }}>Disciplinas</span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.tags.map(tag => (
-                        <span key={tag} className="font-display text-[8px] tracking-[0.12em] uppercase px-2 py-1 rounded"
-                          style={{ background: dk ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)", color: dk ? "rgba(255,255,255,0.38)" : "rgba(0,0,0,0.45)", border: `1px solid ${dk ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.08)"}` }}>
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Tools */}
-                  <div>
-                    <span className="block font-display text-[9px] tracking-[0.18em] uppercase mb-2" style={{ color: dk ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.3)" }}>Ferramentas</span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.tools.map(tool => (
-                        <span key={tool} className="font-display text-[8px] tracking-[0.12em] uppercase px-2 py-1 rounded"
-                          style={{ background: "rgba(162,213,198,0.08)", color: "rgba(162,213,198,0.75)", border: "1px solid rgba(162,213,198,0.15)" }}>
-                          {tool}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                </div>
+                <DescPanelContent project={project} dk={dk} />
               </motion.div>
-            </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      )}
+
+      {/* ══ NORMAL / MINIMIZING MODE ══════════════════════════════════════════ */}
+      {!isExpanded && (
+        <>
+          {/* Backdrop */}
+          {!isMinimized && (
+            <div className="absolute inset-0"
+              style={{ background: "rgba(0,0,0,0.86)", backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)" }}
+              onClick={onClose} />
           )}
-        </AnimatePresence>
-      </div>
+
+          <div className="relative z-10 flex items-stretch" style={{ gap: 10, height: "min(88vh, 860px)" }}>
+            {/* Main window */}
+            <motion.div
+              className="relative flex flex-col overflow-hidden rounded-2xl flex-shrink-0"
+              style={{
+                width: "min(90vw, 1220px)",
+                background: dk ? "#08101d" : "#f0f4f8",
+                boxShadow: dk ? "0 60px 160px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.07)" : "0 40px 120px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.08)",
+                transformOrigin: "bottom center",
+              }}
+              initial={{ scale: 0.87, opacity: 0, y: 24 }}
+              animate={isMinimized ? { scaleX: 0.28, scaleY: 0.05, y: "90vh", opacity: 0 } : { scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.87, opacity: 0, y: 24 }}
+              transition={{ type: "spring", stiffness: 340, damping: 30 }}
+            >
+              {/* Chrome */}
+              <div className="flex items-center shrink-0 h-11 px-4 gap-4" style={{ background: chromeBg, borderBottom: chromeBdr }}>
+                <TrafficLights />
+                <NavArrows />
+                <motion.button onClick={() => setShowDesc(d => !d)}
+                  className="font-display text-[9px] tracking-[0.14em] uppercase px-3 py-1 rounded-full"
+                  animate={{ borderColor: showDesc ? "rgba(162,213,198,0.7)" : dk ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.15)", color: showDesc ? "rgb(162,213,198)" : dk ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)", background: showDesc ? "rgba(162,213,198,0.08)" : "transparent" }}
+                  style={{ border: "1px solid" }} transition={{ duration: 0.2 }}>
+                  Descrição do Projeto
+                </motion.button>
+              </div>
+              <Carousel />
+            </motion.div>
+
+            {/* Description window */}
+            <AnimatePresence>
+              {showDesc && !isMinimized && (
+                <motion.div className="flex-shrink-0 overflow-hidden" initial={{ width: 0 }} animate={{ width: 440 }} exit={{ width: 0 }} transition={windowSpring}>
+                  <motion.div className="flex flex-col overflow-hidden rounded-2xl h-full"
+                    style={{ width: 440, background: dk ? "#0d1520" : "#f7f9fc", boxShadow: `0 0 0 1px ${dk ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}` }}
+                    initial={{ scale: 0.87, opacity: 0, y: 24 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.87, opacity: 0, y: 24 }}
+                    transition={{ ...windowSpring, delay: 0.05 }}>
+                    <div className="flex items-center shrink-0 h-11 px-4 gap-3" style={{ background: chromeBg, borderBottom: chromeBdr }}>
+                      <div className="flex items-center gap-2">
+                        <button onClick={() => setShowDesc(false)} className="w-[13px] h-[13px] rounded-full hover:opacity-75" style={{ background: "#ff5f57" }} />
+                        <div className="w-[13px] h-[13px] rounded-full" style={{ background: "#ffbd2e" }} />
+                        <div className="w-[13px] h-[13px] rounded-full" style={{ background: "#28c941" }} />
+                      </div>
+                      <span className="font-display text-[9px] tracking-[0.2em] uppercase ml-2" style={{ color: dk ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.28)" }}>Descrição</span>
+                    </div>
+                    <DescPanelContent project={project} dk={dk} />
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </>
+      )}
+
+      {/* ══ MINI DOCK (minimized) ══════════════════════════════════════════════ */}
+      <AnimatePresence>
+        {isMinimized && (
+          <div className="fixed bottom-5 left-1/2 z-[110]" style={{ transform: "translateX(-50%)", pointerEvents: "auto" }}>
+            <motion.button
+              key="dock"
+              initial={{ y: 44, opacity: 0, scale: 0.84 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: 44, opacity: 0, scale: 0.84 }}
+              transition={{ type: "spring", stiffness: 420, damping: 32, delay: 0.16 }}
+              onClick={() => setIsMinimized(false)}
+              className="flex items-center gap-3"
+              style={{
+                background: dk ? "rgba(16,22,34,0.97)" : "rgba(228,233,242,0.97)",
+                backdropFilter: "blur(24px)",
+                WebkitBackdropFilter: "blur(24px)",
+                border: `1px solid ${dk ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`,
+                borderRadius: 16,
+                padding: "10px 20px 10px 12px",
+                boxShadow: "0 20px 64px rgba(0,0,0,0.5)",
+                cursor: "pointer",
+              }}
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <img src={project.slides[current]} alt="" className="rounded-lg object-cover shrink-0" style={{ width: 62, height: 40 }} />
+              <div className="flex flex-col items-start gap-0.5">
+                <span className="font-display text-[9px] tracking-[0.2em] uppercase" style={{ color: dk ? "rgba(255,255,255,0.38)" : "rgba(0,0,0,0.38)" }}>{project.category}</span>
+                <span className="font-display font-bold text-[13px] uppercase tracking-wide whitespace-nowrap" style={{ color: dk ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.85)" }}>{project.title}</span>
+              </div>
+              <ChevronUp className="w-4 h-4 ml-1 shrink-0" style={{ color: dk ? "rgba(255,255,255,0.38)" : "rgba(0,0,0,0.38)" }} />
+            </motion.button>
+          </div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
