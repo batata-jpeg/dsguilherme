@@ -12,6 +12,7 @@ import LampCord from "@/components/LampCord";
 import ScrollToTop from "@/components/ScrollToTop";
 import SiteBackground from "@/components/SiteBackground";
 import HardwareAccelPopup from "@/components/HardwareAccelPopup";
+import GlobalMinimizedDock from "@/components/GlobalMinimizedDock";
 
 import Index from "./pages/Index.tsx";
 import Projects from "./pages/Projects.tsx";
@@ -21,6 +22,7 @@ import Contact from "./pages/Contact.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { MinimizedProjectProvider } from "@/contexts/MinimizedProjectContext";
 
 const queryClient = new QueryClient();
 
@@ -56,12 +58,14 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
       <LanguageProvider>
+        <MinimizedProjectProvider>
         <TooltipProvider>
           <Toaster />
           <Sonner />
           <BrowserRouter>
             <HardwareAccelPopup />
             <SiteBackground />
+            <GlobalMinimizedDock />
             <LampCord />
             <div className="relative z-10 min-h-screen">
               <NavigationWrapper />
@@ -72,6 +76,7 @@ const App = () => (
             </div>
           </BrowserRouter>
         </TooltipProvider>
+        </MinimizedProjectProvider>
       </LanguageProvider>
     </ThemeProvider>
   </QueryClientProvider>

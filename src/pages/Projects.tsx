@@ -1,6 +1,6 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, ChevronUp } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
@@ -10,6 +10,7 @@ import fallingCharDark from "@/assets/hero-character-falling.png";
 import fallingCharLight from "@/assets/hero-character-falling-light.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useMinimizedProject } from "@/contexts/MinimizedProjectContext";
 
 const GAZZ_THUMB = "/gazz/gazz-01.jpg";
 const gazzSlides = [
@@ -98,10 +99,11 @@ function DescPanelContent({ project, dk }: { project: Project; dk: boolean }) {
 function MacOSModal({ project, onClose }: { project: Project; onClose: () => void }) {
   const { theme } = useTheme();
   const dk = theme === "dark";
+  const { minimize } = useMinimizedProject();
   const [current, setCurrent] = useState(0);
   const [dir, setDir] = useState(0);
   const [showDesc, setShowDesc] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
+  const [isSquishing, setIsSquishing] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [descWidth, setDescWidth] = useState(400);
   const [isResizingDesc, setIsResizingDesc] = useState(false);
@@ -151,11 +153,19 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
   const chromeBg  = dk ? "#111d2e" : "#e2e8f0";
   const chromeBdr = `1px solid ${dk ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)"}`;
 
+  const handleMinimize = useCallback(() => {
+    setIsSquishing(true);
+    setTimeout(() => {
+      minimize({ id: project.id, title: project.title, category: project.category, thumbnail: project.slides[current] });
+      onClose();
+    }, 420);
+  }, [minimize, project, current, onClose]);
+
   const TrafficLights = ({ onRed = onClose }: { onRed?: () => void }) => (
     <div className="flex items-center gap-2">
-      <button onClick={onRed}                          className="w-[13px] h-[13px] rounded-full hover:opacity-75 transition-opacity" style={{ background: "#ff5f57" }} />
-      <button onClick={() => setIsMinimized(true)}     className="w-[13px] h-[13px] rounded-full hover:opacity-75 transition-opacity" style={{ background: "#ffbd2e" }} />
-      <button onClick={() => setIsExpanded(e => !e)}   className="w-[13px] h-[13px] rounded-full hover:opacity-75 transition-opacity" style={{ background: "#28c941" }} />
+      <button onClick={onRed}             className="w-[13px] h-[13px] rounded-full hover:opacity-75 transition-opacity" style={{ background: "#ff5f57" }} />
+      <button onClick={handleMinimize}    className="w-[13px] h-[13px] rounded-full hover:opacity-75 transition-opacity" style={{ background: "#ffbd2e" }} />
+      <button onClick={() => setIsExpanded(e => !e)} className="w-[13px] h-[13px] rounded-full hover:opacity-75 transition-opacity" style={{ background: "#28c941" }} />
     </div>
   );
 
@@ -203,7 +213,7 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       style={{
-        pointerEvents: isMinimized ? "none" : "auto",
+        pointerEvents: isSquishing ? "none" : "auto",
         ...(isExpanded ? {} : { display: "flex", alignItems: "center", justifyContent: "center", padding: "clamp(12px,2.5vw,36px)" }),
       }}
     >
@@ -265,7 +275,7 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
       {!isExpanded && (
         <>
           {/* Backdrop */}
-          {!isMinimized && (
+          {!isSquishing && (
             <div className="absolute inset-0"
               style={{ background: "rgba(0,0,0,0.86)", backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)" }}
               onClick={onClose} />
@@ -282,7 +292,7 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
                 transformOrigin: "bottom center",
               }}
               initial={{ scale: 0.87, opacity: 0, y: 24 }}
-              animate={isMinimized ? { scaleX: 0.28, scaleY: 0.05, y: "90vh", opacity: 0 } : { scale: 1, opacity: 1, y: 0 }}
+              animate={isSquishing ? { scaleX: 0.28, scaleY: 0.05, y: "90vh", opacity: 0 } : { scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.87, opacity: 0, y: 24 }}
               transition={{ type: "spring", stiffness: 340, damping: 30 }}
             >
@@ -302,7 +312,7 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
 
             {/* Description window */}
             <AnimatePresence>
-              {showDesc && !isMinimized && (
+              {showDesc && !isSquishing && (
                 <motion.div className="flex-shrink-0 overflow-hidden" initial={{ width: 0 }} animate={{ width: 440 }} exit={{ width: 0 }} transition={windowSpring}>
                   <motion.div className="flex flex-col overflow-hidden rounded-2xl h-full"
                     style={{ width: 440, background: dk ? "#0d1520" : "#f7f9fc", boxShadow: `0 0 0 1px ${dk ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}` }}
@@ -325,41 +335,6 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
         </>
       )}
 
-      {/* ══ MINI DOCK (minimized) ══════════════════════════════════════════════ */}
-      <AnimatePresence>
-        {isMinimized && (
-          <div className="fixed bottom-5 left-1/2 z-[110]" style={{ transform: "translateX(-50%)", pointerEvents: "auto" }}>
-            <motion.button
-              key="dock"
-              initial={{ y: 44, opacity: 0, scale: 0.84 }}
-              animate={{ y: 0, opacity: 1, scale: 1 }}
-              exit={{ y: 44, opacity: 0, scale: 0.84 }}
-              transition={{ type: "spring", stiffness: 420, damping: 32, delay: 0.16 }}
-              onClick={() => setIsMinimized(false)}
-              className="flex items-center gap-3"
-              style={{
-                background: dk ? "rgba(16,22,34,0.97)" : "rgba(228,233,242,0.97)",
-                backdropFilter: "blur(24px)",
-                WebkitBackdropFilter: "blur(24px)",
-                border: `1px solid ${dk ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`,
-                borderRadius: 16,
-                padding: "10px 20px 10px 12px",
-                boxShadow: "0 20px 64px rgba(0,0,0,0.5)",
-                cursor: "pointer",
-              }}
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <img src={project.slides[current]} alt="" className="rounded-lg object-cover shrink-0" style={{ width: 62, height: 40 }} />
-              <div className="flex flex-col items-start gap-0.5">
-                <span className="font-display text-[9px] tracking-[0.2em] uppercase" style={{ color: dk ? "rgba(255,255,255,0.38)" : "rgba(0,0,0,0.38)" }}>{project.category}</span>
-                <span className="font-display font-bold text-[13px] uppercase tracking-wide whitespace-nowrap" style={{ color: dk ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.85)" }}>{project.title}</span>
-              </div>
-              <ChevronUp className="w-4 h-4 ml-1 shrink-0" style={{ color: dk ? "rgba(255,255,255,0.38)" : "rgba(0,0,0,0.38)" }} />
-            </motion.button>
-          </div>
-        )}
-      </AnimatePresence>
     </motion.div>
   );
 }
@@ -505,6 +480,7 @@ export default function Projects() {
   const { t } = useLanguage();
   const { theme } = useTheme();
   const dk = theme === "dark";
+  const { pendingOpen, clearPendingOpen } = useMinimizedProject();
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [openProject, setOpenProject] = useState<Project | null>(null);
 
@@ -542,6 +518,14 @@ export default function Projects() {
       slides: armSlides,
     },
   ];
+
+  // Auto-open modal when user restores from the global dock
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (!pendingOpen) return;
+    const proj = projects.find(p => p.id === pendingOpen);
+    if (proj) { setOpenProject(proj); clearPendingOpen(); }
+  }, [pendingOpen]);
 
   return (
     <div className="min-h-screen bg-transparent overflow-x-hidden">
