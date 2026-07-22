@@ -6,6 +6,7 @@ interface HexCell {
   points: string;
   elevation: number;
   targetElevation: number;
+  dirty?: boolean; // needs one white-reset write after dropping back to rest
 }
 
 const HEX_SIZE = 38;
@@ -23,7 +24,7 @@ function flatHexPoints(cx: number, cy: number, size: number): string {
   return pts.join(" ");
 }
 
-export default function HexagonBackground({ className = "" }: { className?: string }) {
+export default function HexagonBackground({ className = "", staticGrid = false }: { className?: string; staticGrid?: boolean }) {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const cellsRef = useRef<HexCell[]>([]);
   const mouseRef = useRef({ x: -9999, y: -9999 });
@@ -99,24 +100,41 @@ export default function HexagonBackground({ className = "" }: { className?: stri
     const ro = new ResizeObserver(buildGrid);
     if (svgRef.current) ro.observe(svgRef.current);
 
+    // Static mode (e.g. Projects page): draw the grid once, no hover animation.
+    if (staticGrid) {
+      return () => ro.disconnect();
+    }
+
+    let mouseMoved = true; // force one pass on mount
+    let anyActive = false; // any cell still settling toward its target
+
     const onMove = (e: MouseEvent) => {
       mouseRef.current = { x: e.clientX, y: e.clientY };
+      mouseMoved = true;
+    };
+    const onLeave = () => {
+      mouseRef.current = { x: -9999, y: -9999 };
+      mouseMoved = true;
     };
     window.addEventListener("mousemove", onMove, { passive: true });
+    document.addEventListener("mouseleave", onLeave);
 
     const animate = () => {
+      rafRef.current = requestAnimationFrame(animate);
       const cells = cellsRef.current;
       const polys = polygonsRef.current;
       const svg = svgRef.current;
-      if (!svg || cells.length === 0) {
-        rafRef.current = requestAnimationFrame(animate);
-        return;
-      }
+      if (!svg || cells.length === 0) return;
+
+      // Idle: mouse hasn't moved and nothing is animating → skip all work.
+      if (!mouseMoved && !anyActive) return;
+      mouseMoved = false;
 
       const rect = svg.getBoundingClientRect();
       const mx = mouseRef.current.x - rect.left;
       const my = mouseRef.current.y - rect.top;
 
+      let active = false;
       for (let i = 0; i < cells.length; i++) {
         const cell = cells[i];
         const dx = cell.cx - mx;
@@ -129,7 +147,7 @@ export default function HexagonBackground({ className = "" }: { className?: stri
 
         // Lerp
         cell.elevation += (cell.targetElevation - cell.elevation) * 0.12;
-
+        if (Math.abs(cell.elevation - cell.targetElevation) > 0.001) active = true;
         if (Math.abs(cell.elevation) < 0.001) cell.elevation = 0;
 
         const e = cell.elevation;
@@ -143,15 +161,17 @@ export default function HexagonBackground({ className = "" }: { className?: stri
           poly.setAttribute("stroke", `rgb(${Math.round(200 - e * 40)},${Math.round(200 - e * 40)},${Math.round(200 - e * 40)})`);
           poly.setAttribute("filter", "url(#hex-shadow)");
           poly.setAttribute("transform", `translate(0, ${-lift})`);
-        } else {
+          cell.dirty = true;
+        } else if (cell.dirty) {
+          // Reset to rest exactly once, not every frame.
           poly.setAttribute("fill", "#ffffff");
           poly.setAttribute("stroke", "#e8e8e8");
           poly.removeAttribute("filter");
           poly.removeAttribute("transform");
+          cell.dirty = false;
         }
       }
-
-      rafRef.current = requestAnimationFrame(animate);
+      anyActive = active;
     };
     rafRef.current = requestAnimationFrame(animate);
 
@@ -159,8 +179,9 @@ export default function HexagonBackground({ className = "" }: { className?: stri
       cancelAnimationFrame(rafRef.current);
       ro.disconnect();
       window.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseleave", onLeave);
     };
-  }, [buildGrid]);
+  }, [buildGrid, staticGrid]);
 
   return (
     <svg

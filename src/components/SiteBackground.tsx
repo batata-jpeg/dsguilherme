@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import ColorBends from "@/components/ColorBends";
 import HexagonBackground from "@/components/HexagonBackground";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -12,6 +13,9 @@ export default function SiteBackground() {
   const reduceMotion = usePrefersReducedMotion();
   const isMobile = useIsMobile();
   const isLight = theme === "light";
+  // On the Projects page keep the background static (no animation / no pointer
+  // interaction) so the heavy hero + 3D book run smoother. Both themes.
+  const isProjects = useLocation().pathname === "/projects";
   // Disable heavy WebGL on mobile/tablet to prevent flicker and save battery
   const useStaticBg = reduceMotion || isMobile;
 
@@ -28,7 +32,7 @@ export default function SiteBackground() {
       <div className="absolute inset-0 h-full min-h-[100dvh] w-full">
         {isLight ? (
           <div className="pointer-events-auto h-full w-full min-h-[100dvh]">
-            <HexagonBackground className="h-full min-h-[100dvh] w-full" />
+            <HexagonBackground className="h-full min-h-[100dvh] w-full" staticGrid={isProjects} />
           </div>
         ) : useStaticBg ? (
           <div className="relative h-full w-full min-h-[100dvh] bg-black">
@@ -74,6 +78,7 @@ export default function SiteBackground() {
                 transparent
                 autoRotate={0}
                 useGlobalPointer
+                frozen={isProjects}
                 className="h-full min-h-[100dvh] w-full"
               />
             </div>

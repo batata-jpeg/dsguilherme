@@ -4,11 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, Maximize, Minimize, X, ChevronRight, Calendar, Wrench, User, Target, AlignLeft, FileText, Images } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLanguage } from "@/contexts/LanguageContext";
-import project1 from "@/assets/project-1.jpg";
-import project2 from "@/assets/project-2.jpg";
-import project3 from "@/assets/project-3.jpg";
-import project4 from "@/assets/project-4.jpg";
-import project5 from "@/assets/project-5.jpg";
+import project1 from "@/assets/project-1.webp";
+import project2 from "@/assets/project-2.webp";
+import project3 from "@/assets/project-3.webp";
+import project4 from "@/assets/project-4.webp";
+import project5 from "@/assets/project-5.webp";
 const gazzSlides = [
   "/gazz/gazz-01.jpg",
   "/gazz/gazz-02.jpg",

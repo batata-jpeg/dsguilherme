@@ -17,6 +17,7 @@ export type ColorBendsProps = {
   parallax?: number;
   noise?: number;
   useGlobalPointer?: boolean;
+  frozen?: boolean; // render a single static frame and stop animating / reacting
 };
 
 const MAX_COLORS = 8 as const;
@@ -128,6 +129,7 @@ export default function ColorBends({
   parallax = 0.5,
   noise = 0.1,
   useGlobalPointer = false,
+  frozen = false,
 }: ColorBendsProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
@@ -139,6 +141,9 @@ export default function ColorBends({
   const pointerTargetRef = useRef<THREE.Vector2>(new THREE.Vector2(0, 0));
   const pointerCurrentRef = useRef<THREE.Vector2>(new THREE.Vector2(0, 0));
   const pointerSmoothRef = useRef<number>(8);
+  const frozenRef = useRef<boolean>(frozen);
+  const renderOnceRef = useRef<(() => void) | null>(null);
+  const startLoopRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -180,7 +185,9 @@ export default function ColorBends({
     });
     rendererRef.current = renderer;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    // Soft, blurry full-screen effect behind a veil — 1× resolution is plenty
+    // and cuts fragment work up to 4× on hi-DPI screens.
+    renderer.setPixelRatio(1);
     renderer.setClearColor(0x000000, transparent ? 0 : 1);
     renderer.domElement.style.width = "100%";
     renderer.domElement.style.height = "100%";
@@ -188,11 +195,27 @@ export default function ColorBends({
     container.appendChild(renderer.domElement);
 
     const clock = new THREE.Clock();
+
+    // Draw one frame using the current uniforms/pointer.
+    const renderFrame = () => {
+      const elapsed = clock.elapsedTime;
+      material.uniforms.uTime.value = elapsed;
+      const deg = (rotationRef.current % 360) + autoRotateRef.current * elapsed;
+      const rad = (deg * Math.PI) / 180;
+      (material.uniforms.uRot.value as THREE.Vector2).set(Math.cos(rad), Math.sin(rad));
+      const cur = pointerCurrentRef.current;
+      const tgt = pointerTargetRef.current;
+      cur.lerp(tgt, 0.12);
+      (material.uniforms.uPointer.value as THREE.Vector2).copy(cur);
+      renderer.render(scene, camera);
+    };
+
     const handleResize = () => {
       const w = container.clientWidth || 1;
       const h = container.clientHeight || 1;
       renderer.setSize(w, h, false);
       (material.uniforms.uCanvas.value as THREE.Vector2).set(w, h);
+      if (frozenRef.current) renderFrame(); // keep the frozen image correct after resize
     };
     handleResize();
 
@@ -204,21 +227,29 @@ export default function ColorBends({
       (window as Window).addEventListener("resize", handleResize);
     }
 
-    const loop = () => {
-      const dt = clock.getDelta();
-      const elapsed = clock.elapsedTime;
-      material.uniforms.uTime.value = elapsed;
-      const deg = (rotationRef.current % 360) + autoRotateRef.current * elapsed;
-      const rad = (deg * Math.PI) / 180;
-      (material.uniforms.uRot.value as THREE.Vector2).set(Math.cos(rad), Math.sin(rad));
-      const cur = pointerCurrentRef.current;
-      const tgt = pointerTargetRef.current;
-      cur.lerp(tgt, Math.min(1, dt * pointerSmoothRef.current));
-      (material.uniforms.uPointer.value as THREE.Vector2).copy(cur);
-      renderer.render(scene, camera);
+    // Slow ambient effect → cap at ~30fps. Halves GPU cost, imperceptible here.
+    const FRAME_MS = 1000 / 30;
+    let lastDraw = 0;
+    const loop = (now: number) => {
+      if (frozenRef.current) { rafRef.current = null; return; } // paused
       rafRef.current = requestAnimationFrame(loop);
+      if (now - lastDraw < FRAME_MS) return;
+      lastDraw = now;
+      clock.getDelta(); // advance elapsedTime
+      renderFrame();
     };
-    rafRef.current = requestAnimationFrame(loop);
+    const startLoop = () => {
+      if (rafRef.current == null && !frozenRef.current) {
+        lastDraw = 0;
+        rafRef.current = requestAnimationFrame(loop);
+      }
+    };
+    renderOnceRef.current = renderFrame;
+    startLoopRef.current = startLoop;
+
+    // Always draw at least one frame; then animate unless frozen.
+    renderFrame();
+    if (!frozenRef.current) startLoop();
 
     return () => {
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
@@ -233,6 +264,17 @@ export default function ColorBends({
       }
     };
   }, []);
+
+  // Freeze / unfreeze without remounting (e.g. entering/leaving the Projects page).
+  useEffect(() => {
+    frozenRef.current = frozen;
+    if (frozen) {
+      if (rafRef.current != null) { cancelAnimationFrame(rafRef.current); rafRef.current = null; }
+      renderOnceRef.current?.();
+    } else {
+      startLoopRef.current?.();
+    }
+  }, [frozen]);
 
   useEffect(() => {
     const material = materialRef.current;
