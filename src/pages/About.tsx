@@ -67,8 +67,8 @@ export default function About() {
 
       {/* Portrait + Bio */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-12 sm:pb-20">
-        <div className="glass-panel p-5 sm:p-8 md:p-14 grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-start">
-          <FadeInSection className="lg:col-span-2 flex flex-col items-center gap-4 w-full">
+        <div className="glass-panel p-5 sm:p-8 md:p-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 items-start">
+          <FadeInSection className="md:col-span-1 lg:col-span-2 flex flex-col items-center gap-4 w-full">
             <div className="w-full flex flex-col items-center gap-4">
               <Logo height={64} />
               <ThrowableProfileCard
@@ -93,7 +93,7 @@ export default function About() {
             </div>
           </FadeInSection>
 
-          <FadeInSection delay={0.2} className="lg:col-span-3 space-y-10">
+          <FadeInSection delay={0.2} className="md:col-span-1 lg:col-span-3 space-y-10">
             <div className="space-y-4">
               <span className="section-label">{t("about.story.label")}</span>
               <p className="font-body leading-relaxed whitespace-pre-line" style={{ color: "hsl(var(--muted-foreground))" }}>{t("about.story.p1")}</p>
@@ -161,7 +161,7 @@ export default function About() {
         <div className="space-y-4">
           {experience.map((exp, i) => (
             <FadeInSection key={exp.company} delay={i * 0.1}>
-              <div className="glass-panel p-4 sm:p-6 lg:p-8 grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-8 items-start">
+              <div className="glass-panel p-4 sm:p-6 lg:p-8 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 lg:gap-8 items-start">
                 <div>
                   <div className="font-display font-bold uppercase text-sm sm:text-base" style={{ color: "hsl(var(--foreground))" }}>{exp.role}</div>
                   <div className="font-display text-xs sm:text-sm mt-1 gradient-text font-600">{exp.company}</div>

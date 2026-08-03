@@ -30,8 +30,8 @@ export default function Footer() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-12">
           <div className="space-y-4">
-            <div className="flex items-center">
-              <Logo height={80} style={{ marginLeft: "-27px" }} />
+            <div className="flex items-center overflow-hidden">
+              <Logo height={80} style={{ marginLeft: "clamp(-12px, -1.5vw, -27px)" }} />
             </div>
             <p className="font-body text-sm leading-relaxed max-w-md" style={{ color: "hsl(var(--muted-foreground))" }}>
               {t("footer.tagline")}

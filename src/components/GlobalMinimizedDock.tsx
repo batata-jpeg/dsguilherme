@@ -20,8 +20,8 @@ export default function GlobalMinimizedDock() {
     <AnimatePresence>
       {minimized && (
         <div
-          className="fixed bottom-5 left-1/2 z-[200]"
-          style={{ transform: "translateX(-50%)", pointerEvents: "auto" }}
+          className="fixed left-1/2 z-[200]"
+          style={{ bottom: "calc(20px + env(safe-area-inset-bottom, 0px))", transform: "translateX(-50%)", pointerEvents: "auto" }}
         >
           <motion.div
             key="global-dock"
@@ -49,15 +49,15 @@ export default function GlobalMinimizedDock() {
             />
 
             {/* Info */}
-            <div className="flex flex-col items-start gap-0.5">
+            <div className="flex flex-col items-start gap-0.5 min-w-0 max-w-[120px] sm:max-w-[180px]">
               <span
-                className="font-display text-[9px] tracking-[0.2em] uppercase"
+                className="font-display text-[9px] tracking-[0.2em] uppercase truncate w-full"
                 style={{ color: dk ? "rgba(255,255,255,0.38)" : "rgba(0,0,0,0.38)" }}
               >
                 {minimized.category}
               </span>
               <span
-                className="font-display font-bold text-[13px] uppercase tracking-wide whitespace-nowrap"
+                className="font-display font-bold text-[13px] uppercase tracking-wide truncate w-full"
                 style={{ color: dk ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.85)" }}
               >
                 {minimized.title}

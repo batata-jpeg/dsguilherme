@@ -62,6 +62,18 @@ const translations: Record<Language, Record<string, string>> = {
     "index.about.body": "I'm a multidisciplinary graphic designer and visual artist with over 7 years of experience crafting brands, identities, and digital experiences that push the boundaries of conventional design.",
     "index.about.cta": "Read My Story",
 
+    // Index – Categories
+    "index.categories.label": "What I Create",
+
+    // Category gallery modal
+    "category.back": "Back",
+    "category.close": "Close",
+    "category.window": "Window",
+    "category.fullscreen": "Fullscreen",
+    "category.prev": "Previous",
+    "category.next": "Next",
+    "category.soon": "Soon",
+
     // Index – Contact CTA
     "index.cta.label": "Contact",
     "index.cta.line1": "LET'S CREATE",
@@ -176,6 +188,18 @@ const translations: Record<Language, Record<string, string>> = {
     "projdet.gazz.cardCategory": "Branding",
     "projdet.gazz.cardDesc": "Complete brand identity, packaging system and 3D retail experience for Gazz Energy.",
 
+    // Prumo project detail
+    "projdet.prumo.title": "PRUMO",
+    "projdet.prumo.category": "Branding, Visual Identity, Web Studio",
+    "projdet.prumo.description": "PRUMO is born from the union of strategy, design and technology. Inspired by the plumb line — the tool that guides construction with precision and balance — its visual identity translates direction, structure and movement into a contemporary and functional system.\n\nMore than building websites, PRUMO creates digital experiences aligned with each brand's purpose. A visual universe where every element finds its axis, and every project moves forward with clarity.",
+    "projdet.prumo.client": "PRUMO — Web & Design Studio (self-initiated)",
+    "projdet.prumo.audience": "Brands and businesses that value precision, strategy and a strong digital presence",
+    "projdet.prumo.challenge": "The main challenge was to build an identity that expressed precision and direction without becoming cold or purely technical. The plumb line needed to work simultaneously as symbol, concept and graphic system — carrying meaning across the logo, motion, and every brand application.\n\nIt was also essential to create a cohesive language that scaled from a moving logo to physical stationery, keeping the same sense of balance and intention throughout.",
+    "projdet.prumo.process": "The project started from the concept of the plumb line as a guiding axis, translated into a bold geometric wordmark where the O becomes the instrument itself.\n\nThe full system was then developed:\n\n• Geometric logo with an integrated plumb-line icon\n• Motion identity — the plumb falling and finding its axis\n• Neue Haas Unica as the primary typeface (Bold, Medium, Light, Thin)\n• A monochrome black-and-white palette with concrete and metallic textures\n• Applications across web mockups, business cards and full stationery\n\nThe presentation was designed as a continuous vertical narrative, where connecting elements link one page to the next.",
+    "projdet.prumo.outcome": "The result is a precise, cohesive and highly recognizable brand system, ready to represent a modern web studio. The identity balances technical rigor with elegance, translating the idea that every construction needs direction.\n\nPRUMO delivers a complete visual language — from animated logo to physical collateral — where precision meets direction.",
+    "projdet.prumo.cardCategory": "Branding",
+    "projdet.prumo.cardDesc": "Complete visual identity and motion system for PRUMO, a precision-driven web studio.",
+
     // Project detail UI labels
     "projdet.label.year": "Year",
     "projdet.label.client": "Client",
@@ -287,6 +311,18 @@ const translations: Record<Language, Record<string, string>> = {
     "index.about.title": "TRANSFORMANDO O IMPOSSÍVEL EM REALIDADE VISUAL",
     "index.about.body": "Sou um designer gráfico multidisciplinar e artista visual com mais de 7 anos de experiência criando marcas, identidades e experiências digitais que ultrapassam os limites do design convencional.",
     "index.about.cta": "Minha História",
+
+    // Index – Categories
+    "index.categories.label": "O que eu crio",
+
+    // Category gallery modal
+    "category.back": "Voltar",
+    "category.close": "Fechar",
+    "category.window": "Janela",
+    "category.fullscreen": "Tela cheia",
+    "category.prev": "Anterior",
+    "category.next": "Próximo",
+    "category.soon": "Em breve",
 
     // Index – Contact CTA
     "index.cta.label": "Contato",
@@ -401,6 +437,18 @@ const translations: Record<Language, Record<string, string>> = {
     "projdet.gazz.outcome": "O resultado é um sistema de marca completo com forte coesão visual em todos os pontos de contato. Gazz Energy demonstra a capacidade de construir uma marca do zero — do posicionamento estratégico à execução física tridimensional.\n\nO projeto exibe domínio de identidade visual, design de embalagem em múltiplos formatos, sistemas de padrões de marca e criação de ambientes de varejo 3D, entregando uma experiência de marca consistente e imersiva.",
     "projdet.gazz.cardCategory": "Branding",
     "projdet.gazz.cardDesc": "Identidade de marca completa, sistema de embalagens e experiência de varejo 3D para a Gazz Energy.",
+
+    // Prumo project detail
+    "projdet.prumo.title": "PRUMO",
+    "projdet.prumo.category": "Branding, Identidade Visual, Estúdio Web",
+    "projdet.prumo.description": "PRUMO nasce da união entre estratégia, design e tecnologia. Inspirada no instrumento que orienta construções com precisão e equilíbrio, a identidade visual traduz direção, estrutura e movimento em um sistema contemporâneo e funcional.\n\nMais do que criar sites, a PRUMO constrói experiências digitais alinhadas ao propósito de cada marca. Um universo visual onde cada elemento encontra seu eixo, e cada projeto avança com clareza.",
+    "projdet.prumo.client": "PRUMO — Estúdio de Web & Design (projeto autoral)",
+    "projdet.prumo.audience": "Marcas e negócios que valorizam precisão, estratégia e uma presença digital forte",
+    "projdet.prumo.challenge": "O principal desafio foi construir uma identidade que expressasse precisão e direção sem se tornar fria ou puramente técnica. O prumo precisava funcionar ao mesmo tempo como símbolo, conceito e sistema gráfico — carregando significado no logotipo, no movimento e em cada aplicação da marca.\n\nTambém era essencial criar uma linguagem coesa que escalasse de um logo em movimento até a papelaria física, mantendo a mesma sensação de equilíbrio e intenção em tudo.",
+    "projdet.prumo.process": "O projeto partiu do conceito do prumo como eixo orientador, traduzido em um logotipo geométrico e marcante onde o O se torna o próprio instrumento.\n\nEm seguida, todo o sistema foi desenvolvido:\n\n• Logotipo geométrico com ícone de prumo integrado\n• Identidade em movimento — o prumo caindo e encontrando seu eixo\n• Neue Haas Unica como tipografia primária (Bold, Medium, Light, Thin)\n• Uma paleta monocromática em preto e branco com texturas de concreto e metal\n• Aplicações em mockups de web, cartões de visita e papelaria completa\n\nA apresentação foi pensada como uma narrativa vertical contínua, onde elementos de ligação conectam uma página à outra.",
+    "projdet.prumo.outcome": "O resultado é um sistema de marca preciso, coeso e altamente reconhecível, pronto para representar um estúdio web moderno. A identidade equilibra rigor técnico e elegância, traduzindo a ideia de que toda construção precisa de direção.\n\nA PRUMO entrega uma linguagem visual completa — do logo animado ao material físico — onde a precisão encontra a direção.",
+    "projdet.prumo.cardCategory": "Branding",
+    "projdet.prumo.cardDesc": "Identidade visual completa e sistema de movimento para a PRUMO, um estúdio web guiado pela precisão.",
 
     // Project detail UI labels
     "projdet.label.year": "Ano",

@@ -144,8 +144,8 @@ export default function Contact() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-20 sm:pb-32">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12">
-          <FadeInSection delay={0.1} className="lg:col-span-3 space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-12">
+          <FadeInSection delay={0.1} className="md:col-span-3 space-y-6">
             <div className="glass-panel p-6 space-y-4">
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
@@ -275,8 +275,8 @@ export default function Contact() {
             </div>
           </FadeInSection>
 
-          <FadeInSection delay={0.2} className="lg:col-span-2">
-            <div className="glass-panel p-6 md:p-8 lg:sticky lg:top-28">
+          <FadeInSection delay={0.2} className="md:col-span-2">
+            <div className="glass-panel p-6 md:p-8 md:sticky md:top-28">
               <p className="font-body text-xs mb-4 leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
                 {t("contact.form.secondaryHint")}
               </p>

@@ -1,7 +1,10 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { motion, useAnimation, useScroll, useTransform, useInView } from "framer-motion";
-import { ArrowRight, ChevronDown, ExternalLink, Zap, Award, Users, Layers, MessageCircle, Mail, Linkedin } from "lucide-react";
+import { motion, AnimatePresence, useAnimation, useScroll, useTransform, useInView } from "framer-motion";
+import { ArrowRight, ChevronDown, ExternalLink, Zap, Award, Users, Layers, MessageCircle, Mail, Linkedin, Box, Film, Camera, Paintbrush, Monitor, Sparkles } from "lucide-react";
+import ThreeDModal from "@/components/ThreeDModal";
+import CategoryModal from "@/components/CategoryModal";
+import { CATEGORY_GALLERIES } from "@/data/categories";
 import GooeyNav from "@/components/GooeyNav";
 import heroVisualDark from "@/assets/hero-character.webp";
 import heroVisualLight from "@/assets/hero-character-light.webp";
@@ -50,6 +53,10 @@ export default function Index() {
   const { t, language } = useLanguage();
   const reduceMotion = usePrefersReducedMotion();
   const [heroTyped, setHeroTyped] = useState(reduceMotion);
+  const [show3D, setShow3D] = useState(false);
+  const [openCategory, setOpenCategory] = useState<
+    { id: string; label: string; gradient: string; glow: string } | null
+  >(null);
 
   useEffect(() => {
     setHeroTyped(reduceMotion);
@@ -99,6 +106,7 @@ export default function Index() {
 
 
   return (
+    <>
     <div className="min-h-screen overflow-x-hidden dot-grid bg-transparent">
       {/* ── HERO */}
       <section ref={heroRef} className="relative flex min-h-[100svh] items-center overflow-hidden">
@@ -237,6 +245,150 @@ export default function Index() {
         </div>
       </section>
 
+      {/* ── CATEGORIES */}
+      <section className="relative py-16 sm:py-24 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <FadeInSection>
+            <span className="section-label flex justify-center mb-10 sm:mb-14">
+              {t("index.categories.label")}
+            </span>
+          </FadeInSection>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+            {[
+              {
+                label: "3D",
+                icon: Box,
+                gradient: "linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)",
+                glow: "rgba(124,58,237,0.35)",
+                onClick: () => setShow3D(true),
+              },
+              {
+                label: "Vídeos",
+                icon: Film,
+                gradient: "linear-gradient(135deg, #ec4899 0%, #ef4444 100%)",
+                glow: "rgba(236,72,153,0.35)",
+                category: "videos",
+              },
+              {
+                label: "Imagens",
+                icon: Camera,
+                gradient: "linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)",
+                glow: "rgba(14,165,233,0.35)",
+                category: "imagens",
+              },
+              {
+                label: "Ilustração",
+                icon: Paintbrush,
+                gradient: "linear-gradient(135deg, #10b981 0%, #14b8a6 100%)",
+                glow: "rgba(16,185,129,0.35)",
+                category: "ilustracao",
+              },
+              {
+                label: "Motions",
+                icon: Sparkles,
+                gradient: "linear-gradient(135deg, #f59e0b 0%, #f97316 100%)",
+                glow: "rgba(245,158,11,0.35)",
+                category: "motions",
+              },
+              {
+                label: "Websites",
+                icon: Monitor,
+                gradient: "linear-gradient(135deg, #0d9488 0%, #2563eb 100%)",
+                glow: "rgba(13,148,136,0.35)",
+                category: "websites",
+              },
+            ].map(({ label, icon: Icon, gradient, glow, category, onClick }, i) => {
+              // A category block stays disabled until its gallery has media.
+              const count = category ? CATEGORY_GALLERIES[category].items.length : 0;
+              const enabled = Boolean(onClick) || count > 0;
+              const handleClick = onClick
+                ? onClick
+                : () => setOpenCategory({ id: category!, label, gradient, glow });
+
+              return (
+              <FadeInSection key={label} delay={i * 0.07}>
+                  <motion.button
+                    type="button"
+                    disabled={!enabled}
+                    aria-label={label}
+                    className="glass-panel w-full flex flex-col items-center justify-center gap-4 py-8 sm:py-10 px-4 rounded-2xl select-none"
+                    whileHover={enabled ? { y: -6, scale: 1.03 } : undefined}
+                    whileTap={enabled ? { scale: 0.97 } : undefined}
+                    transition={{ type: "spring", stiffness: 400, damping: 22 }}
+                    style={{
+                      position: "relative",
+                      overflow: "hidden",
+                      cursor: enabled ? "pointer" : "not-allowed",
+                      opacity: enabled ? 1 : 0.45,
+                    }}
+                    onClick={enabled ? handleClick : undefined}
+                  >
+                    {/* Glow layer on hover via CSS */}
+                    {enabled && (
+                      <motion.div
+                        className="absolute inset-0 rounded-2xl pointer-events-none"
+                        initial={{ opacity: 0 }}
+                        whileHover={{ opacity: 1 }}
+                        transition={{ duration: 0.2 }}
+                        style={{ boxShadow: `inset 0 0 0 1px ${glow}, 0 0 28px ${glow}` }}
+                      />
+                    )}
+
+                    {/* Icon container */}
+                    <div className="relative shrink-0">
+                      <div
+                        className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                        style={{
+                          background: gradient,
+                          boxShadow: `0 8px 24px ${glow}`,
+                          filter: enabled ? "none" : "grayscale(75%)",
+                        }}
+                      >
+                        <Icon className="w-7 h-7 text-white" strokeWidth={1.8} />
+                      </div>
+                      {count > 0 && (
+                        <div
+                          className="absolute -top-1.5 -right-1.5 min-w-[20px] h-5 px-1 rounded-full flex items-center justify-center"
+                          style={{
+                            background: "hsl(var(--primary))",
+                            boxShadow: "0 0 8px hsl(var(--primary) / 0.6)",
+                          }}
+                        >
+                          <span className="font-display font-black text-[10px] leading-none" style={{ color: "hsl(var(--primary-foreground))" }}>
+                            {count}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Label */}
+                    <span
+                      className="font-display font-bold text-[11px] sm:text-xs tracking-[0.18em] uppercase text-center leading-tight"
+                      style={{ color: "hsl(var(--foreground))" }}
+                    >
+                      {label}
+                    </span>
+
+                    {!enabled && (
+                      <span
+                        className="absolute top-2.5 right-2.5 font-display font-bold text-[8px] tracking-[0.16em] uppercase px-2 py-1 rounded-full"
+                        style={{
+                          background: "hsl(var(--muted) / 0.6)",
+                          color: "hsl(var(--muted-foreground))",
+                        }}
+                      >
+                        {t("category.soon")}
+                      </span>
+                    )}
+                  </motion.button>
+              </FadeInSection>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* ── CONTACT CTA */}
       <section className="relative py-20 sm:py-32 overflow-hidden">
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
@@ -267,6 +419,25 @@ export default function Index() {
         </div>
       </section>
     </div>
+
+      {/* ── 3D Modal */}
+      <AnimatePresence>
+        {show3D && <ThreeDModal onClose={() => setShow3D(false)} />}
+      </AnimatePresence>
+
+      {/* ── Category gallery modal */}
+      <AnimatePresence>
+        {openCategory && (
+          <CategoryModal
+            categoryId={openCategory.id}
+            label={openCategory.label}
+            gradient={openCategory.gradient}
+            glow={openCategory.glow}
+            onClose={() => setOpenCategory(null)}
+          />
+        )}
+      </AnimatePresence>
+    </>
   );
 
 }

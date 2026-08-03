@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X, FileText } from "lucide-react";
 import project1 from "@/assets/project-1.webp";
@@ -39,7 +40,12 @@ type Project = {
   tools: string[];
   stripImage: string;
   slides: string[];
-  kind?: "book";
+  // "book" = interactive 3D flipbook. "scroll" = vertical case-study document
+  // (pages stacked like a PDF/Behance). Undefined = horizontal carousel.
+  kind?: "book" | "scroll";
+  // For "scroll" projects: maps a slide index to an animated gif that only
+  // plays while on screen (falls back to slides[index] otherwise).
+  gifSlides?: Record<number, string>;
 };
 
 // ── MacOS Modal ──────────────────────────────────────────────────────────────
@@ -334,7 +340,7 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
     </div>
   );
 
-  return (
+  return createPortal(
     <motion.div
       className="fixed inset-0 z-[100]"
       initial={{ opacity: 0 }}
@@ -529,7 +535,291 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
         </>
       )}
 
-    </motion.div>
+    </motion.div>,
+    // Portalled to <body>: PageTransition wraps each route in a transformed
+    // motion.div, whose stacking context would otherwise trap z-[100]
+    // underneath the lamp cord overlay.
+    document.body,
+  );
+}
+
+// ── Scroll Document Modal (vertical case-study, PDF/Behance style) ────────────
+
+// A single stacked page. If `gif` is provided it only animates while on screen
+// (IntersectionObserver swaps poster ↔ gif), so idle gifs never weigh the page.
+// Falls back to the poster if the gif fails to load (e.g. not uploaded yet).
+function ScrollSlide({ src, gif, root }: { src: string; gif?: string; root: React.RefObject<HTMLElement> }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    if (!gif) return;
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { root: root.current ?? null, threshold: 0.2, rootMargin: "10% 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [gif, root]);
+
+  const showGif = !!gif && inView && !failed;
+
+  return (
+    <div ref={ref} className="block w-full leading-[0]">
+      <img
+        src={showGif ? gif! : src}
+        alt=""
+        onError={() => { if (showGif) setFailed(true); }}
+        className="block w-full h-auto select-none"
+        draggable={false}
+        loading="lazy"
+      />
+    </div>
+  );
+}
+
+function ScrollDocBody({ project, scrollRef }: { project: Project; scrollRef: React.RefObject<HTMLDivElement> }) {
+  return (
+    <div
+      ref={scrollRef}
+      className="flex-1 overflow-y-auto bg-black"
+      style={{ overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}
+    >
+      {project.slides.map((src, i) => (
+        <ScrollSlide key={i} src={src} gif={project.gifSlides?.[i]} root={scrollRef} />
+      ))}
+    </div>
+  );
+}
+
+function ScrollDocModal({ project, onClose }: { project: Project; onClose: () => void }) {
+  const { theme } = useTheme();
+  const dk = theme === "dark";
+  const isMobile = useIsMobile();
+  const { minimize } = useMinimizedProject();
+  const [showDesc, setShowDesc] = useState(false);
+  const [isSquishing, setIsSquishing] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [descWidth, setDescWidth] = useState(400);
+  const [isResizingDesc, setIsResizingDesc] = useState(false);
+  const descDragRef = useRef<{ startX: number; startWidth: number } | null>(null);
+
+  const winScrollRef = useRef<HTMLDivElement>(null);
+  const expScrollRef = useRef<HTMLDivElement>(null);
+  const mobileScrollRef = useRef<HTMLDivElement>(null);
+
+  const windowSpring = { type: "spring", stiffness: 360, damping: 36 } as const;
+
+  const startDescResize = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    descDragRef.current = { startX: e.clientX, startWidth: descWidth };
+    setIsResizingDesc(true);
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+    const onMove = (ev: MouseEvent) => {
+      if (!descDragRef.current) return;
+      const delta = descDragRef.current.startX - ev.clientX;
+      setDescWidth(Math.min(window.innerWidth * 0.55, Math.max(260, descDragRef.current.startWidth + delta)));
+    };
+    const onUp = () => {
+      descDragRef.current = null;
+      setIsResizingDesc(false);
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+  }, [descWidth]);
+
+  const chromeBg  = dk ? "#111d2e" : "#e2e8f0";
+  const chromeBdr = `1px solid ${dk ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)"}`;
+
+  const handleMinimize = useCallback(() => {
+    setIsSquishing(true);
+    setTimeout(() => {
+      minimize({ id: project.id, title: project.title, category: project.category, thumbnail: project.slides[0] });
+      onClose();
+    }, 420);
+  }, [minimize, project, onClose]);
+
+  const TrafficLights = ({ onRed = onClose }: { onRed?: () => void }) => (
+    <div className="flex items-center gap-2">
+      <button onClick={onRed}          className="w-[13px] h-[13px] rounded-full hover:opacity-75 transition-opacity" style={{ background: "#ff5f57" }} />
+      <button onClick={handleMinimize} className="w-[13px] h-[13px] rounded-full hover:opacity-75 transition-opacity" style={{ background: "#ffbd2e" }} />
+      {!isMobile && <button onClick={() => setIsExpanded(e => !e)} className="w-[13px] h-[13px] rounded-full hover:opacity-75 transition-opacity" style={{ background: "#28c941" }} />}
+    </div>
+  );
+
+  const DescToggle = () => (
+    <motion.button onClick={() => setShowDesc(d => !d)}
+      className="font-display text-[9px] tracking-[0.14em] uppercase px-3 py-1 rounded-full"
+      animate={{ borderColor: showDesc ? "rgba(162,213,198,0.7)" : dk ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.15)", color: showDesc ? "rgb(162,213,198)" : dk ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)", background: showDesc ? "rgba(162,213,198,0.08)" : "transparent" }}
+      style={{ border: "1px solid" }} transition={{ duration: 0.2 }}>
+      Descrição do Projeto
+    </motion.button>
+  );
+
+  return createPortal(
+    <motion.div
+      className="fixed inset-0 z-[100]"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      style={{
+        pointerEvents: isSquishing ? "none" : "auto",
+        ...(isExpanded ? {} : !isMobile ? { display: "flex", alignItems: "center", justifyContent: "center", padding: "clamp(12px,2.5vw,36px)" } : {}),
+      }}
+    >
+      {/* ══ EXPANDED / FULLSCREEN ══════════════════════════════════════════════ */}
+      {isExpanded && (
+        <div className="absolute inset-0 flex" style={{ background: dk ? "#05090f" : "#f0f4f8" }}>
+          <div className="flex flex-col flex-1 overflow-hidden"
+            style={{ marginRight: showDesc ? descWidth : 0, transition: isResizingDesc ? "none" : "margin-right 0.35s cubic-bezier(0.16,1,0.3,1)" }}>
+            <div className="flex items-center shrink-0 h-11 px-4 gap-4" style={{ background: chromeBg, borderBottom: chromeBdr }}>
+              <TrafficLights />
+              <span className="font-display text-[10px] tracking-[0.2em] uppercase mx-auto" style={{ color: dk ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.32)" }}>{project.title}</span>
+              {!isMobile && <DescToggle />}
+            </div>
+            <ScrollDocBody project={project} scrollRef={expScrollRef} />
+          </div>
+
+          <AnimatePresence>
+            {showDesc && (
+              <motion.div
+                initial={{ x: descWidth }} animate={{ x: 0 }} exit={{ x: descWidth }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="fixed right-0 top-0 bottom-0 flex flex-col z-20"
+                style={{ width: descWidth, background: dk ? "#0d1520" : "#f7f9fc", borderLeft: `1px solid ${dk ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`, userSelect: isResizingDesc ? "none" : "auto" }}
+              >
+                <div onMouseDown={startDescResize}
+                  className="absolute left-0 top-0 bottom-0 w-[6px] cursor-col-resize z-30"
+                  style={{ transition: "background 0.2s" }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "rgba(10,132,255,0.2)"; }}
+                  onMouseLeave={e => { if (!isResizingDesc) e.currentTarget.style.background = "transparent"; }}>
+                  <div style={{ position: "absolute", left: 2, top: "50%", transform: "translateY(-50%)", width: 2, height: 40, borderRadius: 2, background: "rgba(10,132,255,0.45)" }} />
+                </div>
+                <div className="flex items-center shrink-0 h-11 px-4 gap-3" style={{ background: chromeBg, borderBottom: chromeBdr }}>
+                  <div className="flex items-center gap-2">
+                    <button onClick={() => setShowDesc(false)} className="w-[13px] h-[13px] rounded-full hover:opacity-75" style={{ background: "#ff5f57" }} />
+                    <div className="w-[13px] h-[13px] rounded-full" style={{ background: "#ffbd2e" }} />
+                    <div className="w-[13px] h-[13px] rounded-full" style={{ background: "#28c941" }} />
+                  </div>
+                  <span className="font-display text-[9px] tracking-[0.2em] uppercase ml-2" style={{ color: dk ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.28)" }}>Descrição</span>
+                </div>
+                <DescPanelContent project={project} dk={dk} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      )}
+
+      {/* ══ NORMAL MODE ═══════════════════════════════════════════════════════ */}
+      {!isExpanded && (
+        <>
+          {/* ── MOBILE SHEET ──────────────────────────────────────────────── */}
+          {isMobile && (
+            <motion.div
+              className="fixed inset-0 z-10 flex flex-col"
+              style={{ background: dk ? "#05090f" : "#f0f4f8" }}
+              initial={{ y: "100%" }}
+              animate={isSquishing ? { y: "100%", opacity: 0 } : { y: 0, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 340, damping: 38 }}
+            >
+              <div className="flex items-center shrink-0 h-11 px-4 gap-3" style={{ background: chromeBg, borderBottom: chromeBdr }}>
+                <TrafficLights />
+                <div className="flex-1" />
+                <span className="font-display text-[10px] tracking-widest" style={{ color: dk ? "rgba(255,255,255,0.32)" : "rgba(0,0,0,0.32)" }}>
+                  {project.title}
+                </span>
+              </div>
+
+              {/* One vertical scroll: stacked pages, then description. Native finger-drag. */}
+              <div ref={mobileScrollRef} className="flex-1 overflow-y-auto" style={{ overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
+                <div className="bg-black">
+                  {project.slides.map((src, i) => (
+                    <ScrollSlide key={i} src={src} gif={project.gifSlides?.[i]} root={mobileScrollRef} />
+                  ))}
+                </div>
+                <div style={{ background: dk ? "#0d1520" : "#ffffff" }}>
+                  <div className="px-5 pt-4 pb-3" style={{ borderBottom: `1px solid ${dk ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)"}` }}>
+                    <span className="font-display text-[9px] tracking-[0.28em] uppercase" style={{ color: dk ? "rgba(255,255,255,0.32)" : "rgba(0,0,0,0.38)" }}>
+                      Descrição do Projeto
+                    </span>
+                  </div>
+                  <DescPanelContent project={project} dk={dk} />
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* ── DESKTOP WINDOWED ──────────────────────────────────────────── */}
+          {!isMobile && (
+            <>
+              {!isSquishing && (
+                <div
+                  className="absolute inset-0"
+                  style={{ background: "rgba(0,0,0,0.86)", backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)" }}
+                  onClick={onClose}
+                />
+              )}
+
+              <div className="relative z-10 flex items-stretch" style={{ gap: 10, height: "min(88vh, 860px)" }}>
+                <motion.div
+                  className="relative flex flex-col overflow-hidden rounded-2xl flex-shrink-0"
+                  style={{
+                    width: "min(90vw, 1220px)",
+                    background: dk ? "#08101d" : "#f0f4f8",
+                    boxShadow: dk ? "0 60px 160px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.07)" : "0 40px 120px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.08)",
+                    transformOrigin: "bottom center",
+                  }}
+                  initial={{ scale: 0.87, opacity: 0, y: 24 }}
+                  animate={isSquishing ? { scaleX: 0.28, scaleY: 0.05, y: "90vh", opacity: 0 } : { scale: 1, opacity: 1, y: 0 }}
+                  exit={{ scale: 0.87, opacity: 0, y: 24 }}
+                  transition={{ type: "spring", stiffness: 340, damping: 30 }}
+                >
+                  <div className="flex items-center shrink-0 h-11 px-4 gap-4" style={{ background: chromeBg, borderBottom: chromeBdr }}>
+                    <TrafficLights />
+                    <span className="font-display text-[10px] tracking-[0.2em] uppercase mx-auto" style={{ color: dk ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.32)" }}>{project.title}</span>
+                    <DescToggle />
+                  </div>
+                  <ScrollDocBody project={project} scrollRef={winScrollRef} />
+                </motion.div>
+
+                <AnimatePresence>
+                  {showDesc && !isSquishing && (
+                    <motion.div className="flex-shrink-0 overflow-hidden" initial={{ width: 0 }} animate={{ width: 440 }} exit={{ width: 0 }} transition={windowSpring}>
+                      <motion.div
+                        className="flex flex-col overflow-hidden rounded-2xl h-full"
+                        style={{ width: 440, background: dk ? "#0d1520" : "#f7f9fc", boxShadow: `0 0 0 1px ${dk ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}` }}
+                        initial={{ scale: 0.87, opacity: 0, y: 24 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.87, opacity: 0, y: 24 }}
+                        transition={{ ...windowSpring, delay: 0.05 }}
+                      >
+                        <div className="flex items-center shrink-0 h-11 px-4 gap-3" style={{ background: chromeBg, borderBottom: chromeBdr }}>
+                          <div className="flex items-center gap-2">
+                            <button onClick={() => setShowDesc(false)} className="w-[13px] h-[13px] rounded-full hover:opacity-75" style={{ background: "#ff5f57" }} />
+                            <div className="w-[13px] h-[13px] rounded-full" style={{ background: "#ffbd2e" }} />
+                            <div className="w-[13px] h-[13px] rounded-full" style={{ background: "#28c941" }} />
+                          </div>
+                          <span className="font-display text-[9px] tracking-[0.2em] uppercase ml-2" style={{ color: dk ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.28)" }}>Descrição</span>
+                        </div>
+                        <DescPanelContent project={project} dk={dk} />
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </>
+          )}
+        </>
+      )}
+    </motion.div>,
+    // Portalled to <body>: see MacOSModal above.
+    document.body,
   );
 }
 
@@ -689,6 +979,31 @@ export default function Projects() {
   const [openProject, setOpenProject] = useState<Project | null>(null);
 
   const projects: Project[] = [
+    {
+      id: "prumo",
+      title: "PRUMO",
+      year: "2025",
+      category: t("projdet.prumo.category"),
+      description: t("projdet.prumo.description"),
+      client: t("projdet.prumo.client"),
+      audience: t("projdet.prumo.audience"),
+      challenge: t("projdet.prumo.challenge"),
+      process: t("projdet.prumo.process"),
+      outcome: t("projdet.prumo.outcome"),
+      tags: ["Branding", "Visual Identity", "Logo Design", "Motion", "Web Design", "Art Direction"],
+      tools: ["Illustrator", "Photoshop", "After Effects", "Figma"],
+      stripImage: "/prumo/prumo-strip.jpg",
+      kind: "scroll",
+      slides: [
+        "/prumo/prumo-01.jpg", "/prumo/prumo-02.jpg", "/prumo/prumo-03.jpg",
+        "/prumo/prumo-04.jpg", "/prumo/prumo-05.jpg", "/prumo/prumo-06.jpg",
+        "/prumo/prumo-07.jpg", "/prumo/prumo-08.jpg", "/prumo/prumo-09.jpg",
+        "/prumo/prumo-10.jpg",
+      ],
+      // Pages 3 and 7 are animated; they only loop while scrolled into view.
+      // Drop the real files at these paths — until then the poster jpg shows.
+      gifSlides: { 2: "/prumo/prumo-03.gif", 6: "/prumo/prumo-07.gif" },
+    },
     {
       id: "livro-interativo",
       title: "LIVRO INTERATIVO",
@@ -916,7 +1231,9 @@ export default function Projects() {
       {/* ── MODAL */}
       <AnimatePresence>
         {openProject && (
-          <MacOSModal project={openProject} onClose={() => setOpenProject(null)} />
+          openProject.kind === "scroll"
+            ? <ScrollDocModal project={openProject} onClose={() => setOpenProject(null)} />
+            : <MacOSModal project={openProject} onClose={() => setOpenProject(null)} />
         )}
       </AnimatePresence>
     </div>
