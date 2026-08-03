@@ -3,11 +3,13 @@
 // PARKED — not rendered anywhere right now. Removed from the live home page on
 // 2026-08-03 while the galleries are still missing content.
 //
-// This is the "O que eu crio" section: six category blocks that open gallery
-// modals. 3D opens ThreeDModal; the rest open CategoryModal with whatever is
-// declared in src/data/categories.ts. A category with no media renders as a
-// disabled block with an "em breve" badge — that placeholder look is why it
-// came off the live site.
+// This is the "O que eu crio" section: six category blocks that open a gallery
+// modal with whatever is declared in src/data/categories.ts. A category with no
+// media renders as a disabled block with an "em breve" badge — that placeholder
+// look is why it came off the live site.
+//
+// All six galleries are currently empty, so every block renders disabled. Add
+// media to src/data/categories.ts to switch one on; nothing else is needed.
 //
 // To put it back: import this component into src/pages/Index.tsx and drop
 // <BotoesHome /> between the PHILOSOPHY and CONTACT CTA sections. Nothing else
@@ -16,9 +18,8 @@
 import { useRef, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Box, Film, Camera, Paintbrush, Monitor, Sparkles } from "lucide-react";
-import ThreeDModal from "@/components/ThreeDModal";
 import CategoryModal from "@/components/CategoryModal";
-import { CATEGORY_GALLERIES } from "@/data/categories";
+import { categoryCount } from "@/data/categories";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 function FadeInSection({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
@@ -39,7 +40,6 @@ function FadeInSection({ children, delay = 0, className = "" }: { children: Reac
 
 export default function BotoesHome() {
   const { t } = useLanguage();
-  const [show3D, setShow3D] = useState(false);
   const [openCategory, setOpenCategory] = useState<
     { id: string; label: string; gradient: string; glow: string } | null
   >(null);
@@ -61,7 +61,7 @@ export default function BotoesHome() {
                 icon: Box,
                 gradient: "linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)",
                 glow: "rgba(124,58,237,0.35)",
-                onClick: () => setShow3D(true),
+                category: "3d",
               },
               {
                 label: "Vídeos",
@@ -98,13 +98,11 @@ export default function BotoesHome() {
                 glow: "rgba(13,148,136,0.35)",
                 category: "websites",
               },
-            ].map(({ label, icon: Icon, gradient, glow, category, onClick }, i) => {
+            ].map(({ label, icon: Icon, gradient, glow, category }, i) => {
               // A category block stays disabled until its gallery has media.
-              const count = category ? CATEGORY_GALLERIES[category].items.length : 0;
-              const enabled = Boolean(onClick) || count > 0;
-              const handleClick = onClick
-                ? onClick
-                : () => setOpenCategory({ id: category!, label, gradient, glow });
+              const count = categoryCount(category);
+              const enabled = count > 0;
+              const handleClick = () => setOpenCategory({ id: category, label, gradient, glow });
 
               return (
               <FadeInSection key={label} delay={i * 0.07}>
@@ -188,11 +186,6 @@ export default function BotoesHome() {
           </div>
         </div>
       </section>
-
-      {/* ── 3D Modal */}
-      <AnimatePresence>
-        {show3D && <ThreeDModal onClose={() => setShow3D(false)} />}
-      </AnimatePresence>
 
       {/* ── Category gallery modal */}
       <AnimatePresence>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, useAnimation, useScroll, useTransform, useInView } from "framer-motion";
 import { ArrowRight, ChevronDown, ExternalLink, Zap, Award, Users, Layers, MessageCircle, Mail, Linkedin } from "lucide-react";
 import GooeyNav from "@/components/GooeyNav";
+import BotoesHome from "@/components/BotoesHome";
 import heroVisualDark from "@/assets/hero-character.webp";
 import heroVisualLight from "@/assets/hero-character-light.webp";
 import project2 from "@/assets/project-2.jpg";
@@ -237,6 +238,9 @@ export default function Index() {
           </FadeInSection>
         </div>
       </section>
+
+      {/* ── BOTOES HOME (local only — nao commitar sem querer publicar) */}
+      <BotoesHome />
 
       {/* ── CONTACT CTA */}
       <section className="relative py-20 sm:py-32 overflow-hidden">

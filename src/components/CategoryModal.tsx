@@ -5,7 +5,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { CATEGORY_GALLERIES, GalleryItem } from "@/data/categories";
+import ChromaGrid from "@/components/ChromaGrid";
+import WebsiteList from "@/components/WebsiteList";
+import { CATEGORY_GALLERIES, categoryCount, GalleryItem } from "@/data/categories";
 
 interface Props {
   /** Key into CATEGORY_GALLERIES. */
@@ -25,6 +27,7 @@ export default function CategoryModal({ categoryId, label, gradient, glow, onClo
 
   const gallery = CATEGORY_GALLERIES[categoryId];
   const items = gallery?.items ?? [];
+  const links = gallery?.links;
 
   const [index, setIndex] = useState<number | null>(null); // null = grid, number = lightbox
   const [isExpanded, setIsExpanded] = useState(false);
@@ -140,73 +143,38 @@ export default function CategoryModal({ categoryId, label, gradient, glow, onClo
         className="font-display text-[9px] tracking-[0.2em] uppercase whitespace-nowrap"
         style={{ color: dk ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)" }}
       >
-        {current ? `${index! + 1} / ${items.length}` : `${label} · ${items.length}`}
+        {current ? `${index! + 1} / ${items.length}` : `${label} · ${categoryCount(categoryId)}`}
       </span>
       <div className="flex-1" />
     </div>
   );
 
   // ── Grid ─────────────────────────────────────────────────────────────────────
-  const grid = (
-    <div className="flex-1 min-h-0 overflow-y-auto" style={{ padding: 14, background: bg }}>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: isMobile
-            ? "repeat(2, minmax(0, 1fr))"
-            : "repeat(auto-fill, minmax(180px, 1fr))",
-          gap: 10,
-        }}
-      >
-        {items.map((item, i) => (
-          <motion.button
-            key={item.src}
-            onClick={() => setIndex(i)}
-            whileHover={{ scale: 1.025 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: "spring", stiffness: 440, damping: 26 }}
-            style={{
-              aspectRatio: gallery.aspect,
-              borderRadius: 14,
-              overflow: "hidden",
-              position: "relative",
-              cursor: "pointer",
-              border: "none",
-              padding: 0,
-              background: gradient,
-            }}
-          >
-            {renderMedia(item, "thumb")}
-
-            <motion.div
-              className="absolute inset-0 pointer-events-none rounded-[14px]"
-              initial={{ opacity: 0 }}
-              whileHover={{ opacity: 1 }}
-              transition={{ duration: 0.18 }}
-              style={{ boxShadow: `inset 0 0 0 1.5px ${glow}, 0 0 32px ${glow}` }}
-            />
-
-            <div
-              className="absolute bottom-0 left-0 right-0 px-3 py-2.5 text-left"
-              style={{
-                background: "linear-gradient(to top, rgba(0,0,0,0.74) 0%, transparent 100%)",
-              }}
-            >
-              {item.sub && (
-                <span
-                  className="block font-display text-[8px] tracking-[0.22em] uppercase mb-0.5 truncate"
-                  style={{ color: "rgba(255,255,255,0.52)" }}
-                >
-                  {item.sub}
-                </span>
-              )}
-              <span className="block font-display font-bold text-xs uppercase tracking-wide text-white truncate">
-                {item.title}
-              </span>
-            </div>
-          </motion.button>
-        ))}
-      </div>
+  //
+  // The chroma spotlight keeps the whole grid greyed out except around the
+  // cursor, so the card border/gradient follow the category's own colour.
+  const grid = links ? (
+    <div
+      className="flex-1 min-h-0 overflow-y-auto"
+      style={{ background: bg, padding: isMobile ? 14 : 24 }}
+    >
+      <WebsiteList links={links} />
+    </div>
+  ) : (
+    <div className="flex-1 min-h-0 overflow-y-auto" style={{ background: bg }}>
+      <ChromaGrid
+        items={items.map((item, i) => ({
+          image: item.type === "video" && item.poster ? item.poster : item.src,
+          alt: item.title ?? `${label} ${i + 1}`,
+          borderColor: glow.replace(/[\d.]+\)$/, "0.9)"),
+          gradient,
+        }))}
+        columns={isMobile ? 2 : 3}
+        cardWidth={isMobile ? 160 : 300}
+        aspect={gallery.aspect}
+        radius={isMobile ? 200 : 300}
+        onSelect={setIndex}
+      />
     </div>
   );
 
@@ -262,6 +230,9 @@ export default function CategoryModal({ categoryId, label, gradient, glow, onClo
         )}
       </div>
 
+      {/* Info panel only exists for items that carry a title — image-only
+          galleries show the artwork and nothing else. */}
+      {(current.title || current.sub) && (
       <div
         className="shrink-0 px-5 py-4"
         style={{
@@ -284,6 +255,7 @@ export default function CategoryModal({ categoryId, label, gradient, glow, onClo
           {current.title}
         </h3>
       </div>
+      )}
     </div>
   );
 
