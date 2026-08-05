@@ -13,6 +13,7 @@
 import { useRef, useEffect, type ReactNode, type CSSProperties } from "react";
 import { Renderer, Program, Mesh, Triangle, Color } from "ogl";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
+import { useCanHover } from "@/hooks/use-can-hover";
 import "./SpecularButton.css";
 
 const PAD = 20;
@@ -160,6 +161,10 @@ export default function SpecularButton({
   const fxRef = useRef<HTMLSpanElement>(null);
   const propsRef = useRef<LiveProps>({} as LiveProps);
   const reduceMotion = usePrefersReducedMotion();
+  const canHover = useCanHover();
+  // With hoverOnly there is no pointer to light the rim on a touch screen, so
+  // the shader would burn a WebGL context and a rAF loop per button for nothing.
+  const skipFx = reduceMotion || (hoverOnly && !canHover);
 
   propsRef.current = {
     radius,
@@ -177,7 +182,7 @@ export default function SpecularButton({
   };
 
   useEffect(() => {
-    if (reduceMotion) return;
+    if (skipFx) return;
     const btn = btnRef.current;
     const fx = fxRef.current;
     if (!btn || !fx) return;
@@ -330,7 +335,7 @@ export default function SpecularButton({
       if (gl.canvas.parentNode === fx) fx.removeChild(gl.canvas);
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  }, [reduceMotion]);
+  }, [skipFx]);
 
   const style = {
     "--sb-radius": `${radius}px`,

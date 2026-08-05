@@ -21,6 +21,7 @@ import { Box, Film, Camera, Paintbrush, Monitor, Sparkles } from "lucide-react";
 import CategoryModal from "@/components/CategoryModal";
 import { categoryCount } from "@/data/categories";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useCanHover } from "@/hooks/use-can-hover";
 
 function FadeInSection({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -40,6 +41,7 @@ function FadeInSection({ children, delay = 0, className = "" }: { children: Reac
 
 export default function BotoesHome() {
   const { t } = useLanguage();
+  const canHover = useCanHover();
   const [openCategory, setOpenCategory] = useState<
     { id: string; label: string; gradient: string; glow: string } | null
   >(null);
@@ -111,7 +113,11 @@ export default function BotoesHome() {
                     disabled={!enabled}
                     aria-label={label}
                     className="glass-panel w-full flex flex-col items-center justify-center gap-4 py-8 sm:py-10 px-4 rounded-2xl select-none"
-                    whileHover={enabled ? { y: -6, scale: 1.03 } : undefined}
+                    // No whileHover on touch: framer-motion fires the hover
+                    // gesture on pointerdown, and a block that lifts and scales
+                    // out from under the finger can swallow the tap before the
+                    // click lands.
+                    whileHover={enabled && canHover ? { y: -6, scale: 1.03 } : undefined}
                     whileTap={enabled ? { scale: 0.97 } : undefined}
                     transition={{ type: "spring", stiffness: 400, damping: 22 }}
                     style={{
@@ -123,7 +129,7 @@ export default function BotoesHome() {
                     onClick={enabled ? handleClick : undefined}
                   >
                     {/* Glow layer on hover via CSS */}
-                    {enabled && (
+                    {enabled && canHover && (
                       <motion.div
                         className="absolute inset-0 rounded-2xl pointer-events-none"
                         initial={{ opacity: 0 }}

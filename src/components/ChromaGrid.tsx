@@ -8,9 +8,13 @@
 //     image only.
 //   - Cards call onSelect(index) instead of window.open(url), so a click opens
 //     the gallery lightbox rather than navigating away.
+//   - The greyscale layers are skipped entirely where hover is unavailable.
+//     Without a pointer to carry the spotlight the artwork would sit permanently
+//     desaturated, which is the opposite of what a portfolio wants.
 
 import { useRef, useEffect, type CSSProperties } from "react";
 import { gsap } from "gsap";
+import { useCanHover } from "@/hooks/use-can-hover";
 import "./ChromaGrid.css";
 
 export interface ChromaItem {
@@ -50,6 +54,8 @@ export default function ChromaGrid({
   ease = "power3.out",
   onSelect,
 }: ChromaGridProps) {
+  const canHover = useCanHover();
+
   const rootRef = useRef<HTMLDivElement>(null);
   const fadeRef = useRef<HTMLDivElement>(null);
   const setX = useRef<((v: number) => void) | null>(null);
@@ -58,14 +64,14 @@ export default function ChromaGrid({
 
   useEffect(() => {
     const el = rootRef.current;
-    if (!el) return;
+    if (!el || !canHover) return;
     setX.current = gsap.quickSetter(el, "--x", "px") as (v: number) => void;
     setY.current = gsap.quickSetter(el, "--y", "px") as (v: number) => void;
     const { width, height } = el.getBoundingClientRect();
     pos.current = { x: width / 2, y: height / 2 };
     setX.current(pos.current.x);
     setY.current(pos.current.y);
-  }, []);
+  }, [canHover]);
 
   const moveTo = (x: number, y: number) => {
     gsap.to(pos.current, {
@@ -83,13 +89,14 @@ export default function ChromaGrid({
 
   const handleMove = (e: React.PointerEvent<HTMLDivElement>) => {
     const el = rootRef.current;
-    if (!el) return;
+    if (!el || !canHover) return;
     const r = el.getBoundingClientRect();
     moveTo(e.clientX - r.left, e.clientY - r.top);
     gsap.to(fadeRef.current, { opacity: 0, duration: 0.25, overwrite: true });
   };
 
   const handleLeave = () => {
+    if (!canHover) return;
     gsap.to(fadeRef.current, { opacity: 1, duration: fadeOut, overwrite: true });
   };
 
@@ -135,8 +142,12 @@ export default function ChromaGrid({
           </div>
         </button>
       ))}
-      <div className="chroma-overlay" />
-      <div ref={fadeRef} className="chroma-fade" />
+      {canHover && (
+        <>
+          <div className="chroma-overlay" />
+          <div ref={fadeRef} className="chroma-fade" />
+        </>
+      )}
     </div>
   );
 }
