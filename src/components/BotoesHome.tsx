@@ -46,6 +46,27 @@ export default function BotoesHome() {
     { id: string; label: string; gradient: string; glow: string } | null
   >(null);
 
+  // Own tap detection for touch. The synthesised click is what was failing on
+  // real phones, so the open no longer depends on it; onClick still handles
+  // mouse and keyboard, and running both is harmless since opening the same
+  // category twice is idempotent.
+  const tapRef = useRef<{ x: number; y: number; id: number } | null>(null);
+
+  const onTapStart = (e: React.PointerEvent) => {
+    if (e.pointerType === "mouse") return;
+    tapRef.current = { x: e.clientX, y: e.clientY, id: e.pointerId };
+  };
+
+  const onTapEnd = (e: React.PointerEvent, open: () => void) => {
+    if (e.pointerType === "mouse") return;
+    const start = tapRef.current;
+    tapRef.current = null;
+    if (!start || start.id !== e.pointerId) return;
+    // A finger that travelled was scrolling, not tapping.
+    if (Math.hypot(e.clientX - start.x, e.clientY - start.y) > 12) return;
+    open();
+  };
+
   return (
     <>
       <section className="relative py-16 sm:py-24 overflow-hidden">
@@ -113,20 +134,30 @@ export default function BotoesHome() {
                     disabled={!enabled}
                     aria-label={label}
                     className="glass-panel w-full flex flex-col items-center justify-center gap-4 py-8 sm:py-10 px-4 rounded-2xl select-none"
-                    // No whileHover on touch: framer-motion fires the hover
-                    // gesture on pointerdown, and a block that lifts and scales
-                    // out from under the finger can swallow the tap before the
-                    // click lands.
+                    // Touch screens get no framer gestures at all. whileHover
+                    // fires on pointerdown there, lifting the block out from
+                    // under the finger, and both gestures capture the pointer —
+                    // either can leave the browser without a click to
+                    // synthesise.
                     whileHover={enabled && canHover ? { y: -6, scale: 1.03 } : undefined}
-                    whileTap={enabled ? { scale: 0.97 } : undefined}
+                    whileTap={enabled && canHover ? { scale: 0.97 } : undefined}
                     transition={{ type: "spring", stiffness: 400, damping: 22 }}
                     style={{
                       position: "relative",
                       overflow: "hidden",
                       cursor: enabled ? "pointer" : "not-allowed",
                       opacity: enabled ? 1 : 0.45,
+                      // Tell the browser this is a tap target, never a pan/zoom
+                      // start, so it stops waiting to classify the gesture.
+                      touchAction: "manipulation",
                     }}
                     onClick={enabled ? handleClick : undefined}
+                    // Fallback for touch: open on our own tap detection instead
+                    // of trusting the browser's synthesised click. Guarded by a
+                    // movement threshold so ending a scroll over the block does
+                    // not count, and idempotent with onClick.
+                    onPointerDown={enabled ? onTapStart : undefined}
+                    onPointerUp={enabled ? (e) => onTapEnd(e, handleClick) : undefined}
                   >
                     {/* Glow layer on hover via CSS */}
                     {enabled && canHover && (
