@@ -285,6 +285,46 @@
   }
 }
 
+/* ─── Blocos de categoria (BOTOES HOME) ─────────────────────────────────────
+   Sem gesto de framer-motion: whileHover/whileTap fazem setPointerCapture no
+   pointerdown, e no Safari do iOS isso engole o click do toque. Hover e press
+   ficam em CSS puro, e o lift so existe onde ha hover de verdade. */
+.category-block {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.category-block:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.category-block:not(:disabled):active {
+  transform: scale(0.97);
+}
+
+.category-block__glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+@media (hover: hover) {
+  .category-block:not(:disabled):hover {
+    transform: translateY(-6px) scale(1.03);
+  }
+
+  .category-block:not(:disabled):hover .category-block__glow {
+    opacity: 1;
+  }
+}
+
 .glass-panel-sm {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur-sm);

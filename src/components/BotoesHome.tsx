@@ -21,7 +21,6 @@ import { Box, Film, Camera, Paintbrush, Monitor, Sparkles } from "lucide-react";
 import CategoryModal from "@/components/CategoryModal";
 import { categoryCount } from "@/data/categories";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useCanHover } from "@/hooks/use-can-hover";
 
 function FadeInSection({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -41,7 +40,6 @@ function FadeInSection({ children, delay = 0, className = "" }: { children: Reac
 
 export default function BotoesHome() {
   const { t } = useLanguage();
-  const canHover = useCanHover();
   const [openCategory, setOpenCategory] = useState<
     { id: string; label: string; gradient: string; glow: string } | null
   >(null);
@@ -129,43 +127,26 @@ export default function BotoesHome() {
 
               return (
               <FadeInSection key={label} delay={i * 0.07}>
-                  <motion.button
+                  {/* Plain <button>, deliberately not motion.button: the framer
+                      gestures were the one thing these blocks had that the
+                      working buttons elsewhere on the site do not. Hover and
+                      press live in CSS now (.category-block). */}
+                  <button
                     type="button"
                     disabled={!enabled}
                     aria-label={label}
-                    className="glass-panel w-full flex flex-col items-center justify-center gap-4 py-8 sm:py-10 px-4 rounded-2xl select-none"
-                    // Touch screens get no framer gestures at all. whileHover
-                    // fires on pointerdown there, lifting the block out from
-                    // under the finger, and both gestures capture the pointer —
-                    // either can leave the browser without a click to
-                    // synthesise.
-                    whileHover={enabled && canHover ? { y: -6, scale: 1.03 } : undefined}
-                    whileTap={enabled && canHover ? { scale: 0.97 } : undefined}
-                    transition={{ type: "spring", stiffness: 400, damping: 22 }}
-                    style={{
-                      position: "relative",
-                      overflow: "hidden",
-                      cursor: enabled ? "pointer" : "not-allowed",
-                      opacity: enabled ? 1 : 0.45,
-                      // Tell the browser this is a tap target, never a pan/zoom
-                      // start, so it stops waiting to classify the gesture.
-                      touchAction: "manipulation",
-                    }}
+                    className="glass-panel category-block w-full flex flex-col items-center justify-center gap-4 py-8 sm:py-10 px-4 rounded-2xl select-none"
                     onClick={enabled ? handleClick : undefined}
-                    // Fallback for touch: open on our own tap detection instead
-                    // of trusting the browser's synthesised click. Guarded by a
-                    // movement threshold so ending a scroll over the block does
-                    // not count, and idempotent with onClick.
+                    // Belt and braces for touch: open from our own tap detection
+                    // as well, guarded by a movement threshold so ending a
+                    // scroll over the block does not count. Idempotent with
+                    // onClick, so both firing is harmless.
                     onPointerDown={enabled ? onTapStart : undefined}
                     onPointerUp={enabled ? (e) => onTapEnd(e, handleClick) : undefined}
                   >
-                    {/* Glow layer on hover via CSS */}
-                    {enabled && canHover && (
-                      <motion.div
-                        className="absolute inset-0 rounded-2xl pointer-events-none"
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                        transition={{ duration: 0.2 }}
+                    {enabled && (
+                      <span
+                        className="category-block__glow"
                         style={{ boxShadow: `inset 0 0 0 1px ${glow}, 0 0 28px ${glow}` }}
                       />
                     )}
@@ -216,7 +197,7 @@ export default function BotoesHome() {
                         {t("category.soon")}
                       </span>
                     )}
-                  </motion.button>
+                  </button>
               </FadeInSection>
               );
             })}
