@@ -11,7 +11,6 @@ import PageTransition from "@/components/PageTransition";
 import LampCord from "@/components/LampCord";
 import ScrollToTop from "@/components/ScrollToTop";
 import SiteBackground from "@/components/SiteBackground";
-import HardwareAccelPopup from "@/components/HardwareAccelPopup";
 import GlobalMinimizedDock from "@/components/GlobalMinimizedDock";
 
 import Index from "./pages/Index.tsx";
@@ -63,7 +62,6 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <HardwareAccelPopup />
             <SiteBackground />
             <GlobalMinimizedDock />
             <LampCord />
