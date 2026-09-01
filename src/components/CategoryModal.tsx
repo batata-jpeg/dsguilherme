@@ -7,6 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ChromaGrid from "@/components/ChromaGrid";
 import WebsiteList from "@/components/WebsiteList";
+import VideoFeed from "@/components/VideoFeed";
 import { CATEGORY_GALLERIES, categoryCount, GalleryItem } from "@/data/categories";
 
 interface Props {
@@ -28,6 +29,9 @@ export default function CategoryModal({ categoryId, label, gradient, glow, onClo
   const gallery = CATEGORY_GALLERIES[categoryId];
   const items = gallery?.items ?? [];
   const links = gallery?.links;
+  // "feed" categories skip the grid/lightbox pair entirely and open straight
+  // into the vertical video player.
+  const isFeed = gallery?.layout === "feed";
 
   const [index, setIndex] = useState<number | null>(null); // null = grid, number = lightbox
   const [isExpanded, setIsExpanded] = useState(false);
@@ -149,11 +153,14 @@ export default function CategoryModal({ categoryId, label, gradient, glow, onClo
     </div>
   );
 
-  // ── Grid ─────────────────────────────────────────────────────────────────────
+  // ── Browse pane ──────────────────────────────────────────────────────────────
   //
-  // The chroma spotlight keeps the whole grid greyed out except around the
+  // Feed categories hand off to the vertical video player. Otherwise it is the
+  // chroma spotlight grid, which keeps everything greyed out except around the
   // cursor, so the card border/gradient follow the category's own colour.
-  const grid = links ? (
+  const browse = isFeed ? (
+    <VideoFeed items={items.filter((i) => i.type === "video")} />
+  ) : links ? (
     <div
       className="flex-1 min-h-0 overflow-y-auto"
       style={{ background: bg, padding: isMobile ? 14 : 24 }}
@@ -281,7 +288,7 @@ export default function CategoryModal({ categoryId, label, gradient, glow, onClo
           exit={{ opacity: 0 }}
           transition={{ duration: 0.15 }}
         >
-          {grid}
+          {browse}
         </motion.div>
       )}
     </AnimatePresence>
@@ -291,6 +298,11 @@ export default function CategoryModal({ categoryId, label, gradient, glow, onClo
   if (isMobile) {
     return createPortal(
       <motion.div
+        // Keyed apart from the desktop root below. Both are a <motion.div> in
+        // the same slot, so without distinct keys React reuses one DOM node
+        // across a breakpoint change and the abandoned branch's motion values
+        // stay stuck on it.
+        key="sheet"
         className="fixed inset-0 z-[150] flex flex-col overflow-hidden"
         style={{ background: bg }}
         initial={{ y: "100%" }}
@@ -311,6 +323,7 @@ export default function CategoryModal({ categoryId, label, gradient, glow, onClo
   // ── Desktop: windowed or expanded ────────────────────────────────────────────
   return createPortal(
     <motion.div
+      key="window"
       className="fixed inset-0 z-[150]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

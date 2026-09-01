@@ -32,6 +32,13 @@ export interface CategoryGallery {
   items: GalleryItem[];
   /** When set, the modal renders a link list instead of a photo grid. */
   links?: LinkItem[];
+  /**
+   * "grid" (default) opens a thumbnail grid, then a lightbox on click.
+   * "feed" opens a TikTok-style vertical player instead: one video per
+   * full-height slide, snap scrolling, autoplay on the slide you are on.
+   * Only makes sense for a gallery of 9:16 videos.
+   */
+  layout?: "grid" | "feed";
 }
 
 /** How many entries a category holds, whichever shape it uses. */
@@ -49,8 +56,18 @@ export const CATEGORY_GALLERIES: Record<string, CategoryGallery> = {
   },
   videos: {
     id: "videos",
-    aspect: "16 / 9",
-    items: [],
+    // Vertical 9:16 — the feed player sizes its stage from this shape.
+    aspect: "9 / 16",
+    layout: "feed",
+    items: [
+      {
+        src: "/videos/tavares.mp4",
+        type: "video",
+        poster: "/videos/tavares.jpg",
+        title: "Tavares",
+        sub: "Social / Reels",
+      },
+    ],
   },
   imagens: {
     id: "imagens",

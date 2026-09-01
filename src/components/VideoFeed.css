@@ -1,0 +1,66 @@
+/* Vertical snap feed (TikTok/Reels layout) used by the Vídeos category modal. */
+
+.video-feed {
+  scroll-snap-type: y mandatory;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  /* The snap track is the whole experience — a scrollbar next to it just adds
+     noise, and the slide counter already says where you are. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.video-feed::-webkit-scrollbar {
+  display: none;
+}
+
+.video-feed__slide {
+  height: 100%;
+  scroll-snap-align: start;
+  /* Without `always` a fast flick can sail past a slide and land between two,
+     which leaves nothing playing. */
+  scroll-snap-stop: always;
+}
+
+/* The seek track grows under the pointer so it is easier to grab, and stays
+   grown while a drag is in progress even if the pointer leaves it. */
+.video-feed__track {
+  padding-block: 10px;
+  touch-action: none;
+  cursor: pointer;
+}
+
+.video-feed__rail {
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.26);
+  transition: height 0.16s ease;
+}
+
+.video-feed__track:hover .video-feed__rail,
+.video-feed__track[data-scrubbing="true"] .video-feed__rail {
+  height: 6px;
+}
+
+.video-feed__knob {
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+
+.video-feed__track:hover .video-feed__knob,
+.video-feed__track[data-scrubbing="true"] .video-feed__knob {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-feed {
+    scroll-behavior: auto;
+  }
+
+  .video-feed__rail,
+  .video-feed__knob {
+    transition: none;
+  }
+}

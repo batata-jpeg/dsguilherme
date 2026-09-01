@@ -74,6 +74,16 @@ const translations: Record<Language, Record<string, string>> = {
     "category.next": "Next",
     "category.soon": "Soon",
 
+    // Video feed (Vídeos category)
+    "feed.play": "Play",
+    "feed.pause": "Pause",
+    "feed.mute": "Mute",
+    "feed.unmute": "Unmute",
+    "feed.sound": "Sound",
+    "feed.share": "Share",
+    "feed.copied": "Link copied",
+    "feed.seek": "Seek",
+
     // Index – Contact CTA
     "index.cta.label": "Contact",
     "index.cta.line1": "LET'S CREATE",
@@ -323,6 +333,16 @@ const translations: Record<Language, Record<string, string>> = {
     "category.prev": "Anterior",
     "category.next": "Próximo",
     "category.soon": "Em breve",
+
+    // Video feed (categoria Vídeos)
+    "feed.play": "Reproduzir",
+    "feed.pause": "Pausar",
+    "feed.mute": "Desativar som",
+    "feed.unmute": "Ativar som",
+    "feed.sound": "Som",
+    "feed.share": "Compartilhar",
+    "feed.copied": "Link copiado",
+    "feed.seek": "Avançar ou voltar",
 
     // Index – Contact CTA
     "index.cta.label": "Contato",
