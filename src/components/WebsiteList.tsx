@@ -49,7 +49,7 @@ export default function WebsiteList({ links }: { links: LinkItem[] }) {
   const isMobile = useIsMobile();
 
   const plateBg = dk ? "#0d1520" : "#ffffff";
-  const hairline = dk ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.08)";
+  const hairline = "hsl(var(--foreground) / 0.07)";
 
   return (
     <div className="flex flex-col">
@@ -94,7 +94,7 @@ export default function WebsiteList({ links }: { links: LinkItem[] }) {
             <div className="flex items-center gap-1.5 mb-1">
               <span
                 className="font-display font-bold uppercase tracking-[0.14em] text-[10px] sm:text-[11px] truncate"
-                style={{ color: dk ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.85)" }}
+                style={{ color: "hsl(var(--foreground) / 0.9)" }}
               >
                 {item.name}
               </span>
@@ -106,14 +106,14 @@ export default function WebsiteList({ links }: { links: LinkItem[] }) {
 
             <p
               className="font-body leading-relaxed text-xs sm:text-sm"
-              style={{ color: dk ? "rgba(255,255,255,0.52)" : "rgba(0,0,0,0.55)" }}
+              style={{ color: "hsl(var(--foreground) / 0.52)" }}
             >
               {item.description}
             </p>
 
             <span
               className="block font-display text-[9px] tracking-[0.16em] uppercase mt-1.5 truncate"
-              style={{ color: dk ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.32)" }}
+              style={{ color: "hsl(var(--foreground) / 0.3)" }}
             >
               {item.url.replace(/^https?:\/\//, "")}
             </span>

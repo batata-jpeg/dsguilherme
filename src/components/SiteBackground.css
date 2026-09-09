@@ -1,0 +1,135 @@
+/* Background for every page. Fixed, inert, and below everything. */
+
+.site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.site-bg__base {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-bg);
+}
+
+/* ── The silk ────────────────────────────────────────────────────────────
+ * A shader canvas laid over the gradient, not in place of it. Both knobs that
+ * decide how loud it is live here rather than in the component, because the
+ * right strength is a function of what it is sitting on:
+ *
+ *   dark   the base is nearly black, so soft-light would barely move it —
+ *          `screen` lifts instead, and the opacity has to stay low or the
+ *          folds turn into visible bands.
+ *   light  the base is a mid blue with room in both directions, so
+ *          `soft-light` can push and pull it without shifting the hue.
+ *
+ * .site-bg makes its own stacking context (fixed + z-index), so the blend can
+ * only ever reach the gradient underneath — never the page content above.
+ */
+.site-bg__silk {
+  position: absolute;
+  inset: 0;
+  opacity: var(--silk-opacity);
+  mix-blend-mode: var(--silk-blend);
+}
+
+html.dark .site-bg {
+  --silk-opacity: 0.24;
+  --silk-blend: screen;
+}
+
+/* Higher than dark's, but soft-light is a far gentler operator than screen —
+   it cannot clip and it cannot lift black, so it takes more before it shows. */
+html.light .site-bg {
+  --silk-opacity: 0.18;
+  --silk-blend: soft-light;
+}
+
+/* ── The drifting lights ─────────────────────────────────────────────────
+ * Two of them, both in the theme's own accent, both enormous and very faint.
+ * They read as ambient lighting rather than as shapes — which is the whole
+ * point: no blobs, no orbs, nothing you can trace an edge on.
+ *
+ * Only `transform` animates, so this stays on the compositor and costs
+ * essentially nothing next to the WebGL it replaced.
+ */
+.site-bg__lights {
+  position: absolute;
+  inset: -25%;
+}
+
+.site-bg__light {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  filter: blur(40px);
+  will-change: transform;
+}
+
+.site-bg__light--a {
+  top: -6%;
+  left: 6%;
+  width: 62vw;
+  height: 62vw;
+  min-width: 620px;
+  min-height: 620px;
+  background: radial-gradient(circle, hsl(var(--primary) / 0.14) 0%, transparent 62%);
+  animation: site-bg-drift-a 34s ease-in-out infinite;
+}
+
+.site-bg__light--b {
+  bottom: -10%;
+  right: 2%;
+  width: 54vw;
+  height: 54vw;
+  min-width: 540px;
+  min-height: 540px;
+  background: radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 64%);
+  animation: site-bg-drift-b 44s ease-in-out infinite;
+}
+
+/* A hair of grain over the gradient. Flat gradients band badly on wide dark
+   surfaces, and this is the cheapest way to break the banding up. */
+.site-bg__grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'>\
+<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/>\
+<feColorMatrix type='saturate' values='0'/></filter>\
+<rect width='140' height='140' filter='url(%23n)' opacity='0.32'/></svg>");
+}
+
+@keyframes site-bg-drift-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6vw, 4vh, 0) scale(1.12);
+  }
+}
+
+@keyframes site-bg-drift-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.06);
+  }
+  50% {
+    transform: translate3d(-5vw, -5vh, 0) scale(1);
+  }
+}
+
+.site-bg__lights.is-still .site-bg__light {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-bg__light {
+    animation: none;
+  }
+}

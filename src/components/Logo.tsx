@@ -1,5 +1,3 @@
-import { useTheme } from "@/contexts/ThemeContext";
-
 interface LogoProps {
   height?: number;
   className?: string;
@@ -7,15 +5,14 @@ interface LogoProps {
 }
 
 export default function Logo({ height = 28, className = "", style }: LogoProps) {
-  const { theme } = useTheme();
-  const color = theme === "dark" ? "#ffffff" : "#000000";
-
+  // Follows the theme foreground: white on the blue page, near-white on
+  // charcoal. A caller can still override it by setting `color` in `style`.
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 2048 1080"
       height={height}
-      style={{ width: "auto", color, display: "block", ...style }}
+      style={{ width: "auto", color: "hsl(var(--foreground))", display: "block", ...style }}
       className={className}
       aria-label="Guima"
       role="img"

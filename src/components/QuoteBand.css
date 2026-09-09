@@ -1,0 +1,109 @@
+/* ── Quote band ───────────────────────────────────────────────────────────
+ *
+ * A full-bleed slab across the page. The rule the rest of the site follows —
+ * surfaces are lighter than the ground they sit on — is what sets its colour:
+ * near-white over the blue page, slate over the charcoal one. Geometry is the
+ * same in both; only colour moves.
+ */
+
+.quote-band {
+  position: relative;
+  width: 100%;
+  padding: clamp(32px, 5vw, 64px) clamp(20px, 5vw, 72px);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* The shadow the band throws upward onto the section above it — the thing that
+   makes it read as a slab laid over the page rather than a gap cut into it.
+   Cast on both edges, weighted to the top. */
+.quote-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  box-shadow:
+    0 -22px 45px -12px rgba(0, 0, 0, 0.32),
+    0 18px 40px -14px rgba(0, 0, 0, 0.24);
+}
+
+html.light .quote-band {
+  background: linear-gradient(180deg, #eef1f6 0%, #e4e9f0 100%);
+}
+
+html.dark .quote-band {
+  background: linear-gradient(180deg, #222834 0%, #1b2029 100%);
+}
+
+.quote-band__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.52fr);
+  align-items: center;
+  gap: clamp(16px, 4vw, 56px);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ── Quote ───────────────────────────────────────────────────────────────── */
+.quote-band__text {
+  min-width: 0;
+}
+
+.quote-band__warp {
+  /* WarpText needs a real box: it rasterises to fit whatever height it is
+     given, so this is what actually sets the type size on screen. */
+  min-height: clamp(150px, 22vw, 260px);
+}
+
+.quote-band__author {
+  margin: clamp(4px, 1vw, 12px) 0 0;
+  text-align: center;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: clamp(0.95rem, 1.9vw, 1.5rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+html.light .quote-band__author {
+  color: #0a1a2f;
+}
+
+html.dark .quote-band__author {
+  color: #eef2f7;
+}
+
+/* ── Sphere ──────────────────────────────────────────────────────────────── */
+.quote-band__orb {
+  min-width: 0;
+  max-width: 420px;
+  width: 100%;
+  justify-self: end;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────
+ * Below the tablet break the sphere goes under the quote and shrinks — it is
+ * decoration, so it gives up space first.
+ */
+@media (max-width: 900px) {
+  .quote-band__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .quote-band__orb {
+    justify-self: center;
+    max-width: min(300px, 68vw);
+  }
+}
+
+@media (max-width: 640px) {
+  /* The quote is the point of the section; the sphere is company. On a phone
+     it gives up most of its size so the type can have the room. */
+  .quote-band__orb {
+    max-width: min(150px, 40vw);
+  }
+
+  .quote-band__warp {
+    min-height: clamp(180px, 52vw, 260px);
+  }
+}

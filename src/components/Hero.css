@@ -1,0 +1,291 @@
+/* ── Hero ─────────────────────────────────────────────────────────────────
+ *
+ * One full-viewport composition, three stacked layers over the site's own
+ * background:
+ *
+ *   —  background        SiteBackground, showing through from behind the hero
+ *   1  glow              single soft light behind the character
+ *   2  DSGUILHERME       giant wordmark, spans the width
+ *   3  character         in front, covering the middle of the word
+ *
+ * The hero used to paint layer 0 itself, with a gradient identical to
+ * --gradient-bg. That was a duplicate even then; now that the site background
+ * carries the silk shader, painting over it would leave the first screen the
+ * one flat panel on the site. So the hero is transparent down to it.
+ *
+ * The floating navbar is rendered globally (GlassNav) and sits above all of
+ * this in the root stacking context.
+ *
+ * Theme changes colour, transparency and light — never geometry. Every
+ * measurement below lives outside the theme blocks on purpose, so light and
+ * dark are pixel-identical in layout.
+ */
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  overflow: hidden;
+  /* Keeps the layer z-indexes below from competing with the rest of the page. */
+  isolation: isolate;
+
+  /* ── Tunables. The whole composition scales from these four. */
+  --hero-char-h: 84svh;
+  --hero-char-max-h: 1200px;
+  /* Height ceiling implied by the width the character may occupy. */
+  --hero-char-wcap: 98vw;
+  /* width / height of the character asset in use. */
+  --hero-char-ar: 1.018;
+  --hero-word-size: 14.4vw;
+  --hero-word-top: 38%;
+  --hero-glow-y: 42%;
+}
+
+/* Fallback for browsers without svh: 100vh is close enough and never shorter. */
+@supports not (min-height: 100svh) {
+  .hero {
+    min-height: 100vh;
+    --hero-char-h: 84vh;
+  }
+}
+
+/* ── Layer 1: the light behind the character ─────────────────────────────
+ * Deliberately one gradient and nothing else — no blobs, no particles, no
+ * noise. Bled past the edges so the falloff never shows a seam.
+ */
+.hero__glow {
+  position: absolute;
+  inset: -12%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+html.light .hero__glow {
+  background: radial-gradient(
+    circle at 50% var(--hero-glow-y),
+    rgba(190, 215, 255, 0.55) 0%,
+    rgba(115, 165, 230, 0.35) 25%,
+    rgba(40, 105, 200, 0.15) 45%,
+    transparent 68%
+  );
+}
+
+html.dark .hero__glow {
+  background: radial-gradient(
+    circle at 50% var(--hero-glow-y),
+    rgba(210, 215, 220, 0.45) 0%,
+    rgba(135, 145, 155, 0.25) 28%,
+    rgba(70, 80, 90, 0.1) 48%,
+    transparent 68%
+  );
+}
+
+/* ── Layer 2: DSGUILHERME ────────────────────────────────────────────────── */
+.hero__wordmark {
+  position: absolute;
+  z-index: 2;
+  top: var(--hero-word-top);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: var(--font-display), "Inter", sans-serif;
+  font-weight: 900;
+  font-size: var(--hero-word-size);
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  /* It is scenery, not a target: never let it swallow a click or a drag. */
+  user-select: none;
+  pointer-events: none;
+}
+
+.hero__word--narrow {
+  display: none;
+}
+
+/* ── The Ds badge ────────────────────────────────────────────────────────
+ * Reads as a program icon on a home screen: rounded square, one flat colour
+ * ramp, a rim of light along the top edge. Phone only.
+ */
+.hero__badge {
+  position: absolute;
+  z-index: 2;
+  display: none;
+  /* Baseline, not centre: the two letters are different sizes and in the
+     reference they sit on one line, the way a program icon sets them. */
+  align-items: baseline;
+  justify-content: center;
+  top: var(--hero-badge-top, 17%);
+  left: 50%;
+  width: var(--hero-badge-size, 21vw);
+  height: var(--hero-badge-size, 21vw);
+  border-radius: 23%;
+  background: linear-gradient(170deg, #4ec7f2 0%, #35bcee 45%, #23b0e8 100%);
+  box-shadow:
+    0 14px 32px rgba(0, 0, 0, 0.26),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.42);
+  font-family: var(--font-display), "Inter", sans-serif;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Nudge the pair down so the D's cap sits on the icon's centre. With
+   line-height 1 the glyph rides high inside its line box, so aligning the
+   boxes would leave the letters visibly above centre. */
+.hero__badge-d,
+.hero__badge-s {
+  position: relative;
+  top: calc(var(--hero-badge-size, 21vw) * 0.1);
+  text-shadow: 0 2px 5px rgba(0, 40, 70, 0.22);
+}
+
+.hero__badge-d {
+  font-size: calc(var(--hero-badge-size, 21vw) * 0.82);
+  letter-spacing: -0.05em;
+}
+
+/* Sized against the D's *cap height*, not its font-size: `s` is lowercase, so
+   what shows is its x-height. Matching font-sizes would have made it look
+   about a third too small next to the D. */
+.hero__badge-s {
+  font-size: calc(var(--hero-badge-size, 21vw) * 0.66);
+  letter-spacing: -0.03em;
+}
+
+html.light .hero__wordmark {
+  color: rgba(215, 232, 255, 0.55);
+}
+
+html.dark .hero__wordmark {
+  color: rgba(214, 217, 222, 0.55);
+}
+
+/* ── Layer 3: character ──────────────────────────────────────────────────── */
+.hero__character {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 0;
+
+  /* Height drives the size; the width cap is what stops a tall narrow window
+     pushing the character past the edges. */
+  --h: min(var(--hero-char-h), var(--hero-char-max-h), var(--hero-char-wcap));
+  height: var(--h);
+
+  /* The width has to be stated, not left to `auto`. This box is absolutely
+     positioned at left: 50%, so shrink-to-fit gives it only the space from the
+     midpoint to the right edge — half the viewport — and the image was being
+     letterboxed inside that. On a phone that meant a 453px-tall box holding a
+     195px-wide character floating above its own bottom edge, which is exactly
+     the "tiny character with a gap under it" this was reported as. */
+  width: calc(var(--h) * var(--hero-char-ar));
+  transform: translateX(-50%);
+
+  pointer-events: none;
+}
+
+.hero__character-anim {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hero__character-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  opacity: 0;
+  /* Deliberately no transition. Changing the theme runs the site's own view
+     transition — a light circle that expands from the toggle over 1.5s and
+     wipes the new theme in (see ::view-transition-new(root) in index.css).
+     The browser has already snapshotted the old frame by the time this class
+     flips, so an instant swap is revealed *by* that sweep: the shirt changes
+     colour as the light passes over it. Fading the two images against each
+     other on top of that is what made them ghost through one another. */
+}
+
+.hero__character-img.is-on {
+  opacity: 1;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────
+ * Not a scale of the desktop composition: the word grows in relative terms
+ * (and is allowed to run past the edges) while the character gives back
+ * height, which is what keeps it the protagonist on a small screen.
+ */
+@media (max-width: 1024px) {
+  .hero {
+    --hero-char-h: 76svh;
+    --hero-word-top: 36%;
+  }
+}
+
+@media (max-width: 640px) {
+  /* The phone pose is framed with the body running off the left of its own
+     canvas. Centred, that cut lands mid-screen and reads as a mistake; on the
+     viewport edge it reads as the character leaning in from the side. */
+  .hero__character {
+    left: 0;
+    transform: none;
+  }
+
+  .hero__word--wide {
+    display: none;
+  }
+
+  .hero__word--narrow {
+    display: inline;
+  }
+
+  .hero__badge {
+    display: flex;
+  }
+
+  .hero {
+    /* Nine letters instead of eleven, so the type can grow and still fit. */
+    --hero-word-size: 17vw;
+    --hero-badge-size: 21vw;
+    --hero-badge-top: 12.5%;
+    /* The phone pose is a 9:16 close-up. */
+    --hero-char-ar: 0.5636;
+    /* The close-up shares the phone's own proportion, so it can sit flush to
+       the bottom and still leave the top third for the badge and the name. */
+    --hero-char-h: 64svh;
+    --hero-char-wcap: 178vw;
+    /* The character is near enough square, so on a narrow phone its width is
+       what limits it — it cannot pass ~46% of the height without cropping the
+       raised hands, and the hands are the pose. So the rest of the composition
+       comes down to meet it instead: the word crosses the hands and the head,
+       and the light sits behind the character rather than in the empty band
+       above it. */
+    --hero-word-top: 29%;
+    --hero-glow-y: 46%;
+  }
+}
+
+/* Short landscape windows: height is the scarce axis, so lean on width. */
+@media (max-height: 620px) and (min-width: 641px) {
+  .hero {
+    --hero-char-h: 88svh;
+    --hero-word-size: 11vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__character,
+  .hero__wordmark {
+    animation: none;
+  }
+}

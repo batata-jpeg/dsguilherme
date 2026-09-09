@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef, useEffect, type CSSProperties } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X, FileText } from "lucide-react";
@@ -7,8 +7,8 @@ import project2 from "@/assets/project-2.webp";
 import project3 from "@/assets/project-3.webp";
 import project4 from "@/assets/project-4.webp";
 import project5 from "@/assets/project-5.webp";
-import fallingCharDark from "@/assets/hero-character-falling.webp";
-import fallingCharLight from "@/assets/hero-character-falling-light.webp";
+import projectsCharDark from "@/assets/projects-guima-dark.webp";
+import projectsCharLight from "@/assets/projects-guima-light.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useMinimizedProject } from "@/contexts/MinimizedProjectContext";
@@ -24,6 +24,63 @@ const gazzSlides = [
   "/gazz/gazz-19.jpg", "/gazz/gazz-20.jpg", "/gazz/gazz-21.jpg",
 ];
 const armSlides = [project1, project2, project3, project4, project5];
+
+// ── The falling character on the Projects hero ───────────────────────────────
+// Both themes' art is rendered at once and stacked; the theme only flips which
+// one is opaque, deliberately with no transition on the swap.
+//
+// Swapping a single `src` instead would make the browser decode the other file
+// on the spot and flash an empty frame. And a CSS fade would run *underneath*
+// the theme toggle's own view transition — the light circle that expands from
+// the switch over 1.5s (::view-transition-new(root) in index.css) — leaving the
+// two poses ghosting through one another. The browser has already snapshotted
+// the old frame by the time opacity flips, so the instant swap is revealed *by*
+// that sweep: the clothes change colour as the light passes over them.
+//
+// The two files are cropped to one shared 1440x948 canvas, so the character
+// does not move by a pixel between themes. Keep them that way if either is
+// ever re-exported.
+const CHAR_W = 1440;
+const CHAR_H = 948;
+
+const fallingCharBase: CSSProperties = {
+  position: "absolute",
+  inset: 0,
+  width: "100%",
+  height: "100%",
+  objectFit: "contain",
+  objectPosition: "center",
+  userSelect: "none",
+};
+
+// Decorative in both copies: the same character twice in the accessibility tree
+// would just be announced twice, and the credit under the hero already names him.
+function FallingChar({ dark }: { dark: boolean }) {
+  return (
+    <>
+      <img
+        src={projectsCharLight}
+        alt=""
+        draggable={false}
+        style={{
+          ...fallingCharBase,
+          filter: "drop-shadow(0 30px 80px rgba(0,0,0,0.18)) drop-shadow(0 0 40px rgba(0,0,0,0.08))",
+          opacity: dark ? 0 : 1,
+        }}
+      />
+      <img
+        src={projectsCharDark}
+        alt=""
+        draggable={false}
+        style={{
+          ...fallingCharBase,
+          filter: "drop-shadow(0 30px 100px rgba(40,100,200,0.22)) drop-shadow(0 0 60px rgba(162,213,198,0.08))",
+          opacity: dark ? 1 : 0,
+        }}
+      />
+    </>
+  );
+}
 
 type Project = {
   id: string;
@@ -57,41 +114,41 @@ function DescPanelContent({ project, dk }: { project: Project; dk: boolean }) {
         <span className="block font-display text-[9px] tracking-[0.22em] uppercase mb-1" style={{ color: "hsl(var(--primary))" }}>
           {project.category} · {project.year}
         </span>
-        <h3 className="font-display font-extrabold uppercase text-lg leading-tight" style={{ color: dk ? "rgba(255,255,255,0.92)" : "rgba(0,0,0,0.88)" }}>
+        <h3 className="font-display font-extrabold uppercase text-lg leading-tight" style={{ color: "hsl(var(--foreground) / 0.92)" }}>
           {project.title}
         </h3>
       </div>
-      <p className="font-body text-sm leading-relaxed mb-5" style={{ color: dk ? "rgba(255,255,255,0.62)" : "rgba(0,0,0,0.62)", whiteSpace: "pre-line" }}>
+      <p className="font-body text-sm leading-relaxed mb-5" style={{ color: "hsl(var(--foreground) / 0.62)", whiteSpace: "pre-line" }}>
         {project.description}
       </p>
-      <div className="mb-5" style={{ height: 1, background: dk ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.06)" }} />
+      <div className="mb-5" style={{ height: 1, background: "hsl(var(--foreground) / 0.05)" }} />
       {[{ label: "Cliente", value: project.client }, { label: "Público", value: project.audience }].map(({ label, value }) => (
         <div key={label} className="mb-4">
           <span className="block font-display text-[9px] tracking-[0.18em] uppercase mb-1" style={{ color: "hsl(var(--primary))" }}>{label}</span>
-          <p className="font-body text-xs leading-relaxed" style={{ color: dk ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.55)" }}>{value}</p>
+          <p className="font-body text-xs leading-relaxed" style={{ color: "hsl(var(--foreground) / 0.55)" }}>{value}</p>
         </div>
       ))}
-      <div className="mb-5" style={{ height: 1, background: dk ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.06)" }} />
+      <div className="mb-5" style={{ height: 1, background: "hsl(var(--foreground) / 0.05)" }} />
       {[{ label: "Desafio", value: project.challenge }, { label: "Processo", value: project.process }, { label: "Resultado", value: project.outcome }].map(({ label, value }) => (
         <div key={label} className="mb-5">
-          <span className="block font-display text-[9px] tracking-[0.18em] uppercase mb-1.5" style={{ color: dk ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)" }}>{label}</span>
-          <p className="font-body text-xs leading-relaxed" style={{ color: dk ? "rgba(255,255,255,0.52)" : "rgba(0,0,0,0.52)", whiteSpace: "pre-line" }}>{value}</p>
+          <span className="block font-display text-[9px] tracking-[0.18em] uppercase mb-1.5" style={{ color: "hsl(var(--foreground) / 0.35)" }}>{label}</span>
+          <p className="font-body text-xs leading-relaxed" style={{ color: "hsl(var(--foreground) / 0.52)", whiteSpace: "pre-line" }}>{value}</p>
         </div>
       ))}
-      <div className="mb-5" style={{ height: 1, background: dk ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.06)" }} />
+      <div className="mb-5" style={{ height: 1, background: "hsl(var(--foreground) / 0.05)" }} />
       <div className="mb-4">
-        <span className="block font-display text-[9px] tracking-[0.18em] uppercase mb-2" style={{ color: dk ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.3)" }}>Disciplinas</span>
+        <span className="block font-display text-[9px] tracking-[0.18em] uppercase mb-2" style={{ color: "hsl(var(--foreground) / 0.28)" }}>Disciplinas</span>
         <div className="flex flex-wrap gap-1.5">
           {project.tags.map(tag => (
             <span key={tag} className="font-display text-[8px] tracking-[0.12em] uppercase px-2 py-1 rounded"
-              style={{ background: dk ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)", color: dk ? "rgba(255,255,255,0.38)" : "rgba(0,0,0,0.45)", border: `1px solid ${dk ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.08)"}` }}>
+              style={{ background: "hsl(var(--foreground) / 0.04)", color: "hsl(var(--foreground) / 0.38)", border: `1px solid hsl(var(--foreground) / 0.07)` }}>
               {tag}
             </span>
           ))}
         </div>
       </div>
       <div>
-        <span className="block font-display text-[9px] tracking-[0.18em] uppercase mb-2" style={{ color: dk ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.3)" }}>Ferramentas</span>
+        <span className="block font-display text-[9px] tracking-[0.18em] uppercase mb-2" style={{ color: "hsl(var(--foreground) / 0.28)" }}>Ferramentas</span>
         <div className="flex flex-wrap gap-1.5">
           {project.tools.map(tool => (
             <span key={tool} className="font-display text-[8px] tracking-[0.12em] uppercase px-2 py-1 rounded"
@@ -161,8 +218,8 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
     window.addEventListener("mouseup", onUp);
   }, [descWidth]);
 
-  const chromeBg  = dk ? "#111d2e" : "#e2e8f0";
-  const chromeBdr = `1px solid ${dk ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)"}`;
+  const chromeBg  = "hsl(var(--card))";
+  const chromeBdr = `1px solid hsl(var(--foreground) / 0.06)`;
 
   const handleMinimize = useCallback(() => {
     setIsSquishing(true);
@@ -185,7 +242,7 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
       {[{ d: -1, Icon: ChevronLeft }, { d: 1, Icon: ChevronRight }].map(({ d, Icon }) => (
         <button key={d} onClick={() => go(d)}
           className="flex items-center justify-center w-6 h-6 rounded-full"
-          style={{ background: dk ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)", border: `1px solid ${dk ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`, color: dk ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.5)" }}>
+          style={{ background: "hsl(var(--foreground) / 0.06)", border: `1px solid hsl(var(--foreground) / 0.1)`, color: "hsl(var(--foreground) / 0.55)" }}>
           <Icon className="w-3.5 h-3.5" />
         </button>
       ))}
@@ -354,7 +411,7 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
 
       {/* ══ EXPANDED / FULLSCREEN ══════════════════════════════════════════════ */}
       {isExpanded && (
-        <div className="absolute inset-0 flex" style={{ background: dk ? "#05090f" : "#f0f4f8" }}>
+        <div className="absolute inset-0 flex" style={{ background: "hsl(var(--background-deep))" }}>
           {/* Main column */}
           <div className="flex flex-col flex-1 overflow-hidden"
             style={{ marginRight: showDesc ? descWidth : 0, transition: isResizingDesc ? "none" : "margin-right 0.35s cubic-bezier(0.16,1,0.3,1)" }}>
@@ -387,7 +444,7 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
                 initial={{ x: descWidth }} animate={{ x: 0 }} exit={{ x: descWidth }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 className="fixed right-0 top-0 bottom-0 flex flex-col z-20"
-                style={{ width: descWidth, background: dk ? "#0d1520" : "#f7f9fc", borderLeft: `1px solid ${dk ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`, userSelect: isResizingDesc ? "none" : "auto" }}
+                style={{ width: descWidth, background: "hsl(var(--card))", borderLeft: `1px solid hsl(var(--foreground) / 0.07)`, userSelect: isResizingDesc ? "none" : "auto" }}
               >
                 {/* Drag handle */}
                 <div onMouseDown={startDescResize}
@@ -404,7 +461,7 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
                     <div className="w-[13px] h-[13px] rounded-full" style={{ background: "#ffbd2e" }} />
                     <div className="w-[13px] h-[13px] rounded-full" style={{ background: "#28c941" }} />
                   </div>
-                  <span className="font-display text-[9px] tracking-[0.2em] uppercase ml-2" style={{ color: dk ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.28)" }}>Descrição</span>
+                  <span className="font-display text-[9px] tracking-[0.2em] uppercase ml-2" style={{ color: "hsl(var(--foreground) / 0.28)" }}>Descrição</span>
                 </div>
                 <DescPanelContent project={project} dk={dk} />
               </motion.div>
@@ -436,8 +493,8 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
             <motion.div
               className="relative flex flex-col overflow-hidden rounded-2xl flex-1 min-w-0"
               style={{
-                background: dk ? "#08101d" : "#f0f4f8",
-                boxShadow: dk ? "0 60px 160px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.07)" : "0 40px 120px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.08)",
+                background: "hsl(var(--background-deep))",
+                boxShadow: "0 60px 160px rgba(0,0,0,0.55), 0 0 0 1px var(--glass-border)",
                 transformOrigin: "bottom center",
               }}
               initial={{ scale: 0.87, opacity: 0, y: 24 }}
@@ -472,7 +529,7 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
               {showDesc && !isSquishing && !isMobile && (
                 <motion.div className="flex-shrink-0 overflow-hidden" initial={{ width: 0 }} animate={{ width: 440 }} exit={{ width: 0 }} transition={windowSpring}>
                   <motion.div className="flex flex-col overflow-hidden rounded-2xl h-full"
-                    style={{ width: 440, background: dk ? "#0d1520" : "#f7f9fc", boxShadow: `0 0 0 1px ${dk ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}` }}
+                    style={{ width: 440, background: "hsl(var(--card))", boxShadow: `0 0 0 1px hsl(var(--foreground) / 0.07)` }}
                     initial={{ scale: 0.87, opacity: 0, y: 24 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.87, opacity: 0, y: 24 }}
                     transition={{ ...windowSpring, delay: 0.05 }}>
                     <div className="flex items-center shrink-0 h-11 px-4 gap-3" style={{ background: chromeBg, borderBottom: chromeBdr }}>
@@ -481,7 +538,7 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
                         <div className="w-[13px] h-[13px] rounded-full" style={{ background: "#ffbd2e" }} />
                         <div className="w-[13px] h-[13px] rounded-full" style={{ background: "#28c941" }} />
                       </div>
-                      <span className="font-display text-[9px] tracking-[0.2em] uppercase ml-2" style={{ color: dk ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.28)" }}>Descrição</span>
+                      <span className="font-display text-[9px] tracking-[0.2em] uppercase ml-2" style={{ color: "hsl(var(--foreground) / 0.28)" }}>Descrição</span>
                     </div>
                     <DescPanelContent project={project} dk={dk} />
                   </motion.div>
@@ -495,7 +552,7 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
             {showDesc && !isSquishing && isMobile && (
               <motion.div
                 className="absolute inset-0 z-30 flex flex-col"
-                style={{ background: dk ? "#0d1520" : "#f7f9fc" }}
+                style={{ background: "hsl(var(--card))" }}
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
                 exit={{ y: "100%" }}
@@ -515,14 +572,14 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
                   </button>
                   <span
                     className="font-display text-[10px] tracking-[0.2em] uppercase"
-                    style={{ color: dk ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)" }}
+                    style={{ color: "hsl(var(--foreground) / 0.4)" }}
                   >
                     Descrição
                   </span>
                   <button
                     onClick={() => setShowDesc(false)}
                     className="ml-auto flex h-8 w-8 items-center justify-center rounded-full"
-                    style={{ background: dk ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)", color: dk ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)" }}
+                    style={{ background: "hsl(var(--foreground) / 0.08)", color: "hsl(var(--foreground) / 0.7)" }}
                     aria-label="Fechar descrição"
                   >
                     <X className="h-4 w-4" />
@@ -636,8 +693,8 @@ function ScrollDocModal({ project, onClose }: { project: Project; onClose: () =>
     window.addEventListener("mouseup", onUp);
   }, [descWidth]);
 
-  const chromeBg  = dk ? "#111d2e" : "#e2e8f0";
-  const chromeBdr = `1px solid ${dk ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)"}`;
+  const chromeBg  = "hsl(var(--card))";
+  const chromeBdr = `1px solid hsl(var(--foreground) / 0.06)`;
 
   const handleMinimize = useCallback(() => {
     setIsSquishing(true);
@@ -658,7 +715,7 @@ function ScrollDocModal({ project, onClose }: { project: Project; onClose: () =>
   const DescToggle = () => (
     <motion.button onClick={() => setShowDesc(d => !d)}
       className="font-display text-[9px] tracking-[0.14em] uppercase px-3 py-1 rounded-full"
-      animate={{ borderColor: showDesc ? "rgba(162,213,198,0.7)" : dk ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.15)", color: showDesc ? "rgb(162,213,198)" : dk ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)", background: showDesc ? "rgba(162,213,198,0.08)" : "transparent" }}
+      animate={{ borderColor: showDesc ? "rgba(162,213,198,0.7)" : "hsl(var(--foreground) / 0.15)", color: showDesc ? "rgb(162,213,198)" : "hsl(var(--foreground) / 0.45)", background: showDesc ? "rgba(162,213,198,0.08)" : "transparent" }}
       style={{ border: "1px solid" }} transition={{ duration: 0.2 }}>
       Descrição do Projeto
     </motion.button>
@@ -677,12 +734,12 @@ function ScrollDocModal({ project, onClose }: { project: Project; onClose: () =>
     >
       {/* ══ EXPANDED / FULLSCREEN ══════════════════════════════════════════════ */}
       {isExpanded && (
-        <div className="absolute inset-0 flex" style={{ background: dk ? "#05090f" : "#f0f4f8" }}>
+        <div className="absolute inset-0 flex" style={{ background: "hsl(var(--background-deep))" }}>
           <div className="flex flex-col flex-1 overflow-hidden"
             style={{ marginRight: showDesc ? descWidth : 0, transition: isResizingDesc ? "none" : "margin-right 0.35s cubic-bezier(0.16,1,0.3,1)" }}>
             <div className="flex items-center shrink-0 h-11 px-4 gap-4" style={{ background: chromeBg, borderBottom: chromeBdr }}>
               <TrafficLights />
-              <span className="font-display text-[10px] tracking-[0.2em] uppercase mx-auto" style={{ color: dk ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.32)" }}>{project.title}</span>
+              <span className="font-display text-[10px] tracking-[0.2em] uppercase mx-auto" style={{ color: "hsl(var(--foreground) / 0.3)" }}>{project.title}</span>
               {!isMobile && <DescToggle />}
             </div>
             <ScrollDocBody project={project} scrollRef={expScrollRef} />
@@ -694,7 +751,7 @@ function ScrollDocModal({ project, onClose }: { project: Project; onClose: () =>
                 initial={{ x: descWidth }} animate={{ x: 0 }} exit={{ x: descWidth }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 className="fixed right-0 top-0 bottom-0 flex flex-col z-20"
-                style={{ width: descWidth, background: dk ? "#0d1520" : "#f7f9fc", borderLeft: `1px solid ${dk ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`, userSelect: isResizingDesc ? "none" : "auto" }}
+                style={{ width: descWidth, background: "hsl(var(--card))", borderLeft: `1px solid hsl(var(--foreground) / 0.07)`, userSelect: isResizingDesc ? "none" : "auto" }}
               >
                 <div onMouseDown={startDescResize}
                   className="absolute left-0 top-0 bottom-0 w-[6px] cursor-col-resize z-30"
@@ -709,7 +766,7 @@ function ScrollDocModal({ project, onClose }: { project: Project; onClose: () =>
                     <div className="w-[13px] h-[13px] rounded-full" style={{ background: "#ffbd2e" }} />
                     <div className="w-[13px] h-[13px] rounded-full" style={{ background: "#28c941" }} />
                   </div>
-                  <span className="font-display text-[9px] tracking-[0.2em] uppercase ml-2" style={{ color: dk ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.28)" }}>Descrição</span>
+                  <span className="font-display text-[9px] tracking-[0.2em] uppercase ml-2" style={{ color: "hsl(var(--foreground) / 0.28)" }}>Descrição</span>
                 </div>
                 <DescPanelContent project={project} dk={dk} />
               </motion.div>
@@ -725,7 +782,7 @@ function ScrollDocModal({ project, onClose }: { project: Project; onClose: () =>
           {isMobile && (
             <motion.div
               className="fixed inset-0 z-10 flex flex-col"
-              style={{ background: dk ? "#05090f" : "#f0f4f8" }}
+              style={{ background: "hsl(var(--background-deep))" }}
               initial={{ y: "100%" }}
               animate={isSquishing ? { y: "100%", opacity: 0 } : { y: 0, opacity: 1 }}
               transition={{ type: "spring", stiffness: 340, damping: 38 }}
@@ -733,7 +790,7 @@ function ScrollDocModal({ project, onClose }: { project: Project; onClose: () =>
               <div className="flex items-center shrink-0 h-11 px-4 gap-3" style={{ background: chromeBg, borderBottom: chromeBdr }}>
                 <TrafficLights />
                 <div className="flex-1" />
-                <span className="font-display text-[10px] tracking-widest" style={{ color: dk ? "rgba(255,255,255,0.32)" : "rgba(0,0,0,0.32)" }}>
+                <span className="font-display text-[10px] tracking-widest" style={{ color: "hsl(var(--foreground) / 0.32)" }}>
                   {project.title}
                 </span>
               </div>
@@ -745,9 +802,9 @@ function ScrollDocModal({ project, onClose }: { project: Project; onClose: () =>
                     <ScrollSlide key={i} src={src} gif={project.gifSlides?.[i]} root={mobileScrollRef} />
                   ))}
                 </div>
-                <div style={{ background: dk ? "#0d1520" : "#ffffff" }}>
-                  <div className="px-5 pt-4 pb-3" style={{ borderBottom: `1px solid ${dk ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)"}` }}>
-                    <span className="font-display text-[9px] tracking-[0.28em] uppercase" style={{ color: dk ? "rgba(255,255,255,0.32)" : "rgba(0,0,0,0.38)" }}>
+                <div style={{ background: "hsl(var(--card))" }}>
+                  <div className="px-5 pt-4 pb-3" style={{ borderBottom: `1px solid hsl(var(--foreground) / 0.06)` }}>
+                    <span className="font-display text-[9px] tracking-[0.28em] uppercase" style={{ color: "hsl(var(--foreground) / 0.32)" }}>
                       Descrição do Projeto
                     </span>
                   </div>
@@ -773,8 +830,8 @@ function ScrollDocModal({ project, onClose }: { project: Project; onClose: () =>
                   className="relative flex flex-col overflow-hidden rounded-2xl flex-shrink-0"
                   style={{
                     width: "min(90vw, 1220px)",
-                    background: dk ? "#08101d" : "#f0f4f8",
-                    boxShadow: dk ? "0 60px 160px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.07)" : "0 40px 120px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.08)",
+                    background: "hsl(var(--background-deep))",
+                    boxShadow: "0 60px 160px rgba(0,0,0,0.55), 0 0 0 1px var(--glass-border)",
                     transformOrigin: "bottom center",
                   }}
                   initial={{ scale: 0.87, opacity: 0, y: 24 }}
@@ -784,7 +841,7 @@ function ScrollDocModal({ project, onClose }: { project: Project; onClose: () =>
                 >
                   <div className="flex items-center shrink-0 h-11 px-4 gap-4" style={{ background: chromeBg, borderBottom: chromeBdr }}>
                     <TrafficLights />
-                    <span className="font-display text-[10px] tracking-[0.2em] uppercase mx-auto" style={{ color: dk ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.32)" }}>{project.title}</span>
+                    <span className="font-display text-[10px] tracking-[0.2em] uppercase mx-auto" style={{ color: "hsl(var(--foreground) / 0.3)" }}>{project.title}</span>
                     <DescToggle />
                   </div>
                   <ScrollDocBody project={project} scrollRef={winScrollRef} />
@@ -795,7 +852,7 @@ function ScrollDocModal({ project, onClose }: { project: Project; onClose: () =>
                     <motion.div className="flex-shrink-0 overflow-hidden" initial={{ width: 0 }} animate={{ width: 440 }} exit={{ width: 0 }} transition={windowSpring}>
                       <motion.div
                         className="flex flex-col overflow-hidden rounded-2xl h-full"
-                        style={{ width: 440, background: dk ? "#0d1520" : "#f7f9fc", boxShadow: `0 0 0 1px ${dk ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}` }}
+                        style={{ width: 440, background: "hsl(var(--card))", boxShadow: `0 0 0 1px hsl(var(--foreground) / 0.07)` }}
                         initial={{ scale: 0.87, opacity: 0, y: 24 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.87, opacity: 0, y: 24 }}
                         transition={{ ...windowSpring, delay: 0.05 }}
                       >
@@ -805,7 +862,7 @@ function ScrollDocModal({ project, onClose }: { project: Project; onClose: () =>
                             <div className="w-[13px] h-[13px] rounded-full" style={{ background: "#ffbd2e" }} />
                             <div className="w-[13px] h-[13px] rounded-full" style={{ background: "#28c941" }} />
                           </div>
-                          <span className="font-display text-[9px] tracking-[0.2em] uppercase ml-2" style={{ color: dk ? "rgba(255,255,255,0.28)" : "rgba(0,0,0,0.28)" }}>Descrição</span>
+                          <span className="font-display text-[9px] tracking-[0.2em] uppercase ml-2" style={{ color: "hsl(var(--foreground) / 0.28)" }}>Descrição</span>
                         </div>
                         <DescPanelContent project={project} dk={dk} />
                       </motion.div>
@@ -850,7 +907,7 @@ function ProjectStrip({
     <motion.div
       className="relative cursor-pointer overflow-hidden"
       style={{
-        borderBottom: `1px solid ${dk ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.06)"}`,
+        borderBottom: `1px solid hsl(var(--foreground) / 0.05)`,
         zIndex: isHovered ? 10 : 1,
       }}
       animate={{
@@ -876,9 +933,9 @@ function ProjectStrip({
             animate={{
               opacity: [0.3, 1, 0.3],
               boxShadow: [
-                "inset 0 0 0 1px rgba(162,213,198,0.1)",
-                "inset 0 0 0 1px rgba(162,213,198,0.4)",
-                "inset 0 0 0 1px rgba(162,213,198,0.1)",
+                "inset 0 0 0 1px hsl(var(--primary) / 0.12)",
+                "inset 0 0 0 1px hsl(var(--primary) / 0.45)",
+                "inset 0 0 0 1px hsl(var(--primary) / 0.12)",
               ],
             }}
             exit={{ opacity: 0 }}
@@ -898,9 +955,8 @@ function ProjectStrip({
         <div
           className="absolute inset-0"
           style={{
-            background: dk
-              ? "linear-gradient(90deg, rgba(5,10,20,0.99) 0%, rgba(5,10,20,0.82) 55%, rgba(5,10,20,0.4) 100%)"
-              : "linear-gradient(90deg, rgba(22,24,28,0.97) 0%, rgba(22,24,28,0.88) 55%, rgba(22,24,28,0.55) 100%)",
+            background:
+              "linear-gradient(90deg, hsl(var(--background-deep) / 0.97) 0%, hsl(var(--background-deep) / 0.86) 55%, hsl(var(--background-deep) / 0.48) 100%)",
             transition: "background 0.35s ease",
           }}
         />
@@ -916,7 +972,7 @@ function ProjectStrip({
           <motion.h2
             className="font-display font-extrabold uppercase leading-none"
             animate={{
-              color: isHovered ? "#ffffff" : dk ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.55)",
+              color: isHovered ? "#ffffff" : "rgba(255,255,255,0.5)",
             }}
             style={{
               fontSize: isMobile
@@ -943,7 +999,7 @@ function ProjectStrip({
                     {tag}
                   </span>
                 ))}
-                <span className="font-display text-[10px] tracking-[0.18em] uppercase" style={{ color: dk ? "rgba(255,255,255,0.22)" : "rgba(0,0,0,0.28)" }}>
+                <span className="font-display text-[10px] tracking-[0.18em] uppercase" style={{ color: "rgba(255,255,255,0.28)" }}>
                   — {project.year}
                 </span>
               </motion.div>
@@ -1084,95 +1140,35 @@ export default function Projects() {
         >
           <div style={{ position: "relative" }}>
 
-            {dk ? (
-              <>
-                {/* ── Layer 1: Liquid glass material — rim + thin specular */}
-                <h1
-                  className="font-display font-extrabold uppercase leading-none text-center"
-                  style={{
-                    fontSize: "clamp(3rem, 21vw, 24rem)",
-                    letterSpacing: "-0.03em",
-                    WebkitTextStroke: "1.2px rgba(255,255,255,0.55)",
-                    background: `linear-gradient(180deg,
-                      rgba(255,255,255,0.92) 0%,
-                      rgba(255,255,255,0.70) 3%,
-                      rgba(255,255,255,0.18) 7%,
-                      rgba(255,255,255,0.03) 16%,
-                      rgba(220,235,255,0.02) 40%,
-                      rgba(220,235,255,0.02) 62%,
-                      rgba(255,255,255,0.04) 72%,
-                      rgba(255,255,255,0.12) 84%,
-                      rgba(255,255,255,0.28) 93%,
-                      rgba(255,255,255,0.40) 100%)`,
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                    filter: "drop-shadow(0 1px 0 rgba(255,255,255,0.50)) drop-shadow(0 -1px 0 rgba(255,255,255,0.35))",
-                  }}
-                >PROJETOS</h1>
-
-                {/* ── Layer 2: Prismatic fringe */}
-                <h1
-                  aria-hidden="true"
-                  className="font-display font-extrabold uppercase leading-none text-center"
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    fontSize: "clamp(3rem, 21vw, 24rem)",
-                    letterSpacing: "-0.03em",
-                    background: `linear-gradient(
-                      96deg,
-                      rgba(255, 45, 108, 0.18) 0%,
-                      rgba(138, 40, 255, 0.14) 16%,
-                      rgba(38,  112, 255, 0.12) 32%,
-                      rgba(0,   218, 255, 0.10) 48%,
-                      rgba(0,   255, 148, 0.08) 60%,
-                      rgba(255, 238, 0,   0.11) 74%,
-                      rgba(255, 118, 0,   0.14) 88%,
-                      rgba(255, 45,  148, 0.18) 100%
-                    )`,
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                    mixBlendMode: "screen",
-                  }}
-                >PROJETOS</h1>
-              </>
-            ) : (
-              /* Light mode: thin stroke outline + subtle dark fill */
-              <h1
-                className="font-display font-extrabold uppercase leading-none text-center"
-                style={{
-                  fontSize: "clamp(3rem, 21vw, 24rem)",
-                  letterSpacing: "-0.03em",
-                  WebkitTextStroke: "1px rgba(0,0,0,0.55)",
-                  WebkitTextFillColor: "rgba(0,0,0,0.12)",
-                  color: "rgba(0,0,0,0.12)",
-                }}
-              >PROJETOS</h1>
-            )}
+            {/* One treatment in both themes, the same one the home Hero gives
+                DSGUILHERME: a translucent slab of the foreground colour. The old
+                version stacked a rainbow "prismatic fringe" over a white one,
+                which was the last of the neon palette on this page. */}
+            <h1 className="page-wordmark font-display font-extrabold uppercase leading-none text-center">
+              PROJETOS
+            </h1>
 
           </div>
 
           {/* Mobile / tablet: character sits BELOW the title, using the free space */}
           {isMobile && (
-            <motion.img
-              src={dk ? fallingCharDark : fallingCharLight}
-              alt="Guilherme 3D character"
+            // The float lives on the wrapper so both copies drift together and
+            // stay exactly on top of one another. aspect-ratio is what gives the
+            // box a height at all — its children are absolutely positioned, so
+            // it would otherwise collapse to zero in the flex column.
+            <motion.div
               style={{
+                position: "relative",
                 width: "112%",
                 maxWidth: "none",
+                aspectRatio: `${CHAR_W} / ${CHAR_H}`,
                 maxHeight: "44vh",
-                objectFit: "contain",
-                objectPosition: "center",
-                filter: dk
-                  ? "drop-shadow(0 30px 100px rgba(40,100,200,0.22)) drop-shadow(0 0 60px rgba(162,213,198,0.08))"
-                  : "drop-shadow(0 30px 80px rgba(0,0,0,0.18)) drop-shadow(0 0 40px rgba(0,0,0,0.08))",
-                mixBlendMode: dk ? "screen" : "normal",
               }}
               animate={{ y: [-3, -13, -3], rotate: [-0.5, 0.5, -0.5] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            />
+            >
+              <FallingChar dark={dk} />
+            </motion.div>
           )}
         </div>
 
@@ -1182,30 +1178,30 @@ export default function Projects() {
             className="pointer-events-none select-none"
             style={{ position: "absolute", inset: 0, display: "flex", justifyContent: "center", alignItems: "flex-start", zIndex: 10 }}
           >
-            <motion.img
-              src={dk ? fallingCharDark : fallingCharLight}
-              alt="Guilherme 3D character"
+            {/* No negative margin. The old art was 1.688 wide-to-tall, so `contain`
+                fitted it by width and left a letterbox band top and bottom, and
+                -3vh was there to cancel that band. This pose is 1.52, which fits
+                by height instead — the band is gone, and the same -3vh dragged
+                the raised shoe off the top of the section. Top-aligned to the
+                box, the art is contained within it and cannot clip. */}
+            <motion.div
               style={{
+                position: "relative",
                 flexShrink: 0,
-                marginTop: "-3vh",
                 width: "92%",
                 height: "92%",
-                objectFit: "contain",
-                objectPosition: "center",
-                filter: dk
-                  ? "drop-shadow(0 30px 100px rgba(40,100,200,0.22)) drop-shadow(0 0 60px rgba(162,213,198,0.08))"
-                  : "drop-shadow(0 30px 80px rgba(0,0,0,0.18)) drop-shadow(0 0 40px rgba(0,0,0,0.08))",
-                mixBlendMode: dk ? "screen" : "normal",
               }}
               animate={{ y: [-3, -17, -3], rotate: [-0.5, 0.5, -0.5] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            />
+            >
+              <FallingChar dark={dk} />
+            </motion.div>
           </div>
         )}
 
         {/* Credit */}
         <div className="absolute bottom-8 right-8">
-          <span className="font-display text-[10px] tracking-[0.25em] uppercase" style={{ color: dk ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.18)" }}>
+          <span className="font-display text-[10px] tracking-[0.25em] uppercase" style={{ color: "hsl(var(--foreground) / 0.15)" }}>
             Guilherme Carvalho
           </span>
         </div>
@@ -1213,7 +1209,7 @@ export default function Projects() {
       </section>
 
       {/* ── STRIPS */}
-      <section style={{ borderTop: `1px solid ${dk ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.06)"}` }}>
+      <section style={{ borderTop: "1px solid var(--glass-border)" }}>
         {projects.map(proj => (
           <ProjectStrip
             key={proj.id}
@@ -1225,7 +1221,7 @@ export default function Projects() {
             onClick={() => setOpenProject(proj)}
           />
         ))}
-        <div style={{ borderBottom: `1px solid ${dk ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.06)"}` }} />
+        <div style={{ borderBottom: `1px solid hsl(var(--foreground) / 0.05)` }} />
       </section>
 
       {/* ── MODAL */}

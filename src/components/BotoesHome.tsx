@@ -144,24 +144,30 @@ export default function BotoesHome() {
                     onPointerDown={enabled ? onTapStart : undefined}
                     onPointerUp={enabled ? (e) => onTapEnd(e, handleClick) : undefined}
                   >
+                    {/* The category's own colour only exists on hover. At rest
+                        every tile is the same glass, which is what keeps the
+                        grid calm against the flat background. */}
                     {enabled && (
                       <span
                         className="category-block__glow"
-                        style={{ boxShadow: `inset 0 0 0 1px ${glow}, 0 0 28px ${glow}` }}
+                        style={{
+                          background: `radial-gradient(circle at 50% 30%, ${glow} 0%, transparent 68%)`,
+                          boxShadow: `inset 0 0 0 1px ${glow}`,
+                        }}
                       />
                     )}
 
                     {/* Icon container */}
                     <div className="relative shrink-0">
                       <div
-                        className="w-14 h-14 rounded-2xl flex items-center justify-center"
-                        style={{
-                          background: gradient,
-                          boxShadow: `0 8px 24px ${glow}`,
-                          filter: enabled ? "none" : "grayscale(75%)",
-                        }}
+                        className="category-block__icon w-14 h-14 rounded-2xl flex items-center justify-center"
+                        style={{ opacity: enabled ? 1 : 0.5 }}
                       >
-                        <Icon className="w-7 h-7 text-white" strokeWidth={1.8} />
+                        <Icon
+                          className="w-7 h-7"
+                          strokeWidth={1.8}
+                          style={{ color: "hsl(var(--foreground))" }}
+                        />
                       </div>
                       {count > 0 && (
                         <div

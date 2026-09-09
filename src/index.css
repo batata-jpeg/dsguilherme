@@ -59,127 +59,132 @@
   }
 
   html.dark {
-    --background: 0 0% 4%;
-    --background-deep: 260 12% 6%;
-    --foreground: 0 0% 96%;
+    /* ── Carvão. Mesmo fundo da Hero, promovido a tema do site inteiro. */
+    --background: 216 17% 12%;
+    --background-deep: 216 18% 9%;
+    --foreground: 210 15% 96%;
 
-    --card: 260 8% 8%;
-    --card-foreground: 0 0% 96%;
-    --popover: 260 8% 8%;
-    --popover-foreground: 0 0% 96%;
+    --card: 216 15% 15%;
+    --card-foreground: 210 15% 96%;
+    --popover: 216 16% 13%;
+    --popover-foreground: 210 15% 96%;
 
-    --primary: 165 72% 52%;
-    --primary-foreground: 0 0% 4%;
-    --primary-glow: 270 75% 65%;
+    /* O azul é o único acento. Ecoa o tema claro sem trazer neon de volta. */
+    --primary: 214 100% 72%;
+    --primary-foreground: 216 20% 10%;
+    --primary-glow: 214 100% 80%;
 
-    --secondary: 270 45% 58%;
+    --secondary: 214 26% 32%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 260 8% 14%;
-    --muted-foreground: 260 8% 58%;
-    --accent: 330 75% 62%;
-    --accent-foreground: 0 0% 4%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 96%;
+    --muted: 216 14% 20%;
+    --muted-foreground: 214 12% 66%;
+    --accent: 214 100% 72%;
+    --accent-foreground: 216 20% 10%;
+    --destructive: 0 72% 58%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 260 10% 18%;
-    --input: 260 8% 12%;
-    --ring: 165 72% 52%;
+    --border: 214 12% 24%;
+    --input: 216 15% 17%;
+    --ring: 214 100% 72%;
 
-    --glass-bg: rgba(255, 255, 255, 0.045);
-    --glass-bg-hover: rgba(255, 255, 255, 0.08);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-border-inner: rgba(255, 255, 255, 0.05);
-    --glass-border-hover: rgba(0, 255, 209, 0.22);
-    --glass-blur: blur(28px);
-    --glass-blur-sm: blur(16px);
-    --glass-shadow: 0 8px 40px rgba(0, 0, 0, 0.45), 0 1px 0 rgba(255, 255, 255, 0.06) inset;
-    --glass-shadow-hover: 0 16px 56px rgba(138, 92, 255, 0.18), 0 1px 0 rgba(0, 255, 209, 0.12) inset;
-    --glass-shadow-sm: 0 4px 24px rgba(0, 0, 0, 0.35), 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+    /* Vidro sobre carvão: pouca opacidade, blur alto, realce no topo. */
+    --glass-bg: rgba(255, 255, 255, 0.06);
+    --glass-bg-hover: rgba(255, 255, 255, 0.11);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-border-inner: rgba(255, 255, 255, 0.06);
+    --glass-border-hover: rgba(150, 195, 255, 0.38);
+    --glass-blur: blur(26px) saturate(140%);
+    --glass-blur-sm: blur(16px) saturate(130%);
+    --glass-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, transparent 46%);
+    --glass-shadow: 0 10px 40px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    --glass-shadow-hover: 0 18px 56px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    --glass-shadow-sm: 0 6px 24px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 
-    --glow-blue: 0 0 36px rgba(0, 255, 209, 0.22);
-    --glow-blue-sm: 0 0 18px rgba(0, 255, 209, 0.14);
-    --glow-violet: 0 0 36px rgba(138, 92, 255, 0.22);
-    --glow-combined: 0 0 48px rgba(0, 255, 209, 0.12), 0 0 90px rgba(255, 92, 122, 0.1);
+    --glow-blue: 0 0 36px rgba(111, 174, 255, 0.22);
+    --glow-blue-sm: 0 0 18px rgba(111, 174, 255, 0.14);
+    --glow-violet: 0 0 36px rgba(111, 174, 255, 0.16);
+    --glow-combined: 0 0 48px rgba(111, 174, 255, 0.14), 0 0 90px rgba(255, 255, 255, 0.05);
 
-    --gradient-bg: linear-gradient(165deg, hsl(0, 0%, 4%) 0%, hsl(260, 15%, 5%) 48%, hsl(0, 0%, 3%) 100%);
-    --gradient-hero: radial-gradient(ellipse 80% 55% at 70% 18%, rgba(138, 92, 255, 0.14) 0%, transparent 55%),
-      radial-gradient(ellipse 70% 50% at 20% 88%, rgba(0, 255, 209, 0.1) 0%, transparent 50%);
-    --gradient-text: linear-gradient(135deg, #00ffd1 0%, #c4a8ff 52%, #ff7a9a 100%);
-    --gradient-glass: linear-gradient(145deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.02) 100%);
-    --gradient-card: linear-gradient(145deg, rgba(138, 92, 255, 0.08) 0%, rgba(0, 255, 209, 0.04) 100%);
-    --gradient-prism: linear-gradient(135deg, #00ffd1 0%, #8a5cff 45%, #ff5c7a 100%);
+    --gradient-bg: linear-gradient(135deg, #1c2026 0%, #191d23 50%, #171b21 100%);
+    --gradient-hero: radial-gradient(circle at 50% 42%, rgba(210, 215, 220, 0.16) 0%, transparent 62%);
+    --gradient-text: linear-gradient(135deg, #ffffff 0%, #a9cdff 58%, #6fa8ff 100%);
+    --gradient-glass: linear-gradient(160deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+    --gradient-card: linear-gradient(160deg, rgba(255, 255, 255, 0.08) 0%, rgba(111, 174, 255, 0.04) 100%);
+    --gradient-prism: linear-gradient(135deg, #ffffff 0%, #8fbcff 100%);
 
-    --sidebar-background: 260 8% 8%;
-    --sidebar-foreground: 0 0% 96%;
-    --sidebar-primary: 165 72% 52%;
-    --sidebar-primary-foreground: 0 0% 4%;
-    --sidebar-accent: 260 8% 14%;
-    --sidebar-accent-foreground: 0 0% 96%;
-    --sidebar-border: 260 10% 18%;
-    --sidebar-ring: 165 72% 52%;
+    --sidebar-background: 216 16% 13%;
+    --sidebar-foreground: 210 15% 96%;
+    --sidebar-primary: 214 100% 72%;
+    --sidebar-primary-foreground: 216 20% 10%;
+    --sidebar-accent: 216 14% 20%;
+    --sidebar-accent-foreground: 210 15% 96%;
+    --sidebar-border: 214 12% 24%;
+    --sidebar-ring: 214 100% 72%;
   }
 
   html.light {
-    --background: 260 25% 97%;
-    --background-deep: 260 20% 94%;
-    --foreground: 260 30% 8%;
+    /* ── Azul. O fundo da Hero vira o fundo do site; o branco vira o acento. */
+    --background: 214 91% 41%;
+    --background-deep: 214 92% 37%;
+    --foreground: 0 0% 100%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 260 30% 8%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 260 30% 8%;
+    --card: 214 80% 46%;
+    --card-foreground: 0 0% 100%;
+    --popover: 214 84% 44%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 260 42% 38%;
-    --primary-foreground: 0 0% 98%;
-    --primary-glow: 165 55% 42%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 214 92% 22%;
+    --primary-glow: 210 100% 90%;
 
-    --secondary: 165 40% 88%;
-    --secondary-foreground: 260 30% 12%;
+    --secondary: 210 100% 88%;
+    --secondary-foreground: 214 92% 20%;
 
-    --muted: 260 18% 92%;
-    --muted-foreground: 260 12% 40%;
-    --accent: 270 50% 92%;
-    --accent-foreground: 260 30% 12%;
-    --destructive: 0 84% 60%;
+    --muted: 214 60% 52%;
+    --muted-foreground: 210 92% 91%;
+    --accent: 210 100% 90%;
+    --accent-foreground: 214 92% 20%;
+    --destructive: 0 84% 64%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 260 16% 88%;
-    --input: 260 20% 94%;
-    --ring: 260 42% 38%;
+    --border: 214 55% 60%;
+    --input: 214 70% 46%;
+    --ring: 0 0% 100%;
 
-    --glass-bg: rgba(255, 255, 255, 0.72);
-    --glass-bg-hover: rgba(255, 255, 255, 0.9);
-    --glass-border: rgba(255, 255, 255, 0.95);
-    --glass-border-inner: rgba(138, 92, 255, 0.08);
-    --glass-border-hover: rgba(0, 255, 209, 0.35);
-    --glass-blur: blur(28px);
-    --glass-blur-sm: blur(16px);
-    --glass-shadow: 0 8px 40px rgba(80, 60, 120, 0.08), 0 1.5px 0 rgba(255, 255, 255, 0.9) inset;
-    --glass-shadow-hover: 0 16px 48px rgba(80, 60, 120, 0.12), 0 1.5px 0 rgba(255, 255, 255, 1) inset;
-    --glass-shadow-sm: 0 4px 20px rgba(80, 60, 120, 0.06), 0 1px 0 rgba(255, 255, 255, 0.85) inset;
+    /* Vidro sobre azul: branco translúcido, o mesmo da navbar da Hero. */
+    --glass-bg: rgba(255, 255, 255, 0.14);
+    --glass-bg-hover: rgba(255, 255, 255, 0.22);
+    --glass-border: rgba(255, 255, 255, 0.24);
+    --glass-border-inner: rgba(255, 255, 255, 0.12);
+    --glass-border-hover: rgba(255, 255, 255, 0.55);
+    --glass-blur: blur(26px) saturate(150%);
+    --glass-blur-sm: blur(16px) saturate(140%);
+    --glass-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, transparent 46%);
+    --glass-shadow: 0 10px 38px rgba(0, 22, 62, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    --glass-shadow-hover: 0 18px 54px rgba(0, 22, 62, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    --glass-shadow-sm: 0 6px 22px rgba(0, 22, 62, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.24);
 
-    --glow-blue: 0 0 28px rgba(0, 255, 209, 0.12);
-    --glow-blue-sm: 0 0 14px rgba(0, 255, 209, 0.08);
-    --glow-violet: 0 0 28px rgba(138, 92, 255, 0.12);
-    --glow-combined: 0 0 40px rgba(138, 92, 255, 0.1), 0 0 70px rgba(0, 255, 209, 0.08);
+    --glow-blue: 0 0 36px rgba(255, 255, 255, 0.28);
+    --glow-blue-sm: 0 0 18px rgba(255, 255, 255, 0.18);
+    --glow-violet: 0 0 36px rgba(190, 215, 255, 0.3);
+    --glow-combined: 0 0 48px rgba(255, 255, 255, 0.2), 0 0 90px rgba(190, 215, 255, 0.14);
 
-    --gradient-bg: linear-gradient(160deg, hsl(260, 25%, 97%) 0%, hsl(220, 30%, 96%) 50%, hsl(260, 20%, 96%) 100%);
-    --gradient-hero: radial-gradient(ellipse at 65% 40%, rgba(138, 92, 255, 0.12) 0%, transparent 55%),
-      radial-gradient(ellipse at 30% 80%, rgba(0, 255, 209, 0.08) 0%, transparent 50%);
-    --gradient-text: linear-gradient(135deg, #0d9488 0%, #6d28d9 48%, #db2777 100%);
-    --gradient-glass: linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(230, 240, 255, 0.35) 100%);
-    --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.85) 0%, rgba(200, 210, 255, 0.2) 100%);
-    --gradient-prism: linear-gradient(135deg, #0d9488 0%, #7c3aed 50%, #db2777 100%);
+    --gradient-bg: linear-gradient(135deg, #0959c8 0%, #0963d8 50%, #0756c5 100%);
+    --gradient-hero: radial-gradient(circle at 50% 42%, rgba(190, 215, 255, 0.4) 0%, transparent 62%);
+    --gradient-text: linear-gradient(135deg, #ffffff 0%, #dbe9ff 58%, #a9cdff 100%);
+    --gradient-glass: linear-gradient(160deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.06) 100%);
+    --gradient-card: linear-gradient(160deg, rgba(255, 255, 255, 0.18) 0%, rgba(190, 215, 255, 0.08) 100%);
+    --gradient-prism: linear-gradient(135deg, #ffffff 0%, #bed7ff 100%);
 
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 260 30% 8%;
-    --sidebar-primary: 260 42% 38%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 260 18% 92%;
-    --sidebar-accent-foreground: 260 30% 8%;
-    --sidebar-border: 260 16% 88%;
-    --sidebar-ring: 260 42% 38%;
+    --sidebar-background: 214 84% 44%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 214 92% 22%;
+    --sidebar-accent: 214 60% 52%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 214 55% 60%;
+    --sidebar-ring: 0 0% 100%;
   }
 }
 
@@ -197,18 +202,18 @@
 
   html {
     scroll-behavior: smooth;
-    background: #000;
+    background: #191d23;
     overflow-x: hidden;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }
 
   html.light {
-    background: hsl(260, 25%, 97%);
+    background: #0959c8;
   }
 
   html.dark {
-    background: hsl(0, 0%, 4%);
+    background: #191d23;
   }
 
   body {
@@ -249,39 +254,97 @@
 
 /* ─── Véu sobre WebGL escuro (legibilidade) ─────────────────────────────── */
 .site-bg-dark-veil {
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.28) 0%,
-    rgba(0, 0, 0, 0.52) 45%,
-    rgba(0, 0, 0, 0.72) 100%
-  );
+  background: transparent;
   pointer-events: none;
 }
 
-/* ─── Malha ambiente (prism) ─────────────────────────────────────────────── */
+/* ─── Malha ambiente ─────────────────────────────────────────────────────
+   Duas manchas de luz muito suaves, na cor do tema. Nada de neon. */
 .dot-grid {
   background-image:
-    radial-gradient(circle at 18% 22%, rgba(0, 255, 209, 0.07) 0%, transparent 52%),
-    radial-gradient(circle at 82% 78%, rgba(138, 92, 255, 0.06) 0%, transparent 52%),
-    radial-gradient(circle at 50% 50%, rgba(255, 92, 122, 0.04) 0%, transparent 58%);
+    radial-gradient(circle at 16% 18%, hsl(var(--primary) / 0.07) 0%, transparent 46%),
+    radial-gradient(circle at 84% 76%, hsl(var(--primary) / 0.05) 0%, transparent 48%);
 }
 
-/* ─── Painéis glass ─────────────────────────────────────────────────────── */
-.glass-panel {
+/* ─── Liquid glass ───────────────────────────────────────────────────────
+   A base de todo vidro do site. Não é só um fundo translúcido: o blur com
+   saturação puxa a cor do que está atrás, o ::before é o brilho que corre no
+   topo, e a sombra inset é o que dá sensação de espessura. */
+.liquid-glass,
+.glass-panel,
+.glass-panel-sm {
+  position: relative;
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
-  border-radius: 20px;
   box-shadow: var(--glass-shadow);
-  transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  isolation: isolate;
 }
 
-@media (hover: hover) {
+.liquid-glass::before,
+.glass-panel::before,
+.glass-panel-sm::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--glass-sheen);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.glass-panel {
+  border-radius: 20px;
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-sm {
+  border-radius: 12px;
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  box-shadow: var(--glass-shadow-sm);
+}
+
+/* O reflexo que segue o cursor. GlassPointer só escreve --gx/--gy; todo o
+   efeito mora aqui, e sem pointer ele simplesmente nunca acende. */
+.glass-panel::after,
+.glass-panel-sm::after,
+.category-block::after,
+.btn-glass-secondary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    240px circle at var(--gx, 50%) var(--gy, 50%),
+    hsl(var(--foreground) / 0.1) 0%,
+    transparent 68%
+  );
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .glass-panel:hover::after,
+  .glass-panel-sm:hover::after,
+  .category-block:not(:disabled):hover::after {
+    opacity: 1;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
   .glass-panel:hover {
+    background: var(--glass-bg-hover);
     border-color: var(--glass-border-hover);
     box-shadow: var(--glass-shadow-hover);
-    transform: translateY(-1px);
+    transform: translateY(-3px);
   }
 }
 
@@ -294,7 +357,10 @@
   overflow: hidden;
   cursor: pointer;
   touch-action: manipulation;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .category-block:disabled {
@@ -309,13 +375,27 @@
 .category-block__glow {
   position: absolute;
   inset: 0;
-  border-radius: 16px;
+  border-radius: inherit;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  z-index: -1;
+  transition: opacity 0.3s ease;
 }
 
-@media (hover: hover) {
+.category-block__icon {
+  background: var(--glass-bg-hover);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow-sm);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .category-block:not(:disabled):hover .category-block__icon {
+    transform: translateY(-2px) scale(1.06);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
   .category-block:not(:disabled):hover {
     transform: translateY(-6px) scale(1.03);
   }
@@ -325,77 +405,130 @@
   }
 }
 
-.glass-panel-sm {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur-sm);
-  -webkit-backdrop-filter: var(--glass-blur-sm);
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  box-shadow: var(--glass-shadow-sm);
+/* ─── Buttons ────────────────────────────────────────────────────────────
+   Primário: pastilha sólida, do jeito das cápsulas da navbar da Hero —
+   branca sobre o azul, azul sobre o carvão. Secundário: vidro puro. */
+.btn-glass-primary,
+.btn-glass-secondary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border-radius: 14px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ─── Buttons ────────────────────────────────────────────────────────────── */
 .btn-glass-primary {
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
-  border: 1.5px solid hsl(var(--primary));
-  border-radius: 12px;
-  padding: 12px 28px;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.875rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  transition: background 0.45s ease, color 0.45s ease, border-color 0.45s ease, box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  box-shadow: 0 2px 16px hsl(var(--primary) / 0.25);
-}
-
-@media (hover: hover) {
-  .btn-glass-primary:hover {
-    background: hsl(var(--primary) / 0.85);
-    box-shadow: 0 4px 24px hsl(var(--primary) / 0.40);
-    transform: translateY(-1px);
-  }
-}
-
-.btn-glass-primary:active {
-  transform: scale(0.97);
-  opacity: 0.9;
+  border: 1px solid hsl(var(--primary));
+  box-shadow:
+    0 6px 22px hsl(var(--primary) / 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
 .btn-glass-secondary {
-  background: transparent;
+  background: var(--glass-bg);
   color: hsl(var(--foreground));
-  border: 1.5px solid hsl(var(--primary) / 0.45);
-  border-radius: 12px;
-  padding: 12px 28px;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.875rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  transition: background 0.45s ease, color 0.45s ease, border-color 0.45s ease, box-shadow 0.2s ease, transform 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  box-shadow: var(--glass-shadow-sm);
 }
 
-@media (hover: hover) {
+/* O brilho que atravessa no hover. Fica fora da tela até ser chamado, então
+   não custa nada em repouso. */
+.btn-glass-primary::after,
+.btn-glass-secondary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -130%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.38) 50%,
+    transparent 100%
+  );
+  transform: skewX(-18deg);
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-glass-primary:hover,
   .btn-glass-secondary:hover {
-    background: hsl(var(--primary) / 0.10);
-    border-color: hsl(var(--primary) / 0.80);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+  }
+
+  .btn-glass-primary:hover {
+    box-shadow:
+      0 10px 30px hsl(var(--primary) / 0.42),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .btn-glass-secondary:hover {
+    background: var(--glass-bg-hover);
+    border-color: var(--glass-border-hover);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .btn-glass-primary:hover::after,
+  .btn-glass-secondary:hover::after {
+    animation: btn-shine 0.75s ease-out;
   }
 }
 
+.btn-glass-primary:active,
 .btn-glass-secondary:active {
-  transform: scale(0.97);
-  opacity: 0.85;
+  transform: translateY(0) scale(0.97);
+}
+
+@keyframes btn-shine {
+  to {
+    left: 130%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-glass-primary::after,
+  .btn-glass-secondary::after {
+    display: none;
+  }
+}
+
+/* ─── Page wordmark ──────────────────────────────────────────────────────
+   O mesmo tratamento do DSGUILHERME da Hero, para os títulos gigantes de
+   página. Grande, translúcido, atrás do conteúdo. */
+.page-wordmark {
+  font-size: clamp(3rem, 21vw, 24rem);
+  letter-spacing: -0.04em;
+  line-height: 0.85;
+}
+
+html.light .page-wordmark {
+  color: rgba(215, 232, 255, 0.55);
+}
+
+html.dark .page-wordmark {
+  color: rgba(214, 217, 222, 0.5);
 }
 
 /* ─── Gradient Text ──────────────────────────────────────────────────────── */
@@ -410,24 +543,24 @@
 /* ─── Section Labels ─────────────────────────────────────────────────────── */
 .section-label {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 700;
   font-size: 0.68rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: hsl(var(--primary));
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .section-label::before {
   content: '';
   display: inline-block;
-  width: 20px;
+  width: 22px;
   height: 1.5px;
-  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)));
+  background: hsl(var(--primary));
   border-radius: 2px;
-  opacity: 0.8;
+  opacity: 0.65;
 }
 
 /* ─── Ambient glow orbs ──────────────────────────────────────────────────── */
@@ -436,7 +569,7 @@
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 255, 209, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, hsl(var(--primary) / 0.14) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -445,7 +578,7 @@
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(138, 92, 255, 0.09) 0%, transparent 70%);
+  background: radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 70%);
   pointer-events: none;
 }
 

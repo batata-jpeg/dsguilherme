@@ -1,0 +1,419 @@
+/* ── GlassNav ─────────────────────────────────────────────────────────────
+ *
+ * A floating bar with real glass: transparency, blur, saturation boost, a
+ * highlight along the top edge, translucent borders and an inner sheen — the
+ * layers that read as thickness rather than a flat tinted rectangle.
+ *
+ * Geometry is theme-independent. Only colour, transparency and light change
+ * between light and dark, so the bar never shifts or resizes on a toggle.
+ */
+
+.gnav-wrap {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99;
+  /* Fixed width: the pill labels change length with the language, and a bar
+     that resized on every language toggle would be the most visible thing on
+     the page. */
+  width: min(770px, calc(100% - 48px));
+}
+
+.gnav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 50px;
+  padding: 0 8px 0 18px;
+  border-radius: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* The sheen. A pseudo-element rather than another gradient on the background
+   so the blur underneath stays untouched. */
+.gnav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gnav > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Glass, light theme ──────────────────────────────────────────────────── */
+html.light .gnav {
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+    0 10px 35px rgba(0, 0, 0, 0.06);
+}
+
+html.light .gnav::before {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, transparent 42%),
+    radial-gradient(ellipse 120% 90% at 12% -30%, rgba(255, 255, 255, 0.22) 0%, transparent 55%);
+}
+
+/* ── Glass, dark theme ───────────────────────────────────────────────────
+ * Lighter than the background it sits on, which is what gives the dark hero
+ * its contrast.
+ */
+html.dark .gnav {
+  background: rgba(230, 230, 230, 0.68);
+  backdrop-filter: blur(26px) saturate(125%);
+  -webkit-backdrop-filter: blur(26px) saturate(125%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.06),
+    0 14px 40px rgba(0, 0, 0, 0.35);
+}
+
+html.dark .gnav::before {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, transparent 45%),
+    radial-gradient(ellipse 120% 90% at 12% -30%, rgba(255, 255, 255, 0.3) 0%, transparent 55%);
+}
+
+/* ── Centred middle group ────────────────────────────────────────────────
+ * Whatever sits in the middle of the bar is taken out of flow and pinned to
+ * the bar's own centre. Leaving it in the flex row meant its position depended
+ * on how wide the wordmark and the controls happened to be — which is how the
+ * controls ended up 16px off centre on a phone, near the middle but by
+ * accident rather than by rule. With the middle out of flow, space-between has
+ * only the two edge items left to place.
+ */
+/* ── Wordmark ────────────────────────────────────────────────────────────── */
+.gnav__logo {
+  font-family: var(--font-display), "Inter", sans-serif;
+  font-weight: 900;
+  font-size: 1.32rem;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 1;
+  white-space: nowrap;
+  transition: opacity 0.22s ease;
+}
+
+html.light .gnav__logo {
+  color: #ffffff;
+}
+
+html.dark .gnav__logo {
+  color: #000000;
+}
+
+/* ── Page pills ──────────────────────────────────────────────────────────── */
+.gnav__list {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.gnav__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 16px;
+  border-radius: 10px;
+  font-family: var(--font-display), "Inter", sans-serif;
+  font-weight: 800;
+  font-size: 0.7rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    transform 0.24s ease,
+    background-color 0.24s ease,
+    opacity 0.24s ease;
+}
+
+html.light .gnav__pill {
+  background: rgba(255, 255, 255, 0.94);
+  color: #000000;
+}
+
+html.dark .gnav__pill {
+  background: rgba(0, 0, 0, 0.95);
+  color: #ffffff;
+}
+
+/* Only real pointers get the lift — on a touch screen it fires on tap and
+   reads as a glitch. */
+@media (hover: hover) and (pointer: fine) {
+  .gnav__pill:hover {
+    transform: translateY(-1px);
+  }
+
+  html.light .gnav__pill:hover {
+    background: #ffffff;
+  }
+
+  html.dark .gnav__pill:hover {
+    background: #000000;
+  }
+
+  .gnav__logo:hover {
+    opacity: 0.82;
+  }
+}
+
+.gnav__pill:active {
+  transform: translateY(0);
+}
+
+/* The active page reads through weight of background, not an extra marker. */
+html.light .gnav__pill.is-active {
+  background: #ffffff;
+}
+
+html.dark .gnav__pill.is-active {
+  background: #000000;
+}
+
+/* ── Controls ────────────────────────────────────────────────────────────
+ * Two sliding switches. The knob holds the icon and travels end to end, so
+ * where it sits is what tells you the current state — no label needed.
+ */
+.gnav__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.gnav__switch {
+  --sw-w: 54px;
+  --sw-h: 30px;
+  --sw-pad: 3px;
+  --sw-knob: calc(var(--sw-h) - var(--sw-pad) * 2);
+
+  position: relative;
+  width: var(--sw-w);
+  height: var(--sw-h);
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  flex-shrink: 0;
+  /* The track is a well: the inner shadow is what makes the knob read as
+     sitting inside it rather than on top of it. */
+  box-shadow:
+    inset 0 1px 3px rgba(0, 20, 50, 0.16),
+    inset 0 0 0 1px rgba(0, 20, 50, 0.05);
+  transition: background-color 0.3s ease;
+}
+
+html.light .gnav__switch {
+  background: rgba(255, 255, 255, 0.94);
+}
+
+html.dark .gnav__switch {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.gnav__switch-knob {
+  position: absolute;
+  top: var(--sw-pad);
+  left: var(--sw-pad);
+  width: var(--sw-knob);
+  height: var(--sw-knob);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow:
+    0 2px 5px rgba(0, 20, 50, 0.3),
+    0 0 0 1px rgba(0, 20, 50, 0.06);
+  /* Slight overshoot on arrival — a switch that eases to a dead stop feels
+     stuck, and this is the whole point of the control. */
+  transition: transform 0.42s cubic-bezier(0.34, 1.42, 0.64, 1);
+}
+
+.gnav__switch.is-end .gnav__switch-knob {
+  transform: translateX(calc(var(--sw-w) - var(--sw-knob) - var(--sw-pad) * 2));
+}
+
+.gnav__switch-knob--flag {
+  background: #ffffff;
+}
+
+.gnav__switch-knob--sun {
+  background: #ffe81a;
+  color: #101318;
+}
+
+.gnav__switch-knob--moon {
+  background: #2b3038;
+  color: #ffffff;
+}
+
+.gnav__flag {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: block;
+  object-fit: cover;
+}
+
+.gnav__switch-icon {
+  width: 15px;
+  height: 15px;
+}
+
+/* Still used by the mobile menu toggle. */
+.gnav__ctrl-icon {
+  width: 17px;
+  height: 17px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gnav__switch:hover .gnav__switch-knob {
+    box-shadow:
+      0 3px 8px rgba(0, 20, 50, 0.36),
+      0 0 0 1px rgba(0, 20, 50, 0.08);
+  }
+}
+
+.gnav__switch:active .gnav__switch-knob {
+  /* Squash toward the direction of travel while held. */
+  width: calc(var(--sw-knob) + 3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gnav__switch-knob {
+    transition: none;
+  }
+}
+
+/* ── Mobile ──────────────────────────────────────────────────────────────
+ * The three labels plus the wordmark and both controls stop fitting well
+ * before the phone breakpoint, so the pills move into a sheet and the bar
+ * keeps only the wordmark, the controls and the toggle.
+ */
+.gnav__burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+html.light .gnav__burger {
+  background: rgba(255, 255, 255, 0.94);
+  color: #111111;
+}
+
+html.dark .gnav__burger {
+  background: rgba(255, 255, 255, 0.9);
+  color: #111111;
+}
+
+.gnav__sheet {
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 16px;
+  display: none;
+  overflow: hidden;
+}
+
+html.light .gnav__sheet {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 10px 35px rgba(0, 0, 0, 0.08);
+}
+
+html.dark .gnav__sheet {
+  background: rgba(230, 230, 230, 0.72);
+  backdrop-filter: blur(26px) saturate(125%);
+  -webkit-backdrop-filter: blur(26px) saturate(125%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 14px 40px rgba(0, 0, 0, 0.35);
+}
+
+.gnav__sheet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gnav__pill--block {
+  width: 100%;
+  height: 40px;
+  justify-content: flex-start;
+  padding: 0 14px;
+}
+
+@media (max-width: 860px) {
+  .gnav-wrap {
+    width: calc(100% - 24px);
+    top: 14px;
+  }
+
+  .gnav {
+    padding: 0 8px 0 14px;
+  }
+
+  .gnav__list {
+    display: none;
+  }
+
+  .gnav__controls {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .gnav__burger,
+  .gnav__sheet {
+    display: flex;
+  }
+
+  .gnav__sheet {
+    display: block;
+  }
+
+  .gnav__logo {
+    font-size: 1.15rem;
+  }
+}

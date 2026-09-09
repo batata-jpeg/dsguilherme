@@ -1,35 +1,13 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion, useAnimation, useScroll, useTransform, useInView } from "framer-motion";
-import { ArrowRight, ChevronDown, ExternalLink, Zap, Award, Users, Layers, MessageCircle, Mail, Linkedin } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { MessageCircle, Mail, Linkedin } from "lucide-react";
 import GooeyNav from "@/components/GooeyNav";
 import BotoesHome from "@/components/BotoesHome";
-import heroVisualDark from "@/assets/hero-character.webp";
-import heroVisualLight from "@/assets/hero-character-light.webp";
-import project2 from "@/assets/project-2.jpg";
-import project3 from "@/assets/project-3.jpg";
-import aboutPortrait from "@/assets/about-portrait.jpg";
+import Hero from "@/components/Hero";
+import QuoteBand from "@/components/QuoteBand";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useTheme } from "@/contexts/ThemeContext";
-import Logo from "@/components/Logo";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { MAILTO_HREF, SOCIAL, WHATSAPP_CHAT_URL } from "@/config/links";
-import HeroTypewriter from "@/components/HeroTypewriter";
-import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
-
-// 7 badges arranged in a rough ellipse around the character (center ~50%,50%)
-// Desktop (x/y): ellipse rx≈40%, ry≈43% — slight negatives OK (overflow visible)
-// Mobile  (mx/my): tighter ellipse fully inside the container
-const floatingBadges = [
-{ label: "Motion Design", icon: "◈", delay: 0, x: "36%", y: "0%", mx: "28%", my: "0%", xKeys: [0, 22, -16, 8, -20, 0], yKeys: [0, -18, 12, -22, 8, 0], rKeys: [0, 4, -3, 5, -2, 0], dur: 8 },
-{ label: "Edição de Vídeo", icon: "▶", delay: 0.3, x: "72%", y: "10%", mx: "58%", my: "8%", xKeys: [0, -18, 24, -10, 18, 0], yKeys: [0, 20, -14, 22, -10, 0], rKeys: [0, -3, 4, -5, 3, 0], dur: 8.8 },
-{ label: "UI/UX", icon: "◉", delay: 0.6, x: "84%", y: "44%", mx: "66%", my: "38%", xKeys: [0, -20, 28, -12, 20, 0], yKeys: [0, 24, -16, 26, -10, 0], rKeys: [0, -3, 5, -4, 3, 0], dur: 9 },
-{ label: "Branding", icon: "◆", delay: 1, x: "68%", y: "80%", mx: "55%", my: "74%", xKeys: [0, 18, -24, 8, -20, 0], yKeys: [0, -16, 22, -6, 18, 0], rKeys: [0, 5, -4, 3, -5, 0], dur: 7.5 },
-{ label: "3D Design", icon: "◎", delay: 1.3, x: "26%", y: "86%", mx: "20%", my: "78%", xKeys: [0, -26, 12, 20, -16, 0], yKeys: [0, 12, -24, 16, -6, 0], rKeys: [0, -4, 3, -5, 2, 0], dur: 10 },
-{ label: "Blender", icon: "⬡", delay: 1.7, x: "-6%", y: "44%", mx: "2%", my: "40%", xKeys: [0, 14, -18, 24, -12, 0], yKeys: [0, -22, 14, -12, 24, 0], rKeys: [0, 3, -5, 4, -3, 0], dur: 8.5 },
-{ label: "Imagens", icon: "◇", delay: 0.8, x: "-4%", y: "12%", mx: "2%", my: "10%", xKeys: [0, -16, 22, -20, 12, 0], yKeys: [0, 18, -10, 24, -16, 0], rKeys: [0, -5, 4, -3, 5, 0], dur: 9.5 }];
-
-
 
 function FadeInSection({ children, delay = 0, className = "" }: {children: React.ReactNode;delay?: number;className?: string;}) {
   const ref = useRef(null);
@@ -48,196 +26,16 @@ function FadeInSection({ children, delay = 0, className = "" }: {children: React
 }
 
 export default function Index() {
-  const { t, language } = useLanguage();
-  const reduceMotion = usePrefersReducedMotion();
-  const [heroTyped, setHeroTyped] = useState(reduceMotion);
-
-  useEffect(() => {
-    setHeroTyped(reduceMotion);
-  }, [language, reduceMotion]);
-
-  const onHeroTypeComplete = useCallback(() => {
-    setHeroTyped(true);
-  }, []);
-  const { theme } = useTheme();
-  const isMobile = useIsMobile();
-  const isDark = theme === "dark";
-  const heroVisual = isDark ? heroVisualDark : heroVisualLight;
-  const heroRef = useRef<HTMLDivElement>(null);
-
-  // Bouncy character swap
-  const charControls = useAnimation();
-  const [displayedVisual, setDisplayedVisual] = useState(heroVisual);
-  const isFirstRender = useRef(true);
-
-  useEffect(() => {
-    if (isFirstRender.current) { isFirstRender.current = false; return; }
-    const run = async () => {
-      setDisplayedVisual(heroVisual); // swap during view-transition capture
-      // Wait for the light-burst transition to finish, then reveal with a bounce
-      await new Promise(r => setTimeout(r, 1520));
-      await charControls.start({
-        y: -18, scaleY: 1.06, scaleX: 0.96,
-        transition: { duration: 0.11, ease: "easeOut" },
-      });
-      await charControls.start({
-        y: 0, scaleY: 1, scaleX: 1,
-        transition: { type: "spring", stiffness: 460, damping: 13, mass: 0.7 },
-      });
-    };
-    run();
-  }, [theme]);
-
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, isMobile ? 1 : 0]);
-
-  const stats = [
-  { value: "5+", label: t("index.stats.years"), icon: Zap },
-  { value: "78+", label: t("index.stats.projects"), icon: Award },
-  { value: "40+", label: t("index.stats.clients"), icon: Users },
-  { value: "6", label: t("index.stats.fields"), icon: Layers }];
-
+  const { t } = useLanguage();
 
   return (
     <>
     <div className="min-h-screen overflow-x-hidden dot-grid bg-transparent">
       {/* ── HERO */}
-      <section ref={heroRef} className="relative flex min-h-[100svh] items-center overflow-hidden">
-        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative z-10 w-full">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-14 sm:pb-16 grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center">
-            <div className="space-y-6 sm:space-y-8">
-              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }} className="space-y-2">
-                <HeroTypewriter
-                  line1={t("index.hero.h1a")}
-                  line2={t("index.hero.h1b")}
-                  line3={t("index.hero.h1c")}
-                  resetKey={language}
-                  reducedMotion={reduceMotion}
-                  onComplete={onHeroTypeComplete}
-                  msPerChar={62}
-                  pauseBetweenLines={520}
-                  className="font-display font-extrabold leading-[0.9] tracking-tight uppercase text-left"
-                  style={{ fontSize: "clamp(3rem, 9vw, 6.5rem)" }}
-                />
-              </motion.div>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={heroTyped ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="font-body text-base sm:text-lg leading-relaxed max-w-md"
-                style={{ color: "hsl(var(--muted-foreground))" }}
-              >
-                {t("index.hero.description")}
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={heroTyped ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.55, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4"
-              >
-                <Link to="/projects" className="w-full sm:w-auto">
-                  <button className="btn-glass-primary w-full sm:w-auto justify-center">{t("index.hero.cta.projects")} <ArrowRight className="w-4 h-4" /></button>
-                </Link>
-                <Link to="/about" className="w-full sm:w-auto">
-                  <button className="btn-glass-secondary w-full sm:w-auto justify-center">{t("index.hero.cta.about")}</button>
-                </Link>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={heroTyped ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.55, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                className="avail-for-work-badge inline-flex items-center gap-3 rounded-full border px-3.5 py-2 sm:px-4 sm:py-2.5 backdrop-blur-[10px] motion-reduce:animate-none max-w-full"
-              >
-                <span className="relative flex h-2.5 w-2.5 shrink-0" aria-hidden>
-                  <span className="avail-for-work-badge__dot-glow absolute inset-[-4px] rounded-full bg-primary/25 motion-reduce:animate-none" />
-                  <span
-                    className="relative block h-2.5 w-2.5 rounded-full ring-[1.5px] ring-primary/45"
-                    style={{
-                      background: "hsl(var(--primary))",
-                      boxShadow: "0 0 12px hsl(var(--primary) / 0.4)",
-                    }}
-                  />
-                </span>
-                <span
-                  className="font-display text-[0.68rem] sm:text-xs tracking-[0.18em] sm:tracking-[0.2em] uppercase font-bold leading-tight"
-                  style={{ color: "hsl(var(--primary))" }}
-                >
-                  {t("index.hero.available")}
-                </span>
-              </motion.div>
-            </div>
-
-            <div className="relative flex items-center justify-center min-h-[320px] sm:min-h-[420px] lg:min-h-[560px] overflow-hidden lg:overflow-visible">
-              {!isMobile && floatingBadges.map((badge) => (
-                <motion.div
-                  key={badge.label}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 1 + badge.delay }}
-                  className="z-20 absolute"
-                  style={{
-                    left: badge.x,
-                    top: badge.y,
-                    transform: "translate(-50%, -50%)",
-                  }}
-                >
-                  <motion.div
-                    animate={{ x: badge.xKeys, y: badge.yKeys, rotate: badge.rKeys }}
-                    transition={{ duration: badge.dur, repeat: Infinity, ease: "easeInOut", repeatType: "loop" }}
-                    className="glass-panel-sm px-2 py-1.5 lg:px-3 lg:py-2 flex items-center gap-1.5 lg:gap-2 whitespace-nowrap hover:scale-105 transition-transform duration-300"
-                  >
-                    <span className="text-xs lg:text-sm" style={{ color: "hsl(var(--primary))" }}>{badge.icon}</span>
-                    <span className="font-display text-[9px] lg:text-xs tracking-[0.1em] uppercase" style={{ color: "hsl(var(--foreground))" }}>{badge.label}</span>
-                  </motion.div>
-                </motion.div>
-              ))}
-
-              <div className="flex w-full flex-col items-center gap-4 z-10">
-                <div className="flex w-full justify-center" style={isMobile ? undefined : { filter: "drop-shadow(0 24px 60px rgba(59,153,252,0.25)) drop-shadow(0 0 100px rgba(147,84,245,0.15))" }}>
-                  <motion.img
-                    src={displayedVisual}
-                    alt="Designer 3D Character"
-                    className="w-80 h-auto max-w-full sm:w-96 md:w-[420px] lg:w-80 xl:w-[440px] object-contain"
-                    animate={charControls}
-                    transition={{ y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
-                  />
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }}
-          className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex">
-          <span className="font-display text-xs tracking-[0.25em] uppercase" style={{ color: "hsl(var(--muted-foreground))" }}>{t("index.hero.scroll")}</span>
-          <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
-            <ChevronDown className="w-4 h-4" style={{ color: "hsl(var(--primary))" }} />
-          </motion.div>
-        </motion.div>
-      </section>
+      <Hero />
 
       {/* ── PHILOSOPHY */}
-      <section className="relative py-20 sm:py-32 overflow-hidden">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
-          <FadeInSection delay={0.2}>
-            <h2 className="font-display font-extrabold leading-[0.85] tracking-tight uppercase text-center" style={{ fontSize: "clamp(2.25rem, 8vw, 7rem)", color: "hsl(var(--foreground))" }}>
-              {t("index.philosophy.line1")}
-              <br />
-              {t("index.philosophy.line2")} <span className="gradient-text">{t("index.philosophy.accent")}</span>
-            </h2>
-          </FadeInSection>
-          <FadeInSection delay={0.4}>
-            <h2 className="font-display font-extrabold leading-[0.9] tracking-tight mt-4 uppercase text-center text-muted-foreground" style={{ fontSize: "clamp(1.75rem, 6vw, 3rem)" }}>
-              {t("index.philosophy.author")}
-            </h2>
-          </FadeInSection>
-        </div>
-      </section>
+      <QuoteBand />
 
       {/* ── BOTOES HOME (local only — nao commitar sem querer publicar) */}
       <BotoesHome />

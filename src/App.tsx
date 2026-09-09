@@ -8,9 +8,9 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ClickSpark from "@/components/ClickSpark";
 import PageTransition from "@/components/PageTransition";
-import LampCord from "@/components/LampCord";
 import ScrollToTop from "@/components/ScrollToTop";
 import SiteBackground from "@/components/SiteBackground";
+import GlassPointer from "@/components/GlassPointer";
 import GlobalMinimizedDock from "@/components/GlobalMinimizedDock";
 
 import Index from "./pages/Index.tsx";
@@ -63,8 +63,8 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <SiteBackground />
+            <GlassPointer />
             <GlobalMinimizedDock />
-            <LampCord />
             <div className="relative z-10 min-h-screen">
               <NavigationWrapper />
               <ClickSpark sparkColor="#ffffff" sparkRadius={30} sparkCount={10} extraScale={1.3}>

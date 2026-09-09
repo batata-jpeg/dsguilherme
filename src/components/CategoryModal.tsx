@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ChromaGrid from "@/components/ChromaGrid";
@@ -21,9 +20,7 @@ interface Props {
 }
 
 export default function CategoryModal({ categoryId, label, gradient, glow, onClose }: Props) {
-  const { theme } = useTheme();
   const { t } = useLanguage();
-  const dk = theme === "dark";
   const isMobile = useIsMobile();
 
   const gallery = CATEGORY_GALLERIES[categoryId];
@@ -36,9 +33,12 @@ export default function CategoryModal({ categoryId, label, gradient, glow, onClo
   const [index, setIndex] = useState<number | null>(null); // null = grid, number = lightbox
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const chromeBg = dk ? "#111d2e" : "#e2e8f0";
-  const chromeBdr = `1px solid ${dk ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)"}`;
-  const bg = dk ? "#05090f" : "#f0f4f8";
+  // Window chrome and body now come from the theme tokens instead of a pair of
+  // hardcoded navy/grey pairs, so the modal follows the site into blue or
+  // charcoal rather than punching a light grey rectangle through it.
+  const chromeBg = "hsl(var(--card))";
+  const chromeBdr = "1px solid var(--glass-border)";
+  const bg = "hsl(var(--background-deep))";
 
   // Esc backs out of the lightbox first, then closes. Arrows page through.
   useEffect(() => {
@@ -133,7 +133,7 @@ export default function CategoryModal({ categoryId, label, gradient, glow, onClo
           animate={{ opacity: 1, x: 0 }}
           onClick={() => setIndex(null)}
           className="flex items-center gap-1 ml-2"
-          style={{ color: dk ? "rgba(255,255,255,0.42)" : "rgba(0,0,0,0.42)" }}
+          style={{ color: "hsl(var(--muted-foreground))" }}
         >
           <ChevronLeft className="w-3.5 h-3.5" />
           <span className="font-display text-[9px] tracking-[0.16em] uppercase">
@@ -145,7 +145,7 @@ export default function CategoryModal({ categoryId, label, gradient, glow, onClo
       <div className="flex-1" />
       <span
         className="font-display text-[9px] tracking-[0.2em] uppercase whitespace-nowrap"
-        style={{ color: dk ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)" }}
+        style={{ color: "hsl(var(--muted-foreground))" }}
       >
         {current ? `${index! + 1} / ${items.length}` : `${label} · ${categoryCount(categoryId)}`}
       </span>
@@ -190,7 +190,7 @@ export default function CategoryModal({ categoryId, label, gradient, glow, onClo
     <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
       <div
         className="relative flex-1 min-h-0 flex items-center justify-center"
-        style={{ background: dk ? "#070c14" : "#e8edf5", padding: isMobile ? 12 : 28 }}
+        style={{ background: "hsl(var(--background-deep))", padding: isMobile ? 12 : 28 }}
       >
         <AnimatePresence mode="wait">
           <motion.div
@@ -211,9 +211,9 @@ export default function CategoryModal({ categoryId, label, gradient, glow, onClo
               onClick={() => setIndex((i) => ((i ?? 0) - 1 + items.length) % items.length)}
               className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-100"
               style={{
-                background: dk ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)",
-                border: `1px solid ${dk ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
-                color: dk ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)",
+                background: "var(--glass-bg-hover)",
+                border: "1px solid var(--glass-border)",
+                color: "hsl(var(--foreground))",
                 opacity: 0.75,
               }}
               title={t("category.prev")}
@@ -224,9 +224,9 @@ export default function CategoryModal({ categoryId, label, gradient, glow, onClo
               onClick={() => setIndex((i) => ((i ?? 0) + 1) % items.length)}
               className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-100"
               style={{
-                background: dk ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)",
-                border: `1px solid ${dk ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`,
-                color: dk ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)",
+                background: "var(--glass-bg-hover)",
+                border: "1px solid var(--glass-border)",
+                color: "hsl(var(--foreground))",
                 opacity: 0.75,
               }}
               title={t("category.next")}
@@ -243,8 +243,8 @@ export default function CategoryModal({ categoryId, label, gradient, glow, onClo
       <div
         className="shrink-0 px-5 py-4"
         style={{
-          background: dk ? "#0d1520" : "#ffffff",
-          borderTop: `1px solid ${dk ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)"}`,
+          background: "hsl(var(--card))",
+          borderTop: "1px solid var(--glass-border)",
         }}
       >
         {current.sub && (
@@ -257,7 +257,7 @@ export default function CategoryModal({ categoryId, label, gradient, glow, onClo
         )}
         <h3
           className="font-display font-extrabold uppercase text-base leading-tight"
-          style={{ color: dk ? "rgba(255,255,255,0.92)" : "rgba(0,0,0,0.88)" }}
+          style={{ color: "hsl(var(--foreground))" }}
         >
           {current.title}
         </h3>

@@ -1,0 +1,34 @@
+/* The sphere's palette lives here, not in the component — the canvas reads
+   these three custom properties every time the theme class changes. It sits on
+   the quote band, which is a near-white slab on the blue page and a slate slab
+   on the charcoal one, so the outline colour flips with it. */
+
+.dot-sphere {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
+  --ds-dot: rgba(16, 24, 40, 0.26);
+  --ds-accent: #0b4fbb;
+  --ds-hot: #4d97ff;
+}
+
+html.dark .dot-sphere {
+  --ds-dot: rgba(255, 255, 255, 0.2);
+  --ds-accent: #2563eb;
+  --ds-hot: #7cb6ff;
+}
+
+.dot-sphere canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot-sphere {
+    /* The component already freezes the spin; nothing extra to do here. */
+  }
+}
