@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect, type CSSProperties } from "react";
+import { Fragment, useState, useCallback, useRef, useEffect, useLayoutEffect, type CSSProperties } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X, FileText } from "lucide-react";
@@ -24,6 +24,19 @@ const gazzSlides = [
   "/gazz/gazz-19.jpg", "/gazz/gazz-20.jpg", "/gazz/gazz-21.jpg",
 ];
 const armSlides = [project1, project2, project3, project4, project5];
+
+// StratosDrive reads as one vertical document: nine identity pages, then the
+// seven-flyer campaign. The note indices in the project entry below are keyed
+// to these positions, so reordering here means reordering the notes too.
+const SD = "/stratosdrive";
+const stratosSlides = [
+  `${SD}/sd-01-logo.jpg`, `${SD}/sd-02-manifesto.jpg`, `${SD}/sd-03-estudos.jpg`,
+  `${SD}/sd-04-construcao.jpg`, `${SD}/sd-05-variacoes.jpg`, `${SD}/sd-06-simbolo.jpg`,
+  `${SD}/sd-07-cartoes.jpg`, `${SD}/sd-08-app.jpg`, `${SD}/sd-09-interior.jpg`,
+  `${SD}/sd-flyer-1.jpg`, `${SD}/sd-flyer-2.jpg`, `${SD}/sd-flyer-3.jpg`,
+  `${SD}/sd-flyer-4.jpg`, `${SD}/sd-flyer-5.jpg`, `${SD}/sd-flyer-6.jpg`,
+  `${SD}/sd-flyer-7.jpg`,
+];
 
 // ── The falling character on the Projects hero ───────────────────────────────
 // Both themes' art is rendered at once and stacked; the theme only flips which
@@ -103,6 +116,21 @@ type Project = {
   // For "scroll" projects: maps a slide index to an animated gif that only
   // plays while on screen (falls back to slides[index] otherwise).
   gifSlides?: Record<number, string>;
+  // For "scroll" projects: short narrative beats set between the pages,
+  // Behance-style. Keyed by the slide index the beat sits *above*; the key
+  // slides.length places one after the last page.
+  notes?: Record<number, { eyebrow: string; text: string }>;
+  // Tints the note eyebrows to the project's own palette. Defaults to a
+  // neutral warm white, which suits the monochrome case studies.
+  noteAccent?: string;
+  // For "scroll" projects: indices of pages that are portrait (A4 flyers,
+  // posters). Declared rather than measured on load, because switching the
+  // layout after the image decodes would shift every offset below it while
+  // the reader is mid-scroll.
+  portraitSlides?: number[];
+  // For "scroll" projects: indices to set a wordless break above, for two
+  // pages that would otherwise bleed into one another.
+  dividers?: number[];
 };
 
 // ── MacOS Modal ──────────────────────────────────────────────────────────────
@@ -605,36 +633,174 @@ function MacOSModal({ project, onClose }: { project: Project; onClose: () => voi
 // A single stacked page. If `gif` is provided it only animates while on screen
 // (IntersectionObserver swaps poster ↔ gif), so idle gifs never weigh the page.
 // Falls back to the poster if the gif fails to load (e.g. not uploaded yet).
-function ScrollSlide({ src, gif, root }: { src: string; gif?: string; root: React.RefObject<HTMLElement> }) {
+function ScrollSlide({ src, gif, root, fit, fitHeight }: {
+  src: string;
+  gif?: string;
+  root: React.RefObject<HTMLElement>;
+  fit?: boolean;
+  fitHeight?: number;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
   const [failed, setFailed] = useState(false);
+  // A portrait page fills a whole screen, so one that has not arrived yet is a
+  // screen of black. Native lazy-loading only reaches about a screen ahead,
+  // which loses the race at scroll speed — these are fetched on our own
+  // signal instead, two screens out. Landscape pages keep the native lazy.
+  const [armed, setArmed] = useState(!fit);
 
   useEffect(() => {
-    if (!gif) return;
+    if (!gif && !fit) return;
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { root: root.current ?? null, threshold: 0.2, rootMargin: "10% 0px" },
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+        if (entry.isIntersecting) setArmed(true);
+      },
+      {
+        root: root.current ?? null,
+        threshold: fit ? 0 : 0.2,
+        rootMargin: fit ? "200% 0px" : "10% 0px",
+      },
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [gif, root]);
+  }, [gif, fit, root]);
 
   const showGif = !!gif && inView && !failed;
 
+  const img = (
+    <img
+      src={armed ? (showGif ? gif! : src) : undefined}
+      alt=""
+      onError={() => { if (showGif) setFailed(true); }}
+      draggable={false}
+      loading={fit ? "eager" : "lazy"}
+      className="block select-none"
+      // `fit` fills its box and lets object-fit letterbox inside it, so the
+      // page occupies exactly the same space before and after it decodes and
+      // nothing below it shifts on load.
+      style={fit
+        ? { width: "100%", height: "100%", objectFit: "contain" }
+        : { width: "100%", height: "auto" }}
+    />
+  );
+
+  // A portrait page at full bleed runs about three screens tall, so it can
+  // never be read as a page. The wrapper instead takes the scroll viewport's
+  // height, giving the page exactly one screen, and object-fit letterboxes the
+  // artwork inside it. The height arrives as a measured number rather than
+  // 100%, because a percentage only resolves while the stack is a direct child
+  // of the scroller — which the mobile sheet is not.
+  if (fit) {
+    return (
+      <div
+        ref={ref}
+        className="w-full flex items-center justify-center bg-black"
+        style={{ height: fitHeight || "100%", padding: "18px 0", boxSizing: "border-box" }}
+      >
+        {img}
+      </div>
+    );
+  }
+
+  return <div ref={ref} className="block w-full leading-[0]">{img}</div>;
+}
+
+// A short text beat between two pages — the pause that turns a stack of
+// images into a story. Deliberately narrow and short: it should be read in a
+// glance on the way to the next page, never become a wall of copy.
+function ScrollNote({ eyebrow, text, accent }: { eyebrow: string; text: string; accent: string }) {
   return (
-    <div ref={ref} className="block w-full leading-[0]">
-      <img
-        src={showGif ? gif! : src}
-        alt=""
-        onError={() => { if (showGif) setFailed(true); }}
-        className="block w-full h-auto select-none"
-        draggable={false}
-        loading="lazy"
-      />
+    <div className="w-full bg-black flex justify-center" style={{ padding: "clamp(44px,7vw,104px) 24px" }}>
+      <div style={{ maxWidth: 620 }}>
+        <span
+          className="block font-display text-[10px] tracking-[0.3em] uppercase"
+          style={{ color: accent, opacity: 0.75, marginBottom: 14 }}
+        >
+          {eyebrow}
+        </span>
+        <p
+          className="font-body"
+          style={{
+            color: "rgba(255,255,255,0.72)",
+            fontSize: "clamp(14px,1.15vw,17px)",
+            lineHeight: 1.72,
+            whiteSpace: "pre-line",
+          }}
+        >
+          {text}
+        </p>
+      </div>
     </div>
+  );
+}
+
+// A beat with no words: a black gap and a short rule, for two pages that open
+// on the same ground and would otherwise read as one continuous image.
+function ScrollDivider({ accent }: { accent: string }) {
+  return (
+    <div
+      className="w-full bg-black flex items-center justify-center"
+      style={{ padding: "clamp(34px,5vw,72px) 24px" }}
+    >
+      <span style={{ display: "block", width: 48, height: 1, background: accent, opacity: 0.4 }} />
+    </div>
+  );
+}
+
+// The height of the scrolling viewport, in pixels, kept in step with resizes
+// and device rotation. Portrait pages are sized off this.
+function useViewportHeight(ref: React.RefObject<HTMLElement>) {
+  const [h, setH] = useState(0);
+  useLayoutEffect(() => {
+    let ro: ResizeObserver | null = null;
+    let raf = 0;
+    const attach = () => {
+      const el = ref.current;
+      // The scroller is this component's own parent, and React attaches child
+      // refs before parent ones — so on the first layout pass it is still null.
+      if (!el) { raf = requestAnimationFrame(attach); return; }
+      const read = () => setH(el.clientHeight);
+      read();
+      ro = new ResizeObserver(read);
+      ro.observe(el);
+    };
+    attach();
+    return () => { cancelAnimationFrame(raf); ro?.disconnect(); };
+  }, [ref]);
+  return h;
+}
+
+// The page stack itself. Shared by all three shells (windowed, fullscreen and
+// the mobile sheet) so a note can never appear in one of them and not another.
+function ScrollPages({ project, scrollRef }: { project: Project; scrollRef: React.RefObject<HTMLElement> }) {
+  const accent = project.noteAccent ?? "rgba(255,255,255,0.55)";
+  const viewportH = useViewportHeight(scrollRef);
+  const note = (i: number) => {
+    const n = project.notes?.[i];
+    return n ? <ScrollNote eyebrow={n.eyebrow} text={n.text} accent={accent} /> : null;
+  };
+  const divider = (i: number) =>
+    project.dividers?.includes(i) ? <ScrollDivider accent={accent} /> : null;
+  return (
+    <>
+      {project.slides.map((src, i) => (
+        <Fragment key={i}>
+          {divider(i)}
+          {note(i)}
+          <ScrollSlide
+            src={src}
+            gif={project.gifSlides?.[i]}
+            root={scrollRef}
+            fit={project.portraitSlides?.includes(i)}
+            fitHeight={viewportH}
+          />
+        </Fragment>
+      ))}
+      {note(project.slides.length)}
+    </>
   );
 }
 
@@ -645,9 +811,7 @@ function ScrollDocBody({ project, scrollRef }: { project: Project; scrollRef: Re
       className="flex-1 overflow-y-auto bg-black"
       style={{ overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}
     >
-      {project.slides.map((src, i) => (
-        <ScrollSlide key={i} src={src} gif={project.gifSlides?.[i]} root={scrollRef} />
-      ))}
+      <ScrollPages project={project} scrollRef={scrollRef} />
     </div>
   );
 }
@@ -798,9 +962,7 @@ function ScrollDocModal({ project, onClose }: { project: Project; onClose: () =>
               {/* One vertical scroll: stacked pages, then description. Native finger-drag. */}
               <div ref={mobileScrollRef} className="flex-1 overflow-y-auto" style={{ overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" }}>
                 <div className="bg-black">
-                  {project.slides.map((src, i) => (
-                    <ScrollSlide key={i} src={src} gif={project.gifSlides?.[i]} root={mobileScrollRef} />
-                  ))}
+                  <ScrollPages project={project} scrollRef={mobileScrollRef} />
                 </div>
                 <div style={{ background: "hsl(var(--card))" }}>
                   <div className="px-5 pt-4 pb-3" style={{ borderBottom: `1px solid hsl(var(--foreground) / 0.06)` }}>
@@ -1035,6 +1197,41 @@ export default function Projects() {
   const [openProject, setOpenProject] = useState<Project | null>(null);
 
   const projects: Project[] = [
+    // Newest first, in the order the work lands — the top entry is the
+    // most recent case study.
+    {
+      id: "stratosdrive",
+      title: "STRATOSDRIVE",
+      year: "2025",
+      category: t("projdet.stratos.category"),
+      description: t("projdet.stratos.description"),
+      client: t("projdet.stratos.client"),
+      audience: t("projdet.stratos.audience"),
+      challenge: t("projdet.stratos.challenge"),
+      process: t("projdet.stratos.process"),
+      outcome: t("projdet.stratos.outcome"),
+      tags: ["Branding", "Visual Identity", "Logo Design", "Art Direction", "Automotive", "Campaign"],
+      tools: ["Illustrator", "Photoshop", "Nano Banana Pro", "Artlist", "Notion"],
+      stripImage: `${SD}/sd-strip.jpg`,
+      kind: "scroll",
+      slides: stratosSlides,
+      // Cream, so the beats between pages read as part of the brand rather
+      // than as chrome bolted onto it.
+      noteAccent: "#F2E8D5",
+      portraitSlides: [9, 10, 11, 12, 13, 14, 15],
+      // Both the construction page and the colour grid open on the same
+      // burgundy, so back to back they read as one page.
+      dividers: [4],
+      notes: {
+        1:  { eyebrow: t("projdet.stratos.note1.eyebrow"), text: t("projdet.stratos.note1.text") },
+        2:  { eyebrow: t("projdet.stratos.note2.eyebrow"), text: t("projdet.stratos.note2.text") },
+        3:  { eyebrow: t("projdet.stratos.note3.eyebrow"), text: t("projdet.stratos.note3.text") },
+        5:  { eyebrow: t("projdet.stratos.note4.eyebrow"), text: t("projdet.stratos.note4.text") },
+        6:  { eyebrow: t("projdet.stratos.note5.eyebrow"), text: t("projdet.stratos.note5.text") },
+        9:  { eyebrow: t("projdet.stratos.note6.eyebrow"), text: t("projdet.stratos.note6.text") },
+        16: { eyebrow: t("projdet.stratos.note7.eyebrow"), text: t("projdet.stratos.note7.text") },
+      },
+    },
     {
       id: "prumo",
       title: "PRUMO",
