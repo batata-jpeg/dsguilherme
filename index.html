@@ -1,33 +1,1511 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Guilherme Carvalho (Guima) — Designer gráfico &amp; visual</title>
-    <meta name="description" content="Portfólio de Guilherme Carvalho — designer gráfico, 3D e motion.">
-    <meta name="author" content="Guilherme Carvalho" />
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guilherme Carvalho (Guima) — Designer gráfico &amp; visual</title>
+<meta name="description" content="Portfólio de Guilherme Carvalho, designer gráfico em São Paulo: identidade visual, ilustração, sites e vídeo.">
+<meta name="author" content="Guilherme Carvalho">
+<meta name="theme-color" content="#1442D8">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Guilherme Carvalho (Guima) — Designer gráfico &amp; visual">
+<meta property="og:description" content="Portfólio de Guilherme Carvalho, designer gráfico em São Paulo: identidade visual, ilustração, sites e vídeo.">
+<meta property="og:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/01133489-5192-426e-b69c-4e7231f11c14/id-preview-cb3fe17f--d088ac10-4b49-491c-9124-1bb1a1db804c.lovable.app-1775782368907.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Guilherme Carvalho (Guima) — Designer gráfico &amp; visual">
+<meta name="twitter:description" content="Portfólio de Guilherme Carvalho, designer gráfico em São Paulo: identidade visual, ilustração, sites e vídeo.">
+<meta name="twitter:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/01133489-5192-426e-b69c-4e7231f11c14/id-preview-cb3fe17f--d088ac10-4b49-491c-9124-1bb1a1db804c.lovable.app-1775782368907.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preload" href="/fonts/Gellix-TRIAL-ExtraBold.otf" as="font" type="font/otf" crossorigin>
+<style>
+@font-face { font-family: "Gellix"; src: url("/fonts/Gellix-TRIAL-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Gellix"; src: url("/fonts/Gellix-TRIAL-SemiBold.otf") format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Gellix"; src: url("/fonts/Gellix-TRIAL-ExtraBold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
 
-    
-    
-    <meta property="og:type" content="website" />
+/* Tema claro (padrão): Cobalto, cinco tons que se alternam de cartaz em cartaz */
+:root, [data-tone="1"] { --bg: #1442D8; --ink: #FFFFFF; --name: #FFFFFF; --soft: #C9D5FF; --btn: #FFFFFF; --btn-ink: #1442D8; --line: rgba(255, 255, 255, .42); }
+[data-tone="2"] { --bg: #0A1A5C; --ink: #E3EAFF; --name: #8FAEFF; --soft: #9FB2E8; --btn: #8FAEFF; --btn-ink: #0A1A5C; --line: rgba(227, 234, 255, .35); }
+[data-tone="3"] { --bg: #EAF0FF; --ink: #0A1A5C; --name: #1442D8; --soft: #4A5B94; --btn: #1442D8; --btn-ink: #FFFFFF; --line: rgba(10, 26, 92, .3); }
+[data-tone="4"] { --bg: #8FAEFF; --ink: #06124A; --name: #06124A; --soft: #26357A; --btn: #06124A; --btn-ink: #FFFFFF; --line: rgba(6, 18, 74, .35); }
+[data-tone="5"] { --bg: #050B26; --ink: #D5DEFF; --name: #3D6BFF; --soft: #8E9CC9; --btn: #3D6BFF; --btn-ink: #FFFFFF; --line: rgba(213, 222, 255, .3); }
+/* Tema escuro: marinhos quase pretos, com o cobalto como luz */
+:root[data-theme="dark"], [data-theme="dark"] [data-tone="1"] { --bg: #0B1230; --ink: #EEF2FF; --name: #FFFFFF; --soft: #A7B3DA; --btn: #FFFFFF; --btn-ink: #0B1230; --line: rgba(238, 242, 255, .3); }
+[data-theme="dark"] [data-tone="2"] { --bg: #0E1638; --ink: #E3E9FF; --name: #8FAEFF; --soft: #9AA8D6; --btn: #8FAEFF; --btn-ink: #0B1230; --line: rgba(227, 233, 255, .28); }
+[data-theme="dark"] [data-tone="3"] { --bg: #111A42; --ink: #E8EDFF; --name: #7C9BFF; --soft: #A3B0DA; --btn: #5C83FF; --btn-ink: #FFFFFF; --line: rgba(232, 237, 255, .26); }
+[data-theme="dark"] [data-tone="4"] { --bg: #16204F; --ink: #EEF2FF; --name: #C3D1FF; --soft: #B0BCE6; --btn: #C3D1FF; --btn-ink: #0B1230; --line: rgba(238, 242, 255, .3); }
+[data-theme="dark"] [data-tone="5"] { --bg: #070B1C; --ink: #D5DEFF; --name: #3D6BFF; --soft: #8E9CC9; --btn: #3D6BFF; --btn-ink: #FFFFFF; --line: rgba(213, 222, 255, .26); }
+:root {
+  --gut: clamp(16px, 4vw, 64px);
+  --navh: 60px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --media-h: clamp(240px, 44svh, 460px);
+  color-scheme: light;
+}
+:root[data-theme="dark"] { color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { background: #050B26; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { margin: 0; color: #0A1A5C; font-family: "Gellix", "Helvetica Neue", Arial, system-ui, sans-serif; font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+img, video { max-width: 100%; height: auto; display: block; }
+p, h1, h2, h3, h4, figure, ul, ol, dl, dd { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--name); outline-offset: 3px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: fixed; left: 12px; top: -80px; z-index: 100; padding: 10px 14px; border-radius: 10px; background: #FFFFFF; color: #0A1A5C; font-weight: 600; text-decoration: none; }
+.skip:focus { top: 12px; }
+@media (max-width: 899px) { .only-d { display: none !important; } }
+@media (min-width: 900px) { .only-m { display: none !important; } }
 
-    <meta name="twitter:card" content="summary_large_image" />
+/* ── Barra do topo: assume a cor do cartaz que passa embaixo dela */
+.nav { position: fixed; inset: 0 0 auto 0; z-index: 40; display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: calc(var(--navh) + env(safe-area-inset-top, 0px)); padding: env(safe-area-inset-top, 0px) var(--gut) 0; background: var(--nav-bg, #1442D8); color: var(--nav-ink, #FFFFFF); transition: background-color .35s var(--ease), color .35s var(--ease); }
+.nav .logo svg { display: block; width: 64px; height: auto; fill: currentColor; transition: transform .35s var(--ease); }
+.nav .logo:hover svg { transform: rotate(-4deg) scale(1.04); }
+.nav-right { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 30px); }
+.nav ul { display: flex; gap: clamp(14px, 2vw, 26px); font-size: 14px; font-weight: 600; }
+.nav ul a, .ulink { text-decoration: none; background-image: linear-gradient(currentColor, currentColor); background-repeat: no-repeat; background-position: 0 100%; background-size: 0% 1.5px; padding-bottom: 3px; transition: background-size .35s var(--ease); }
+.nav ul a:hover, .nav ul a[aria-current="true"], .ulink:hover { background-size: 100% 1.5px; }
+.tools { display: flex; align-items: center; gap: 8px; }
+.tool { display: inline-flex; align-items: center; justify-content: center; gap: 3px; height: 32px; min-width: 32px; padding: 0 10px; border-radius: 999px; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, currentColor 38%, transparent); font-size: 12px; font-weight: 600; letter-spacing: .02em; transition: box-shadow .25s var(--ease), background-color .25s var(--ease); }
+.tool:hover { box-shadow: inset 0 0 0 1.5px currentColor; }
+.tool svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.tool.icon { padding: 0; }
+:root:not([lang="en"]) .tool [data-l="en"], :root[lang="en"] .tool [data-l="pt"] { opacity: .42; }
+:root:not([data-theme="dark"]) .i-sun, :root[data-theme="dark"] .i-moon { display: none; }
+.menu-btn { padding: 8px 0; font-size: 14px; font-weight: 600; }
+@media (max-width: 899px) { .nav ul { display: none; } }
+@media (min-width: 900px) { .menu-btn { display: none; } }
+.menu { position: fixed; inset: 0; z-index: 60; display: grid; align-content: start; gap: 4px; padding: calc(var(--navh) + 28px + env(safe-area-inset-top, 0px)) var(--gut) 40px; background: var(--bg); color: var(--ink); }
+.menu[hidden] { display: none; }
+.menu a { font-size: clamp(34px, 10vw, 56px); font-weight: 800; line-height: 1.04; letter-spacing: -0.02em; text-transform: uppercase; text-decoration: none; color: var(--name); }
+.menu .menu-close { position: absolute; top: calc(14px + env(safe-area-inset-top, 0px)); right: var(--gut); padding: 8px 0; font-weight: 600; }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-    <meta property="og:title" content="Guilherme Carvalho (Guima) — Designer gráfico &amp; visual">
-  <meta name="twitter:title" content="Guilherme Carvalho (Guima) — Designer gráfico &amp; visual">
-  <meta property="og:description" content="Portfólio de Guilherme Carvalho — designer gráfico, 3D e motion.">
-  <meta name="twitter:description" content="Portfólio de Guilherme Carvalho — designer gráfico, 3D e motion.">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any">
-  <meta property="og:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/01133489-5192-426e-b69c-4e7231f11c14/id-preview-cb3fe17f--d088ac10-4b49-491c-9124-1bb1a1db804c.lovable.app-1775782368907.png">
-  <meta name="twitter:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/01133489-5192-426e-b69c-4e7231f11c14/id-preview-cb3fe17f--d088ac10-4b49-491c-9124-1bb1a1db804c.lovable.app-1775782368907.png">
+/* ── Cartazes: conteúdo numa coluna de até 1240px, centralizada na altura da tela */
+.pst { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: calc(var(--navh) + 28px + env(safe-area-inset-top, 0px)) var(--gut) clamp(28px, 4svh, 48px); background: var(--bg); color: var(--ink); overflow: hidden; transition: background-color .35s var(--ease), color .35s var(--ease); }
+.in { width: 100%; max-width: 1240px; margin: 0 auto; container-type: inline-size; display: flex; flex-direction: column; }
+.meta { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 20px; font-size: 12.5px; font-weight: 600; letter-spacing: .01em; color: var(--soft); }
+.meta .r { margin-left: auto; text-align: right; }
+.nm { margin-top: 4px; line-height: .8; white-space: nowrap; color: var(--name); }
+.nm + .nm { margin-top: -6px; }
+.nm.end { margin-bottom: 12px; }
+.fit { display: inline-block; padding: .16em 0 .08em; font-size: 10cqi; font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; }
+.media { position: relative; display: flex; gap: clamp(10px, 1.2cqi, 16px); height: var(--media-h); }
+.foot { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 14px 40px; margin-top: 20px; }
+.lead { max-width: 56ch; font-size: 16px; line-height: 1.55; }
+.lead b { font-weight: 600; }
+.acts { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.count { font-size: 13px; color: var(--soft); }
+@media (max-width: 899px) {
+  .pst { justify-content: flex-start; padding-top: calc(var(--navh) + 16px + env(safe-area-inset-top, 0px)); }
+  .media { height: clamp(220px, 42svh, 420px); }
+  .media .sec { display: none; }
+  .foot { flex-direction: column; align-items: start; }
+  .lead { font-size: 15px; }
+}
+
+/* ── Cards e botões, com o hover suave */
+.card { position: relative; display: block; flex: 1 1 0; min-width: 0; overflow: hidden; border-radius: 14px; background: color-mix(in srgb, var(--ink) 12%, var(--bg)); isolation: isolate; text-align: left; text-decoration: none; }
+.card img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+.chip { position: absolute; left: 12px; bottom: 12px; z-index: 3; display: inline-flex; align-items: center; gap: 8px; padding: 8px 13px; border-radius: 999px; background: var(--btn); color: var(--btn-ink); font-size: 13px; font-weight: 600; line-height: 1; transition: translate .45s var(--ease), opacity .45s var(--ease); }
+.btn { position: relative; display: inline-flex; align-items: center; gap: 9px; padding: 12px 18px; border-radius: 999px; background-color: var(--btn); color: var(--btn-ink); font-size: 14px; font-weight: 600; line-height: 1; text-decoration: none; white-space: nowrap; transition: transform .3s var(--ease), box-shadow .3s var(--ease), background-color .3s var(--ease), color .3s var(--ease); }
+.btn.ghost { background-color: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
+.ar { display: inline-block; transition: transform .35s var(--ease); }
+@media (hover: hover) and (pointer: fine) {
+  .card .chip { translate: 0 calc(100% + 20px); opacity: 0; }
+  .card:hover .chip, .card:focus-visible .chip { translate: 0 0; opacity: 1; }
+  .card:hover img { transform: scale(1.04); }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 22px -10px rgba(3, 8, 31, .55); }
+  .btn.ghost:hover { box-shadow: inset 0 0 0 1.5px var(--ink); }
+  .btn:hover .ar { transform: translateX(4px); }
+}
+@media (prefers-reduced-motion: reduce) { .card img, .chip, .btn, .ar { transition: none; } }
+</style>
+
+<style>
+/* ── Abertura: título cheio atrás; cabeça e mãos na frente; contorno fino do título só sobre a camiseta */
+.hero { justify-content: flex-start; }
+.hero .in { position: relative; z-index: 4; }
+.stage { position: absolute; left: 50%; bottom: 0; z-index: 1; height: min(86svh, 70vw); aspect-ratio: 1500 / 1476; translate: -50% 0; }
+.stage .ch, .stage .fabric, .stage .outline { position: absolute; inset: 0; width: 100%; height: 100%; }
+.stage .ch { z-index: 1; }
+.stage .fabric { z-index: 2; pointer-events: none; }
+.stage .logo { position: absolute; left: 50%; top: 16%; width: 104%; height: auto; translate: -50% 0; pointer-events: none; }
+.stage .logo.fill { z-index: 0; fill: var(--name); }
+.stage .outline { z-index: 3; pointer-events: none; -webkit-mask: url("/img/c-wave-shirt-mask-v2.png") center / 100% 100% no-repeat; mask: url("/img/c-wave-shirt-mask-v2.png") center / 100% 100% no-repeat; }
+.stage .logo.line { fill: none; stroke: var(--name); stroke-width: 3.2; }
+.stage .ch { -webkit-user-drag: none; -webkit-user-select: none; user-select: none; }
+.stage.can-paint { cursor: crosshair; }
+.hero .cue { position: absolute; right: var(--gut); bottom: clamp(20px, 3svh, 36px); z-index: 4; display: inline-flex; gap: 8px; font-size: 14px; font-weight: 600; text-decoration: none; }
+.hero .cue .ar { animation: cue 1.8s var(--ease) infinite; }
+@keyframes cue { 0%, 100% { translate: 0 0; } 50% { translate: 0 4px; } }
+.hero-sub { margin-top: 8px; font-size: 15px; font-weight: 600; color: var(--soft); }
+@media (max-width: 899px) { .stage { height: max(min(calc(100svh - 250px), 132vw), min(62svh, 98vw)); } .hero .in { padding-top: clamp(0px, calc((100svh - 115vw - 190px) * .45), 110px); } .stage .logo { width: 96%; } .stage .logo.line { stroke-width: 4.5; } .hero .cue { display: none; } }
+@media (prefers-reduced-motion: reduce) { .hero .cue .ar { animation: none; } }
+
+/* Paleta para pintar a camiseta (só no computador) */
+.paint { position: absolute; left: var(--gut); bottom: clamp(20px, 3svh, 36px); z-index: 5; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 9px 12px; width: 296px; padding: 12px 15px 14px; border-radius: 18px; background: color-mix(in srgb, var(--bg) 78%, #FFFFFF 10%); box-shadow: inset 0 0 0 1px var(--line), 0 20px 40px -24px rgba(3, 8, 31, .6); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.paint-t { grid-area: 1 / 1; font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.paint-clear { grid-area: 1 / 2; padding: 5px 11px; border-radius: 999px; background: var(--btn); color: var(--btn-ink); font-size: 12px; font-weight: 600; transition: transform .2s var(--ease); }
+.paint-clear:hover { transform: scale(1.05); }
+.sw-row, .seg, .paint-hint { grid-column: 1 / -1; }
+.sw-row { display: flex; gap: 11px; padding: 3px 0 3px 3px; transition: opacity .25s var(--ease); }
+.sw { width: 22px; height: 22px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--line); transition: transform .2s var(--ease), box-shadow .2s var(--ease); }
+.sw:hover { transform: scale(1.12); }
+.sw[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ink); }
+.seg { display: flex; gap: 5px; transition: opacity .25s var(--ease); }
+.seg button { padding: 5px 9px; border-radius: 999px; box-shadow: inset 0 0 0 1.5px var(--line); font-size: 12px; font-weight: 600; white-space: nowrap; transition: background-color .2s var(--ease), color .2s var(--ease), box-shadow .2s var(--ease); }
+.seg button:hover { box-shadow: inset 0 0 0 1.5px var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); box-shadow: none; }
+.seg.off, .sw-row.off { opacity: .35; pointer-events: none; }
+.paint-hint { font-size: 11.5px; line-height: 1.3; color: var(--soft); }
+@media (max-width: 1099px), (hover: none), (pointer: coarse) { .paint { display: none; } }
+.paint.no-room { display: none; }
+
+/* ── Livro: capa e contracapa, e o livro aberto folheável */
+.media.book { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.75fr); gap: clamp(20px, 3cqi, 44px); height: clamp(270px, 44svh, 450px); }
+.covers { position: relative; min-height: 0; }
+.bk { position: absolute; top: 46%; height: 74%; aspect-ratio: 1452 / 1664; isolation: isolate; border-radius: 3px 8px 8px 3px; background: #FFFFFF; box-shadow: 0 26px 34px -20px rgba(3, 8, 31, .65), 0 2px 6px rgba(3, 8, 31, .22); transition: rotate .6s var(--ease), translate .6s var(--ease); }
+.bk img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+.bk::before { content: ""; position: absolute; inset: 0 auto 0 0; z-index: 1; width: 8%; border-radius: 3px 0 0 3px; background: linear-gradient(90deg, rgba(0, 0, 0, .3), rgba(255, 255, 255, .22) 40%, rgba(0, 0, 0, .08) 70%, transparent); pointer-events: none; }
+.bk::after { content: ""; position: absolute; top: 1.6%; bottom: 1.6%; right: -2.4%; z-index: -1; width: 3%; border-radius: 0 4px 4px 0; background: repeating-linear-gradient(90deg, #F3F1EA 0 1px, #D5D2C8 1px 2px); }
+.bk.back { left: 30%; translate: 0 -53%; rotate: 7deg; }
+.bk.front { left: 2%; translate: 0 -47%; rotate: -4deg; }
+.covers:hover .bk.front { rotate: -7deg; translate: -3% -48%; }
+.covers:hover .bk.back { rotate: 11deg; translate: 6% -55%; }
+.covers .cap { position: absolute; left: 2%; bottom: 0; font-size: 12.5px; font-weight: 600; color: var(--soft); }
+.open { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 14px; min-width: 0; min-height: 0; }
+.spread { position: relative; display: grid; grid-template-columns: 1fr 1fr; height: calc(100% - 50px); max-width: 100%; aspect-ratio: 2904 / 1664; cursor: pointer; filter: drop-shadow(0 20px 22px rgba(3, 8, 31, .42)); }
+.spread::before { content: ""; position: absolute; left: .8%; right: .8%; bottom: -1.3%; z-index: -1; height: 2.8%; border-radius: 0 0 8px 8px; background: repeating-linear-gradient(180deg, #F3F1EA 0 1px, #D5D2C8 1px 2px); }
+.leaf { position: relative; overflow: hidden; background: #FFFFFF; }
+.leaf.l { border-radius: 6px 0 0 6px; }
+.leaf.r { border-radius: 0 6px 6px 0; }
+.leaf img { width: 100%; height: 100%; object-fit: cover; transition: opacity .26s var(--ease), translate .26s var(--ease); }
+.leaf::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
+.leaf.l::after { background: linear-gradient(270deg, rgba(0, 0, 0, .24), rgba(0, 0, 0, .07) 5%, transparent 13%), linear-gradient(90deg, rgba(0, 0, 0, .06), transparent 6%); }
+.leaf.r::after { background: linear-gradient(90deg, rgba(0, 0, 0, .24), rgba(0, 0, 0, .07) 5%, rgba(255, 255, 255, .06) 10%, transparent 15%), linear-gradient(270deg, rgba(0, 0, 0, .06), transparent 6%); }
+.spread.turning .leaf.l img { opacity: 0; translate: -10px 0; }
+.spread.turning .leaf.r img { opacity: 0; translate: 10px 0; }
+.spread-bar { display: flex; align-items: center; gap: 10px; max-width: 100%; }
+.spread-count { flex: 0 0 auto; min-width: 11ch; font-size: 12.5px; font-weight: 600; color: var(--soft); font-variant-numeric: tabular-nums; }
+.thumbs { display: flex; gap: 6px; min-width: 0; padding: 4px; overflow-x: auto; scrollbar-width: none; }
+.thumbs::-webkit-scrollbar { display: none; }
+.thumbs button { flex: 0 0 auto; width: 52px; aspect-ratio: 360 / 206; overflow: hidden; border-radius: 3px; background: #FFFFFF; opacity: .5; transition: opacity .25s var(--ease), translate .25s var(--ease); }
+.thumbs img { width: 100%; height: 100%; object-fit: cover; }
+.thumbs button:hover { opacity: .9; translate: 0 -2px; }
+.thumbs button[aria-current="true"] { opacity: 1; box-shadow: 0 0 0 2px var(--ink); }
+.sp-btn { flex: 0 0 auto; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--line); font-weight: 600; transition: background-color .25s var(--ease), color .25s var(--ease); }
+.sp-btn:hover { background: var(--ink); color: var(--bg); }
+@media (max-width: 899px) {
+  .media.book { grid-template-columns: minmax(0, 1fr); height: auto; gap: 16px; }
+  .covers { height: 58vw; }
+  .bk { height: 80%; top: 44%; }
+  .bk.back { left: 34%; }
+  .spread { width: 100%; height: auto; }
+  .spread-count { display: none; }
+}
+
+/* ── Armagedom: mão de cartas viradas para cima; o clique abre a imagem no estudo de caso */
+.media.deck-wrap { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, .55fr); align-items: center; gap: clamp(20px, 3cqi, 48px); height: clamp(300px, 50svh, 500px); }
+.deck { position: relative; height: 100%; }
+.gcard { --dx: min(68%, 11.5cqi); position: absolute; left: 50%; bottom: 9%; z-index: calc(var(--i) + 1); height: 66%; aspect-ratio: 63 / 88; perspective: 1400px; translate: calc(-50% + (var(--i) - 2) * var(--dx)) 0; rotate: calc((var(--i) - 2) * 3.5deg); transform-origin: 50% 130%; transition: rotate .6s var(--ease), translate .5s var(--ease); }
+.gc-in { position: absolute; inset: 0; transform: rotateY(180deg); transform-style: preserve-3d; transition: transform .7s var(--ease); }
+.gcard.down .gc-in { transform: none; }
+.gc-face { position: absolute; inset: 0; overflow: hidden; border-radius: 14px; -webkit-backface-visibility: hidden; backface-visibility: hidden; box-shadow: 0 24px 34px -22px rgba(0, 0, 0, .85), 0 0 0 1px rgba(255, 255, 255, .06); }
+.gc-back { background: #0B0B0C url("/img/arma/card-back.jpg") center / cover; }
+.gc-back::after { content: ""; position: absolute; inset: 7px; border-radius: 9px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2); }
+.gc-front { transform: rotateY(180deg); background: #0B0B0C; }
+.gc-front img { width: 100%; height: 100%; object-fit: cover; }
+.gc-front::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 56%, rgba(5, 5, 6, .92) 86%); }
+.gc-n { position: absolute; left: 12px; top: 8px; z-index: 1; font-size: clamp(18px, 2cqi, 26px); font-weight: 800; color: #E3242B; text-shadow: 0 1px 6px rgba(0, 0, 0, .5); }
+.gc-t { position: absolute; left: 14px; right: 30%; bottom: 12px; z-index: 1; font-size: clamp(12px, 1.25cqi, 15px); font-weight: 800; line-height: 1.1; text-transform: uppercase; color: #FFFFFF; }
+@media (hover: hover) and (pointer: fine) { .gcard:hover { z-index: 6; translate: calc(-50% + (var(--i) - 2) * var(--dx)) -26px; } }
+.deck-side { display: grid; align-content: center; gap: 16px; }
+.deck-hint { font-size: 13px; color: var(--soft); }
+@media (max-width: 899px) { .media.deck-wrap { grid-template-columns: minmax(0, 1fr); height: auto; } .deck { height: 300px; } .gcard { --dx: min(34%, 13cqi); height: 72%; rotate: calc((var(--i) - 2) * 3deg); } }
+@media (prefers-reduced-motion: reduce) { .gc-in, .gcard { transition: none; } }
+
+/* ── Ilustração: carrossel que arrasta com o mouse e barra de rolagem para escolher */
+.media.rail { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; cursor: grab; -webkit-user-select: none; user-select: none; }
+.media.rail::-webkit-scrollbar { display: none; }
+.media.rail.is-drag { cursor: grabbing; }
+.rail .card { flex: 0 0 auto; width: auto; height: 100%; aspect-ratio: 1640 / 2360; }
+.rail .card::after { content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit; box-shadow: inset 0 0 0 3px var(--name), inset 0 0 0 6px var(--bg); opacity: 0; transition: opacity .3s var(--ease); pointer-events: none; }
+.rail .card.is-cur::after { opacity: 1; }
+.rail img { -webkit-user-drag: none; pointer-events: none; }
+.rail-bar { display: flex; align-items: center; gap: 16px; margin-top: 16px; }
+.rail-scroll { flex: 1 1 auto; height: 6px; margin: 0; border-radius: 6px; background: linear-gradient(90deg, var(--name) calc(22px + var(--p, 0) * (100% - 44px)), var(--line) 0); -webkit-appearance: none; appearance: none; cursor: pointer; }
+.rail-scroll::-webkit-slider-thumb { width: 44px; height: 16px; border-radius: 10px; background: var(--name); box-shadow: 0 0 0 3px var(--bg); -webkit-appearance: none; }
+.rail-scroll::-moz-range-thumb { width: 44px; height: 16px; border: 0; border-radius: 10px; background: var(--name); box-shadow: 0 0 0 3px var(--bg); }
+.rail-count { flex: 0 0 auto; min-width: 5ch; font-size: 13px; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; color: var(--soft); }
+
+/* ── Sites */
+.site { background: #050814; }
+.site .shot { object-position: top; filter: brightness(.24) saturate(.6) blur(1.5px); transition: filter .6s var(--ease), transform .8s var(--ease); }
+.site .site-logo { position: absolute; left: 50%; top: 47%; z-index: 2; width: min(44%, 260px); height: auto; object-fit: contain; translate: -50% -50%; pointer-events: none; }
+.site .chip { left: 50%; transform: translateX(-50%); }
+@media (hover: hover) and (pointer: fine) {
+  .site .chip { translate: 0 0; opacity: 1; }
+  .site:hover .shot { filter: brightness(.4) saturate(.85) blur(0); }
+  .site:hover .site-logo { transform: scale(1.05); }
+}
+@media (max-width: 899px) { .media.sites { flex-direction: column; height: clamp(360px, 62svh, 560px); } }
+
+/* ── Vídeo: um iPad com os reels em tela cheia */
+.media.reels { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: clamp(24px, 4cqi, 64px); height: auto; }
+.reel-info { display: grid; align-content: center; gap: 18px; max-width: 440px; }
+.reel-list { display: grid; gap: 10px; }
+.reel-list button { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; align-items: center; gap: 12px; width: 100%; padding: 8px 14px 8px 8px; border-radius: 14px; text-align: left; box-shadow: inset 0 0 0 1.5px var(--line); transition: background-color .25s var(--ease), box-shadow .25s var(--ease); }
+.reel-list img, .reel-list .ph { width: 44px; height: 58px; object-fit: cover; border-radius: 8px; }
+.reel-list .ph { display: grid; place-items: center; box-shadow: inset 0 0 0 1.5px var(--line); font-size: 18px; color: var(--soft); }
+.reel-list b { display: block; font-size: 14.5px; font-weight: 600; }
+.reel-list small { font-size: 12.5px; color: var(--soft); }
+.reel-list .dur { font-size: 12.5px; color: var(--soft); font-variant-numeric: tabular-nums; }
+.reel-list button:not(:disabled):hover { box-shadow: inset 0 0 0 1.5px var(--ink); }
+.reel-list button[aria-current="true"] { background: color-mix(in srgb, var(--ink) 10%, transparent); box-shadow: inset 0 0 0 1.5px var(--name); }
+.reel-list button:disabled { cursor: default; background: transparent; box-shadow: inset 0 0 0 1.5px var(--line); border: 0; opacity: .7; }
+.reel-list button:disabled b { color: var(--soft); }
+.ipad { position: relative; height: clamp(360px, 62svh, 600px); aspect-ratio: .7; padding: 14px; border-radius: 40px; background: #0A0D18; box-shadow: inset 0 0 0 2px #262C44, 0 40px 60px -34px rgba(0, 0, 0, .85); }
+.ipad::before { content: ""; position: absolute; top: 4px; left: 50%; width: 6px; height: 6px; border-radius: 50%; background: #1E2438; translate: -50% 0; }
+.ipad-screen { position: relative; height: 100%; overflow: hidden; border-radius: 28px; background: #000000; touch-action: none; }
+.reel-track { position: absolute; inset: 0; transition: transform .6s var(--ease); }
+.reel-slide { position: relative; height: 100%; }
+.reel-slide video { width: 100%; height: 100%; object-fit: cover; }
+.reel-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0, 0, 0, .38), transparent 16%, transparent 58%, rgba(0, 0, 0, .75)); }
+.reel-top { position: absolute; top: 14px; left: 18px; right: 18px; display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 600; color: #FFFFFF; pointer-events: none; }
+.reel-nav { position: absolute; right: 12px; top: 50%; display: grid; gap: 10px; translate: 0 -50%; }
+.rb { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: rgba(10, 13, 24, .45); color: #FFFFFF; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: background-color .25s var(--ease), transform .25s var(--ease), opacity .25s var(--ease); }
+.rb svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.rb:disabled { opacity: .35; cursor: default; }
+@media (hover: hover) and (pointer: fine) { .rb:not(:disabled):hover { background: rgba(255, 255, 255, .24); transform: scale(1.06); } }
+.reel-bottom { position: absolute; left: 16px; right: 16px; bottom: 14px; display: grid; gap: 10px; color: #FFFFFF; }
+.reel-title { padding-right: 56px; font-size: 13px; line-height: 1.35; }
+.reel-title b { font-weight: 600; }
+.reel-controls { display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto auto; align-items: center; gap: 10px; }
+.ipad-screen:fullscreen { border-radius: 0; }
+.ipad-screen:fullscreen .reel-slide video { object-fit: contain; }
+.ipad-screen:fullscreen .reel-top, .ipad-screen:fullscreen .reel-bottom { left: max(16px, calc(50% - 28.125vh + 16px)); right: max(16px, calc(50% - 28.125vh + 16px)); }
+.ipad-screen:fullscreen .reel-nav { right: max(12px, calc(50% - 28.125vh - 64px)); }
+.reel-controls .rb { width: 34px; height: 34px; }
+.reel-controls .rb svg { width: 16px; height: 16px; }
+.reel-controls [data-show] { display: none; }
+.reel-controls .rb.is-on [data-show="on"], .reel-controls .rb:not(.is-on) [data-show="off"] { display: block; }
+.reel-time { font-size: 12px; font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.reel-seek { width: 100%; height: 4px; margin: 0; border-radius: 4px; background: linear-gradient(90deg, #FFFFFF var(--p, 0%), rgba(255, 255, 255, .3) var(--p, 0%)); -webkit-appearance: none; appearance: none; cursor: pointer; }
+.reel-seek::-webkit-slider-thumb { width: 12px; height: 12px; border-radius: 50%; background: #FFFFFF; -webkit-appearance: none; }
+.reel-seek::-moz-range-thumb { width: 12px; height: 12px; border: 0; border-radius: 50%; background: #FFFFFF; }
+@media (max-width: 899px) { .media.reels { grid-template-columns: minmax(0, 1fr); justify-items: center; } .ipad { height: 66svh; } .reel-info { order: 2; width: 100%; max-width: none; } .reel-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } .reel-list button { grid-template-columns: minmax(0, 1fr); justify-items: start; } .reel-list .dur { display: none; } }
+
+/* ── Sobre: três fotos empilhadas, a de cima troca no clique; currículo em botões grandes */
+.media.about { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(24px, 4cqi, 60px); height: auto; }
+.photos { position: relative; min-height: var(--media-h); cursor: pointer; }
+.photos img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; border-radius: 16px; box-shadow: 0 24px 40px -26px rgba(3, 8, 31, .7); transition: transform .55s var(--ease), opacity .45s var(--ease); }
+.photos [data-pos="0"] { z-index: 3; }
+.photos [data-pos="1"] { z-index: 2; transform: translate(5%, 3%) rotate(4deg) scale(.95); }
+.photos [data-pos="2"] { z-index: 1; transform: translate(-5%, 4%) rotate(-5deg) scale(.92); }
+.photos img.leaving { transform: translate(-16%, -3%) rotate(-12deg); opacity: 0; }
+.photos-hint { position: absolute; left: 12px; bottom: 12px; z-index: 4; padding: 7px 12px; border-radius: 999px; background: var(--btn); color: var(--btn-ink); font-size: 12.5px; font-weight: 600; pointer-events: none; }
+.about-text { display: grid; align-content: center; gap: 18px; }
+.bio { max-width: 40ch; font-size: clamp(17px, 1.6cqi, 21px); line-height: 1.4; }
+.exp { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 28px; padding-top: 16px; border-top: 1.5px solid var(--line); }
+.exp h3 { font-size: 15px; font-weight: 800; }
+.exp .when { margin: 2px 0 4px; font-size: 12.5px; color: var(--soft); }
+.exp p { font-size: 14px; line-height: 1.45; }
+.tools-list { display: flex; flex-wrap: wrap; gap: 10px; padding: 4px 0; }
+.neon { --neon: #2FA8FF; display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px 12px 14px; border-radius: 999px; background: #060A1C; color: color-mix(in srgb, var(--neon) 32%, #FFFFFF); font-size: 15px; font-weight: 700; line-height: 1; text-decoration: none; white-space: nowrap; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--neon) 72%, #FFFFFF), inset 0 0 14px color-mix(in srgb, var(--neon) 42%, transparent), 0 0 10px color-mix(in srgb, var(--neon) 62%, transparent), 0 0 28px color-mix(in srgb, var(--neon) 34%, transparent); text-shadow: 0 0 8px color-mix(in srgb, var(--neon) 90%, transparent), 0 0 18px color-mix(in srgb, var(--neon) 55%, transparent); transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
+.neon svg { flex: 0 0 auto; width: 20px; height: 20px; fill: currentColor; filter: drop-shadow(0 0 3px var(--neon)) drop-shadow(0 0 8px color-mix(in srgb, var(--neon) 60%, transparent)); }
+.neon.sm { gap: 8px; padding: 8px 15px 8px 10px; font-size: 13.5px; }
+.neon.sm svg { width: 18px; height: 18px; }
+@media (hover: hover) and (pointer: fine) { .neon:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--neon) 45%, #FFFFFF), inset 0 0 20px color-mix(in srgb, var(--neon) 60%, transparent), 0 0 14px color-mix(in srgb, var(--neon) 90%, transparent), 0 0 42px color-mix(in srgb, var(--neon) 60%, transparent); } }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) { .neon:hover { animation: flick .8s linear 1; } }
+@keyframes flick { 0%, 100% { opacity: 1; } 8% { opacity: .5; } 13% { opacity: 1; } 22% { opacity: .72; } 27% { opacity: 1; } }
+.cv { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 4px; }
+.cv-btn { position: relative; display: grid; gap: 6px; padding: 22px 60px 22px 24px; border-radius: 20px; background: var(--btn); color: var(--btn-ink); text-decoration: none; transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+.cv-btn.alt { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); }
+.cv-k { font-size: clamp(22px, 2.5cqi, 32px); font-weight: 800; line-height: .95; letter-spacing: -0.02em; text-transform: uppercase; }
+.cv-s { font-size: 13px; font-weight: 600; opacity: .8; }
+.cv-btn { grid-template-columns: auto minmax(0, 1fr); column-gap: 16px; align-items: center; }
+.cv-btn .flag { grid-row: 1 / span 2; width: 46px; height: auto; border-radius: 6px; box-shadow: 0 0 0 1.5px rgba(255, 255, 255, .55), 0 8px 16px -10px rgba(0, 0, 0, .7); }
+.cv-btn .ar { position: absolute; right: 24px; top: 50%; font-size: 26px; translate: 0 -50%; }
+@media (hover: hover) and (pointer: fine) { .cv-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 30px -16px rgba(3, 8, 31, .6); } .cv-btn:hover .ar { transform: translate(3px, -3px); } }
+@media (max-width: 899px) { .media.about { grid-template-columns: minmax(0, 1fr); } .photos { min-height: 0; height: 56svh; } .exp, .cv { grid-template-columns: minmax(0, 1fr); } }
+
+/* ── Contato: texto à direita; o rosto encostado na borda esquerda da página */
+.contact .in { padding-left: clamp(0px, 32vw, 500px); }
+.contact .contact-links { position: relative; z-index: 3; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 8px; }
+.contact .btn.big { padding: 15px 22px; font-size: 15px; }
+.contact .soc { display: flex; flex-wrap: wrap; gap: 12px; margin-left: 4px; }
+.contact .face { position: absolute; left: 0; bottom: 0; z-index: 2; width: auto; height: min(88svh, 50vw); transform-origin: 0 100%; transition: rotate .45s var(--ease), scale .45s var(--ease); }
+.contact .face:hover { scale: 1.02; }
+.contact .fine { position: relative; z-index: 3; margin-top: 28px; font-size: 12.5px; color: var(--soft); }
+@media (max-width: 899px) { .contact .in { padding-left: 0; } .contact .soc { gap: 8px; margin-left: 0; } .contact .soc .neon { gap: 6px; padding: 9px 11px 9px 9px; font-size: 12.5px; } .contact .soc .neon svg { width: 16px; height: 16px; } .contact .fine { margin-bottom: 38svh; } .contact .face { top: var(--face-top, 60%); bottom: auto; height: calc((100% - var(--face-top, 60%)) * 1.35); max-height: 80svh; } }
+@media (max-width: 899px), (hover: none) { .card[data-case] .chip { display: none; } }
+
+/* ── Janelas: estudo de caso, ilustração ampliada e o site aberto aqui dentro */
+.dlg { width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: 0; border: 0; background: var(--bg); color: var(--ink); }
+.dlg::backdrop { background: rgba(3, 8, 31, .72); }
+.dlg-bar { position: sticky; top: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: calc(12px + env(safe-area-inset-top, 0px)) var(--gut) 12px; background: var(--bg); }
+.dlg-bar p { font-size: 13px; font-weight: 600; color: var(--soft); }
+.case-dlg { overflow-y: auto; }
+.case-body { display: grid; gap: 28px; max-width: 1080px; margin: 0 auto; padding: 8px var(--gut) 64px; }
+.case-head { display: grid; gap: 18px; }
+.case-name { padding-top: .1em; font-size: clamp(38px, 6vw, 88px); font-weight: 800; line-height: .9; letter-spacing: -0.03em; text-transform: uppercase; color: var(--name); overflow-wrap: anywhere; }
+.case-lead { max-width: 44ch; font-size: clamp(17px, 1.6vw, 22px); line-height: 1.35; }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 28px; padding-top: 16px; border-top: 1.5px solid var(--line); }
+.facts dt { font-size: 12.5px; font-weight: 600; color: var(--soft); }
+.facts dd { font-size: 14px; }
+.cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 36px; }
+.cols h3 { margin-bottom: 6px; font-size: 16px; font-weight: 800; }
+.cols p { font-size: 14.5px; line-height: 1.55; }
+.pages { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; }
+.pages img { grid-column: span 6; width: 100%; border-radius: 10px; background: color-mix(in srgb, var(--ink) 10%, var(--bg)); scroll-margin-top: 80px; }
+.pages img.pt { grid-column: span 2; }
+.pages .note { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 8px 36px; padding: 16px 0 4px; border-top: 1.5px solid var(--line); }
+.pages .note h3 { font-size: 16px; font-weight: 800; }
+.pages .note p { max-width: 62ch; font-size: 14.5px; line-height: 1.55; }
+.case-foot { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
+@media (max-width: 899px) { .facts, .cols { grid-template-columns: minmax(0, 1fr); } .pages img.pt { grid-column: span 3; } .pages .note { grid-template-columns: minmax(0, 1fr); } }
+.lb, .web { display: none; }
+.lb[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
+.lb figure { position: relative; min-height: 0; }
+.lb img { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0 var(--gut); object-fit: contain; }
+.lb-nav { display: flex; justify-content: center; gap: 10px; padding: 14px var(--gut) calc(16px + env(safe-area-inset-bottom, 0px)); }
+.web[open] { display: grid; grid-template-rows: auto minmax(0, 1fr); }
+.web .dlg-bar { gap: 14px; }
+.web .dots { display: flex; gap: 6px; }
+.web .dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--soft); opacity: .5; }
+.web .url { flex: 1 1 auto; min-width: 0; overflow: hidden; padding: 8px 14px; border-radius: 999px; background: color-mix(in srgb, var(--ink) 10%, transparent); color: var(--ink); text-align: center; text-overflow: ellipsis; white-space: nowrap; }
+.web-frame { min-height: 0; padding: 0 var(--gut) calc(var(--gut) * .6); }
+.web-frame iframe { display: block; width: 100%; height: 100%; border: 0; border-radius: 14px; background: #FFFFFF; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .7); }
+@media (max-width: 899px) { .web .dots, .web .open-new { display: none; } }
+html:has(dialog[open]) { overflow: hidden; }
+</style>
+
 </head>
+<body>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><g id="guima">
+      <path d="M421.44,497.98v-123.94c0-52.33,42.61-94.19,94.19-94.19h124.92c5.74,0,10.38,4.65,10.38,10.38v209.4c0,60.87-48.47,111.21-109.32,114.23-66.06,3.29-120.18-49.74-120.18-115.89ZM421.55,688.5l-.2-49.12c-.01-3.42,2.75-6.21,6.17-6.23l70.84-.29c3.69-.02,6.7,2.96,6.71,6.66l.22,53.12c.07,17.94,14.33,30.59,31.53,30.52,16.45-.07,30.59-13.58,30.52-30.78l-.25-59.66c0-.08.06-.14.14-.14l83.44-.35c.08,0,.14.06.14.14l.22,53.68c.26,62.68-50.79,115.86-113.47,116.34-63.74.49-115.76-50.21-116.02-113.9ZM505.17,506.22c0,16.53,13.52,30.05,30.05,30.05h.46c17.35,0,31.54-14.19,31.54-31.54v-146.24c0-.08-.06-.14-.14-.14h-31.26c-16.45,0-30.65,14.2-30.65,31.4v116.48ZM567.22,781.06v-245.33s.01-.07.04-.1l83.44-88.62c.09-.09.25-.03.25.1v211.63"/>
+      <path d="M917.07,292.43v400.79c0,62.94-49.89,115.39-112.82,116.63-63.83,1.26-116.68-50.04-116.68-114.35v-403.06c0-6.95,5.63-12.58,12.58-12.58h58.56c6.95,0,12.58,5.63,12.58,12.58v409.04c0,17.19,14.2,30.65,30.65,30.65s31.4-13.46,31.4-30.65v-409.04c0-6.95,5.63-12.58,12.58-12.58h58.56c6.95,0,12.58,5.63,12.58,12.58Z"/>
+      <path d="M959.68,788.29v-494.34c0-7.79,6.31-14.1,14.1-14.1h55.52c7.79,0,14.1,6.31,14.1,14.1v494.34c0,7.79-6.31,14.1-14.1,14.1h-55.52c-7.79,0-14.1-6.31-14.1-14.1Z"/>
+      <path d="M1400.73,354.2v440.13c0,4.45-3.61,8.06-8.06,8.06h-68.35c-4.45,0-8.06-3.61-8.06-8.06v-428.05c0-7.77-5.73-14.59-13.46-15.34-8.88-.87-16.44,6.16-16.44,14.88v428.52c0,4.45-3.61,8.06-8.06,8.06h-67.6c-4.45,0-8.06-3.61-8.06-8.06v-428.52c0-8.36-6.96-15.18-16.15-14.95-8.11.2-14.5,7.04-14.5,15.15v428.31c0,4.45-3.61,8.06-8.06,8.06h-67.6c-4.45,0-8.06-3.61-8.06-8.06v-440.13c0-44.99,36-82.32,80.99-82.58,33.85-.2,62.48,20.04,75.25,49.34,12.77-29.3,41.39-49.53,75.25-49.34,44.99.26,80.99,37.59,80.99,82.58Z"/>
+      <path d="M1553.98,270.13c57.56,0,115.87,39.62,115.87,121.11v403.17c0,4.42-3.58,8-8,8h-128.81c-51.2,0-92.7-41.5-92.7-92.7v-122.52c0-5.18,3.83-9.56,8.97-10.24l2.25-.3,138.3-31.4v-144.28c0-37.38-18.69-52.33-36.63-52.33s-32.89,12.71-32.89,32.89v130.28c0,4.22-2.99,7.86-7.13,8.67l-62.32,12.23c-5.46,1.07-10.54-3.11-10.54-8.67v-138.78c0-76.25,56.81-115.13,113.63-115.13ZM1589.86,621.48l-69.52,17.19v58.31c0,16.45,13.46,29.9,29.9,29.9h39.62v-105.41Z"/>
+    </g></defs></svg>
+
+<a class="skip" href="#inicio" data-i18n="nav.skip">Pular para o conteúdo</a>
+
+<header class="nav" id="nav">
+  <a class="logo" href="#inicio" aria-label="Guima, voltar ao início" data-i18n-attr="aria-label=nav.home"><svg viewBox="400 250 1300 580" aria-hidden="true"><use href="#guima"/></svg></a>
+  <div class="nav-right">
+    <nav aria-label="Seções" data-i18n-attr="aria-label=nav.aria">
+      <ul>
+        <li><a href="#stratosdrive" data-group="projetos" data-i18n="nav.projects">Projetos</a></li>
+        <li><a href="#ilustracao" data-group="ilustracao" data-i18n="nav.ilu">Ilustração</a></li>
+        <li><a href="#sites" data-group="sites" data-i18n="nav.sites">Sites</a></li>
+        <li><a href="#video" data-group="video" data-i18n="nav.video">Vídeo</a></li>
+        <li><a href="#sobre" data-group="sobre" data-i18n="nav.about">Sobre</a></li>
+        <li><a href="#contato" data-group="contato" data-i18n="nav.contact">Contato</a></li>
+      </ul>
+    </nav>
+    <div class="tools">
+      <button class="tool" id="lang" type="button" aria-label="Switch to English"><span data-l="pt">PT</span><span aria-hidden="true">/</span><span data-l="en">EN</span></button>
+      <button class="tool icon" id="theme" type="button" aria-pressed="false" aria-label="Mudar para o tema escuro">
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-i18n="nav.menu">Menu</button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" data-tone="1" hidden>
+  <button class="menu-close" type="button" data-i18n="common.close">Fechar</button>
+  <a href="#stratosdrive" data-i18n="nav.projects">Projetos</a>
+  <a href="#ilustracao" data-i18n="nav.ilu">Ilustração</a>
+  <a href="#sites" data-i18n="nav.sites">Sites</a>
+  <a href="#video" data-i18n="nav.video">Vídeo</a>
+  <a href="#sobre" data-i18n="nav.about">Sobre</a>
+  <a href="#contato" data-i18n="nav.contact">Contato</a>
+</div>
+
+<main>
+  <section class="pst hero" id="inicio" data-tone="1" data-group="inicio" aria-labelledby="t-inicio">
+    <div class="in">
+      <p class="meta"><span class="only-d" data-i18n="hero.meta">Guilherme Carvalho, designer gráfico</span><span class="r">São Paulo</span></p>
+      <h1 class="sr" id="t-inicio" data-i18n="hero.h1">Guilherme Carvalho, designer gráfico em São Paulo</h1>
+      <div class="only-m" aria-hidden="true"><p class="nm"><span class="fit">Guilherme Carvalho</span></p><p class="hero-sub" data-i18n="hero.sub">Designer gráfico em São Paulo</p></div>
+    </div>
+    <div class="stage" id="stage">
+      <svg class="logo fill" viewBox="400 250 1300 580" aria-hidden="true"><use href="#guima"/></svg>
+      <img class="ch" src="/img/c-wave-white.webp" width="1500" height="1476" alt="Guima, o personagem 3D do Guilherme, acenando com as duas mãos" data-i18n-attr="alt=hero.alt">
+      <canvas class="fabric" aria-hidden="true"></canvas>
+      <div class="outline" aria-hidden="true"><svg class="logo line" viewBox="400 250 1300 580"><use href="#guima"/></svg></div>
+    </div>
+    <aside class="paint" id="paint" aria-label="Pintar a camiseta" data-i18n-attr="aria-label=paint.aria">
+      <p class="paint-t" data-i18n="paint.title">Pinte a camiseta</p>
+      <div class="sw-row" role="group" aria-label="Cor" data-i18n-attr="aria-label=paint.color">
+        <button type="button" class="sw" data-color="#26282E" style="--c:#26282E" aria-pressed="true" aria-label="Preto" data-i18n-attr="aria-label=paint.black"></button>
+        <button type="button" class="sw" data-color="#1442D8" style="--c:#1442D8" aria-pressed="false" aria-label="Azul" data-i18n-attr="aria-label=paint.blue"></button>
+        <button type="button" class="sw" data-color="#FFC928" style="--c:#FFC928" aria-pressed="false" aria-label="Amarelo" data-i18n-attr="aria-label=paint.yellow"></button>
+        <button type="button" class="sw" data-color="#E3242B" style="--c:#E3242B" aria-pressed="false" aria-label="Vermelho" data-i18n-attr="aria-label=paint.red"></button>
+        <button type="button" class="sw" data-color="#1FA35C" style="--c:#1FA35C" aria-pressed="false" aria-label="Verde" data-i18n-attr="aria-label=paint.green"></button>
+        <button type="button" class="sw" data-color="#FF5FA2" style="--c:#FF5FA2" aria-pressed="false" aria-label="Rosa" data-i18n-attr="aria-label=paint.pink"></button>
+      </div>
+      <div class="seg" id="paint-effect" role="group" aria-label="Efeito" data-i18n-attr="aria-label=paint.effect">
+        <button type="button" data-effect="fluid" aria-pressed="true" data-i18n="paint.fluid">Fluido</button>
+        <button type="button" data-effect="solid" aria-pressed="false" data-i18n="paint.solid">Tinta</button>
+        <button type="button" data-effect="rainbow" aria-pressed="false" data-i18n="paint.rainbow">Arco-íris</button>
+      </div>
+      <div class="seg off" id="paint-shape" role="group" aria-label="Forma" data-i18n-attr="aria-label=paint.shape">
+        <button type="button" data-shape="brush" aria-pressed="true" data-i18n="paint.brush">Pincel</button>
+        <button type="button" data-shape="spray" aria-pressed="false">Spray</button>
+        <button type="button" data-shape="stars" aria-pressed="false" data-i18n="paint.stars">Estrelas</button>
+        <button type="button" data-shape="dots" aria-pressed="false" data-i18n="paint.dots">Bolinhas</button>
+      </div>
+      <p class="paint-hint" id="paint-hint">Passe o mouse na camiseta.</p>
+      <button type="button" class="paint-clear" id="paint-clear" data-i18n="paint.clear">Limpar</button>
+    </aside>
+    <a class="cue" href="#stratosdrive"><span data-i18n="hero.cue">Role</span> <span class="ar">↓</span></a>
+  </section>
+
+  <section class="pst" id="stratosdrive" data-tone="2" data-group="projetos" aria-labelledby="t-sd">
+    <div class="in">
+      <p class="meta"><span data-i18n="sd.meta">Identidade visual, direção de arte e campanha</span><span class="r">2026</span></p>
+      <h2 class="nm end" id="t-sd"><span class="fit">StratosDrive</span></h2>
+      <div class="media">
+        <button class="card" type="button" data-case="stratosdrive" style="flex-grow:1.55"><img src="/img/sd/sd-01-logo.jpg" width="1600" height="900" alt="Logotipo da StratosDrive em creme sobre bordô" data-i18n-attr="alt=sd.alt1" loading="lazy"><span class="chip"><span data-i18n="common.case">Ver estudo de caso</span> <span class="ar">↗</span></span></button>
+        <button class="card sec" type="button" data-case="stratosdrive"><img src="/img/sd/sd-07-cartoes.jpg" width="1600" height="900" alt="Cartões de visita da StratosDrive em bordô, creme e preto" data-i18n-attr="alt=sd.alt2" loading="lazy"></button>
+      </div>
+      <div class="foot">
+        <p class="lead" data-i18n="sd.lead">Marca de locação de veículos premium, para viagens de trabalho e de lazer. Toda a comunicação parte de uma frase: “Discover the direction you deserve.”</p>
+        <div class="acts"><button class="btn" type="button" data-case="stratosdrive"><span data-i18n="common.case">Ver estudo de caso</span> <span class="ar">→</span></button><span class="count" data-i18n="sd.count">16 páginas</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pst" id="prumo" data-tone="3" data-group="projetos" aria-labelledby="t-prumo">
+    <div class="in">
+      <p class="meta"><span data-i18n="prumo.meta">Identidade visual e movimento</span><span class="r">2025</span></p>
+      <h2 class="nm end" id="t-prumo"><span class="fit">Prumo</span></h2>
+      <div class="media">
+        <button class="card" type="button" data-case="prumo" style="flex-grow:1.55"><img src="/img/prumo/prumo-01.jpg" width="1600" height="900" alt="Logotipo da Prumo em branco sobre concreto cinza" data-i18n-attr="alt=prumo.alt1" loading="lazy"><span class="chip"><span data-i18n="common.case">Ver estudo de caso</span> <span class="ar">↗</span></span></button>
+        <button class="card sec" type="button" data-case="prumo"><img src="/img/prumo/prumo-10.jpg" width="1600" height="900" alt="Papelaria preta da Prumo: caderno, cartões, envelope, crachá e copo" data-i18n-attr="alt=prumo.alt2" loading="lazy" style="object-position:44% 50%"></button>
+      </div>
+      <div class="foot">
+        <p class="lead" data-i18n="prumo.lead">Estúdio de sites que une estratégia, design e tecnologia. A identidade nasce do prumo, o instrumento que orienta construções com precisão.</p>
+        <div class="acts"><button class="btn" type="button" data-case="prumo"><span data-i18n="common.case">Ver estudo de caso</span> <span class="ar">→</span></button><span class="count" data-i18n="prumo.count">10 páginas</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pst" id="gazz-energy" data-tone="5" data-group="projetos" aria-labelledby="t-gazz">
+    <div class="in">
+      <p class="meta"><span data-i18n="gazz.meta">Marca, embalagem e varejo em 3D</span><span class="r">2025</span></p>
+      <h2 class="nm end" id="t-gazz"><span class="fit">Gazz Energy</span></h2>
+      <div class="media">
+        <button class="card" type="button" data-case="gazz-energy" style="flex-grow:1.55"><img src="/img/gazz/gazz-01.jpg" width="1600" height="900" alt="Logotipo da Gazz Energy em branco e verde sobre azul-marinho" data-i18n-attr="alt=gazz.alt1" loading="lazy"><span class="chip"><span data-i18n="common.case">Ver estudo de caso</span> <span class="ar">↗</span></span></button>
+        <button class="card sec" type="button" data-case="gazz-energy"><img src="/img/gazz/gazz-14.jpg" width="1600" height="900" alt="Latas da Gazz Energy nos sabores Citrus, Blueberry e Açaí" data-i18n-attr="alt=gazz.alt2" loading="lazy" style="object-position:50% 60%"></button>
+      </div>
+      <div class="foot">
+        <p class="lead" data-i18n="gazz.lead">Marca de suplemento energético criada para o desafio do IED em parceria com a Magazine Luiza, do logotipo à loja.</p>
+        <div class="acts"><button class="btn" type="button" data-case="gazz-energy"><span data-i18n="common.case">Ver estudo de caso</span> <span class="ar">→</span></button><span class="count" data-i18n="gazz.count">15 páginas</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pst" id="do-verde-as-cinzas" data-tone="4" data-group="projetos" aria-labelledby="t-livro">
+    <div class="in">
+      <p class="meta"><span data-i18n="book.meta">Livro infantil ilustrado</span><span class="r">2024</span></p>
+      <h2 class="sr" id="t-livro">Do Verde às Cinzas</h2>
+      <p class="nm" aria-hidden="true"><span class="fit">Do Verde</span></p>
+      <p class="nm end" aria-hidden="true"><span class="fit">às Cinzas</span></p>
+      <div class="media book">
+        <div class="covers">
+          <figure class="bk back"><img src="/img/book/p24.jpg" width="1000" height="1146" alt="Contracapa do livro, com a sinopse sobre as queimadas no Pantanal" data-i18n-attr="alt=book.altback" loading="lazy"></figure>
+          <figure class="bk front"><img src="/img/book/p01.jpg" width="1000" height="1146" alt="Capa do livro Do Verde às Cinzas" data-i18n-attr="alt=book.altfront" loading="lazy"></figure>
+          <p class="cap" data-i18n="book.cap">Capa e contracapa</p>
+        </div>
+        <div class="open">
+          <div class="spread" id="spread" role="button" tabindex="0" aria-label="Livro aberto. Clique à direita para avançar e à esquerda para voltar." data-i18n-attr="aria-label=book.spread">
+            <div class="leaf l"><img id="pg-l" src="/img/book/p02.jpg" width="1000" height="1146" alt="" loading="lazy"></div>
+            <div class="leaf r"><img id="pg-r" src="/img/book/p03.jpg" width="1000" height="1146" alt="" loading="lazy"></div>
+          </div>
+          <div class="spread-bar">
+            <p class="spread-count" id="spread-count" aria-live="polite">Páginas 2 e 3</p>
+            <button class="sp-btn" type="button" data-step="-1" aria-label="Páginas anteriores" data-i18n-attr="aria-label=book.prev">←</button>
+            <div class="thumbs" id="thumbs">
+              <button type="button" data-spread="0" aria-current="true"><img src="/img/book/spread-01.jpg" alt="" loading="lazy"></button>
+              <button type="button" data-spread="1"><img src="/img/book/spread-02.jpg" alt="" loading="lazy"></button>
+              <button type="button" data-spread="2"><img src="/img/book/spread-03.jpg" alt="" loading="lazy"></button>
+              <button type="button" data-spread="3"><img src="/img/book/spread-04.jpg" alt="" loading="lazy"></button>
+              <button type="button" data-spread="4"><img src="/img/book/spread-05.jpg" alt="" loading="lazy"></button>
+              <button type="button" data-spread="5"><img src="/img/book/spread-06.jpg" alt="" loading="lazy"></button>
+              <button type="button" data-spread="6"><img src="/img/book/spread-07.jpg" alt="" loading="lazy"></button>
+              <button type="button" data-spread="7"><img src="/img/book/spread-08.jpg" alt="" loading="lazy"></button>
+              <button type="button" data-spread="8"><img src="/img/book/spread-09.jpg" alt="" loading="lazy"></button>
+              <button type="button" data-spread="9"><img src="/img/book/spread-10.jpg" alt="" loading="lazy"></button>
+              <button type="button" data-spread="10"><img src="/img/book/spread-11.jpg" alt="" loading="lazy"></button>
+            </div>
+            <button class="sp-btn" type="button" data-step="1" aria-label="Próximas páginas" data-i18n-attr="aria-label=book.next">→</button>
+          </div>
+        </div>
+      </div>
+      <div class="foot">
+        <p class="lead" data-i18n="book.lead">Livro sobre as queimadas no Pantanal, feito com Gustavo Mendes como projeto de faculdade, em parceria com a Leiturinha. Todas as ilustrações foram desenhadas à mão no Procreate.</p>
+        <div class="acts"><a class="btn" href="/img/book/do-verde-as-cinzas.pdf" target="_blank" rel="noopener"><span data-i18n="book.full">Ver livro completo</span> <span class="ar">↗</span></a><button class="btn ghost" type="button" data-case="do-verde-as-cinzas" data-i18n="book.about">Sobre o projeto</button><span class="count" data-i18n="book.count">PDF, 24 páginas</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pst" id="armagedom" data-tone="2" data-group="projetos" aria-labelledby="t-arma">
+    <div class="in">
+      <p class="meta"><span data-i18n="arma.meta">Jogo de tabuleiro</span><span class="r">2024</span></p>
+      <h2 class="nm end" id="t-arma"><span class="fit">Armagedom</span></h2>
+      <div class="media deck-wrap">
+        <div class="deck" id="deck">
+          <button class="gcard" type="button" style="--i:0" data-page="0"><span class="gc-in"><span class="gc-face gc-back"></span><span class="gc-face gc-front"><img src="/img/arma/card-1.jpg" width="630" height="880" alt="" loading="lazy"><span class="gc-n">1</span><span class="gc-t" data-i18n="arma.c1">Identidade visual</span></span></span></button>
+          <button class="gcard" type="button" style="--i:1" data-page="1"><span class="gc-in"><span class="gc-face gc-back"></span><span class="gc-face gc-front"><img src="/img/arma/card-2.jpg" width="630" height="880" alt="" loading="lazy"><span class="gc-n">2</span><span class="gc-t" data-i18n="arma.c2">Cartas</span></span></span></button>
+          <button class="gcard" type="button" style="--i:2" data-page="2"><span class="gc-in"><span class="gc-face gc-back"></span><span class="gc-face gc-front"><img src="/img/arma/card-3.jpg" width="630" height="880" alt="" loading="lazy"><span class="gc-n">3</span><span class="gc-t" data-i18n="arma.c3">Tabuleiro</span></span></span></button>
+          <button class="gcard" type="button" style="--i:3" data-page="3"><span class="gc-in"><span class="gc-face gc-back"></span><span class="gc-face gc-front"><img src="/img/arma/card-4.jpg" width="630" height="880" alt="" loading="lazy"><span class="gc-n">4</span><span class="gc-t" data-i18n="arma.c4">Regras</span></span></span></button>
+          <button class="gcard" type="button" style="--i:4" data-page="4"><span class="gc-in"><span class="gc-face gc-back"></span><span class="gc-face gc-front"><img src="/img/arma/card-5.jpg" width="630" height="880" alt="" loading="lazy"><span class="gc-n">5</span><span class="gc-t" data-i18n="arma.c5">Mundo</span></span></span></button>
+        </div>
+        <div class="deck-side">
+          <p class="lead" data-i18n="arma.lead">Jogo de tabuleiro com mecânicas de RPG num universo distópico, criado do zero: regras, progressão, identidade visual e mundo.</p>
+          <p class="deck-hint" data-i18n="arma.hint">Clique numa carta para ver a imagem no estudo de caso.</p>
+          <div class="acts"><button class="btn" type="button" data-case="armagedom"><span data-i18n="common.case">Ver estudo de caso</span> <span class="ar">→</span></button><button class="btn ghost" type="button" id="shuffle" data-i18n="arma.shuffle">Embaralhar</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pst" id="ilustracao" data-tone="3" data-group="ilustracao" aria-labelledby="t-ilu">
+    <div class="in">
+      <p class="meta"><span data-i18n="ilu.meta">Desenho à mão no Procreate</span><span class="r" data-i18n="ilu.count">9 ilustrações</span></p>
+      <h2 class="nm end" id="t-ilu"><span class="fit" data-i18n="nav.ilu">Ilustração</span></h2>
+      <div class="media rail">
+        <button class="card" type="button" data-ilu="0"><img src="/img/ilu/ilu-01.jpg" width="1000" height="1439" alt="Retrato de uma menina de cabelo castanho sobre fundo lilás estampado" data-i18n-attr="alt=ilu.a1" loading="lazy"><span class="chip" data-i18n="ilu.chip">Ampliar</span></button>
+        <button class="card" type="button" data-ilu="1"><img src="/img/ilu/ilu-02.jpg" width="1000" height="1439" alt="Retrato de uma mulher de cabelo longo sobre fundo verde" data-i18n-attr="alt=ilu.a2" loading="lazy"><span class="chip" data-i18n="ilu.chip">Ampliar</span></button>
+        <button class="card" type="button" data-ilu="2"><img src="/img/ilu/ilu-03.jpg" width="1000" height="1439" alt="Menina sentada numa carteira, desenhando, sobre fundo roxo" data-i18n-attr="alt=ilu.a3" loading="lazy"><span class="chip" data-i18n="ilu.chip">Ampliar</span></button>
+        <button class="card" type="button" data-ilu="3"><img src="/img/ilu/ilu-04.jpg" width="1000" height="1439" alt="Pato de desenho animado com óculos sobre fundo rosa e roxo" data-i18n-attr="alt=ilu.a4" loading="lazy"><span class="chip" data-i18n="ilu.chip">Ampliar</span></button>
+        <button class="card" type="button" data-ilu="4"><img src="/img/ilu/ilu-05.jpg" width="1000" height="1415" alt="Rapaz de óculos escuros com roupa listrada de abelha sobre fundo amarelo" data-i18n-attr="alt=ilu.a5" loading="lazy"><span class="chip" data-i18n="ilu.chip">Ampliar</span></button>
+        <button class="card" type="button" data-ilu="5"><img src="/img/ilu/ilu-06.jpg" width="1000" height="1439" alt="Personagem pulando com cabelo em chamas verdes sobre fundo azul" data-i18n-attr="alt=ilu.a6" loading="lazy"><span class="chip" data-i18n="ilu.chip">Ampliar</span></button>
+        <button class="card" type="button" data-ilu="6"><img src="/img/ilu/ilu-07.jpg" width="1000" height="1439" alt="Casa na árvore com escada sobre fundo amarelo" data-i18n-attr="alt=ilu.a7" loading="lazy"><span class="chip" data-i18n="ilu.chip">Ampliar</span></button>
+        <button class="card" type="button" data-ilu="7"><img src="/img/ilu/ilu-08.jpg" width="1000" height="1439" alt="Esboço de personagem no leme de um barco a vapor, em traço preto sobre creme" data-i18n-attr="alt=ilu.a8" loading="lazy"><span class="chip" data-i18n="ilu.chip">Ampliar</span></button>
+        <button class="card" type="button" data-ilu="8"><img src="/img/ilu/ilu-09.jpg" width="1000" height="1439" alt="Personagem laranja deitado sobre fundo mostarda" data-i18n-attr="alt=ilu.a9" loading="lazy"><span class="chip" data-i18n="ilu.chip">Ampliar</span></button>
+      </div>
+      <div class="rail-bar">
+        <input class="rail-scroll" id="rail-scroll" type="range" min="0" max="1000" value="0" aria-label="Rolar as ilustrações" data-i18n-attr="aria-label=ilu.scroll">
+        <span class="rail-count" id="rail-count">1 / 9</span>
+      </div>
+      <div class="foot">
+        <p class="lead" data-i18n="ilu.lead">Desenho à mão. O livro Do Verde às Cinzas foi feito inteiro no Procreate, e aqui ficam também alguns retratos. Arraste para o lado para ver todas.</p>
+        <div class="acts"><button class="btn" type="button" id="ilu-full" data-ilu="0"><span data-i18n="ilu.btn">Ver em tela cheia</span> <span class="ar">→</span></button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pst" id="sites" data-tone="4" data-group="sites" aria-labelledby="t-sites">
+    <div class="in">
+      <p class="meta"><span data-i18n="sites.meta">Sites já funcionando</span><span class="r" data-i18n="sites.meta2">Abrem aqui dentro</span></p>
+      <h2 class="nm end" id="t-sites"><span class="fit" data-i18n="nav.sites">Sites</span></h2>
+      <div class="media sites">
+        <button class="card site" type="button" data-web="https://holdcorretora.com">
+          <img class="shot" src="/img/hold-d.jpg" width="1100" height="688" alt="" loading="lazy">
+          <img class="site-logo" src="/img/hold-logo.png" width="700" height="286" alt="Hold Corretora" loading="lazy">
+          <span class="chip"><span data-i18n="sites.chip">Ver o site aqui</span> <span class="ar">↗</span></span>
+        </button>
+        <button class="card site" type="button" data-web="https://prumoestudio.com.br">
+          <img class="shot" src="/img/prumo-d.jpg" width="1100" height="688" alt="" loading="lazy">
+          <img class="site-logo" src="/img/prumo-logo.svg" width="1269" height="458" alt="Prumo Estúdio" loading="lazy">
+          <span class="chip"><span data-i18n="sites.chip">Ver o site aqui</span> <span class="ar">↗</span></span>
+        </button>
+      </div>
+      <div class="foot">
+        <p class="lead" data-i18n="sites.lead"><b>Hold Corretora</b>, consultoria especializada em consórcios, e <b>Prumo Estúdio</b>, estúdio digital que une estratégia, design e tecnologia.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pst" id="video" data-tone="5" data-group="video" aria-labelledby="t-video">
+    <div class="in">
+      <p class="meta"><span data-i18n="video.meta">Reels para redes sociais</span><span class="r" data-i18n="video.meta2">Mais em breve</span></p>
+      <h2 class="nm end" id="t-video"><span class="fit" data-i18n="nav.video">Vídeo</span></h2>
+      <div class="media reels">
+        <div class="reel-info">
+          <p class="lead" data-i18n="video.lead">Vídeo vertical para redes sociais, com legenda na tela. Os próximos vídeos entram aqui, e as setas do iPad passam de um para o outro.</p>
+          <ol class="reel-list" id="reel-list">
+            <li><button type="button" data-reel="0" aria-current="true"><img src="/img/reels/reel-1.jpg" width="720" height="1280" alt="" loading="lazy"><span><b>Tavares</b><small data-i18n="video.r1">Reels para redes sociais</small></span><span class="dur">2:41</span></button></li>
+            <li><button type="button" disabled><span class="ph" aria-hidden="true">+</span><span><b data-i18n="video.soon">Em breve</b><small data-i18n="video.soonsub">Próximo vídeo</small></span><span class="dur"></span></button></li>
+            <li><button type="button" disabled><span class="ph" aria-hidden="true">+</span><span><b data-i18n="video.soon">Em breve</b><small data-i18n="video.soonsub">Próximo vídeo</small></span><span class="dur"></span></button></li>
+          </ol>
+        </div>
+        <div class="ipad">
+          <div class="ipad-screen" id="ipad-screen" tabindex="0" aria-label="Reels. Use as setas para cima e para baixo para trocar de vídeo." data-i18n-attr="aria-label=video.screen">
+            <div class="reel-track" id="reel-track">
+              <div class="reel-slide"><video src="/img/reels/reel-1.mp4" poster="/img/reels/reel-1.jpg" playsinline muted loop preload="none"></video></div>
+            </div>
+            <div class="reel-shade"></div>
+            <div class="reel-top"><span>Reels</span><span id="reel-count">1/1</span></div>
+            <div class="reel-nav">
+              <button class="rb" type="button" data-dir="-1" aria-label="Vídeo anterior" data-i18n-attr="aria-label=video.prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>
+              <button class="rb" type="button" data-dir="1" aria-label="Próximo vídeo" data-i18n-attr="aria-label=video.next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            </div>
+            <div class="reel-bottom">
+              <p class="reel-title" id="reel-title"><b>Tavares</b> · Reels para redes sociais</p>
+              <div class="reel-controls">
+                <button class="rb" type="button" id="rb-play" aria-label="Pausar"><svg data-show="on" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14" stroke-width="3"/></svg><svg data-show="off" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
+                <button class="rb" type="button" id="rb-sound" aria-pressed="false" aria-label="Ativar som"><svg data-show="on" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg><svg data-show="off" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="m22 9-6 6M16 9l6 6"/></svg></button>
+                <input class="reel-seek" id="rb-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Posição do vídeo" data-i18n-attr="aria-label=video.seek">
+                <span class="reel-time" id="rb-time">0:00 / 2:41</span>
+                <button class="rb" type="button" id="rb-full" aria-label="Tela cheia"><svg data-show="off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><svg data-show="on" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pst" id="sobre" data-tone="3" data-group="sobre" aria-labelledby="t-sobre">
+    <div class="in">
+      <p class="meta"><span class="r" data-i18n="about.meta2">Currículo em PT e EN</span></p>
+      <h2 class="nm end" id="t-sobre"><span class="fit" data-i18n="nav.about">Sobre</span></h2>
+      <div class="media about">
+        <div class="photos" id="photos" role="button" tabindex="0" aria-label="Trocar a foto" data-i18n-attr="aria-label=about.swap">
+          <img data-pos="0" src="/img/sobre-1.jpg" width="677" height="768" alt="Guilherme Carvalho de braços cruzados" data-i18n-attr="alt=about.alt1">
+          <img data-pos="1" src="/img/sobre-2.jpg" width="800" height="1071" alt="Guilherme Carvalho sorrindo e fazendo sinal de positivo" data-i18n-attr="alt=about.alt2" loading="lazy">
+          <img data-pos="2" src="/img/sobre-3.jpg" width="800" height="1071" alt="Guilherme Carvalho sorrindo, com as mãos no rosto" data-i18n-attr="alt=about.alt3" loading="lazy">
+          <span class="photos-hint" id="photos-hint">1/3 · clique para trocar</span>
+        </div>
+        <div class="about-text">
+          <p class="bio" data-i18n="about.bio">Sou Guilherme Carvalho, designer gráfico. Nasci em Uberlândia, em Minas Gerais, e aos 18 anos me mudei para São Paulo para me especializar em design. Trabalho com identidade visual, embalagem, ilustração, sites e vídeo, do conceito à arte final.</p>
+          <div class="exp">
+            <div><h3>Ecobrindes</h3><p class="when" data-i18n="about.w1">Estágio em design de embalagem · dez 2024 a jul 2025</p><p data-i18n="about.p1">Papelaria corporativa, artes para redes sociais, ilustrações e tratamento de imagens.</p></div>
+            <div><h3 data-i18n="about.h2">Freelancer</h3><p class="when" data-i18n="about.w2">2019 a 2022</p><p data-i18n="about.p2">Tratamento e edição de imagens, layouts e atendimento direto aos clientes, do prazo à entrega.</p></div>
+          </div>
+          <ul class="tools-list" aria-label="Ferramentas" data-i18n-attr="aria-label=about.tools"><li class="neon sm" style="--neon:#FF9A00"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.53 10.73c-.1-.31-.19-.61-.29-.92-.1-.31-.19-.6-.27-.89-.08-.28-.15-.54-.22-.78h-.02c-.09.43-.2.86-.34 1.29-.15.48-.3.98-.46 1.48-.14.51-.29.98-.44 1.4h2.54c-.06-.211-.14-.46-.23-.721-.09-.269-.18-.559-.27-.859zM19.75.3H4.25C1.9.3 0 2.2 0 4.55v14.9c0 2.35 1.9 4.25 4.25 4.25h15.5c2.35 0 4.25-1.9 4.25-4.25V4.55C24 2.2 22.1.3 19.75.3zM14.7 16.83h-2.091c-.069.01-.139-.04-.159-.11l-.82-2.38H7.91l-.76 2.35c-.02.09-.1.15-.19.141H5.08c-.11 0-.14-.061-.11-.18L8.19 7.38c.03-.1.06-.21.1-.33.04-.21.06-.43.06-.65-.01-.05.03-.1.08-.11h2.59c.08 0 .12.03.13.08l3.65 10.3c.03.109 0 .16-.1.16zm3.4-.15c0 .11-.039.16-.129.16H16.01c-.1 0-.15-.061-.15-.16v-7.7c0-.1.041-.14.131-.14h1.98c.09 0 .129.05.129.14v7.7zm-.209-9.03c-.231.24-.571.37-.911.35-.33.01-.65-.12-.891-.35-.23-.25-.35-.58-.34-.92-.01-.34.12-.66.359-.89.242-.23.562-.35.892-.35.391 0 .689.12.91.35.22.24.34.56.33.89.01.34-.11.67-.349.92z"/></svg><span>Illustrator</span></li><li class="neon sm" style="--neon:#31A8FF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.85 8.42c-.37-.15-.77-.21-1.18-.2-.26 0-.49 0-.68.01-.2-.01-.34 0-.41.01v3.36c.14.01.27.02.39.02h.53c.39 0 .78-.06 1.15-.18.32-.09.6-.28.82-.53.21-.25.31-.59.31-1.03.01-.31-.07-.62-.23-.89-.17-.26-.41-.46-.7-.57zM19.75.3H4.25C1.9.3 0 2.2 0 4.55v14.899c0 2.35 1.9 4.25 4.25 4.25h15.5c2.35 0 4.25-1.9 4.25-4.25V4.55C24 2.2 22.1.3 19.75.3zm-7.391 11.65c-.399.56-.959.98-1.609 1.22-.68.25-1.43.34-2.25.34-.24 0-.4 0-.5-.01s-.24-.01-.43-.01v3.209c.01.07-.04.131-.11.141H5.52c-.08 0-.12-.041-.12-.131V6.42c0-.07.03-.11.1-.11.17 0 .33 0 .56-.01.24-.01.49-.01.76-.02s.56-.01.87-.02c.31-.01.61-.01.91-.01.82 0 1.5.1 2.06.31.5.17.96.45 1.34.82.32.32.57.71.73 1.14.149.42.229.85.229 1.3.001.86-.199 1.57-.6 2.13zm7.091 3.89c-.28.4-.671.709-1.12.891-.49.209-1.09.318-1.811.318-.459 0-.91-.039-1.359-.129-.35-.061-.7-.17-1.02-.32-.07-.039-.121-.109-.111-.189v-1.74c0-.029.011-.07.041-.09.029-.02.06-.01.09.01.39.23.8.391 1.24.49.379.1.779.15 1.18.15.38 0 .65-.051.83-.141.16-.07.27-.24.27-.42 0-.141-.08-.27-.24-.4-.16-.129-.489-.279-.979-.471-.51-.18-.979-.42-1.42-.719-.31-.221-.569-.51-.761-.85-.159-.32-.239-.67-.229-1.021 0-.43.12-.84.341-1.21.25-.4.619-.72 1.049-.92.469-.239 1.059-.349 1.769-.349.41 0 .83.03 1.24.09.3.04.59.12.86.23.039.01.08.05.1.09.01.04.02.08.02.12v1.63c0 .04-.02.08-.05.1-.09.02-.14.02-.18 0-.3-.16-.62-.27-.96-.34-.37-.08-.74-.13-1.12-.13-.2-.01-.41.02-.601.07-.129.03-.24.1-.31.2-.05.08-.08.18-.08.27s.04.18.101.26c.09.11.209.2.34.27.229.12.47.23.709.33.541.18 1.061.43 1.541.73.33.209.6.49.789.83.16.318.24.67.23 1.029.011.471-.129.94-.389 1.331z"/></svg><span>Photoshop</span></li><li class="neon sm" style="--neon:#FF3366"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.25.3C1.9.3 0 2.2 0 4.55v14.9c0 2.35 1.9 4.25 4.25 4.25h15.5c2.35 0 4.25-1.9 4.25-4.25V4.55C24 2.2 22.1.3 19.75.3zm11.31 5.13h2.03c.05-.01.09.03.1.07v9.54c0 .18.01.38.02.6.02.21.03.41.04.58 0 .07-.03.13-.1.16-.52.22-1.07.38-1.63.48-.5.09-1.02.14-1.54.14-.74.01-1.48-.14-2.15-.45-.63-.29-1.15-.77-1.51-1.36-.37-.61-.55-1.37-.55-2.28-.01-.74.18-1.47.55-2.11.38-.65.93-1.19 1.59-1.55.7-.39 1.54-.58 2.53-.58.05 0 .12 0 .21.01s.19.01.31.02V5.54c0-.07.03-.11.1-.11zm-8.93.86h1.95c.06-.01.12.03.13.1.01.01.01.02.01.03v10.26c0 .11-.05.16-.14.16H6.62c-.09 0-.13-.05-.13-.16V6.42c0-.09.05-.13.14-.13zm8.23 4.24c-.39 0-.78.08-1.13.26-.34.17-.63.42-.85.74-.22.32-.33.75-.33 1.27-.01.35.05.7.17 1.03.1.27.25.51.45.71.19.18.42.32.68.4.27.09.55.13.83.13.15 0 .29-.01.42-.02.13.01.25-.01.36-.05v-4.4c-.09-.02-.18-.04-.27-.05-.11-.01-.22-.02-.33-.02z"/></svg><span>InDesign</span></li><li class="neon sm" style="--neon:#A259FF"><svg viewBox="0 0 38 57" aria-hidden="true"><path fill="#F24E1E" d="M19 0H9.5a9.5 9.5 0 0 0 0 19H19z"/><path fill="#FF7262" d="M19 0h9.5a9.5 9.5 0 0 1 0 19H19z"/><path fill="#A259FF" d="M19 19H9.5a9.5 9.5 0 0 0 0 19H19z"/><circle fill="#1ABCFE" cx="28.5" cy="28.5" r="9.5"/><path fill="#0ACF83" d="M19 38H9.5A9.5 9.5 0 1 0 19 47.5z"/></svg><span>Figma</span></li><li class="neon sm" style="--neon:#F5792A"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.51 13.214c.046-.8.438-1.506 1.03-2.006a3.424 3.424 0 0 1 2.212-.79c.85 0 1.631.3 2.211.79.592.5.983 1.206 1.028 2.005.045.823-.285 1.586-.865 2.153a3.389 3.389 0 0 1-2.374.938 3.393 3.393 0 0 1-2.376-.938c-.58-.567-.91-1.33-.865-2.152M7.35 14.831c.006.314.106.922.256 1.398a7.372 7.372 0 0 0 1.593 2.757 8.227 8.227 0 0 0 2.787 2.001 8.947 8.947 0 0 0 3.66.76 8.964 8.964 0 0 0 3.657-.772 8.285 8.285 0 0 0 2.785-2.01 7.428 7.428 0 0 0 1.592-2.762 6.964 6.964 0 0 0 .25-3.074 7.123 7.123 0 0 0-1.016-2.779 7.764 7.764 0 0 0-1.852-2.043h.002L13.566 2.55l-.02-.015c-.492-.378-1.319-.376-1.86.002-.547.382-.609 1.015-.123 1.415l-.001.001 3.126 2.543-9.53.01h-.013c-.788.001-1.545.518-1.695 1.172-.154.665.38 1.217 1.2 1.22V8.9l4.83-.01-8.62 6.617-.034.025c-.813.622-1.075 1.658-.563 2.313.52.667 1.625.668 2.447.004L7.414 14s-.069.52-.063.831zm12.09 1.741c-.97.988-2.326 1.548-3.795 1.55-1.47.004-2.827-.552-3.797-1.538a4.51 4.51 0 0 1-1.036-1.622 4.282 4.282 0 0 1 .282-3.519 4.702 4.702 0 0 1 1.153-1.371c.942-.768 2.141-1.183 3.396-1.185 1.256-.002 2.455.41 3.398 1.175.48.391.87.854 1.152 1.367a4.28 4.28 0 0 1 .522 1.706 4.236 4.236 0 0 1-.239 1.811 4.54 4.54 0 0 1-1.035 1.626"/></svg><span>Blender</span></li><li class="neon sm" style="--neon:#9999FF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.54 10.73c-.1-.31-.19-.61-.29-.92s-.19-.6-.27-.89c-.08-.28-.15-.54-.22-.78h-.02c-.09.43-.2.86-.34 1.29-.15.48-.3.98-.46 1.48-.13.51-.29.98-.44 1.4h2.54c-.06-.21-.14-.46-.23-.72-.09-.27-.18-.56-.27-.86zm8.58-.29c-.55-.03-1.07.26-1.33.76-.12.23-.19.47-.22.72h2.109c.26 0 .45 0 .57-.01.08-.01.16-.03.23-.08v-.1c0-.13-.021-.25-.061-.37-.178-.56-.708-.94-1.298-.92zM19.75.3H4.25C1.9.3 0 2.2 0 4.55v14.9c0 2.35 1.9 4.25 4.25 4.25h15.5c2.35 0 4.25-1.9 4.25-4.25V4.55C24 2.2 22.1.3 19.75.3zm-7.04 16.511h-2.09c-.07.01-.14-.041-.16-.11l-.82-2.4H5.92l-.76 2.36c-.02.09-.1.15-.19.14H3.09c-.11 0-.14-.06-.11-.18L6.2 7.39c.03-.1.06-.19.1-.31.04-.21.06-.43.06-.65-.01-.05.03-.1.08-.11h2.59c.07 0 .12.03.13.08l3.65 10.25c.03.11.001.161-.1.161zm7.851-3.991c-.021.189-.031.33-.041.42-.01.07-.069.13-.14.13-.06 0-.17.01-.33.021-.159.02-.35.029-.579.029-.23 0-.471-.04-.73-.04h-3.17c.039.31.14.62.31.89.181.271.431.48.729.601.4.17.841.26 1.281.25.35-.011.699-.04 1.039-.11.311-.039.61-.119.891-.23.05-.039.08-.02.08.08v1.531c0 .039-.01.08-.021.119-.021.03-.04.051-.069.07-.32.14-.65.24-1 .3-.471.09-.94.13-1.42.12-.761 0-1.4-.12-1.92-.35-.49-.211-.921-.541-1.261-.95-.319-.39-.55-.83-.69-1.31-.14-.471-.209-.961-.209-1.461 0-.539.08-1.07.25-1.59.16-.5.41-.96.75-1.37.33-.4.739-.72 1.209-.95.471-.23 1.03-.31 1.67-.31.531-.01 1.06.09 1.55.31.41.18.77.45 1.05.8.26.34.47.72.601 1.14.129.4.189.81.189 1.22 0 .24-.01.45-.019.64z"/></svg><span>After Effects</span></li><li class="neon sm" style="--neon:#9999FF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.15 8.42a2.93 2.93 0 00-1.18-.2 13.9 13.9 0 00-1.09.02v3.36l.39.02h.53c.39 0 .78-.06 1.15-.18.32-.09.6-.28.82-.53.21-.25.31-.59.31-1.03a1.45 1.45 0 00-.93-1.46zM19.75.3H4.25A4.25 4.25 0 000 4.55v14.9c0 2.35 1.9 4.25 4.25 4.25h15.5c2.35 0 4.25-1.9 4.25-4.25V4.55C24 2.2 22.1.3 19.75.3zm-7.09 11.65c-.4.56-.96.98-1.61 1.22-.68.25-1.43.34-2.25.34l-.5-.01-.43-.01v3.21a.12.12 0 01-.11.14H5.82c-.08 0-.12-.04-.12-.13V6.42c0-.07.03-.11.1-.11l.56-.01.76-.02.87-.02.91-.01c.82 0 1.5.1 2.06.31.5.17.96.45 1.34.82.32.32.57.71.73 1.14.15.42.23.85.23 1.3 0 .86-.2 1.57-.6 2.13zm6.82-3.15v1.95c0 .08-.05.11-.16.11a4.35 4.35 0 00-1.92.37c-.19.09-.37.21-.51.37v5.1c0 .1-.04.14-.13.14h-1.97a.14.14 0 01-.16-.12v-5.58l-.01-.75-.02-.78c0-.23-.02-.45-.04-.68a.1.1 0 01.07-.11h1.78c.1 0 .18.07.2.16a3.03 3.03 0 01.13.92c.3-.35.67-.64 1.08-.86a3.1 3.1 0 011.52-.39c.07-.01.13.04.14.11v.04z"/></svg><span>Premiere</span></li><li class="neon sm" style="--neon:#FF5FA2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.6 3.4a2.2 2.2 0 0 1 3.1 0l2.9 2.9a2.2 2.2 0 0 1 0 3.1l-7.2 7.2-6-6z"/><path d="M6.5 11.5l6 6-1.2 1.2a4.4 4.4 0 0 1-3.1 1.3H3.6a.7.7 0 0 1-.5-1.2c1-1 1.2-2 1.2-3.1a4.4 4.4 0 0 1 1.3-3.1z"/></svg><span>Procreate</span></li><li class="neon sm" style="--neon:#B8F53D"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 6.5h9M6.2 8.6l4.6 7.4M17.8 8.6l-4.6 7.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="5" cy="6.5" r="3"/><circle cx="19" cy="6.5" r="3"/><circle cx="12" cy="18" r="3"/></svg><span>TouchDesigner</span></li></ul>
+          <div class="cv">
+            <a class="cv-btn" href="/cv-pt.pdf" target="_blank" rel="noopener noreferrer"><svg class="flag" viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" fill="#009C3B"/><path d="M14 2.6 25.4 10 14 17.4 2.6 10z" fill="#FFDF00"/><circle cx="14" cy="10" r="4.6" fill="#002776"/><path d="M9.5 9.1c3-.6 6-.1 9 2.1" fill="none" stroke="#FFFFFF" stroke-width=".9"/></svg><span class="cv-k" data-i18n="cv.k1">Currículo</span><span class="cv-s" data-i18n="cv.s1">Em português · PDF</span><span class="ar">↗</span></a>
+            <a class="cv-btn alt" href="/cv-en.pdf" target="_blank" rel="noopener noreferrer"><svg class="flag" viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" fill="#FFFFFF"/><path fill="#B22234" d="M0 0h28v1.54H0zM0 3.08h28v1.54H0zM0 6.15h28v1.54H0zM0 9.23h28v1.54H0zM0 12.31h28v1.54H0zM0 15.38h28v1.54H0zM0 18.46h28V20H0z"/><rect width="12" height="10.77" fill="#3C3B6E"/><g fill="#FFFFFF"><circle cx="1.5" cy="1.3" r=".5"/><circle cx="4.5" cy="1.3" r=".5"/><circle cx="7.5" cy="1.3" r=".5"/><circle cx="10.5" cy="1.3" r=".5"/><circle cx="3" cy="3.35" r=".5"/><circle cx="6" cy="3.35" r=".5"/><circle cx="9" cy="3.35" r=".5"/><circle cx="1.5" cy="5.4" r=".5"/><circle cx="4.5" cy="5.4" r=".5"/><circle cx="7.5" cy="5.4" r=".5"/><circle cx="10.5" cy="5.4" r=".5"/><circle cx="3" cy="7.45" r=".5"/><circle cx="6" cy="7.45" r=".5"/><circle cx="9" cy="7.45" r=".5"/><circle cx="1.5" cy="9.5" r=".5"/><circle cx="4.5" cy="9.5" r=".5"/><circle cx="7.5" cy="9.5" r=".5"/><circle cx="10.5" cy="9.5" r=".5"/></g></svg><span class="cv-k" data-i18n="cv.k2">Resume</span><span class="cv-s" data-i18n="cv.s2">Em inglês · PDF</span><span class="ar">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pst contact" id="contato" data-tone="1" data-group="contato" aria-labelledby="t-contato">
+    <div class="in">
+      <p class="meta"><span class="r">São Paulo</span></p>
+      <h2 class="sr" id="t-contato" data-i18n="contact.h2">Bora conversar?</h2>
+      <p class="nm" aria-hidden="true"><span class="fit" data-i18n="contact.l1">Bora</span></p>
+      <p class="nm end" aria-hidden="true"><span class="fit" data-i18n="contact.l2">Conversar?</span></p>
+      <div class="contact-links">
+        <a class="btn big" href="https://wa.me/5534998855454?text=Ol%C3%A1%2C%20gostaria%20de%20contratar%20um%20servi%C3%A7o%20seu!" target="_blank" rel="noopener noreferrer"><span data-i18n="contact.wa">Chamar no WhatsApp</span> <span class="ar">↗</span></a>
+        <a class="btn ghost big" href="mailto:guicarvalhoguima@gmail.com">guicarvalhoguima@gmail.com</a>
+        <p class="soc"><a class="neon" style="--neon:#36C5FF" href="https://www.linkedin.com/in/guilherme-carvalho-13a194293/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span>LinkedIn</span></a><a class="neon" style="--neon:#8C7DFF" href="https://www.behance.net/guilherguimara18/projects" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.969 16.927a2.561 2.561 0 0 0 1.901.677 2.501 2.501 0 0 0 1.531-.475c.362-.235.636-.584.779-.99h2.585a5.091 5.091 0 0 1-1.9 2.896 5.292 5.292 0 0 1-3.091.88 5.839 5.839 0 0 1-2.284-.433 4.871 4.871 0 0 1-1.723-1.211 5.657 5.657 0 0 1-1.08-1.874 7.057 7.057 0 0 1-.383-2.393c-.005-.8.129-1.595.396-2.349a5.313 5.313 0 0 1 5.088-3.604 4.87 4.87 0 0 1 2.376.563c.661.362 1.231.87 1.668 1.485a6.2 6.2 0 0 1 .943 2.133c.194.821.263 1.666.205 2.508h-7.699c-.063.79.184 1.574.688 2.187ZM6.947 4.084a8.065 8.065 0 0 1 1.928.198 4.29 4.29 0 0 1 1.49.638c.418.303.748.711.958 1.182.241.579.357 1.203.341 1.83a3.506 3.506 0 0 1-.506 1.961 3.726 3.726 0 0 1-1.503 1.287 3.588 3.588 0 0 1 2.027 1.437c.464.747.697 1.615.67 2.494a4.593 4.593 0 0 1-.423 2.032 3.945 3.945 0 0 1-1.163 1.413 5.114 5.114 0 0 1-1.683.807 7.135 7.135 0 0 1-1.928.259H0V4.084h6.947Zm-.235 12.9c.308.004.616-.029.916-.099a2.18 2.18 0 0 0 .766-.332c.228-.158.411-.371.534-.619.142-.317.208-.663.191-1.009a2.08 2.08 0 0 0-.642-1.715 2.618 2.618 0 0 0-1.696-.505h-3.54v4.279h3.471Zm13.635-5.967a2.13 2.13 0 0 0-1.654-.619 2.336 2.336 0 0 0-1.163.259 2.474 2.474 0 0 0-.738.62 2.359 2.359 0 0 0-.396.792c-.074.239-.12.485-.137.734h4.769a3.239 3.239 0 0 0-.679-1.785l-.002-.001Zm-13.813-.648a2.254 2.254 0 0 0 1.423-.433c.399-.355.607-.88.56-1.413a1.916 1.916 0 0 0-.178-.891 1.298 1.298 0 0 0-.495-.533 1.851 1.851 0 0 0-.711-.274 3.966 3.966 0 0 0-.835-.073H3.241v3.631h3.293v-.014ZM21.62 5.122h-5.976v1.527h5.976V5.122Z"/></svg><span>Behance</span></a><a class="neon" style="--neon:#FF3DA5" href="https://www.instagram.com/carvalhoguilherme_/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg><span>Instagram</span></a></p>
+      </div>
+      <p class="fine">© 2026 Guilherme Carvalho</p>
+    </div>
+    <img class="face" src="/img/c-face-white.webp" width="786" height="1400" alt="" loading="lazy">
+  </section>
+</main>
+
+<dialog class="dlg case-dlg" id="caso" aria-labelledby="caso-nome">
+  <div class="dlg-bar"><p id="caso-count"></p><button class="btn" type="button" data-close><span data-i18n="common.close">Fechar</span> <span class="ar">✕</span></button></div>
+  <article class="case-body" id="caso-body"></article>
+</dialog>
+
+<dialog class="dlg lb" id="lightbox" data-tone="5" aria-label="Ilustração ampliada" data-i18n-attr="aria-label=ilu.dlg">
+  <div class="dlg-bar"><p id="lb-count">1/9</p><button class="btn" type="button" data-close><span data-i18n="common.close">Fechar</span> <span class="ar">✕</span></button></div>
+  <figure><img id="lb-img" src="/img/ilu/ilu-01.jpg" alt=""></figure>
+  <div class="lb-nav"><button class="btn ghost" type="button" id="lb-prev"><span class="ar">←</span> <span data-i18n="common.prev">Anterior</span></button><button class="btn ghost" type="button" id="lb-next"><span data-i18n="common.next">Próxima</span> <span class="ar">→</span></button></div>
+</dialog>
+
+<dialog class="dlg web" id="web-dlg" data-tone="5" aria-label="Site aberto dentro do portfólio" data-i18n-attr="aria-label=web.dlg">
+  <div class="dlg-bar">
+    <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+    <p class="url" id="web-url">holdcorretora.com</p>
+    <div class="acts"><a class="btn ghost open-new" id="web-open" href="https://holdcorretora.com" target="_blank" rel="noopener noreferrer"><span data-i18n="web.newtab">Abrir em nova aba</span> <span class="ar">↗</span></a><button class="btn" type="button" data-close><span data-i18n="common.close">Fechar</span> <span class="ar">✕</span></button></div>
+  </div>
+  <div class="web-frame"><iframe id="web-iframe" title="Site" src="about:blank"></iframe></div>
+</dialog>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const CASES_PT = {"stratosdrive": {"name": "StratosDrive", "meta": "Identidade visual, direção de arte e campanha, 2026", "lead": "Marca de locação de veículos premium, para viagens de trabalho e de lazer. Toda a comunicação parte de uma frase: “Discover the direction you deserve.”", "facts": [["Cliente", "Projeto conceitual"], ["Público", "Executivos em viagem de negócios e viajantes em busca de uma experiência premium"], ["Ferramentas", "Illustrator, Photoshop, Nano Banana Pro, Artlist, Notion"]], "cols": [["Desafio", "Ocupar um território sofisticado sem o exagero das marcas de supercarro, e falar tanto com quem resolve uma viagem de trabalho quanto com quem planeja um fim de semana."], ["Processo", "Dezenas de monogramas testados, de construções geométricas a serifas clássicas, até um símbolo menos literal. A IA serviu para explorar cenários; identidade, vetorização e direção de arte saíram do processo de design."], ["Resultado", "O símbolo SD se sustenta sozinho em chaveiro, app e interior do carro, e sete flyers A4 mostram o sistema em direções de arte diferentes."]], "pages": ["sd-01-logo", "sd-02-manifesto", "sd-03-estudos", "sd-04-construcao", "sd-05-variacoes", "sd-06-simbolo", "sd-07-cartoes", "sd-08-app", "sd-09-interior", "sd-flyer-1", "sd-flyer-2", "sd-flyer-3", "sd-flyer-4", "sd-flyer-5", "sd-flyer-6", "sd-flyer-7"], "notes": {"1": ["O projeto", "A StratosDrive é uma locadora de veículos premium feita tanto para viagem corporativa quanto para lazer. O território é o luxo acessível: sofisticação e confiança, sem o exagero das locadoras de supercarro."], "2": ["Exploração", "Antes de chegar ao símbolo final, testei monogramas geométricos, construções clássicas em serifa e ícones ligados a estrada, bússola e direção. Todos diziam “carro”. Nenhum ainda dizia StratosDrive."], "3": ["O símbolo", "O monograma nasce das iniciais S e D, integradas em um único traço contínuo. As curvas arredondadas remetem ao desenho automotivo contemporâneo, e a inclinação horizontal carrega a sensação de movimento."], "5": ["Cores", "Burgundy #681D2A e Cream #F2E8D5. O vinho traz profundidade e uma leitura mais madura da marca; o creme abre respiro e afasta a identidade do preto e dourado que o segmento premium usa por padrão."], "6": ["Aplicações", "O símbolo sozinho já sustenta a marca, em chaveiro, ícone de app, cartão ou detalhe no interior do veículo. Em outros pontos a assinatura completa assume o protagonismo, e o sistema segue reconhecível nos dois níveis."], "9": ["Campanha", "Sete flyers A4, o mesmo conteúdo, sete direções de arte diferentes: foto em tela cheia, composição editorial, vista aérea, interior de veículo, cena noturna e detalhe automotivo. Cor, tipografia e atmosfera mantêm tudo na mesma família."], "16": ["Resultado", "Mais do que um logotipo: um sistema visual que une o universo automotivo a uma linguagem de lifestyle premium. O valor não está só no veículo escolhido, mas em como você escolhe chegar até ele."]}}, "prumo": {"name": "Prumo", "meta": "Identidade visual e movimento, 2025", "lead": "Estúdio de sites que une estratégia, design e tecnologia. A identidade nasce do prumo, o instrumento que orienta construções com precisão.", "facts": [["Cliente", "Projeto autoral"], ["Público", "Marcas e negócios que valorizam precisão e presença digital"], ["Ferramentas", "Illustrator, Photoshop, After Effects, Figma"]], "cols": [["Desafio", "Expressar precisão e direção sem ficar frio ou técnico demais, com um conceito que funcionasse ao mesmo tempo como símbolo, movimento e sistema."], ["Processo", "Logotipo geométrico em que o O vira o próprio prumo, animação do prumo caindo até achar o eixo, Neue Haas Unica como fonte principal e paleta em preto e branco com texturas de concreto e metal."], ["Resultado", "Um sistema coeso, do logo animado à papelaria, apresentado como uma narrativa vertical contínua."]], "pages": ["prumo-01", "prumo-02", "prumo-03", "prumo-04", "prumo-05", "prumo-06", "prumo-07", "prumo-08", "prumo-09", "prumo-10"]}, "gazz-energy": {"name": "Gazz Energy", "meta": "Marca, embalagem e varejo em 3D, 2025", "lead": "Marca de suplemento energético criada para o desafio do IED em parceria com a Magazine Luiza, do logotipo à loja.", "facts": [["Cliente", "IED (Istituto Europeo di Design) e Magazine Luiza"], ["Público", "Jovens adultos urbanos, de 18 a 35 anos"], ["Ferramentas", "Illustrator, Photoshop, Blender, Figma"]], "cols": [["Desafio", "Se destacar num segmento dominado por marcas como a Red Bull, com uma identidade inclusiva que passasse energia sem afastar públicos diversos."], ["Processo", "Três pilares visuais (tipografia geométrica, movimento e versatilidade de cor), embalagens em sachê, lata e garrafa nos sabores Citrus, Blueberry e Açaí, e a loja inteira modelada no Blender."], ["Resultado", "Um sistema de marca completo, do posicionamento estratégico à experiência física em 3D."]], "pages": ["gazz-01", "gazz-02", "gazz-04", "gazz-06", "gazz-07", "gazz-08", "gazz-11", "gazz-13", "gazz-14", "gazz-15", "gazz-17", "gazz-18", "gazz-19", "gazz-20", "gazz-21"]}, "do-verde-as-cinzas": {"name": "Do Verde às Cinzas", "meta": "Livro infantil ilustrado, 2024", "lead": "Livro sobre as queimadas no Pantanal, feito com Gustavo Mendes como projeto de faculdade, em parceria com a Leiturinha. Todas as ilustrações foram desenhadas à mão no Procreate.", "facts": [["Cliente", "Leiturinha (projeto acadêmico)"], ["Público", "Crianças em fase de leitura, famílias e educadores"], ["Ferramentas", "Procreate, InDesign"]], "cols": [["Desafio", "Falar de queimadas e destruição ambiental com sensibilidade, de um jeito que a criança entenda, sem perder a leveza de um livro infantil."], ["Processo", "Roteiro e storyboard página a página, ilustrações com uma paleta que vai do verde vivo aos cinzas conforme o fogo avança, e diagramação e fechamento para impressão no InDesign."], ["Resultado", "Um livro completo, da capa à contracapa, que usa a própria cor para contar a história."]], "pages": ["p01", "p03", "p04", "p05", "p06", "p07", "p08", "p09", "p10", "p11", "p12", "p13", "p14", "p15", "p16", "p17", "p18", "p19", "p20", "p21", "p22", "p24"]}, "armagedom": {"name": "Armagedom", "meta": "Jogo de tabuleiro, 2024", "lead": "Jogo de tabuleiro com mecânicas de RPG num universo distópico, criado do zero: regras, progressão, identidade visual e mundo.", "facts": [["Cliente", "Projeto acadêmico (universidade)"], ["Público", "Jogadores de RPG e de tabuleiro, de 16 a 35 anos"], ["Ferramentas", "Illustrator, Photoshop, InDesign, Figma"]], "cols": [["Desafio", "Equilibrar jogabilidade estratégica, regras claras e uma identidade visual forte, sem virar um jogo bonito e raso."], ["Processo", "Conceito narrativo, protótipos de movimento, combate e progressão, identidade em alto contraste (preto, branco e vermelho), ilustrações de cartas e personagens, tabuleiro, peças e manuais, com várias rodadas de teste."], ["Resultado", "Um jogo completo e funcional, com regras próprias e forte coesão entre narrativa e mecânica."]], "pages": ["arma-1", "arma-2", "arma-3", "arma-4", "arma-5"]}};
+  const I18N = {"ui": {"nav.skip": "Skip to content", "nav.home": "Guima, back to the top", "nav.aria": "Sections", "nav.projects": "Projects", "nav.ilu": "Illustration", "nav.sites": "Websites", "nav.video": "Video", "nav.about": "About", "nav.contact": "Contact", "nav.menu": "Menu", "common.close": "Close", "common.case": "View case study", "common.prev": "Previous", "common.next": "Next", "hero.meta": "Guilherme Carvalho, graphic designer", "paint.aria": "Paint the T-shirt", "paint.title": "Paint the T-shirt", "paint.color": "Color", "paint.effect": "Effect", "paint.shape": "Shape", "paint.black": "Black", "paint.blue": "Blue", "paint.yellow": "Yellow", "paint.red": "Red", "paint.green": "Green", "paint.pink": "Pink", "paint.fluid": "Fluid", "paint.solid": "Paint", "paint.rainbow": "Rainbow", "paint.brush": "Brush", "paint.stars": "Stars", "paint.dots": "Dots", "paint.clear": "Clear", "hero.h1": "Guilherme Carvalho, graphic designer in São Paulo", "hero.sub": "Graphic designer in São Paulo", "hero.alt": "Guima, Guilherme's 3D character, waving with both hands", "hero.cue": "Scroll", "sd.meta": "Visual identity, art direction and campaign", "sd.alt1": "StratosDrive logo in cream on burgundy", "sd.alt2": "StratosDrive business cards in burgundy, cream and black", "sd.lead": "A premium car rental brand for business and leisure travel. All of its communication grows out of one line: “Discover the direction you deserve.”", "sd.count": "16 pages", "prumo.meta": "Visual identity and motion", "prumo.alt1": "Prumo logo in white on gray concrete", "prumo.alt2": "Prumo black stationery: notebook, business cards, envelope, badge and cup", "prumo.lead": "A website studio that brings together strategy, design and technology. The identity comes from the plumb bob, the tool that guides construction with precision.", "prumo.count": "10 pages", "gazz.meta": "Brand, packaging and 3D retail", "gazz.alt1": "Gazz Energy logo in white and green on navy blue", "gazz.alt2": "Gazz Energy cans in Citrus, Blueberry and Açaí flavors", "gazz.lead": "An energy supplement brand created for the IED challenge in partnership with Magazine Luiza, from the logo to the store.", "gazz.count": "15 pages", "book.meta": "Illustrated children's book", "book.altback": "Back cover of the book, with the synopsis about the fires in the Pantanal", "book.altfront": "Front cover of the book Do Verde às Cinzas", "book.cap": "Front and back cover", "book.spread": "Open book. Click the right side to go forward and the left side to go back.", "book.prev": "Previous pages", "book.next": "Next pages", "book.lead": "A book about the fires in the Pantanal, made with Gustavo Mendes as a college project in partnership with Leiturinha. Every illustration was hand-drawn in Procreate.", "book.full": "View the full book", "book.about": "About the project", "book.count": "PDF, 24 pages", "arma.meta": "Board game", "arma.c1": "Visual identity", "arma.c2": "Cards", "arma.c3": "Board", "arma.c4": "Rules", "arma.c5": "World", "arma.lead": "A board game with RPG mechanics set in a dystopian world, built from scratch: rules, progression, visual identity and world.", "arma.hint": "Click a card to see the image in the case study.", "arma.shuffle": "Shuffle", "ilu.meta": "Hand-drawn in Procreate", "ilu.count": "9 illustrations", "ilu.a1": "Portrait of a girl with brown hair on a patterned lilac background", "ilu.a2": "Portrait of a woman with long hair on a green background", "ilu.a3": "Girl sitting at a school desk, drawing, on a purple background", "ilu.a4": "Cartoon duck wearing glasses on a pink and purple background", "ilu.a5": "Young man in sunglasses and a striped bee outfit on a yellow background", "ilu.a6": "Character jumping with green flaming hair on a blue background", "ilu.a7": "Treehouse with a ladder on a yellow background", "ilu.a8": "Sketch of a character at the wheel of a steamboat, in black line on cream", "ilu.a9": "Orange character lying down on a mustard background", "ilu.chip": "Enlarge", "ilu.lead": "Hand-drawn work. The book Do Verde às Cinzas was made entirely in Procreate, and here are a few portraits too. Drag sideways to see them all.", "ilu.btn": "View full screen", "ilu.scroll": "Scroll through the illustrations", "ilu.dlg": "Enlarged illustration", "sites.meta": "Websites already live", "sites.meta2": "They open right here", "sites.chip": "Browse it here", "sites.lead": "<b>Hold Corretora<\/b>, a consultancy specialized in consortium plans, and <b>Prumo Estúdio<\/b>, a digital studio that brings together strategy, design and technology.", "video.meta": "Reels for social media", "video.meta2": "More coming soon", "video.lead": "Vertical video for social media, with on-screen captions. Upcoming videos will land here, and the arrows on the iPad move from one to the next.", "video.r1": "Reels for social media", "video.soon": "Coming soon", "video.soonsub": "Next video", "video.screen": "Reels. Use the up and down arrows to switch videos.", "video.prev": "Previous video", "video.next": "Next video", "video.seek": "Video position", "about.meta2": "Résumé in PT and EN", "about.swap": "Switch photo", "about.alt1": "Guilherme Carvalho with his arms crossed", "about.alt2": "Guilherme Carvalho smiling and giving a thumbs up", "about.alt3": "Guilherme Carvalho smiling, with his hands on his face", "about.bio": "I'm Guilherme Carvalho, a graphic designer. I was born in Uberlândia, Minas Gerais, and moved to São Paulo at 18 to specialize in design. I work on visual identity, packaging, illustration, websites and video, from concept to final artwork.", "about.w1": "Packaging design internship · Dec 2024 to Jul 2025", "about.p1": "Corporate stationery, social media artwork, illustrations and image retouching.", "about.h2": "Freelance", "about.w2": "2019 to 2022", "about.p2": "Image retouching and editing, layouts and direct client service, from deadline to delivery.", "about.tools": "Tools", "cv.k1": "Résumé", "cv.s1": "In Portuguese · PDF", "cv.k2": "Résumé", "cv.s2": "In English · PDF", "contact.h2": "Let's talk?", "contact.l1": "Let's", "contact.l2": "Talk?", "contact.wa": "Message on WhatsApp", "web.dlg": "Website opened inside the portfolio", "web.newtab": "Open in a new tab"}, "cases": {"stratosdrive": {"name": "StratosDrive", "meta": "Visual identity, art direction and campaign, 2026", "lead": "A premium car rental brand for business and leisure travel. All of its communication grows out of one line: “Discover the direction you deserve.”", "facts": [["Client", "Concept project"], ["Audience", "Executives on business trips and travelers looking for a premium experience"], ["Tools", "Illustrator, Photoshop, Nano Banana Pro, Artlist, Notion"]], "cols": [["Challenge", "Claim sophisticated territory without the excess of supercar brands, and speak both to someone booking a work trip and to someone planning a weekend away."], ["Process", "Dozens of monograms tested, from geometric constructions to classic serifs, until landing on a less literal symbol. AI was used to explore scenes; the identity, vectorization and art direction came out of the design process."], ["Outcome", "The SD symbol holds up on its own on a key fob, an app icon and the car interior, and seven A4 flyers show the system across different art directions."]], "notes": {"1": ["The project", "StratosDrive is a premium car rental company built for both corporate and leisure travel. Its territory is accessible luxury: sophistication and trust, without the excess of supercar rental brands."], "2": ["Exploration", "Before reaching the final symbol, I tested geometric monograms, classic serif constructions and icons tied to roads, compasses and direction. They all said “car”. None of them said StratosDrive yet."], "3": ["The symbol", "The monogram is born from the initials S and D, joined in a single continuous stroke. The rounded curves echo contemporary automotive design, and the horizontal slant carries a sense of motion."], "5": ["Colors", "Burgundy #681D2A and Cream #F2E8D5. The burgundy adds depth and a more mature reading of the brand; the cream gives it room to breathe and keeps the identity away from the black and gold the premium segment defaults to."], "6": ["Applications", "The symbol alone carries the brand on a key fob, an app icon, a business card or a detail inside the car. Elsewhere the full signature takes the lead, and the system stays recognizable at both levels."], "9": ["Campaign", "Seven A4 flyers, the same content, seven different art directions: full-bleed photo, editorial layout, aerial view, car interior, night scene and automotive detail. Color, type and atmosphere keep them all in the same family."], "16": ["Outcome", "More than a logo: a visual system that joins the automotive world with a premium lifestyle language. The value isn't only in the car you pick, but in how you choose to get there."]}}, "prumo": {"name": "Prumo", "meta": "Visual identity and motion, 2025", "lead": "A website studio that brings together strategy, design and technology. The identity comes from the plumb bob, the tool that guides construction with precision.", "facts": [["Client", "Self-initiated project"], ["Audience", "Brands and businesses that value precision and a strong digital presence"], ["Tools", "Illustrator, Photoshop, After Effects, Figma"]], "cols": [["Challenge", "Express precision and direction without feeling cold or overly technical, with one concept that works as a symbol, as motion and as a system."], ["Process", "A geometric wordmark where the O becomes the plumb bob itself, an animation of the plumb falling until it finds its axis, Neue Haas Unica as the primary typeface and a black-and-white palette with concrete and metal textures."], ["Outcome", "A cohesive system, from the animated logo to the stationery, presented as one continuous vertical narrative."]]}, "gazz-energy": {"name": "Gazz Energy", "meta": "Brand, packaging and 3D retail, 2025", "lead": "An energy supplement brand created for the IED challenge in partnership with Magazine Luiza, from the logo to the store.", "facts": [["Client", "IED (Istituto Europeo di Design) and Magazine Luiza"], ["Audience", "Young urban adults, 18 to 35"], ["Tools", "Illustrator, Photoshop, Blender, Figma"]], "cols": [["Challenge", "Stand out in a category dominated by brands like Red Bull, with an inclusive identity that feels energetic without pushing diverse audiences away."], ["Process", "Three visual pillars (geometric type, motion and color versatility), packaging as sachet, can and bottle in Citrus, Blueberry and Açaí flavors, and the whole store modeled in Blender."], ["Outcome", "A complete brand system, from strategic positioning to a physical 3D experience."]]}, "do-verde-as-cinzas": {"name": "Do Verde às Cinzas", "meta": "Illustrated children's book, 2024", "lead": "A book about the fires in the Pantanal, made with Gustavo Mendes as a college project in partnership with Leiturinha. Every illustration was hand-drawn in Procreate.", "facts": [["Client", "Leiturinha (academic project)"], ["Audience", "Early readers, families and educators"], ["Tools", "Procreate, InDesign"]], "cols": [["Challenge", "Talk about wildfires and environmental destruction with sensitivity, in a way children understand, without losing the lightness of a children's book."], ["Process", "Page-by-page script and storyboard, illustrations in a palette that moves from vivid green to gray as the fire spreads, and layout and print production in InDesign."], ["Outcome", "A complete book, from front to back cover, that uses color itself to tell the story."]]}, "armagedom": {"name": "Armagedom", "meta": "Board game, 2024", "lead": "A board game with RPG mechanics set in a dystopian world, built from scratch: rules, progression, visual identity and world.", "facts": [["Client", "Academic project (university)"], ["Audience", "RPG and board game players, 16 to 35"], ["Tools", "Illustrator, Photoshop, InDesign, Figma"]], "cols": [["Challenge", "Balance strategic gameplay, clear rules and a strong visual identity, without ending up as a pretty but shallow game."], ["Process", "Narrative concept, prototypes for movement, combat and progression, a high-contrast identity (black, white and red), card and character illustrations, board, pieces and manuals, with several rounds of playtesting."], ["Outcome", "A complete, working game with its own rules and strong cohesion between narrative and mechanics."]]}}};
+  const INFO = {
+    stratosdrive: { dir: "sd", tone: "2" },
+    prumo: { dir: "prumo", tone: "3" },
+    "gazz-energy": { dir: "gazz", tone: "5" },
+    "do-verde-as-cinzas": { dir: "book", tone: "4", pdf: "/img/book/do-verde-as-cinzas.pdf" },
+    armagedom: { dir: "arma", tone: "2" },
+  };
+  const ORDER = Object.keys(INFO);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  const fine = matchMedia("(hover: hover) and (pointer: fine)");
+  const desk = matchMedia("(min-width: 1100px) and (hover: hover) and (pointer: fine)");
+  const store = {
+    get: (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) { /* sem armazenamento: segue sem lembrar */ } },
+  };
+  let lang = store.get("gc-lang") === "en" ? "en" : "pt";
+  const T = (pt, en) => (lang === "en" ? en : pt);
+  const hooks = [];
+  const TAU = Math.PI * 2;
+
+  /* Nomes: mesmo espaçamento, tamanho até encostar na borda (com teto), alinhados pela tinta da primeira letra */
+  const meter = document.createElement("canvas").getContext("2d");
+  const fitName = (el) => {
+    const avail = el.parentElement.clientWidth;
+    if (!avail || !el.getClientRects().length) return;
+    const mobile = innerWidth < 900;
+    el.style.marginLeft = "0px";
+    el.style.fontSize = "10cqi";
+    const px10 = parseFloat(getComputedStyle(el).fontSize);
+    const size = Math.min(10 * avail / el.getBoundingClientRect().width, mobile ? 18 : 12);
+    el.style.fontSize = size + "cqi";
+    const px = px10 * size / 10;
+    meter.font = `800 ${px}px Gellix`;
+    const m = meter.measureText(el.textContent.toUpperCase());
+    el.style.marginLeft = m.actualBoundingBoxLeft + "px";
+    // letra que desce abaixo da linha (a cedilha do Ç): abre espaço embaixo para não encostar no que vem depois
+    if (m.fontBoundingBoxDescent != null) {
+      const lh = parseFloat(getComputedStyle(el).lineHeight) || px * .8;
+      const below = (lh - m.fontBoundingBoxAscent - m.fontBoundingBoxDescent) / 2 + m.fontBoundingBoxDescent;
+      el.style.paddingBottom = Math.max(px * .08, m.actualBoundingBoxDescent - below + px * .07) + "px";
+    }
+  };
+  const fitAll = () => document.querySelectorAll(".fit").forEach(fitName);
+
+  /* Barra do topo com a cor do cartaz que passa embaixo dela */
+  const nav = document.getElementById("nav");
+  const posters = [...document.querySelectorAll(".pst")];
+  const navLinks = [...nav.querySelectorAll("a[data-group]")];
+  let navTick = false;
+  const syncNav = () => {
+    navTick = false;
+    const line = nav.offsetHeight;
+    const cur = posters.find((p) => { const r = p.getBoundingClientRect(); return r.top <= line && r.bottom > line; }) || posters[0];
+    const cs = getComputedStyle(cur);
+    nav.style.setProperty("--nav-bg", cs.getPropertyValue("--bg"));
+    nav.style.setProperty("--nav-ink", cs.getPropertyValue("--ink"));
+    navLinks.forEach((a) => a.setAttribute("aria-current", String(a.dataset.group === cur.dataset.group)));
+  };
+  addEventListener("scroll", () => { if (!navTick) { navTick = true; requestAnimationFrame(syncNav); } }, { passive: true });
+
+  /* Menu do celular */
+  const menu = document.getElementById("menu"), menuBtn = nav.querySelector(".menu-btn");
+  const setMenu = (open, focusBack) => {
+    menu.hidden = !open;
+    menuBtn.setAttribute("aria-expanded", String(open));
+    document.body.style.overflow = open ? "hidden" : "";
+    if (open) menu.querySelector("a").focus();
+    else if (focusBack) menuBtn.focus();
+  };
+  menuBtn.addEventListener("click", () => setMenu(true));
+  menu.querySelector(".menu-close").addEventListener("click", () => setMenu(false, true));
+  menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
+  addEventListener("keydown", (e) => { if (e.key === "Escape" && !menu.hidden) setMenu(false, true); });
+
+  /* Tema claro e escuro */
+  const themeBtn = document.getElementById("theme");
+  const themeLabel = () => themeBtn.setAttribute("aria-label", root.dataset.theme === "dark" ? T("Mudar para o tema claro", "Switch to light theme") : T("Mudar para o tema escuro", "Switch to dark theme"));
+  const setTheme = (t) => { root.dataset.theme = t; themeBtn.setAttribute("aria-pressed", String(t === "dark")); themeLabel(); requestAnimationFrame(syncNav); };
+  themeBtn.addEventListener("click", () => { const t = root.dataset.theme === "dark" ? "light" : "dark"; store.set("gc-theme", t); setTheme(t); });
+  hooks.push(themeLabel);
+
+  /* Idioma: o português fica no HTML; o inglês vem do dicionário */
+  const i18nEls = [...document.querySelectorAll("[data-i18n]")];
+  const i18nAttrEls = [...document.querySelectorAll("[data-i18n-attr]")];
+  i18nEls.forEach((el) => { el.dataset.pt = el.innerHTML; });
+  i18nAttrEls.forEach((el) => el.dataset.i18nAttr.split(";").forEach((pair) => { const attr = pair.split("=")[0]; el.setAttribute("data-pt-" + attr, el.getAttribute(attr) || ""); }));
+  const langBtn = document.getElementById("lang");
+  const applyLang = () => {
+    root.lang = lang === "en" ? "en" : "pt-BR";
+    i18nEls.forEach((el) => { const v = lang === "en" ? I18N.ui[el.dataset.i18n] : null; el.innerHTML = v ?? el.dataset.pt; });
+    i18nAttrEls.forEach((el) => el.dataset.i18nAttr.split(";").forEach((pair) => {
+      const [attr, key] = pair.split("=");
+      const v = lang === "en" ? I18N.ui[key] : null;
+      el.setAttribute(attr, v ?? el.getAttribute("data-pt-" + attr));
+    }));
+    langBtn.setAttribute("aria-label", T("Mudar para inglês", "Switch to Portuguese"));
+    hooks.forEach((fn) => fn());
+    fitAll();
+  };
+  langBtn.addEventListener("click", () => { lang = lang === "en" ? "pt" : "en"; store.set("gc-lang", lang); applyLang(); placeFace(); });
+
+  /* Camiseta: passar o mouse deixa um rastro de fluido que some rápido.
+     No computador dá para pintar de verdade: cor, efeito e forma. A tinta pega a sombra do tecido. */
+  const stage = document.getElementById("stage");
+  const shirtImg = stage.querySelector(".ch");
+  const fabric = stage.querySelector(".fabric"), fctx = fabric.getContext("2d");
+  const loadImg = (src) => { const i = new Image(); i.src = src; return i; };
+  const blackImg = loadImg("/img/c-wave-black.webp"), maskImg = loadImg("/img/c-wave-shirt-mask-v2.png");
+  const dock = document.getElementById("paint"), paintHint = document.getElementById("paint-hint");
+  const makeCanvas = () => { const c = document.createElement("canvas"); return [c, c.getContext("2d")]; };
+  const [paintC, pctx] = makeCanvas(), [inkC, ictx] = makeCanvas(), [texC, tctx] = makeCanvas();
+  const [sa, sactx] = makeCanvas(), [sb, sbctx] = makeCanvas();
+  const BLACK = "#26282E";
+  const P = { color: BLACK, effect: reduce.matches ? "solid" : "fluid", shape: "brush" };
+  let W = 0, H = 0, texKey = "", painted = false, blobs = [], last = null, frame = 0, down = null, hue = 210, sprayRaf = 0;
+  let hit = null, HH = 0;
+  const HW = 150;
+  const loaded = (i) => i.complete && i.naturalWidth > 0;
+  const buildHit = () => {
+    const c = document.createElement("canvas");
+    HH = c.height = Math.round(HW * maskImg.naturalHeight / maskImg.naturalWidth);
+    c.width = HW;
+    const x = c.getContext("2d", { willReadFrequently: true });
+    x.drawImage(maskImg, 0, 0, HW, HH);
+    hit = x.getImageData(0, 0, HW, HH).data;
+  };
+  if (loaded(maskImg)) buildHit(); else maskImg.addEventListener("load", buildHit);
+  const ready = () => hit && loaded(shirtImg) && loaded(blackImg);
+  const onShirt = (u, v) => hit && u >= 0 && u < 1 && v >= 0 && v < 1 && hit[(Math.floor(v * HH) * HW + Math.floor(u * HW)) * 4 + 3] > 60;
+  const sizeAll = () => {
+    const r = stage.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2);
+    const w = Math.round(r.width * d), h = Math.round(r.height * d);
+    if (!w || !h || (w === W && h === H)) return;
+    let keep = null;
+    if (painted) { [keep] = makeCanvas(); keep.width = W; keep.height = H; keep.getContext("2d").drawImage(paintC, 0, 0); }
+    W = fabric.width = paintC.width = inkC.width = texC.width = w;
+    H = fabric.height = paintC.height = inkC.height = texC.height = h;
+    if (keep) pctx.drawImage(keep, 0, 0, W, H);
+    texKey = "";
+  };
+  // recorte de uma imagem do personagem na mesma escala do canvas
+  const crop = (ctx, im, x, y, w, h) => {
+    const kx = im.naturalWidth / W, ky = im.naturalHeight / H;
+    ctx.drawImage(im, x * kx, y * ky, w * kx, h * ky, 0, 0, w, h);
+  };
+  // tecido tingido: o preto usa a camiseta preta renderizada; as outras cores multiplicam a camiseta branca
+  const tint = (ctx, color, x, y, w, h) => {
+    ctx.globalCompositeOperation = "copy";
+    crop(ctx, color === BLACK ? blackImg : shirtImg, x, y, w, h);
+    if (color !== BLACK) { ctx.globalCompositeOperation = "multiply"; ctx.fillStyle = color; ctx.fillRect(0, 0, w, h); }
+    ctx.globalCompositeOperation = "destination-in";
+    crop(ctx, maskImg, x, y, w, h);
+    ctx.globalCompositeOperation = "source-over";
+  };
+  // desenha uma forma em preto, troca pelo tecido tingido e grava na camada de tinta
+  const stamp = (bx, color, draw) => {
+    const x = Math.max(0, Math.floor(bx[0])), y = Math.max(0, Math.floor(bx[1]));
+    const w = Math.min(W, Math.ceil(bx[2])) - x, h = Math.min(H, Math.ceil(bx[3])) - y;
+    if (w <= 0 || h <= 0) return;
+    if (sa.width < w || sa.height < h) { sa.width = sb.width = Math.max(sa.width, w); sa.height = sb.height = Math.max(sa.height, h); }
+    tint(sactx, color, x, y, w, h);
+    sbctx.globalCompositeOperation = "source-over";
+    sbctx.clearRect(0, 0, w, h);
+    sbctx.setTransform(1, 0, 0, 1, -x, -y);
+    sbctx.fillStyle = sbctx.strokeStyle = "#000";
+    draw(sbctx);
+    sbctx.setTransform(1, 0, 0, 1, 0, 0);
+    sbctx.globalAlpha = 1;
+    sbctx.globalCompositeOperation = "source-in";
+    sbctx.drawImage(sa, 0, 0, w, h, 0, 0, w, h);
+    sbctx.globalCompositeOperation = "source-over";
+    pctx.drawImage(sb, 0, 0, w, h, x, y, w, h);
+    painted = true;
+  };
+  const bounds = (pts, pad) => {
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    for (const q of pts) { x0 = Math.min(x0, q[0]); y0 = Math.min(y0, q[1]); x1 = Math.max(x1, q[0]); y1 = Math.max(y1, q[1]); }
+    return [x0 - pad, y0 - pad, x1 + pad, y1 + pad];
+  };
+  const shapes = {
+    brush(a, b, color) {
+      const bw = W * .026, len = Math.hypot(b.x - a.x, b.y - a.y) || 1;
+      const nx = -(b.y - a.y) / len, ny = (b.x - a.x) / len;
+      stamp(bounds([[a.x, a.y], [b.x, b.y]], bw), color, (c) => {
+        c.lineCap = c.lineJoin = "round";
+        c.lineWidth = bw;
+        c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke();
+        c.lineWidth = bw * .16;
+        c.globalAlpha = .55;
+        for (const k of [-.62, .6]) { c.beginPath(); c.moveTo(a.x + nx * bw * k, a.y + ny * bw * k); c.lineTo(b.x + nx * bw * k, b.y + ny * bw * k); c.stroke(); }
+      });
+    },
+    spray(pts, color, n = 22) {
+      const R = W * .05, dots = [];
+      for (const q of pts) for (let i = 0; i < n; i++) {
+        const t = Math.random() * TAU, r = R * Math.pow(Math.random(), 1.8);
+        dots.push([q.x + Math.cos(t) * r, q.y + Math.sin(t) * r, W * (.001 + Math.random() * .0026)]);
+      }
+      stamp(bounds(dots, W * .005), color, (c) => {
+        c.beginPath();
+        for (const [x, y, s] of dots) { c.moveTo(x + s, y); c.arc(x, y, s, 0, TAU); }
+        c.fill();
+      });
+    },
+    stars(pts, color) {
+      const list = pts.map((q) => [q.x + (Math.random() - .5) * W * .035, q.y + (Math.random() - .5) * W * .035, W * (.015 + Math.random() * .02), Math.random() * TAU]);
+      stamp(bounds(list, W * .05), color, (c) => {
+        c.lineJoin = "round";
+        for (const [x, y, r, rot] of list) {
+          c.beginPath();
+          for (let i = 0; i < 10; i++) { const rr = i % 2 ? r * .46 : r, t = rot + i * Math.PI / 5; c.lineTo(x + Math.cos(t) * rr, y + Math.sin(t) * rr); }
+          c.closePath();
+          c.lineWidth = r * .22;
+          c.fill();
+          c.stroke();
+        }
+      });
+    },
+    // bolinhas numa grade fixa, como estampa de poá: arrastar revela a estampa
+    dots(pts, color) {
+      const g = W * .045, R = W * .065, s = g * .3, row = g * .866, list = [];
+      for (const q of pts) {
+        for (let j = Math.floor((q.y - R) / row); j <= Math.ceil((q.y + R) / row); j++) {
+          const y = j * row, off = j & 1 ? g / 2 : 0;
+          for (let i = Math.floor((q.x - R - off) / g); i <= Math.ceil((q.x + R - off) / g); i++) {
+            const x = i * g + off, key = i + ":" + j;
+            if (Math.hypot(x - q.x, y - q.y) > R || down.seen.has(key)) continue;
+            down.seen.add(key);
+            list.push([x, y]);
+          }
+        }
+      }
+      if (list.length) stamp(bounds(list, s + 2), color, (c) => { c.beginPath(); for (const [x, y] of list) { c.moveTo(x + s, y); c.arc(x, y, s, 0, TAU); } c.fill(); });
+    },
+  };
+  const colorNow = () => (P.effect === "rainbow" ? `hsl(${Math.round(hue)} 88% 56%)` : P.color);
+  const STEP = { spray: .02, stars: .06, dots: .03 };
+  const paintTo = (b) => {
+    const a = { x: down.x, y: down.y }, dist = Math.hypot(b.x - a.x, b.y - a.y);
+    if (P.effect === "rainbow") hue = (hue + dist / W * 480) % 360;
+    const color = colorNow();
+    if (P.shape === "brush") shapes.brush(a, b, color);
+    else {
+      // pontos com o mesmo espaçamento ao longo do caminho, mesmo com o mouse rápido
+      const step = W * STEP[P.shape], pts = [];
+      let d = step - down.acc;
+      while (d <= dist) { const k = d / dist; pts.push({ x: a.x + (b.x - a.x) * k, y: a.y + (b.y - a.y) * k }); d += step; }
+      down.acc = dist - (d - step);
+      if (pts.length) shapes[P.shape](pts, color);
+    }
+    down.x = b.x;
+    down.y = b.y;
+    kick();
+  };
+  const sprayTick = () => {
+    if (!down || P.shape !== "spray") return;
+    if (P.effect === "rainbow") hue = (hue + 1.2) % 360;
+    shapes.spray([down], colorNow(), 8);
+    kick();
+    sprayRaf = requestAnimationFrame(sprayTick);
+  };
+  const render = () => {
+    frame = 0;
+    if (!W) return;
+    const now = performance.now();
+    blobs = blobs.filter((b) => now - b.t0 < b.life);
+    fctx.globalCompositeOperation = "source-over";
+    fctx.clearRect(0, 0, W, H);
+    if (blobs.length) {
+      const key = P.color + W + "x" + H;
+      if (texKey !== key) { tint(tctx, P.color, 0, 0, W, H); texKey = key; }
+      ictx.clearRect(0, 0, W, H);
+      for (const b of blobs) {
+        const k = (now - b.t0) / b.life;
+        const x = b.x + b.vx * k, y = b.y + b.vy * k, r = b.r * (1 + k * .8), al = Math.pow(1 - k, 1.5);
+        const g = ictx.createRadialGradient(x, y, 0, x, y, r);
+        g.addColorStop(0, `rgba(0,0,0,${al})`);
+        g.addColorStop(.55, `rgba(0,0,0,${al * .7})`);
+        g.addColorStop(1, "rgba(0,0,0,0)");
+        ictx.fillStyle = g;
+        ictx.beginPath();
+        ictx.arc(x, y, r, 0, TAU);
+        ictx.fill();
+      }
+      fctx.globalCompositeOperation = "copy";
+      fctx.drawImage(inkC, 0, 0);
+      fctx.globalCompositeOperation = "source-in";
+      fctx.drawImage(texC, 0, 0);
+      fctx.globalCompositeOperation = "destination-over";
+    }
+    if (painted) fctx.drawImage(paintC, 0, 0);
+    fctx.globalCompositeOperation = "source-over";
+    if (blobs.length) frame = requestAnimationFrame(render);
+  };
+  const kick = () => { if (!frame) frame = requestAnimationFrame(render); };
+  const at = (e) => {
+    const r = stage.getBoundingClientRect(), u = (e.clientX - r.left) / r.width, v = (e.clientY - r.top) / r.height;
+    return { x: u * W, y: v * H, on: onShirt(u, v) };
+  };
+  // sem a paleta (tela menor ou sem espaço ao lado das letras), fica só o rastro; com movimento reduzido, nem ele
+  const canPaint = () => desk.matches && !dock.classList.contains("no-room");
+  const mode = () => (canPaint() ? P.effect : reduce.matches ? "" : "fluid");
+  const roomForDock = () => {
+    dock.classList.remove("no-room");
+    if (!desk.matches) return;
+    const a = dock.getBoundingClientRect(), l = stage.querySelector(".logo.fill use").getBoundingClientRect();
+    dock.classList.toggle("no-room", a.right > l.left - 12 && a.left < l.right + 12 && a.bottom > l.top - 12 && a.top < l.bottom + 12);
+  };
+  stage.addEventListener("pointermove", (e) => {
+    if (!fine.matches || !ready()) return;
+    sizeAll();
+    const p = at(e), m = mode();
+    stage.classList.toggle("can-paint", m === "solid" || m === "rainbow");
+    if (down) { if (e.pointerId === down.id) paintTo(p); return; }
+    if (m !== "fluid" || !p.on) { last = null; return; }
+    const now = performance.now();
+    const dx = last ? p.x - last.x : 0, dy = last ? p.y - last.y : 0;
+    const steps = Math.max(1, Math.min(12, Math.ceil(Math.hypot(dx, dy) / (W * .018))));
+    for (let i = 1; i <= steps; i++) {
+      const px = last ? last.x + dx * i / steps : p.x, py = last ? last.y + dy * i / steps : p.y, j = W * .012;
+      blobs.push({ x: px + (Math.random() - .5) * j, y: py + (Math.random() - .5) * j, vx: dx * (.8 + Math.random()), vy: dy * (.8 + Math.random()), r: W * (.04 + Math.random() * .03), t0: now, life: 520 + Math.random() * 380 });
+    }
+    if (blobs.length > 180) blobs.splice(0, blobs.length - 180);
+    last = { x: p.x, y: p.y };
+    kick();
+  });
+  stage.addEventListener("pointerdown", (e) => {
+    if (e.button !== 0 || e.pointerType === "touch" || !canPaint() || P.effect === "fluid" || !ready()) return;
+    sizeAll();
+    const p = at(e);
+    e.preventDefault();
+    stage.setPointerCapture(e.pointerId);
+    down = { id: e.pointerId, x: p.x, y: p.y, acc: 0, seen: new Set() };
+    const color = colorNow();
+    if (P.shape === "brush") shapes.brush(p, p, color);
+    else shapes[P.shape]([p], color);
+    cancelAnimationFrame(sprayRaf);
+    if (P.shape === "spray") sprayRaf = requestAnimationFrame(sprayTick);
+    kick();
+  });
+  const release = (e) => { if (down && e.pointerId === down.id) { down = null; cancelAnimationFrame(sprayRaf); } };
+  ["pointerup", "pointercancel", "lostpointercapture"].forEach((t) => stage.addEventListener(t, release));
+  stage.addEventListener("pointerleave", () => { last = null; if (!down) stage.classList.remove("can-paint"); });
+  stage.addEventListener("dragstart", (e) => e.preventDefault());
+  const clearPaint = () => {
+    const wipe = () => { pctx.clearRect(0, 0, W, H); painted = false; blobs = []; last = null; render(); };
+    if (!painted || reduce.matches || !fabric.animate) { wipe(); return; }
+    const anim = fabric.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 280, easing: "ease-out", fill: "forwards" });
+    anim.onfinish = () => { wipe(); anim.cancel(); };
+  };
+  const syncDock = () => {
+    dock.querySelectorAll("[data-color]").forEach((b) => { b.setAttribute("aria-pressed", String(b.dataset.color === P.color)); b.disabled = P.effect === "rainbow"; });
+    dock.querySelectorAll("[data-effect]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.effect === P.effect)));
+    dock.querySelectorAll("[data-shape]").forEach((b) => { b.setAttribute("aria-pressed", String(b.dataset.shape === P.shape)); b.disabled = P.effect === "fluid"; });
+    dock.querySelector(".sw-row").classList.toggle("off", P.effect === "rainbow");
+    document.getElementById("paint-shape").classList.toggle("off", P.effect === "fluid");
+    paintHint.textContent = P.effect === "fluid" ? T("Passe o mouse na camiseta.", "Move your mouse over the T-shirt.") : T("Clique e arraste na camiseta.", "Click and drag on the T-shirt.");
+  };
+  hooks.push(syncDock);
+  dock.addEventListener("click", (e) => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    if (b.dataset.color) P.color = b.dataset.color;
+    if (b.dataset.effect) P.effect = b.dataset.effect;
+    if (b.dataset.shape) P.shape = b.dataset.shape;
+    if (b.id === "paint-clear") clearPaint();
+    syncDock();
+  });
+
+  /* Livro: folhear o livro aberto; passar o mouse na miniatura mostra a página dupla */
+  const spread = document.getElementById("spread"), pgL = document.getElementById("pg-l"), pgR = document.getElementById("pg-r");
+  const spreadCount = document.getElementById("spread-count"), thumbs = document.getElementById("thumbs");
+  const thumbBtns = [...thumbs.querySelectorAll("button")];
+  const pageSrc = (n) => `/img/book/p${String(n).padStart(2, "0")}.jpg`;
+  let sel = 0, shown = 0, turnTimer = 0;
+  const bookLabels = () => {
+    spreadCount.textContent = T(`Páginas ${2 * sel + 2} e ${2 * sel + 3}`, `Pages ${2 * sel + 2} and ${2 * sel + 3}`);
+    thumbBtns.forEach((b, k) => b.setAttribute("aria-label", T(`Páginas ${2 * k + 2} e ${2 * k + 3}`, `Pages ${2 * k + 2} and ${2 * k + 3}`)));
+    pgL.alt = T(`Página ${2 * shown + 2} do livro`, `Page ${2 * shown + 2} of the book`);
+    pgR.alt = T(`Página ${2 * shown + 3} do livro`, `Page ${2 * shown + 3} of the book`);
+  };
+  hooks.push(bookLabels);
+  const showSpread = (i, preview) => {
+    i = (i + thumbBtns.length) % thumbBtns.length;
+    if (!preview) {
+      sel = i;
+      thumbBtns.forEach((b, k) => b.setAttribute("aria-current", String(k === i)));
+      const b = thumbBtns[i];
+      thumbs.scrollTo({ left: b.offsetLeft - thumbs.clientWidth / 2 + b.offsetWidth / 2, behavior: reduce.matches ? "auto" : "smooth" });
+    }
+    if (i !== shown) {
+      shown = i;
+      const l = 2 * i + 2, r = l + 1;
+      [l, r].forEach((n) => { new Image().src = pageSrc(n); });
+      const swap = () => { pgL.src = pageSrc(l); pgR.src = pageSrc(r); spread.classList.remove("turning"); bookLabels(); };
+      clearTimeout(turnTimer);
+      if (reduce.matches) swap();
+      else { spread.classList.add("turning"); turnTimer = setTimeout(swap, 200); }
+    }
+    bookLabels();
+  };
+  thumbBtns.forEach((b, k) => {
+    b.addEventListener("click", () => showSpread(k));
+    b.addEventListener("pointerenter", () => { if (fine.matches) showSpread(k, true); });
+  });
+  thumbs.addEventListener("pointerleave", () => { if (fine.matches) showSpread(sel, true); });
+  document.querySelectorAll(".sp-btn").forEach((b) => b.addEventListener("click", () => showSpread(sel + Number(b.dataset.step))));
+  spread.addEventListener("click", (e) => { const r = spread.getBoundingClientRect(); showSpread(sel + (e.clientX < r.left + r.width / 2 ? -1 : 1)); });
+  spread.addEventListener("keydown", (e) => {
+    if (["ArrowRight", "Enter", " "].includes(e.key)) { e.preventDefault(); showSpread(sel + 1); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); showSpread(sel - 1); }
+  });
+
+  /* Armagedom: as cartas ficam viradas para cima; clicar abre a imagem no estudo de caso */
+  const deck = document.getElementById("deck");
+  const gcards = [...deck.querySelectorAll(".gcard")];
+  let shuffling = false;
+  const deckLabels = () => gcards.forEach((c) => {
+    const num = c.querySelector(".gc-n").textContent, label = c.querySelector(".gc-t").textContent;
+    c.setAttribute("aria-label", T(`Carta ${num}, ${label}. Ver no estudo de caso.`, `Card ${num}, ${label}. See it in the case study.`));
+  });
+  hooks.push(deckLabels);
+  gcards.forEach((c) => c.addEventListener("click", () => { if (!shuffling) openCase("armagedom", Number(c.dataset.page)); }));
+  // embaralhar: vira todas, junta no meio, espalha em outra ordem e desvira uma a uma
+  document.getElementById("shuffle").addEventListener("click", () => {
+    if (shuffling) return;
+    shuffling = true;
+    const q = reduce.matches ? 0 : 1;
+    gcards.forEach((c) => c.classList.add("down"));
+    setTimeout(() => gcards.forEach((c) => c.style.setProperty("--i", "2")), 350 * q);
+    setTimeout(() => {
+      const order = [...gcards].sort(() => Math.random() - .5);
+      order.forEach((c, k) => c.style.setProperty("--i", String(k)));
+      order.forEach((c, k) => setTimeout(() => c.classList.remove("down"), (260 + 110 * k) * q));
+      setTimeout(() => { order.forEach((c) => deck.append(c)); shuffling = false; }, 1500 * q);
+    }, 950 * q);
+  });
+
+  /* Ilustração: arrastar com o mouse, barra para escolher e tela cheia da que está marcada */
+  const rail = document.querySelector("#ilustracao .rail"), railCards = [...rail.querySelectorAll(".card")];
+  const railScroll = document.getElementById("rail-scroll"), railCount = document.getElementById("rail-count"), iluFull = document.getElementById("ilu-full");
+  let railCur = -1, rangeActive = false, drag = null, eatClick = false;
+  const railMax = () => Math.max(0, rail.scrollWidth - rail.clientWidth);
+  // a posição na barra escolhe a ilustração: começo = primeira, fim = última
+  const setRailCur = (k) => {
+    if (k === railCur) return;
+    railCur = k;
+    railCards.forEach((c, i) => c.classList.toggle("is-cur", i === k));
+    railCount.textContent = `${k + 1} / ${railCards.length}`;
+    iluFull.dataset.ilu = String(k);
+  };
+  const syncRail = () => {
+    const max = railMax(), p = rangeActive ? Number(railScroll.value) / 1000 : max ? rail.scrollLeft / max : 0;
+    if (!rangeActive) railScroll.value = String(Math.round(p * 1000));
+    railScroll.style.setProperty("--p", String(p));
+    setRailCur(Math.round(p * (railCards.length - 1)));
+  };
+  const goRail = (k) => {
+    k = Math.max(0, Math.min(railCards.length - 1, k));
+    rail.scrollTo({ left: railMax() * k / (railCards.length - 1), behavior: reduce.matches ? "auto" : "smooth" });
+    setRailCur(k);
+  };
+  rail.addEventListener("scroll", syncRail, { passive: true });
+  railScroll.addEventListener("input", () => {
+    rangeActive = true;
+    rail.scrollLeft = Number(railScroll.value) / 1000 * railMax();
+    syncRail();
+  });
+  railScroll.addEventListener("change", () => { rangeActive = false; goRail(Math.round(Number(railScroll.value) / 1000 * (railCards.length - 1))); });
+  railScroll.addEventListener("keydown", (e) => {
+    const step = { ArrowRight: 1, ArrowUp: 1, PageUp: 1, ArrowLeft: -1, ArrowDown: -1, PageDown: -1 }[e.key];
+    const k = step ? railCur + step : e.key === "Home" ? 0 : e.key === "End" ? railCards.length - 1 : null;
+    if (k === null) return;
+    e.preventDefault();
+    goRail(k);
+  });
+  rail.addEventListener("pointerdown", (e) => {
+    if (e.pointerType !== "mouse" || e.button !== 0) return;
+    drag = { id: e.pointerId, x: e.clientX, sl: rail.scrollLeft, moved: false, lx: e.clientX, lt: e.timeStamp, v: 0 };
+  });
+  rail.addEventListener("pointermove", (e) => {
+    if (!drag || e.pointerId !== drag.id) return;
+    const dx = e.clientX - drag.x;
+    if (!drag.moved) {
+      if (Math.abs(dx) < 6) return;
+      drag.moved = true;
+      rail.classList.add("is-drag");
+      rail.setPointerCapture(e.pointerId);
+    }
+    const dt = Math.max(1, e.timeStamp - drag.lt);
+    drag.v = .7 * ((e.clientX - drag.lx) / dt) + .3 * drag.v;
+    drag.lx = e.clientX;
+    drag.lt = e.timeStamp;
+    rail.scrollLeft = drag.sl - dx;
+  });
+  const endDrag = (e) => {
+    if (!drag || e.pointerId !== drag.id) return;
+    const d = drag;
+    drag = null;
+    if (!d.moved) return;
+    rail.classList.remove("is-drag");
+    eatClick = true;
+    setTimeout(() => { eatClick = false; }, 0);
+    // solta com impulso e para numa ilustração
+    const v = e.timeStamp - d.lt > 90 ? 0 : d.v, max = railMax();
+    const fling = Math.max(-rail.clientWidth / 2, Math.min(rail.clientWidth / 2, v * 240));
+    const p = max ? Math.max(0, Math.min(1, (rail.scrollLeft - fling) / max)) : 0;
+    goRail(Math.round(p * (railCards.length - 1)));
+  };
+  rail.addEventListener("pointerup", endDrag);
+  rail.addEventListener("pointercancel", endDrag);
+  rail.addEventListener("click", (e) => { if (eatClick) { e.preventDefault(); e.stopPropagation(); eatClick = false; } }, true);
+
+  /* Vídeo: reels num iPad, com setas para cima e para baixo */
+  const REELS = [
+    { t: ["Tavares", "Tavares"], d: ["Reels para redes sociais", "Reels for social media"], dur: 161.9 },
+  ];
+  const screen = document.getElementById("ipad-screen"), track = document.getElementById("reel-track");
+  const reels = [...track.querySelectorAll("video")];
+  const listBtns = [...document.querySelectorAll("#reel-list button[data-reel]")];
+  const navBtns = [...screen.querySelectorAll(".reel-nav .rb")];
+  const playBtn = document.getElementById("rb-play"), soundBtn = document.getElementById("rb-sound"), seek = document.getElementById("rb-seek");
+  const timeEl = document.getElementById("rb-time"), titleEl = document.getElementById("reel-title"), countEl = document.getElementById("reel-count");
+  const fullBtn = document.getElementById("rb-full");
+  const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement;
+  let cur = 0, soundOn = false, reelsVisible = false, wheelLock = 0, swipeY = null;
+  const fmt = (s) => { s = Math.max(0, s || 0); return Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0"); };
+  const vid = () => reels[cur];
+  const syncTime = () => {
+    const v = vid(), d = v.duration || REELS[cur].dur, p = d ? v.currentTime / d : 0;
+    seek.value = String(Math.round(p * 1000));
+    seek.style.setProperty("--p", p * 100 + "%");
+    timeEl.textContent = `${fmt(v.currentTime)} / ${fmt(d)}`;
+  };
+  const syncReel = () => {
+    const r = REELS[cur], L = lang === "en" ? 1 : 0, playing = !vid().paused;
+    titleEl.innerHTML = `<b>${r.t[L]}</b> · ${r.d[L]}`;
+    countEl.textContent = `${cur + 1}/${reels.length}`;
+    countEl.hidden = reels.length < 2;
+    listBtns.forEach((b, i) => b.setAttribute("aria-current", String(i === cur)));
+    const full = !!fsEl();
+    fullBtn.classList.toggle("is-on", full);
+    fullBtn.setAttribute("aria-label", full ? T("Sair da tela cheia", "Exit full screen") : T("Tela cheia", "Full screen"));
+    navBtns[0].disabled = cur === 0;
+    navBtns[1].disabled = cur === reels.length - 1;
+    playBtn.classList.toggle("is-on", playing);
+    playBtn.setAttribute("aria-label", playing ? T("Pausar", "Pause") : T("Reproduzir", "Play"));
+    soundBtn.classList.toggle("is-on", soundOn);
+    soundBtn.setAttribute("aria-pressed", String(soundOn));
+    soundBtn.setAttribute("aria-label", soundOn ? T("Tirar o som", "Mute") : T("Ativar o som", "Turn sound on"));
+  };
+  hooks.push(syncReel);
+  const play = () => { const v = vid(); v.preload = "auto"; v.muted = !soundOn; v.play().then(syncReel, syncReel); };
+  const goReel = (i) => {
+    i = Math.max(0, Math.min(reels.length - 1, i));
+    if (i === cur) return;
+    vid().pause();
+    cur = i;
+    track.style.transform = `translateY(${-100 * i}%)`;
+    if (reelsVisible) play();
+    syncReel();
+    syncTime();
+  };
+  reels.forEach((r, k) => ["timeupdate", "loadedmetadata", "seeked"].forEach((ev) => r.addEventListener(ev, () => { if (k === cur) syncTime(); })));
+  reels.forEach((r, k) => ["play", "pause"].forEach((ev) => r.addEventListener(ev, () => { if (k === cur) syncReel(); })));
+  navBtns.forEach((b) => b.addEventListener("click", () => goReel(cur + Number(b.dataset.dir))));
+  listBtns.forEach((b) => b.addEventListener("click", () => goReel(Number(b.dataset.reel))));
+  playBtn.addEventListener("click", () => { if (vid().paused) play(); else vid().pause(); });
+  soundBtn.addEventListener("click", () => {
+    soundOn = !soundOn;
+    reels.forEach((r) => { r.muted = !soundOn; });
+    if (soundOn && vid().paused) play();
+    syncReel();
+  });
+  // tela cheia: a tela do iPad inteira (com os controles); no iPhone, o player do próprio sistema
+  fullBtn.addEventListener("click", () => {
+    if (fsEl()) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; }
+    if (screen.requestFullscreen) screen.requestFullscreen().catch(() => {});
+    else if (screen.webkitRequestFullscreen) screen.webkitRequestFullscreen();
+    else if (vid().webkitEnterFullscreen) { play(); vid().webkitEnterFullscreen(); }
+  });
+  ["fullscreenchange", "webkitfullscreenchange"].forEach((ev) => document.addEventListener(ev, syncReel));
+  seek.addEventListener("input", () => { const d = vid().duration; if (d) { vid().currentTime = Number(seek.value) / 1000 * d; syncTime(); } });
+  screen.addEventListener("click", (e) => { if (e.target.closest("button, input")) return; if (vid().paused) play(); else vid().pause(); });
+  screen.addEventListener("wheel", (e) => {
+    const dir = Math.sign(e.deltaY);
+    if (Math.abs(e.deltaY) < 8 || (dir > 0 && cur === reels.length - 1) || (dir < 0 && cur === 0)) return;
+    e.preventDefault();
+    const now = Date.now();
+    if (now < wheelLock) return;
+    wheelLock = now + 700;
+    goReel(cur + dir);
+  }, { passive: false });
+  screen.addEventListener("pointerdown", (e) => { if (e.pointerType !== "mouse") swipeY = e.clientY; });
+  screen.addEventListener("pointerup", (e) => {
+    if (swipeY === null) return;
+    const dy = e.clientY - swipeY;
+    swipeY = null;
+    if (Math.abs(dy) > 40) goReel(cur + (dy < 0 ? 1 : -1));
+  });
+  screen.addEventListener("keydown", (e) => {
+    if (e.target !== screen) return;
+    if (e.key === "ArrowDown") { e.preventDefault(); goReel(cur + 1); }
+    if (e.key === "ArrowUp") { e.preventDefault(); goReel(cur - 1); }
+    if (e.key === " " || e.key === "k") { e.preventDefault(); playBtn.click(); }
+    if (e.key === "m") soundBtn.click();
+    if (e.key === "f") fullBtn.click();
+  });
+  new IntersectionObserver(([entry]) => {
+    reelsVisible = entry.isIntersecting;
+    if (!reelsVisible) vid().pause();
+    else if (!reduce.matches) play();
+  }, { threshold: .4 }).observe(screen);
+
+  /* Sobre: a foto de cima vai para trás a cada clique */
+  const photos = document.getElementById("photos"), photoImgs = [...photos.querySelectorAll("img")], photosHint = document.getElementById("photos-hint");
+  let photoOrder = [0, 1, 2], photoBusy = false;
+  const syncPhotos = () => { photosHint.textContent = `${photoOrder[0] + 1}/3 · ${T("clique para trocar", "click to switch")}`; };
+  hooks.push(syncPhotos);
+  const nextPhoto = () => {
+    if (photoBusy) return;
+    photoBusy = true;
+    const top = photoImgs[photoOrder[0]];
+    top.classList.add("leaving");
+    setTimeout(() => {
+      photoOrder.push(photoOrder.shift());
+      photoOrder.forEach((idx, pos) => { photoImgs[idx].dataset.pos = String(pos); });
+      top.classList.remove("leaving");
+      syncPhotos();
+      photoBusy = false;
+    }, reduce.matches ? 0 : 300);
+  };
+  photos.addEventListener("click", nextPhoto);
+  photos.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); nextPhoto(); } });
+
+  /* Contato no celular: o rosto começa logo abaixo do texto e passa da borda de baixo */
+  const contact = document.getElementById("contato"), contactFine = contact.querySelector(".fine");
+  const placeFace = () => contact.style.setProperty("--face-top", Math.round(contactFine.getBoundingClientRect().bottom - contact.getBoundingClientRect().top + 18) + "px");
+
+  /* Janelas (projeto, ilustração, site) entram no histórico: a seta de voltar do navegador fecha e volta para a página */
+  const caseDlg = document.getElementById("caso"), lb = document.getElementById("lightbox"), webDlg = document.getElementById("web-dlg");
+  const dialogs = [caseDlg, lb, webDlg];
+  const pageUrl = () => location.pathname + location.search;
+  const remember = (dlg, slug, data) => {
+    const st = { overlay: dlg.id, ...data }, url = pageUrl() + "#" + slug;
+    if (dialogs.some((d) => d.open)) history.replaceState(st, "", url);
+    else history.pushState(st, "", url);
+  };
+  dialogs.forEach((d) => d.addEventListener("close", () => { if (history.state && history.state.overlay === d.id) history.back(); }));
+
+  /* Estudo de caso */
+  const caseBody = document.getElementById("caso-body"), caseCount = document.getElementById("caso-count");
+  const portrait = (p) => /flyer/.test(p) || /^p\d+$/.test(p);
+  const openCase = (id, page, fromHistory) => {
+    const pt = CASES_PT[id], info = INFO[id];
+    if (!pt) return;
+    const c = lang === "en" ? { ...pt, ...I18N.cases[id] } : pt;
+    caseDlg.dataset.tone = info.tone;
+    caseCount.textContent = c.name;
+    const pages = info.pdf ? "" : pt.pages.map((p, i) => {
+      const note = c.notes && c.notes[String(i + 1)];
+      return (note ? `<div class="note"><h3>${note[0]}</h3><p>${note[1]}</p></div>` : "") +
+        `<img class="${portrait(p) ? "pt" : ""}" src="/img/${info.dir}/${p}.jpg" alt="${c.name}, ${T("imagem", "image")} ${i + 1} ${T("de", "of")} ${pt.pages.length}" loading="lazy">`;
+    }).join("");
+    const next = ORDER[(ORDER.indexOf(id) + 1) % ORDER.length];
+    const nextName = (lang === "en" ? I18N.cases[next] : CASES_PT[next]).name;
+    caseBody.innerHTML =
+      `<header class="case-head"><p class="meta"><span>${c.meta}</span></p>` +
+      `<h2 class="case-name" id="caso-nome">${c.name}</h2><p class="case-lead">${c.lead}</p>` +
+      `<dl class="facts">${c.facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl>` +
+      `<div class="cols">${c.cols.map(([h, t]) => `<div><h3>${h}</h3><p>${t}</p></div>`).join("")}</div></header>` +
+      (pages ? `<div class="pages">${pages}</div>` : "") +
+      `<footer class="case-foot">${info.pdf ? `<a class="btn ghost" href="${info.pdf}" target="_blank" rel="noopener">${T("Ver livro completo", "View the full book")} <span class="ar">↗</span></a>` : ""}` +
+      `<button class="btn" type="button" data-case="${next}">${T("Próximo", "Next")}: ${nextName} <span class="ar">→</span></button></footer>`;
+    if (!fromHistory) remember(caseDlg, "projeto-" + id, { id, page: page ?? null });
+    if (!caseDlg.open) caseDlg.showModal();
+    caseDlg.scrollTop = 0;
+    if (page != null) {
+      const img = caseBody.querySelectorAll(".pages img")[page];
+      if (img) setTimeout(() => img.scrollIntoView({ block: "start", behavior: reduce.matches ? "auto" : "smooth" }), 80);
+    }
+  };
+
+  /* Ilustração ampliada */
+  const lbImg = document.getElementById("lb-img"), lbCount = document.getElementById("lb-count");
+  const iluImgs = [...rail.querySelectorAll("img")];
+  let li = 0;
+  const showIlu = (i) => {
+    li = (i + iluImgs.length) % iluImgs.length;
+    lbImg.src = iluImgs[li].getAttribute("src");
+    lbImg.alt = iluImgs[li].alt;
+    lbCount.textContent = `${li + 1}/${iluImgs.length}`;
+    if (lb.open && history.state && history.state.overlay === lb.id) history.replaceState({ overlay: lb.id, i: li }, "", pageUrl() + "#ilustracao-" + (li + 1));
+  };
+  const openIlu = (i, fromHistory) => {
+    showIlu(i);
+    if (!fromHistory) remember(lb, "ilustracao-" + (li + 1), { i: li });
+    if (!lb.open) lb.showModal();
+  };
+  document.getElementById("lb-prev").addEventListener("click", () => showIlu(li - 1));
+  document.getElementById("lb-next").addEventListener("click", () => showIlu(li + 1));
+  lb.addEventListener("keydown", (e) => { if (e.key === "ArrowLeft") showIlu(li - 1); if (e.key === "ArrowRight") showIlu(li + 1); });
+  lb.addEventListener("close", () => goRail(li));
+
+  /* Sites: abrem aqui dentro, numa janela de navegador. O iframe é trocado a cada abertura para não sujar o histórico */
+  const webUrl = document.getElementById("web-url"), webOpen = document.getElementById("web-open");
+  let webFrame = document.getElementById("web-iframe");
+  const swapFrame = (url, title) => {
+    const f = document.createElement("iframe");
+    f.id = "web-iframe";
+    f.title = title;
+    if (url) f.src = url;
+    webFrame.replaceWith(f);
+    webFrame = f;
+  };
+  const openWeb = (url, fromHistory) => {
+    const host = url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+    swapFrame(url, host);
+    webUrl.textContent = host;
+    webOpen.href = url;
+    if (!fromHistory) remember(webDlg, "site-" + host.split(".")[0], { url });
+    if (!webDlg.open) webDlg.showModal();
+  };
+  webDlg.addEventListener("close", () => swapFrame("", "Site"));
+
+  addEventListener("popstate", (e) => {
+    const st = e.state || {};
+    dialogs.forEach((d) => { if (d.open && d.id !== st.overlay) d.close(); });
+    if (st.overlay === caseDlg.id && CASES_PT[st.id]) openCase(st.id, st.page, true);
+    else if (st.overlay === lb.id) openIlu(st.i || 0, true);
+    else if (st.overlay === webDlg.id && st.url) openWeb(st.url, true);
+  });
+  // link direto (ex.: #projeto-prumo): abre a janela por cima da página, e voltar leva para a página
+  const openFromHash = () => {
+    const m = decodeURIComponent(location.hash.slice(1)).match(/^(projeto|ilustracao|site)-(.+)$/);
+    if (!m) return;
+    let open = null;
+    if (m[1] === "projeto" && CASES_PT[m[2]]) open = () => openCase(m[2]);
+    if (m[1] === "ilustracao" && /^\d+$/.test(m[2])) open = () => openIlu(Number(m[2]) - 1);
+    if (m[1] === "site") { const b = [...document.querySelectorAll("[data-web]")].find((el) => el.dataset.web.includes("//" + m[2] + ".")); if (b) open = () => openWeb(b.dataset.web); }
+    if (!open) return;
+    history.replaceState(null, "", pageUrl());
+    open();
+  };
+
+  document.addEventListener("click", (e) => {
+    const t = e.target.closest("[data-case], [data-ilu], [data-web], [data-close]");
+    if (!t) return;
+    if (t.hasAttribute("data-close")) t.closest("dialog").close();
+    else if (t.dataset.case) openCase(t.dataset.case);
+    else if (t.hasAttribute("data-ilu")) openIlu(Number(t.dataset.ilu));
+    else if (t.dataset.web) openWeb(t.dataset.web);
+  });
+
+  setTheme(store.get("gc-theme") === "dark" ? "dark" : "light");
+  applyLang();
+  syncNav();
+  syncTime();
+  syncRail();
+  roomForDock();
+  placeFace();
+  openFromHash();
+  document.fonts.ready.then(() => { fitAll(); roomForDock(); placeFace(); });
+  document.fonts.load('800 40px "Gellix"').then(() => { fitAll(); placeFace(); }, () => {});
+  let rz;
+  addEventListener("resize", () => {
+    clearTimeout(rz);
+    rz = setTimeout(() => { fitAll(); syncNav(); syncRail(); roomForDock(); placeFace(); if (painted) { sizeAll(); render(); } }, 120);
+  });
+})();
+</script>
+
+</body>
 </html>
